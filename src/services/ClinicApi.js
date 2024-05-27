@@ -1,16 +1,29 @@
 import axios from "axios"
-import { API } from "../config"
+import { API } from "../config";
+
 export default function ClinicApi() {
 
     const getAllClinicsData = async ({ doctorId }) => {
         try {
             const result = await axios.get(`${API}/fetchclinic/${doctorId}`)
+            console.log("result=====", result)
             return result.data
         }
         catch (err) {
             return err
         }
     }
+
+    const getClinic = async ({ clinicId }) => {
+        try {
+            const result = await axios.get(`${API}/getclinic/${clinicId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
+
     const insertOwnClinics = async (newClinicData) => {
         try {
             const result = await axios.post(`${API}/insertownclinic`, newClinicData)
@@ -30,6 +43,7 @@ export default function ClinicApi() {
             return err
         }
     }
+
     const insertClinicData = async ({ newClinicData }) => {
         try {
             const result = await axios.post(`${API}/insertclinic`, newClinicData)
@@ -58,15 +72,6 @@ export default function ClinicApi() {
         }
     }
 
-    const getClinic = async (currentPage, pageSize) => {
-        try {
-            const result = await axios.get(`${API}/clinics?page=${currentPage}&pageSize=${pageSize}`)
-            return result.data
-        }
-        catch (err) {
-            return err
-        }
-    }
     const addClinic = async (doctorId, newClinicData) => {
         try {
             const result = await axios.post(`${API}/addclinicid/${doctorId}`, newClinicData)
@@ -79,7 +84,6 @@ export default function ClinicApi() {
     const editClinic = async (clinicId, newClinicData) => {
         try {
             const result = await axios.post(`${API}/updateclinic/${clinicId}`, newClinicData)
-            console.log('======', result)
             return result
         }
         catch (err) {
@@ -109,6 +113,8 @@ export default function ClinicApi() {
     const getSingleClinic = async (clinicId) => {
         try {
             const result = await axios.get(`${API}/getclinic/${clinicId}`)
+            console.log('======', result)
+
             return result.data
         }
         catch (err) {

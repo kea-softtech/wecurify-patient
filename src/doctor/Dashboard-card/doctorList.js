@@ -41,7 +41,7 @@ export default function DoctorList() {
 
     const handleShowProfile = (details, e) => {
         e.preventDefault();
-        navigate(`profile/${details._id}`)
+        navigate(`/profile/${details._id}`)
     }
 
     const BookAppointments = (details, e) => {
@@ -77,11 +77,7 @@ export default function DoctorList() {
                 </div>
             </MainNav>
             <div className='row'>
-                {/* <div className="width16">
-                    <div className="dash row">
-                        <UserLinks />
-                    </div>
-                </div> */}
+               
                 <div className="full-width">
                     <div className="common_box">
                         <div className='row'>
@@ -105,27 +101,10 @@ export default function DoctorList() {
                                                 <i className='icon-building color patientListIcon' />
                                                 <span className='patinetInfo'>{details.address}</span>
                                             </span>
-                                            <span className='cardSpan '>
-                                                <i className='icon-email color patientListIcon' />
-                                                <span className='patinetInfo'> {details.personalEmail}</span>
-                                            </span>
-                                            <span className='cardSpan '>
-                                                <i className='icon_documents color patientListIcon' />
-                                                {/* {details.educationList[0].specialization} */}
-                                                {/* {details.educationList[0].map((item) => {
-                                                    { item.specialization }
-
-                                                })} */}
-
-                                            </span>
-                                            {/* <UpgradeSubscription doctorId={details._id} /> */}
                                             <div className=' appointmentBtn'>
                                                 <NavLink onClick={(e) => BookAppointments(details, e)}>
                                                     <button className='btn appColor helperBtn'>Book Appointment</button>
                                                 </NavLink>
-                                                {/* <NavLink onClick={(e) => ViewAppointments(details, e)}>
-                                                    <button className='btn appColor helperBtn'>View Appointments</button>
-                                                </NavLink> */}
                                             </div>
                                         </div>
                                     </div>

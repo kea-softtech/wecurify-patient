@@ -66,6 +66,15 @@ export default function EducationApi() {
             return err
         }
     }
+    const getDentalServices = async () => {
+        try {
+            const result = await axios.get(`${API}/dentalservices`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    };
     return {
         addEducation,
         fetchAllEducations,
@@ -73,6 +82,7 @@ export default function EducationApi() {
         fetchEditEducationData,
         fetchDrSpecialization,
         fetchDrDegree,
-        updateEducationData
+        updateEducationData,
+        getDentalServices
     }
 }

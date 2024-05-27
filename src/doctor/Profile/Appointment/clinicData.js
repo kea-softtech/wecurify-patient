@@ -1,36 +1,35 @@
-import { useState, useEffect } from "react";
-import React from 'react';
-import avatarImage from '../../../img/profile.png'
-import AuthApi from "../../../services/AuthApi";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ClinicApi from "../../../services/ClinicApi";
 
-function DoctorPersonalInformation(props) {
-    const { doctorId } = props;
-    const { getDrInfo } = AuthApi()
-    const [fetchPersonalData, setFetchPersonalData] = useState([])
+export default function ClinicData(props) {
+    const { clinicId } = props;
+    const [clinics, setclinics] = useState([])
+    const {getSingleClinic} = ClinicApi()
 
     useEffect(() => {
-        getDoctorPersonalDetails();
-    }, [props])
+        doctorServices()
+    }, [])
 
-    const getDoctorPersonalDetails = () => {
-        getDrInfo({ doctorId })
-            .then((result) => {
-                setFetchPersonalData(result.result[0]);
+    const doctorServices = () => {
+        getSingleClinic({ clinicId })
+            .then((res) => {
+                console.log("res----", res)
+                setclinics(res);
             })
     }
 
     return (
         <div className="profile">
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-lg-5 col-md-4">
                     <figure>
-                        <img src={fetchPersonalData.photo} alt="" className="img-fluid"/>
+                        <img src={clinics.clinicLogo} alt="" className="img-fluid"/>
                     </figure>
                 </div>
                 <div className="col-lg-7 col-md-8">
                     <small>Primary care - Internist</small>
-                    <h1>DR. {fetchPersonalData.name}</h1>
+                    <h1>DR. {clinics.clinicLogo}</h1>
                     <span className="rating">
                         <i className="icon_star voted"></i>
                         <i className="icon_star voted"></i>
@@ -40,22 +39,18 @@ function DoctorPersonalInformation(props) {
                         <small>(145)</small>
                         <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" className="badge_list_1"><img src="img/badges/badge_1.svg" width="15" height="15" alt=""/></a>
                     </span>
-                    <ul className="statistic">
-                        <li>854 Views</li>
-                        <li>124 Patients</li>
-                    </ul>
+                    
                     <ul className="contacts">
                         <li>
                             <h6>Address</h6>
-                            {fetchPersonalData.address}
+                            {clinics.address}
                         </li>
                         <li>
-                            <h6>Phone</h6> <Link href="tel://000434323342">{fetchPersonalData.mobile}</Link>
+                            <h6>Clinic Number</h6> <Link href="tel://000434323342">{clinics.clinicNumber}</Link>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
-export { DoctorPersonalInformation }

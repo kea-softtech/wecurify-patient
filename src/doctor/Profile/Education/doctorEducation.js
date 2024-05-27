@@ -1,41 +1,39 @@
-import React from 'react';
-import { FetchEducation } from "./Partial/fetchEducation";
-import { AddDoctorEducation } from "./Partial/addDoctorEducation";
-import { useState } from "react";
-import { Link } from '@mui/material'
-import { MainButtonInput } from "../../../mainComponent/mainButtonInput";
+import React, { useState, useEffect } from "react";
+import EducationApi from "../../../services/EducationApi";
 
 function DoctorEducation(props) {
     const { doctorId } = props
-    const [showEducation, setShowEducation] = useState(true);
+    const [eduData, setEduData] = useState([]);
+    const { fetchAllEducations } = EducationApi()
 
-    function handleAdd() {
-        setShowEducation(!showEducation);
-    }
+    useEffect(() => {
+        getAllEducations()
+    }, [])
 
-    function handleRecordAdded() {
-        setShowEducation(true)
+    const getAllEducations = () => {
+        fetchAllEducations({ doctorId })
+            .then((res) => {
+                setEduData(res);
+            })
     }
 
     return (
         <>
-            <FetchEducation doctorId={doctorId} />
-            <div className="row justifyContent">
-                <div className="my-2 ">
-                    <Link to="#" onClick={() => handleAdd()}>
-                        <MainButtonInput>Add</MainButtonInput>
-                    </Link>
-                </div>
-                <div className="m-2 ">
-                    <MainButtonInput onClick={props.data}>Next</MainButtonInput>
-                </div>
+            <div className="indent_title_in">
+                <i className="pe-7s-news-paper"></i>
+                <h3>Education</h3>
+                <p>Mussum ipsum cacilds, vidis litro abertis.</p>
             </div>
-            <div className='my-4'>
-                {showEducation === false ? (
-                    <div>
-                        <AddDoctorEducation doctorId={doctorId} recordAdded={handleRecordAdded} />
-                    </div>
-                ) : null}
+            <div className="wrapper_indent">
+                <p>Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Nullam mollis. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi.</p>
+                <h6>Curriculum</h6>
+                {eduData.map((education, index) => {
+                    return (
+                        <ul key={index} className="list_edu">
+                            <li><strong>{education.collage}</strong> - {education.degree}</li>
+                        </ul>
+                    )
+                })}
             </div>
         </>
     )
