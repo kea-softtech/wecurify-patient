@@ -6,6 +6,8 @@ import AuthApi from "../services/AuthApi";
 import { Link, useParams } from "react-router-dom";
 import { MainNav } from "../mainComponent/mainNav";
 import { Wrapper } from "../mainComponent/Wrapper";
+import { useRecoilState } from "recoil";
+import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 function AppointmentBookingSection() {
     const { doctorId } = useParams()
@@ -41,15 +43,15 @@ function AppointmentBookingSection() {
             </MainNav>
             <div className='row'>
                 <div className="full-width">
-                    <div className="common_box booking">
-                        <div>
-                            {clinicData.map((clinicItem, id) => (
-                                <MainAccordion key={id} icon={<FaClinicMedical />} title={clinicItem.clinicName}>
-                                    <DoctorAppointmentType clinicData={clinicItem} doctorId={doctorId} />
-                                </MainAccordion>
-                            ))}
+                        <div className="common_box booking">
+                            <div>
+                                {clinicData.map((clinicItem, id) => (
+                                    <MainAccordion key={id} icon={<FaClinicMedical />} title={clinicItem.clinicName}>
+                                        <DoctorAppointmentType clinicData={clinicItem} doctorId={doctorId} />
+                                    </MainAccordion>
+                                ))}
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </Wrapper>

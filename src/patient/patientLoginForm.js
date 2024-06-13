@@ -24,10 +24,8 @@ function PatientLoginForm(props) {
                 .then(data => {
                     setPatientData(data._id)
                     alert(data.otp)
-                    let item = data
-                    setLoginData(item)
+                    setLoginData(data)
                     setShowOTP(true)
-
                 })
         }
     };

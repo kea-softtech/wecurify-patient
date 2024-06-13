@@ -1,33 +1,43 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
-import PatientHistory from "./patientHistory";
 import { Link } from "react-router-dom";
-
-
+import application from '../images/appointment.jpg';
+import doctorprofile from '../images/doctorprofile.jpg'
+import calender from '../images/calender.jpg'
 export default function PatientCards() {
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
 
     return (
         <div className="full-width mt-4">
-            <div className="common_box">
-                <div className="row">
-                    <div className="col-md-4 ">
-                        <div className="cardDiv">
-                            <span className='cardSpan'>
-                                <i className='icon-docs m-1 color patientListIcon' />
-                                <Link to={`/patientappointment/${patientData}`}> Appoinment</Link>
-                            </span>
-
+            <div className="">
+                {/* <div className="row"> */}
+                <div className="row add_bottom_30">
+                    <div className="col-lg-4">
+                        <div className="hoverBox ">
+                            <Link to={`/patientappointment/${patientData}`}>
+                                <img className="patientImg" src={application} alt="not found" />
+                                <h4 className="colorNorm mt-2">Appoinment</h4>
+                                <div>"Check your appointments here to view the booked slots and their respective times."</div>
+                            </Link>
                         </div>
                     </div>
-                    <div className="col-md-4 ">
-                        <div className="cardDiv">
-                            <span className='cardSpan'>
-                                <i className='icon-user m-1 color patientListIcon' />
-                                <Link to={`/patientinfo/${patientData}`}> Profile</Link>
-                            </span>
-
+                    <div className="col-lg-4">
+                        <div className="hoverBox">
+                            <Link to={`/patientinfo/${patientData}`}>
+                                <img className="patientImg" src={doctorprofile} alt="not found" />
+                                <h4 className="colorNorm  mt-2"> Profile</h4>
+                                <div>"View your profile and make any necessary edits, including adding your lifestyle habits."</div>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="col-lg-4">
+                        <div className="hoverBox" >
+                            <Link to={`/calender/${patientData}`}>
+                                <img className="patientImg " src={calender} alt="not found" />
+                                <h4 className="colorNorm  mt-2"> Calendar</h4>
+                                <div>"Click the calendar for a convenient view of your appointments."</div>
+                            </Link>
                         </div>
                     </div>
                 </div>

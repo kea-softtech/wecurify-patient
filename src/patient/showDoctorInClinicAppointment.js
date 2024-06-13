@@ -116,7 +116,7 @@ function ShowDoctorInClinicAppointment(props) {
                     <div className="col-md-8 white-box">
                         {showSlot.length > 0 ?
                             <ShowInClinicAppointSlots
-                                doctorId={doctorId}
+                                doctorsId={doctorId}
                                 sessionSlot={showSlot}
                                 session={session}
                                 slotDate={date}

@@ -1,33 +1,17 @@
 import { useState, useEffect } from "react";
-import AuthApi from "../../../services/AuthApi";
 import PatientProfile from "../../../img/profile.png"
-import ReportApi from "../../../services/ReportApi";
-import { Link,useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
+import PatientApi from "../../../services/PatientApi";
 function CalendarModalBox(props) {
     const { patientId, doctorId, patientList } = props;
     const [patientDetails, setPatientDetails] = useState([]);
-    const { patientDetailsData } = AuthApi()
-    const { MedicineReportData } = ReportApi()
-    const navigate = useNavigate()
+    const { patientDetailsData } = PatientApi()
 
     useEffect(() => {
         getPatientInfoById();
     }, [])
 
-    function saveData() {
-        const bodyData = {
-            "doctorId": doctorId,
-            "patientId": patientId,
-            'patientAppointmentId': patientList._id,
-            'clinicId': patientList.clinicId,
-            "fees": patientList.fees
-        }
-        MedicineReportData(bodyData)
-            .then((res) => {
-                navigate(`consultation/${res._id}`, { data: { fees: patientList.fees } })
-            })
-    }
-
+    
 
     const getPatientInfoById = async () => {
         await patientDetailsData({ patientId })
@@ -68,12 +52,10 @@ function CalendarModalBox(props) {
                         {patientDetails.slotTime}
                     </div>
 
-                    <span className='' align='left'>
-                        {patientList.status === "Ongoing" ?
-                            <Link to="#" onClick={() => saveData()}>
-                                <button className="btn appColor modalbtn ">Start Consultation</button>
+                    <span  align='left'>
+                            <Link to={`/patientinfo/${patientId}`}>
+                                <button className="btn appColor modalbtn ">View Profile</button>
                             </Link>
-                            : null}
                     </span>
                 </div>
             </div>

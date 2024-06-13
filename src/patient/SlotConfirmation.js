@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import UserLinks from "../doctor/Dashboard-card/partial/uselinks";
 import { Wrapper } from "../mainComponent/Wrapper";
 import { MainNav } from "../mainComponent/mainNav";
 import AuthApi from "../services/AuthApi";
@@ -12,7 +11,6 @@ import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
     const { patientAppointmentId } = useParams()
-    console.log('=====////////////////====',patientAppointmentId)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
@@ -63,11 +61,6 @@ export default function SlotConfirmation() {
                 </div>
             </MainNav>
             <div className='row'>
-                {/* <div className="width16">
-                    <div className="dash row">
-                        <UserLinks />
-                    </div>
-                </div> */}
                 <div className="full-width">
                     <div className="container common_box margin_60">
                         <div className=" patientFetch">
@@ -79,9 +72,9 @@ export default function SlotConfirmation() {
                                     Dr. {doctorData.name}
                                     <div> On {AppoinmentData.date} At {AppoinmentData.slotTime}</div>
                                 </div>
-                                {/* <Link to={`/doctors/appointment/${doctorId}`}>
+                                <Link to={`/`}>
                                     <button align='right' className='btn appColor helperBtn'>Done</button>
-                                </Link> */}
+                                </Link>
                             </div>
                         </div>
                     </div>

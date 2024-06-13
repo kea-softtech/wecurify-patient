@@ -52,7 +52,7 @@ export default function Completed(props) {
         <>
             {patientHistoryData ?
                 <div className='row'>
-                    {patientHistoryData.map((details, i) => {
+                    {patientHistoryData&&patientHistoryData.map((details, i) => {
                         return (
                             <>
                                 <div key={i} className="col-md-4 ">
@@ -93,7 +93,7 @@ export default function Completed(props) {
                     })}
                 </div>
                 : null}
-            {patientHistoryData.length > 0 ?
+            {patientHistoryData?
                 <div>
                     <ReactPaginate
                         breakLabel="..."

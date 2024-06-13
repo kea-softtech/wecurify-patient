@@ -12,10 +12,8 @@ import { setSessionData } from "../recoil/atom/setSessionData";
 export default function GetLoginPatientProfile() {
     const { patientId } = useParams()
     const { getDrInfo } = AuthApi()
-    const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [DoctorName, setDoctorsName] = useState([])
-    const [DoctorId, setDoctorsId] = useRecoilState(setDoctorId)
-    const doctorId = DoctorId
+    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
 
     // useEffect(() => {
     //     doctorInfo()
@@ -35,10 +33,10 @@ export default function GetLoginPatientProfile() {
                 <MainNav>
                     <div className="clearfix row">
                         <div className="width50">
-                            <Link to={`/allpatient`}>
+                            <Link to={`/`}>
                                 <i className="arrow_back backArrow" title="back button"></i>
                             </Link>
-                            <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Walkin Patient</span>
+                            <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Patient Information</span>
                         </div>
                         <div className="width50 row justifyContent">
                             {/* <div className="appColor normal-font" align='right'>Dr. {DoctorName}</div> */}
@@ -46,17 +44,12 @@ export default function GetLoginPatientProfile() {
                     </div>
                 </MainNav>
                 <div className='row'>
-                    {/* <div className="width16">
-                        <div className="dash row">
-                            <UserLinks />
-                        </div>
-                    </div> */}
                     <div className="full-width">
                         <div className="common_box mb-3">
                             <div className="row">
                                 <div className="col-md-6 mb-2">
                                     <div className="box_general_4 cart patientDetails">
-                                        <FetchPatientInfo doctorId={doctorId} patientId={patientId} />
+                                        <FetchPatientInfo doctorId={doctorId} patientId={patientId}  />
                                     </div>
                                 </div>
                                 <GetDependent  doctorId={doctorId} patientId={patientId} />

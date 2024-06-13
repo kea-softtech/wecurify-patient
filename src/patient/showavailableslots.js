@@ -1,5 +1,5 @@
 import { slots } from "../common/constant";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import PatientApi from "../services/PatientApi";
@@ -8,79 +8,79 @@ import moment from "moment";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
-import { setDependentId } from "../recoil/atom/setDependentId";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
-import { Button, Modal } from "react-bootstrap";
+import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 const ShowInClinicAppointSlots = (props) => {
-    const { sessionSlot, selectedDate, session, slotDate, doctorId } = props;
+    const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
+    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
-    const [dependentId, setDependentsId] = useRecoilState(setDependentId)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
-    const [show, setShow] = useState(false);
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [bookingSlots, setBookingSlots] = useState([]);
-    const [bookSlot, setbookSlot] = useState([]);
-    const { getbookedSlots, paymentInfo } = PatientApi();
+    const { getbookedSlots } = PatientApi();
     const data = props;
     const navigate = useNavigate();
 
     useEffect(() => {
         availableSlots()
         setSessionsData(data)
+        setDoctorsId(doctorsId)
     }, [props])
 
     const handleShow = (item) => {
         setSlotItem('')
         setSlotItem(item)
-        setbookSlot(item)
-        setShow(true)
+        if (loggedIn !== true) {
+            navigate(`/patient`)
+        } else {
+            navigate(`/patientprofile/${patientData}`)
+        }
+        
     }
-
-    const handleClose = () => {
-        setShow(false)
-    }
+  
     const checkSlotAvailability = (slot) => {
         const currentDate = moment(new Date()).format("YYYY-MM-DD HH:mm")
         const slotDateTime = moment(new Date(selectedDate)).format("YYYY-MM-DD") + " " + slot.time
         const returnData = currentDate > slotDateTime || bookingSlots.some(func => (func.slotId === slot._id && func.status !== "Cancelled"))
         return returnData
     }
-    const handleSelectedSlot = (item) => {
-        if (loggedIn === true) {
-            const startDate = (selectedDate + " " + item.time)
-            const slotId = item._id
-            const transactionData = {
-                "DoctorId": session.doctorId,
-                "ClinicId": session.clinicId,
-                "slotId": slotId,
-                "patientId": patientData,
-                "dependentId": dependentId !== " " ? dependentId : null,
-                "transactionId": '123',
-                "currency": 'INR',
-                "fees": session.fees,
-                "date": slotDate,
-                "day": session.day,
-                "slotTime": item.time,
-                "daySlotId": session._id,
-                "selectedDate": selectedDate,
-                "timeSlot": session.timeSlot,
-                "startDate": startDate,
-                "status": "Ongoing",
-                "payment": "hold"
-            }
-            paymentInfo(transactionData)
-                .then((res) => {
-                    setDependentsId(" ")
-                    handleClose()
-                })
-        }
-        else {
-            navigate(`/patient`)
-        }
-    }
-
+    // const handleSelectedSlot = (item) => {
+    //     if (loggedIn === true) {
+    //         const startDate = (selectedDate + " " + item.time)
+    //         const slotId = item._id
+    //         const transactionData = {
+    //             "DoctorId": session.doctorId,
+    //             "ClinicId": session.clinicId,
+    //             "slotId": slotId,
+    //             "patientId": patientData,
+    //             "dependentId": dependentId !== " " ? dependentId : null,
+    //             "transactionId": '123',
+    //             "currency": 'INR',
+    //             "fees": session.fees,
+    //             "date": slotDate,
+    //             "day": session.day,
+    //             "slotTime": item.time,
+    //             "daySlotId": session._id,
+    //             "selectedDate": selectedDate,
+    //             "timeSlot": session.timeSlot,
+    //             "startDate": startDate,
+    //             "status": "Ongoing",
+    //             "payment": "hold"
+    //         }
+    //         console.log('transactionData-------', transactionData)
+    //         paymentInfo(transactionData)
+    //             .then((res) => {
+    //                 setDependentsId(" ")
+    //                 handleClose()
+    //             })
+    //         navigate(`/calender/${patientData}`)
+    //     }
+    //     else {
+    //         navigate(`/patient`)
+    //     }
+    // }
 
     const availableSlots = () => {
         getbookedSlots(session.doctorId, session.clinicId)
@@ -99,11 +99,9 @@ const ShowInClinicAppointSlots = (props) => {
                 <span style={{ color: "black" }}>
                     <b>{slotDate}  </b>
                     <b>  Fees - <FaRupeeSign /> {session.fees} /-</b></span>
-
                 <section className=" radiobutton">
                     {sessionSlot.map((item, index) => (
                         <>
-
                             <div key={index}>
                                 {checkSlotAvailability(item)
                                     ?
@@ -111,21 +109,19 @@ const ShowInClinicAppointSlots = (props) => {
                                         <div
                                             className="disabled-div"
                                             type="radio"
-                                            // aria-disabled="true"
                                             time={slots}>
                                             <label>{item.time}</label>
                                         </div>
                                     </div>
                                     :
                                     <div >
-                                        <Link
-                                            to='#'
+                                        <button
                                             onClick={() => handleShow(item)}
                                             className="btn_1"
                                             type="radio"
                                             time={slots}>
                                             {item.time}
-                                        </Link>
+                                        </button>
                                     </div>
                                 }
                             </div>
@@ -134,7 +130,7 @@ const ShowInClinicAppointSlots = (props) => {
                     ))}
                 </section>
 
-                <Modal show={show} onHide={handleClose}>
+                {/* <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Are You Sure?</Modal.Title>
                     </Modal.Header>
@@ -149,7 +145,7 @@ const ShowInClinicAppointSlots = (props) => {
                             No
                         </Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal> */}
             </div >
 
         </>

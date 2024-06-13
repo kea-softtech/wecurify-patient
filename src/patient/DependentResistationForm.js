@@ -4,23 +4,20 @@ import { MainInput } from "../mainComponent/mainInput";
 import { MainButtonInput } from "../mainComponent/mainButtonInput";
 import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
-import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { useRecoilState } from "recoil";
-import { setSlotData } from "../recoil/atom/setSlotData";
-import { setNewPatientId } from "../recoil/atom/setNewPatientId";
+import { setDependentId } from "../recoil/atom/setDependentId";
 
-function PatientRegistrationForm(props) {
+function DependentRegistationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
-    const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
-    const [slotItem] = useRecoilState(setSlotData)
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId)
-    const { insertPatientData, fetchPatient } = PatientApi()
+    const [dependentId, setDependentsId] = useRecoilState(setDependentId)
+    const [dependentData, setDependentData] = useState([])
+    const {fetchPatient, AddDependents } = PatientApi()
     const navigate = useNavigate();
 
-    const handleInputChange = event => {
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUpdatePatientData({ ...updatePatientData, [name]: value });
+        setDependentData({ ...dependentData, [name]: value });
         setValue(name, value)
     };
 
@@ -30,8 +27,7 @@ function PatientRegistrationForm(props) {
         register("age", { required: true });
         register("gender", { required: true });
         register("email", { required: true });
-        register("mobile", { required: true });
-        setPatientData(patientId)
+        register("patientId", { required: true });
     }, [])
 
     function getPatientDetails() {
@@ -44,28 +40,24 @@ function PatientRegistrationForm(props) {
     const { register, setValue, formState: { errors } } = useForm();
     const onSubmit = (e) => {
         e.preventDefault();
-        const newPatientData = {
-            mobile: updatePatientData.mobile,
-            name: updatePatientData.name,
-            gender: updatePatientData.gender,
-            age: updatePatientData.age,
-            email: updatePatientData.email,
+        const dependentAdd = {
+            name: dependentData.name,
+            gender: dependentData.gender,
+            age: dependentData.age,
+            email: dependentData.email,
+            patientId: patientId,
         }
-        insertPatientData(patientId, newPatientData)
-            .then((response) => {
-                setLoggedIn(response.isLoggedIn)
-            })
-        if (slotItem._id) {
-            navigate(`/patientprofile/${patientId}`)
-        } else {
-            navigate(`/`)
-        }
+        AddDependents(patientId, dependentAdd)
+        .then((response) => {
+            setDependentsId(response._id)
+        })
+        navigate(`/patientprofile/${patientId}`)
     }
 
     return (
         <div >
             <div className="underline">
-                <h3 className="mb-3">Patient Details</h3>
+                <h3 className="mb-3">Dependent Details</h3>
             </div>
             <form onSubmit={(e) => onSubmit(e)}>
                 <div className="row mt-3">
@@ -74,7 +66,7 @@ function PatientRegistrationForm(props) {
                         <MainInput
                             type="text"
                             name="name"
-                            value={updatePatientData.name}
+                            value={dependentData.name}
                             onChange={handleInputChange}
                             placeholder="Jhon">
                         </MainInput>
@@ -88,7 +80,7 @@ function PatientRegistrationForm(props) {
                             value={updatePatientData.mobile}
                             maxLength={10}
                             pattern="[+-]?\d+(?:[.,]\d+)?"
-                            onChange={handleInputChange}
+                            // onChange={handleInputChange}
                             placeholder="Mobile Number (+XX)">
                         </MainInput>
                         {errors.mobile && <span className="validation">Please enter your Mobile Number</span>}
@@ -100,7 +92,7 @@ function PatientRegistrationForm(props) {
                         <MainInput
                             type="text"
                             name="age"
-                            value={updatePatientData.age}
+                            value={dependentData.age}
                             onChange={handleInputChange}
                             placeholder="25">
                         </MainInput>
@@ -112,7 +104,7 @@ function PatientRegistrationForm(props) {
                         <MainInput
                             type="text"
                             name="gender"
-                            value={updatePatientData.gender}
+                            value={dependentData.gender}
                             onChange={handleInputChange}
                             placeholder="male">
                         </MainInput>
@@ -124,20 +116,18 @@ function PatientRegistrationForm(props) {
                         <MainInput
                             type="email"
                             name="email"
-                            value={updatePatientData.email}
+                            value={dependentData.email}
                             onChange={handleInputChange}
                             placeholder="jhon@doe.com">
                         </MainInput>
                         {errors.email && <span className="validation">Please enter your email address</span>}
                     </div>
                 </div>
-
                 <div className="text-right add_top_30 m-2">
                     <MainButtonInput>Verify & Save</MainButtonInput>
                 </div>
-
             </form>
         </div>
     )
 }
-export { PatientRegistrationForm }
+export { DependentRegistationForm }

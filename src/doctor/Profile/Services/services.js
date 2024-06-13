@@ -35,14 +35,14 @@ export default function ServicesList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {services.map((ser, i) => {
+                                    {/* {services.map((ser, i) => {
                                         return (
                                             <tr key={i}>
                                                 <td>{ser.name}</td>
                                                 <td>$34</td>
                                             </tr>
                                         )
-                                    })}
+                                    })} */}
                                 </tbody>
                             </table>
                         </div>

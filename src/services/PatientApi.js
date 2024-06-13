@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API } from '../config';
 
 export default function PatientApi() {
-    const fetchSessionSlotsData = async ({ doctorId, clinicId }) => {
+    const fetchSessionSlotsData = async ({ doctorId ,  clinicId}) => {
         try {
             const result = await axios.get(`${API}/fetcSessionSlots/${doctorId}/${clinicId}`)
             return result.data
@@ -148,6 +148,15 @@ export default function PatientApi() {
             return err
         }
     }
+    const AddDependents = async (patientId, dependentAdd) => {
+        try {
+            const result = await axios.post(`${API}/adddependent/${patientId}`,dependentAdd)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
     return {
 
         fetchSessionSlotsData,
@@ -165,7 +174,8 @@ export default function PatientApi() {
         getPatientMedical,
         addPatientLifestyle,
         updatePatientLifestyle,
-        fetchUpdatePatientLifestyle
+        fetchUpdatePatientLifestyle,
+        AddDependents
     }
 
 

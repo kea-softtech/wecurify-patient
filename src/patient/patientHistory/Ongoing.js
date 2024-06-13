@@ -54,7 +54,7 @@ export default function Ongoing(props) {
     return (
         <>
             <div className='row'>
-                {patientList.map((details, i) => {
+                {patientList && patientList.map((details, i) => {
                     return (
                         <div key={i} className="col-md-4">
                             <div className="cardDiv">
@@ -71,21 +71,28 @@ export default function Ongoing(props) {
                                     {details.timeSlot} Min.
                                 </span>
                                 {!details.dependentId ?
-                                    <div align='left' className='ml-3 '>
+                                    <div align='left ' className='ml-3 mb-2'>
                                         <span className='patientName'>Patient:  </span> {details['patientDetails'][0].name}
                                     </div>
                                     :
-                                    <div align='left' className='ml-3 fontSize'>
-                                        <span className='patientName'>Patient:  </span>{details['dependentDetails'][0].name}
+                                    <div className='row mb-2'>
+                                        <div align='left' className=' ml-3 width_60 fontSize'>
+                                            <span className='patientName '>Patient:  </span>{details['dependentDetails'][0].name}
+                                        </div>
+                                        <div className='width_20' align='right'>
+                                            <span className='dependent'>Dependent</span>
+                                        </div>
                                     </div>}
                                 <div className=' appointmentBtn' align='right'>
-                                    <Link to={`/doctors/profile/${details.doctorId}`}>
+                                    {/* <Link to={`/patientqueue/${patientId}`}>
+                                        <button className="btn appColor helperBtn ">Queue</button>
+                                    </Link> */}
+                                    <Link to={`/profile/${details.doctorId}`}>
                                         <button className="btn appColor helperBtn ">View Profile</button>
                                     </Link>
                                     <Link onClick={() => handleCancelShow(details)} >
                                         <button className='btn btn-default btnMargin ' >Cancel</button>
                                     </Link>
-
                                 </div>
                             </div>
                         </div>
@@ -93,7 +100,7 @@ export default function Ongoing(props) {
 
                 })}
             </div>
-            {patientList.length > 0 ?
+            {patientList ?
                 <div>
                     <ReactPaginate
                         breakLabel="..."
@@ -114,7 +121,7 @@ export default function Ongoing(props) {
                         activeClassName="active"
                     />
                 </div>
-                : <div className="clinicHistory" ><b>Data is not Available</b></div>}
+                : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>}
 
             <Modal show={showCancel} onHide={handleCancelClose}>
                 <Modal.Header closeButton>

@@ -11,11 +11,9 @@ import { useRecoilState } from "recoil";
 import { FetchPatientLifestyleData } from "./fetchPatientLifestyleData";
 import { FetchPatientMedicalInfo } from "./fetchPatientMedicalInfo";
 import PatientApi from "../services/PatientApi";
-import UserLinks from "../doctor/Dashboard-card/partial/uselinks";
 
 export default function PatientProfile() {
   const { patientId } = useParams();
-  const [helpersData, setHelpersData] = useRecoilState(setHelperData)
   const [getDoctorId, setGetDoctorId] = useRecoilState(setDoctorId)
   const [value, setValue] = useState(0);
   const [patientName, setPatientName] = useState([])

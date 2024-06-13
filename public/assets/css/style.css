@@ -258,7 +258,9 @@ strong {
 	text-align: center;
 	margin-bottom: 45px;
 }
-
+.colorNorm {
+	color: #1a3c8b;
+}
 @media (max-width: 767px) {
 	.main_title {
 		margin-bottom: 15px;
@@ -278,11 +280,11 @@ strong {
 		min-width: 80%;
 	}
 	.MuiFormGroup-root {
-		flex-direction: column !important
+		flex-direction: column !important;
 	}
 }
 
-.MultiPaper-elevation{
+.MultiPaper-elevation {
 	margin-top: 10px;
 }
 .main_title h2 {
@@ -438,7 +440,6 @@ strong {
 }
 
 @media (max-width: 991px) {
-
 	.main_title_3 h3:after,
 	.main_title_3 h3:before {
 		display: none;
@@ -1263,13 +1264,13 @@ ul#additional_links li:after {
 	display: none;
 }
 
-#custom-search-input ul li input[type="radio"]:checked+label,
-#custom-search-input ul li input[type="radio"]:checked+label:hover {
+#custom-search-input ul li input[type="radio"]:checked + label,
+#custom-search-input ul li input[type="radio"]:checked + label:hover {
 	background-color: var(--appColor);
 	color: #fff;
 }
 
-#custom-search-input ul li input[type="radio"]:hover+label {
+#custom-search-input ul li input[type="radio"]:hover + label {
 	background-color: var(--appColor);
 	color: #fff;
 }
@@ -1362,6 +1363,24 @@ ul#additional_links li:after {
 	animation-delay: 0s;
 	animation-duration: 1s;
 }
+.patientImg {
+	height: 200px;
+	width: 200px;
+}
+.hoverBox {
+	background-color: white;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/* margin-bottom: 15px; */
+	margin-top: 4px;
+	width: 100%;
+	border: 1px solid var(--borderColor);
+	transition: background-color 0.3s ease;
+}
+.hoverBox:hover {
+	background-color: #e1e8ed;;
+}
 
 @keyframes shock-wave {
 	0% {
@@ -1431,6 +1450,18 @@ a.box_cat_home {
 .box_feat#icon_3 {
 	background: url(../img/icon-home-3.svg) center 45px no-repeat #fff;
 }
+
+/* .box_feat#appointment {
+	background: url(../../images/appointment.jpg) center no-repeat #fff;
+} */
+
+/* .box_feat#icon_2 {
+	background: url(../img/icon-home-2.svg) center 45px no-repeat #fff;
+}
+
+.box_feat#icon_3 {
+	background: url(../img/icon-home-3.svg) center 45px no-repeat #fff;
+} */
 
 .box_feat span {
 	position: absolute;
@@ -2434,7 +2465,7 @@ a.wish_bt:hover:after {
 	padding-right: 50px !important;
 }
 
-.infoBox>img {
+.infoBox > img {
 	position: absolute !important;
 	right: 60px !important;
 	top: 10px !important;
@@ -2945,7 +2976,6 @@ a.wish_bt:hover:after {
 	animation: cluster-animation 2.5s infinite;
 } */
 @keyframes cluster-animation {
-
 	0%,
 	100% {
 		transform: scale(1.3) rotate(0);
@@ -3285,7 +3315,7 @@ ul.time_select li input[type="radio"] {
 	cursor: pointer;
 }
 
-ul.time_select li input[type="radio"]:checked+label {
+ul.time_select li input[type="radio"]:checked + label {
 	background-color: #333;
 	color: #fff;
 }
@@ -3348,7 +3378,7 @@ input[type="checkbox"].css-checkbox {
 	border: 0;
 }
 
-input[type="checkbox"].css-checkbox+label.css-label {
+input[type="checkbox"].css-checkbox + label.css-label {
 	padding-left: 35px;
 	height: 25px;
 	display: inline-block;
@@ -3371,11 +3401,11 @@ a.social_bt {
 	-webkit-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
 } */
-input[type="checkbox"].css-checkbox:hover+label.css-label {
+input[type="checkbox"].css-checkbox:hover + label.css-label {
 	background-position: 0 -28px;
 }
 
-input[type="checkbox"].css-checkbox:checked+label.css-label {
+input[type="checkbox"].css-checkbox:checked + label.css-label {
 	background-position: 0 -56px;
 }
 
@@ -3569,7 +3599,7 @@ a.social_bt {
 	width: 250px;
 }
 
-.normal-font{
+.normal-font {
 	font-size: 16px;
 	font-weight: 400;
 }
@@ -3670,7 +3700,6 @@ a.social_bt {
 }
 
 @media (max-width: 991px) {
-
 	/* .box_profile ul.contacts {
 		text-align: center;
 	} */
@@ -3910,7 +3939,7 @@ section {
 	flex-flow: row wrap;
 }
 
-section>div {
+section > div {
 	flex: 1;
 	padding: 0.5rem;
 }
@@ -3919,7 +3948,7 @@ section>div {
 	display: none;
 }
 
-.radiobutton input[type="radio"]:not(:disabled)~label {
+.radiobutton input[type="radio"]:not(:disabled) ~ label {
 	cursor: pointer;
 }
 
@@ -3937,11 +3966,11 @@ section>div {
 	display: none;
 }
 
-.checkbutton input[type="checkbox"]:not(:disabled)~label {
+.checkbutton input[type="checkbox"]:not(:disabled) ~ label {
 	cursor: pointer;
 }
 
-section>div>label {
+section > div > label {
 	display: block;
 	width: 100px;
 	background: var(--appColor);
@@ -3952,11 +3981,11 @@ section>div>label {
 	padding: 5px;
 }
 
-div.options>label>input {
+div.options > label > input {
 	visibility: hidden;
 }
 
-input[type="radio"]:checked+label {
+input[type="radio"]:checked + label {
 	background: #3f4079;
 	color: hsla(215, 0%, 100%, 1);
 }
@@ -4155,7 +4184,7 @@ input[type="radio"]:checked+label {
 		width: 70%;
 		margin: auto;
 	}
-	.col-sm-4{
+	.col-sm-4 {
 		min-width: 100%;
 	}
 }
@@ -4170,11 +4199,11 @@ input[type="radio"]:checked+label {
 		margin: auto;
 	}
 }
-.justifyContent{
-	justify-content: flex-end
+.justifyContent {
+	justify-content: flex-end;
 }
 @media (max-width: 578px) {
-	.width50{
+	.width50 {
 		min-width: 100%;
 		margin-top: 10px;
 		justify-content: flex-start;
@@ -4205,6 +4234,9 @@ input[type="radio"]:checked+label {
 }
 .width_50 {
 	width: 50%;
+}
+.width_20 {
+	width: 20%;
 }
 .width40 {
 	width: 40%;
@@ -4356,7 +4388,7 @@ a.social_bt.linkedin:before {
 	background: 0 0;
 }
 
-.checkbox_2 input[type="checkbox"]:focus+label:before {
+.checkbox_2 input[type="checkbox"]:focus + label:before {
 	background-color: #e53c78;
 	background-color: rgba(231, 78, 132, 0.2);
 }
@@ -4378,7 +4410,7 @@ a.social_bt.linkedin:before {
 	height: 0;
 }
 
-.checkbox_2 input[type="checkbox"]:checked+label:after {
+.checkbox_2 input[type="checkbox"]:checked + label:after {
 	opacity: 1;
 }
 
@@ -4611,7 +4643,7 @@ ul.treatments.checkout li strong {
 }
 
 .MuiOutlinedInput-root {
-    padding: 0px;
+	padding: 0px;
 }
 .form_title h3 {
 	margin: 0;
@@ -5142,9 +5174,9 @@ ul.treatments.checkout li.total {
 	display: none;
 }
 
-.rating-input:checked~.rating-star,
+.rating-input:checked ~ .rating-star,
 .rating:hover .rating-star:hover,
-.rating:hover .rating-star:hover~.rating-star {
+.rating:hover .rating-star:hover ~ .rating-star {
 	background-position: 0 0;
 }
 
@@ -5651,7 +5683,7 @@ a.box_feat_about h3 {
 .fontS {
 	font-size: 20px;
 }
-.font-weight{
+.font-weight {
 	font-weight: 600;
 }
 
@@ -5944,7 +5976,10 @@ textarea.form-control {
 .dashSpace {
 	line-height: 65px;
 }
-
+.wraper {
+	margin-left: 10%;
+	margin-right: 10%;
+}
 .wrapperCss {
 	width: 100%;
 }
@@ -5955,7 +5990,7 @@ textarea.form-control {
 }
 
 .css-1wcaknn {
-    padding: 0px !important
+	padding: 0px !important;
 }
 
 .common_box {
@@ -6267,6 +6302,10 @@ ul.bullets li:before {
 	.margin_120 {
 		padding-top: 60px;
 		padding-bottom: 35px;
+	}
+	.wraper {
+		margin-left: 0%;
+		margin-right: 0%;
 	}
 }
 

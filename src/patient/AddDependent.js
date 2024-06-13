@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { PatientRegistrationForm } from "../patient/patientRegistrationForm";
 import { Wrapper } from "../mainComponent/Wrapper";
 import { MainNav } from "../mainComponent/mainNav";
+import { DependentRegistationForm } from "./DependentResistationForm";
 
-export default function CreatePatientProfile() {
+export default function AddDependent() {
     const { patientId } = useParams()
 
     return (
@@ -14,7 +14,7 @@ export default function CreatePatientProfile() {
                         {/* <Link to={`/doctors`}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link> */}
-                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Patient</span>
+                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Add Dependent</span>
                     </div>
                 </div>
             </MainNav>
@@ -24,7 +24,7 @@ export default function CreatePatientProfile() {
                         <div className="patientFetch">
                             <div className="Form-data">
                                 <div className="box_general_3">
-                                    <PatientRegistrationForm patientId={patientId}/>
+                                    <DependentRegistationForm patientId={patientId}/>
                                 </div>
                             </div>
                             {/* <DoctorBookingConfirmation doctorId={doctorId} /> */}

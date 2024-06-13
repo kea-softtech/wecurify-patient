@@ -3,27 +3,27 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Modal } from 'react-bootstrap';
-import AuthApi from '../../services/AuthApi';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CalendarModalBox from './partial/CalendarModalBox';
 import { MainNav } from '../../mainComponent/mainNav';
 import { Wrapper } from '../../mainComponent/Wrapper';
-import UserLinks from './partial/uselinks';
-import { setHelperData } from "../../recoil/atom/setHelperData";
 import { useRecoilState } from "recoil";
 import AppointmentApi from '../../services/AppointmentApi';
+import PatientApi from '../../services/PatientApi';
 const localizer = momentLocalizer(moment)
 
 export default function Calender() {
-  const { doctorId } = useParams();
+  const { patientId } = useParams();
   const { getPatientListDetails } = AppointmentApi()
+  const { getpaymentData } = PatientApi()
   const [getData, setGetData] = useState([])
   const [show, setShow] = useState(false);
   const [patientIdDetails, setPatientIdDetails] = useState([])
-  const [helpersData, setHelpersData] = useRecoilState(setHelperData)
   const [patientList, setPatientList] = useState([])
+
   useEffect(() => {
-    handleOnSelectSlot();
+    //   handleOnSelectSlot();
+    patientData()
   }, [])
 
   const handleClose = () => {
@@ -35,11 +35,12 @@ export default function Calender() {
     setShow(true)
     setPatientIdDetails(patientId)
   }
-  const handleOnSelectSlot = () => {
-    getPatientListDetails({ doctorId })
-      .then((result) => {
+
+  const patientData = () => {
+    getpaymentData({ patientId })
+      .then((res) => {
         const calendarData = []
-        result.map((item) => {
+        res['test'] && res['test'].map((item) => {
           if (item.dependentId) {
             calendarData.push({
               title: item['dependentDetails'][0].name,
@@ -65,11 +66,11 @@ export default function Calender() {
           setGetData(calendarData);
         })
       })
-
   }
+
   const eventPropGetter = (event) => {
-    const backgroundColor = event.status === "Completed" ? '#c0d2fc' : '#1a3c8b';
-    const color = event.status === "Completed" ? '#333' : '#fff';
+    const backgroundColor = event.status === "Completed" ? '#c0d2fc' : '#edebeb';
+    const color = event.status === "Completed" ? '#333' : '#333';
     return { style: { backgroundColor, color } }
   }
 
@@ -77,25 +78,16 @@ export default function Calender() {
     <Wrapper>
       <MainNav>
         <ul className="clearfix">
-          {/* <li>
-            <Link to={`/dashboard/${doctorId}`}>
+          <div className="width50">
+            <Link to={`/`}>
               <i className="arrow_back backArrow" title="back button"></i>
             </Link>
-          </li> */}
-          <li className='float-none' style={{ fontSize: 'inherit' }}>Schedule-Calendar</li>
+            <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Schedule </span>
+          </div>
         </ul>
       </MainNav>
       <div className="row">
-        <div className="width16">
-          <div className="dash row">
-            <UserLinks
-              doctorId={doctorId}
-              helperId={helpersData._id}
-              accessModule={helpersData.access_module}
-            />
-          </div>
-        </div>
-        <div className="common_box">
+        <div className="common_box full-width">
           <div className="myCustomHeight ">
             <Calendar
               messages={{
@@ -123,7 +115,7 @@ export default function Calender() {
         <Modal.Body>
           <CalendarModalBox
             patientList={patientList}
-            doctorId={doctorId}
+            // doctorId={doctorId}
             patientId={patientIdDetails} onSubmit={handleModalButtonClick} />
         </Modal.Body>
       </Modal>

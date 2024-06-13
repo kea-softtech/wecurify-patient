@@ -8,24 +8,27 @@ import { setSessionData } from "../recoil/atom/setSessionData";
 import { setDependentId } from "../recoil/atom/setDependentId";
 
 function FetchPatientInfo(props) {
-    const { patientId, doctorId, } = props;
+    const { patientId, doctorId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
-    const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [dependentId, setDependentsId] = useRecoilState(setDependentId)
     const [fetchPatientData, setFetchPatientData] = useState([])
     const { fetchPatient, paymentInfo } = PatientApi()
     const navigate = useNavigate()
+
     useEffect(() => {
         getAllPatientData()
     }, [])
 
     const handleShow = (item) => {
+        setShow(true)
         setSlotItem('')
         setSlotItem(item)
-        setbookSlot(item)
-        setShow(true)
+    }
+
+    const handleDependent = () => {
+        navigate(`/adddependent/${patientId}`)
     }
 
     const handleClose = () => {
@@ -35,7 +38,7 @@ function FetchPatientInfo(props) {
         const startDate = (sessionData.selectedDate + " " + item.time)
         const slotId = item._id
         const transactionData = {
-            "DoctorId": sessionData.doctorId,
+            "DoctorId": sessionData.session.doctorId,
             "ClinicId": sessionData.session.clinicId,
             "slotId": slotId,
             "patientId": patientId,
@@ -55,8 +58,12 @@ function FetchPatientInfo(props) {
         }
         paymentInfo(transactionData)
             .then((res) => {
-                setDependentsId(" ")
-                navigate(`confirm/${res._id}`)
+                // setDependentsId(" ")
+                if (slotItem._id) {
+                    navigate(`/confirm/${res._id}`)
+                } else {
+                    navigate(`/booking/${doctorId}`)
+                }
                 handleClose()
             })
     }
@@ -99,7 +106,7 @@ function FetchPatientInfo(props) {
                         </Button>
                     </div>
                     <div className="" align='right' >
-                        <Button onClick={() => handleShow(slotItem)} className="radius  buttonPatient appColor">
+                        <Button onClick={() => handleDependent(slotItem)} className="radius  buttonPatient appColor">
                             Add Dependent
                         </Button>
                     </div>

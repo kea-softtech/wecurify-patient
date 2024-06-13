@@ -35,7 +35,7 @@ export default function Cancelled(props) {
         <>
             {patientList ?
                 <div className='row'>
-                    {patientList.map((details, i) => {
+                    {patientList&&patientList.map((details, i) => {
                         return (
                             <>
                                 <div key={i} className="col-md-4 ">
@@ -68,7 +68,7 @@ export default function Cancelled(props) {
                     })}
                 </div>
                 : null}
-            {patientList.length > 0 ?
+            {patientList?
                 <div>
                     <ReactPaginate
                         breakLabel="..."

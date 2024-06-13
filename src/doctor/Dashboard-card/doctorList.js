@@ -4,38 +4,41 @@ import { MainNav } from "../../mainComponent/mainNav";
 import AuthApi from "../../services/AuthApi";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { setDoctorId } from "../../recoil/atom/setDoctorId";
 
 export default function DoctorList() {
     const [doctorData, setDoctorData] = useState([]);
-    const [doctorList, setDoctorList] = useState([]);
     const [filterData, setFilterData] = useState([]);
+    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [key, setKey] = useState('');
     const { getdoctors } = AuthApi();
     const navigate = useNavigate();
 
     useEffect(() => {
-        getDoctorList(currentPage)
-    }, [currentPage]);
+        getDoctorList(currentPage, key)
+    }, []);
 
     const pageSize = 6;
     const getDoctorList = () => {
-        getdoctors(currentPage, pageSize)
+        getdoctors(currentPage, pageSize, key)
             .then((result) => {
-                setFilterData(result.result)
+                setFilterData(result.doctorList)
                 setDoctorData(result.doctorList)
-                setDoctorList(result.doctorList)
                 setTotalPages(result.doctorListPages)
             })
     }
     const searchDoctor = (value) => {
+        setKey(value)
         if (value.length !== 0) {
             const res = filterData.filter(name => name.name.toLowerCase().includes(value.toLowerCase()))
             setDoctorData(res)
         }
         else {
-            setDoctorData(doctorList)
+            setDoctorData(filterData)
         }
     }
 
@@ -46,13 +49,9 @@ export default function DoctorList() {
 
     const BookAppointments = (details, e) => {
         e.preventDefault();
+        setDoctorsId(details._id)
         navigate(`/booking/${details._id}`)
     }
-
-    // const ViewAppointments = (details, e) => {
-    //     e.preventDefault();
-    //     navigate(`appointment/${details._id}`)
-    // }
     const handlePageClick = (data) => {
         setCurrentPage(data.selected + 1)
     }
@@ -62,24 +61,27 @@ export default function DoctorList() {
             <MainNav>
                 <div className=" clearfix row">
                     <div className="width50">
-                        <span className='float-none margin-top' style={{ fontSize: 'inherit' }}>Doctor-List</span>
-                    </div>
-                    <div className="width50 row justifyContent">
-                        <div id="custom-search-input">
-                            <input type="text"
-                                onChange={(e) => searchDoctor(e.target.value)}
-                                className="search-query"
-                                placeholder="Search Doctor By Name"
-                            />
-                        </div>
-
+                        <Link to={`/`}>
+                            <i className="arrow_back backArrow" title="back button"></i>
+                        </Link>
+                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Doctor-List</span>
                     </div>
                 </div>
             </MainNav>
             <div className='row'>
-               
                 <div className="full-width">
                     <div className="common_box">
+                        <div className="m-2" align='right'>
+                            <div className="width50 row justifyContent">
+                                <div id="custom-search-input">
+                                    <input type="text"
+                                        onChange={(e) => searchDoctor(e.target.value)}
+                                        className="search-query"
+                                        placeholder="Search Doctor By Name"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                         <div className='row'>
                             {doctorData.map((details, i) => {
                                 return (
@@ -132,7 +134,7 @@ export default function DoctorList() {
                                     activeClassName="active"
                                 />
                             </div>
-                            : <div className="clinicHistory" ><b>Data is Not Available</b></div>}
+                            : <div className=""><b>Data is Not Available</b></div>}
                     </div >
                 </div>
             </div>
