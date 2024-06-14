@@ -9,7 +9,7 @@ import { setDependentId } from "../recoil/atom/setDependentId";
 
 function DependentRegistationForm(props) {
     const { patientId } = props;
-    const [updatePatientData, setUpdatePatientData] = useState({})
+    const [updatePatientData, setUpdatePatientData] = useState(null)
     const [dependentId, setDependentsId] = useRecoilState(setDependentId)
     const [dependentData, setDependentData] = useState([])
     const {fetchPatient, AddDependents } = PatientApi()
@@ -55,7 +55,9 @@ function DependentRegistationForm(props) {
     }
 
     return (
-        <div >
+        <>
+        {updatePatientData ? 
+        <div>
             <div className="underline">
                 <h3 className="mb-3">Dependent Details</h3>
             </div>
@@ -128,6 +130,8 @@ function DependentRegistationForm(props) {
                 </div>
             </form>
         </div>
+        : null}
+        </>
     )
 }
 export { DependentRegistationForm }

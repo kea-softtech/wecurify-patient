@@ -16,7 +16,8 @@ export default function PatientAppointment() {
     const { doctorId } = useParams()
     const { getDrInfo } = AuthApi()
     const [value, setValue] = useState(0);
-    const [DoctorName, setDoctorsName] = useState([])
+    const [DoctorName, setDoctorsName] = useState([]);
+    
     useEffect(() => {
         doctorInfo()
     }, []);

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import appLogo from '../../src/img/small_wecurify.png'
 import { setloggedIn } from "../recoil/atom/setloggedIn";
 
 export default function Header() {
-    const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn);
+    const [loggedIn] = useRecoilState(setloggedIn);
 
     return (
         <header style={{ zIndex: '2' }} className="header_sticky">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded"
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import moment from "moment";
 import { FaClinicMedical } from 'react-icons/fa';
@@ -15,7 +14,7 @@ export default function PatientIncompleteApt(props) {
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [currentPage]);
+    }, []);
 
 
     const pageSize = 6;

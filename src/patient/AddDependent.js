@@ -11,9 +11,6 @@ export default function AddDependent() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        {/* <Link to={`/doctors`}>
-                            <i className="arrow_back backArrow" title="back button"></i>
-                        </Link> */}
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Add Dependent</span>
                     </div>
                 </div>
@@ -27,7 +24,6 @@ export default function AddDependent() {
                                     <DependentRegistationForm patientId={patientId}/>
                                 </div>
                             </div>
-                            {/* <DoctorBookingConfirmation doctorId={doctorId} /> */}
                         </div>
                     </div>
                 </div>

@@ -3,17 +3,18 @@ import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { setSlotData } from "../recoil/atom/setSlotData";
-import { Button, ButtonGroup, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setDependentId } from "../recoil/atom/setDependentId";
+import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [show, setShow] = useState(false);
-    const [sessionData, setSessionsData] = useRecoilState(setSessionData)
-    const [dependentId, setDependentsId] = useRecoilState(setDependentId)
-    const [fetchPatientData, setFetchPatientData] = useState([])
+    const [sessionData] = useRecoilState(setSessionData)
+    const [dependentId] = useRecoilState(setDependentId)
+    const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const { fetchPatient, paymentInfo } = PatientApi()
     const navigate = useNavigate()
 

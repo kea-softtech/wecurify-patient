@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 
 export default function Incomplete(props) {
     const { patientId } = props
-    const [patientHistoryData, setPatientHistoryData] = useState([])
+    const [patientHistoryData, setPatientHistoryData] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()

@@ -17,7 +17,7 @@ export default function PatientsClinicHistory(props) {
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [currentPage])
+    }, [])
 
     const pageSize = 6;
     function getPatientHistory(currentPage) {

@@ -24,7 +24,7 @@ export default function PatientList(props) {
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, [currentPage])
+    }, [])
 
     const handleCancelShow = (details) => {
         setId(details._id)

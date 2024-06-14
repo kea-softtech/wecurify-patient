@@ -12,9 +12,9 @@ import { setDoctorId } from '../../recoil/atom/setDoctorId';
 
 export default function Completed(props) {
     const { patientId } = props
-    const [patientHistoryData, setPatientHistoryData] = useState([])
+    const [patientHistoryData, setPatientHistoryData] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
-    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
+    const [doctorId] = useRecoilState(setDoctorId)
     const [totalPages, setTotalPages] = useState(0);
     const { downloadPrescription } = AppointmentApi()
     const { getpaymentData } = PatientApi()
@@ -52,7 +52,7 @@ export default function Completed(props) {
         <>
             {patientHistoryData ?
                 <div className='row'>
-                    {patientHistoryData&&patientHistoryData.map((details, i) => {
+                    {patientHistoryData && patientHistoryData.map((details, i) => {
                         return (
                             <>
                                 <div key={i} className="col-md-4 ">

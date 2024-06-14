@@ -15,7 +15,7 @@ export default function PatientCancelledApt(props) {
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, [currentPage])
+    }, [])
 
     const pageSize = 6;
 

@@ -9,7 +9,7 @@ import ReactPaginate from 'react-paginate';
 
 export default function Cancelled(props) {
     const { patientId } = props;
-    const [patientList, setPatientList] = useState([]);
+    const [patientList, setPatientList] = useState(null);
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()
@@ -35,7 +35,7 @@ export default function Cancelled(props) {
         <>
             {patientList ?
                 <div className='row'>
-                    {patientList&&patientList.map((details, i) => {
+                    {patientList && patientList.map((details, i) => {
                         return (
                             <>
                                 <div key={i} className="col-md-4 ">

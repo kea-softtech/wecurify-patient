@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import PatientCards from "../patient/PatientCards";
 import { useRecoilState } from "recoil";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
-import { setNewPatientId } from "../recoil/atom/setNewPatientId";
-import PatientApi from "../services/PatientApi";
+import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId)
-    const [patientName, setPatientName] = useState([])
-    const { fetchPatient } = PatientApi()
-    const patientId = patientData
-
-    useEffect(() => {
-        getPatientDetails()
-    }, [])
-
-    function getPatientDetails() {
-        fetchPatient({ patientId })
-            .then((result) => {
-                if (loggedIn === true) {
-                    setPatientName(result[0].name)
-                }
-            })
-    }
+    const [patientProfiledata] = useRecoilState(setPatientProfileData)
 
     return (
         <div className="container margin_120_95">
@@ -33,7 +16,7 @@ function HomePageTitle() {
             </div> */}
             <div className="row mb-3">
                 <div align='left' className="col-md-6">
-                    {loggedIn === true ? <h4 className="colorNorm mt-3">Hello {patientName},</h4> : null}
+                    {loggedIn === true ? <h4 className="colorNorm mt-3">Hello {patientProfiledata.name},</h4> : null}
                 </div>
                 <div align='right' className="col-md-6 mb-2">
                     <NavLink to="/doctors">
