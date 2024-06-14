@@ -17,7 +17,7 @@ const ShowInClinicAppointSlots = (props) => {
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
-    const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
+    const [loggedIn] = useRecoilState(setloggedIn)
     const [bookingSlots, setBookingSlots] = useState([]);
     const { getbookedSlots } = PatientApi();
     const data = props;
@@ -46,41 +46,6 @@ const ShowInClinicAppointSlots = (props) => {
         const returnData = currentDate > slotDateTime || bookingSlots.some(func => (func.slotId === slot._id && func.status !== "Cancelled"))
         return returnData
     }
-    // const handleSelectedSlot = (item) => {
-    //     if (loggedIn === true) {
-    //         const startDate = (selectedDate + " " + item.time)
-    //         const slotId = item._id
-    //         const transactionData = {
-    //             "DoctorId": session.doctorId,
-    //             "ClinicId": session.clinicId,
-    //             "slotId": slotId,
-    //             "patientId": patientData,
-    //             "dependentId": dependentId !== " " ? dependentId : null,
-    //             "transactionId": '123',
-    //             "currency": 'INR',
-    //             "fees": session.fees,
-    //             "date": slotDate,
-    //             "day": session.day,
-    //             "slotTime": item.time,
-    //             "daySlotId": session._id,
-    //             "selectedDate": selectedDate,
-    //             "timeSlot": session.timeSlot,
-    //             "startDate": startDate,
-    //             "status": "Ongoing",
-    //             "payment": "hold"
-    //         }
-    //         console.log('transactionData-------', transactionData)
-    //         paymentInfo(transactionData)
-    //             .then((res) => {
-    //                 setDependentsId(" ")
-    //                 handleClose()
-    //             })
-    //         navigate(`/calender/${patientData}`)
-    //     }
-    //     else {
-    //         navigate(`/patient`)
-    //     }
-    // }
 
     const availableSlots = () => {
         getbookedSlots(session.doctorId, session.clinicId)
@@ -105,7 +70,7 @@ const ShowInClinicAppointSlots = (props) => {
                             <div key={index}>
                                 {checkSlotAvailability(item)
                                     ?
-                                    <div>
+                                    <div key={index}>
                                         <div
                                             className="disabled-div"
                                             type="radio"
@@ -114,7 +79,7 @@ const ShowInClinicAppointSlots = (props) => {
                                         </div>
                                     </div>
                                     :
-                                    <div >
+                                    <div key={index}>
                                         <button
                                             onClick={() => handleShow(item)}
                                             className="btn_1"
@@ -129,23 +94,6 @@ const ShowInClinicAppointSlots = (props) => {
                         </>
                     ))}
                 </section>
-
-                {/* <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Are You Sure?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="alert alert-danger">You Want To Book This Slot. </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(bookSlot)}>
-                            Yes
-                        </Button>
-                        <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
-                            No
-                        </Button>
-                    </Modal.Footer>
-                </Modal> */}
             </div >
 
         </>

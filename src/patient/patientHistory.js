@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { TabPanel } from "../common/tabpanel";
@@ -8,29 +8,15 @@ import { Wrapper } from "../mainComponent/Wrapper";
 import Ongoing from "./patientHistory/Ongoing";
 import Completed from "./patientHistory/Completed";
 import Cancelled from "./patientHistory/Cancelled";
-import PatientApi from "../services/PatientApi";
 import Incomplete from "./patientHistory/Incomplete";
 
 export default function PatientHistory() {
     const { patientId } = useParams();
-    const { fetchPatient } = PatientApi()
     const [value, setValue] = useState(0);
-    const [patientName, setPatientName] = useState([]);
-
-    useEffect(() => {
-        // patientData()
-    }, [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    // const patientData = () => {
-    //     fetchPatient({ patientId })
-    //         .then((res) => {
-    //             setPatientName(res[0].name)
-    //         })
-    // }
 
     return (
         <Wrapper>
@@ -42,9 +28,6 @@ export default function PatientHistory() {
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Appoinment</span>
                     </div>
-                    {/* <div className="width50 row justifyContent">
-                        <div className="appColor normal-font" align='right'>Patient - {patientName}</div>
-                    </div> */}
                 </div>
             </MainNav>
             <div className="row">

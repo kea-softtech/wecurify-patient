@@ -9,7 +9,6 @@ import { MainTabs } from '../../mainComponent/mainTabs';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Wrapper } from '../../mainComponent/Wrapper';
 import UserLinks from '../Dashboard-card/partial/uselinks';
-import { setHelperData } from "../../recoil/atom/setHelperData";
 import { useRecoilState } from "recoil";
 import AuthApi from '../../services/AuthApi';
 import { MainButtonInput } from '../../mainComponent/mainButtonInput';
@@ -18,7 +17,6 @@ import { AddDoctorClinicInfo } from './Clinic/Partial/AddDoctorClinicInfo';
 export default function EditDoctorProfile() {
     const { getDrInfo } = AuthApi()
     const { doctorId } = useParams();
-    const [helpersData, setHelpersData] = useRecoilState(setHelperData)
     //for using tab
     const [tabValue, setTabValue] = useState(0);
     const [DoctorName, setDoctorsName] = useState([])
@@ -73,8 +71,6 @@ export default function EditDoctorProfile() {
                     <div className="dash row">
                         <UserLinks
                             doctorId={doctorId}
-                            helperId={helpersData._id}
-                            accessModule={helpersData.access_module}
                         />
                     </div>
                 </div>
@@ -97,12 +93,7 @@ export default function EditDoctorProfile() {
                             >
                             </MainTabs>
 
-                            <TabPanel value={tabValue} index={0}>
-                                <DoctorPersonalInformation
-                                    data={goToEducation}
-                                    doctorId={doctorId}
-                                />
-                            </TabPanel>
+                            
 
                             <TabPanel value={tabValue} index={1}>
                                 <DoctorEducation

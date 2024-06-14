@@ -100,13 +100,13 @@ function FetchPatientInfo(props) {
                     <label className="mx-2"><b>Email :</b></label>
                     {fetchPatientData.email}
                 </div>
-                <div className='row'>
-                    <div className="mr-2" align='right' >
+                <div className='d-flex'>
+                    <div className="mr-2" >
                         <Button onClick={() => handleShow(slotItem)} className="radius  buttonPatient appColor">
                             Book Appointment
                         </Button>
                     </div>
-                    <div className="" align='right' >
+                    <div className="mr-2" >
                         <Button onClick={() => handleDependent(slotItem)} className="radius  buttonPatient appColor">
                             Add Dependent
                         </Button>
@@ -118,7 +118,7 @@ function FetchPatientInfo(props) {
                     <Modal.Title>Are You Sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-danger">You Want To Book This Slot. </div>
+                    <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>

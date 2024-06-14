@@ -20,7 +20,7 @@ export default function GetLabPrescription(props) {
         <>
             {
                 getLabData.length > 0 ?
-                    <div align='left'>
+                    <div className='viewMreport' align='left'>
                         <h6> <b>List of Test</b></h6>
                         {getLabData && getLabData.map((item, i) => {
                             return (

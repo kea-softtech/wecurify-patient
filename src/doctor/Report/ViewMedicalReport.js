@@ -7,20 +7,22 @@ import PatientApi from '../../services/PatientApi';
 import ReportApi from '../../services/ReportApi';
 import { Wrapper } from '../../mainComponent/Wrapper';
 import { MainNav } from '../../mainComponent/mainNav';
-import UserLinks from '../Dashboard-card/partial/uselinks';
 import AuthApi from '../../services/AuthApi';
 import { useRecoilState } from 'recoil';
 import { setDoctorId } from '../../recoil/atom/setDoctorId';
+import GetDentalServices from './partial/getdentalservices';
+import { setNewPatientId } from '../../recoil/atom/setNewPatientId';
 
 export default function ViewMedicalReport() {
     const { reportId } = useParams();
     const { getMedicineReport } = ReportApi();
     const { getDrInfo } = AuthApi();
     const { patientDetailsData } = PatientApi();
-    const [ viewData, setViewData] = useState([]);
-    const [ doctorId, setDoctorsId] = useRecoilState(setDoctorId);
-    const [ doctorName, setDoctorName] = useState([]);
-    const [ patientDetails, setPatientDetails] = useState([]);
+    const [viewData, setViewData] = useState([]);
+    const [doctorId] = useRecoilState(setDoctorId);
+    const [patientData, setPatientData] = useRecoilState(setNewPatientId);
+    const [doctorName, setDoctorName] = useState([]);
+    const [patientDetails, setPatientDetails] = useState([]);
 
     useEffect(() => {
         getMedicineReportData()
@@ -50,7 +52,7 @@ export default function ViewMedicalReport() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/doctors/appointment/${doctorId}`}>
+                        <Link to={`/patientappointment/${patientData}`}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>
@@ -63,120 +65,94 @@ export default function ViewMedicalReport() {
                 </div>
             </MainNav>
             <div className="row">
-                <div className="width16">
-                    <div className="dash row">
-                        <UserLinks />
-                    </div>
-                </div>
-                <div className="width84">
-                    <div className="common_box ">
-                        <h6 align="left">
-                            <b>Patient Information</b>
-                        </h6>
+                <div className="full-width ">
+                    <div className="common_box  p-2">
                         <div className="white-box" >
-                            <div className="row mx-4 viewMreport">
-                                <div className="col-md-6 " align='left'>
-                                    <div className='mt-3'><b className='viewMreport fontSize '>{patientDetails.name}</b></div>
-                                    <div><b className='viewMreport'>Email :</b>{patientDetails.email}</div>
-                                    <div><b className='viewMreport'>Gender :</b>{patientDetails.gender}</div>
-                                    <div><b className='viewMreport'>Age :</b>{patientDetails.age}</div>
-                                    <div><b className='viewMreport'>Mobile no :</b>{patientDetails.mobile}</div>
+                            <h6 align="left" className='ml-2'><b>Patient Information</b></h6>
+                            <div className="row viewMreport">
+                                <div className="col-md-6 mb-2 " align='left' >
+                                    <div><b>Patient Name :</b>{patientDetails.name}</div>
+                                    <div><b>Email :</b>{patientDetails.email}</div>
+                                    <div><b>Gender :</b>{patientDetails.gender}</div>
+                                    <div><b>Age :</b>{patientDetails.age}</div>
+                                    <div><b>Mobile no :</b>{patientDetails.mobile}</div>
                                 </div>
-                                <div className="col-md-6" align='left'>
-                                    <h6 className='mt-3'><b>Vital Sign</b></h6>
-                                    <div className='vitalSign'>
-                                        <div className='mx-1'>
-                                            <div >
-                                                <b>BMI :</b>
-                                                {viewData.BMI ?
-                                                    <span>{viewData.BMI}</span>
-                                                    :
-                                                    <span>{"-"}</span>
-                                                }
-                                            </div>
-
-                                            <div >
-                                                <b> Bp :</b>
-                                                {viewData.bp ?
-                                                    <span>{viewData.bp}</span>
-                                                    :
-                                                    <span>{'-'}</span>
-                                                }
-                                            </div>
-                                            <div >
-                                                <b>Height :</b>
-                                                {viewData.height ?
-                                                    <span>{viewData.height}</span>
-                                                    :
-                                                    <span>{'-'}</span>
-                                                }
-                                            </div>
+                                <div className="col-md-6 " align='left'>
+                                    {viewData.BMI ?
+                                        <div >
+                                            <b>BMI :</b>
+                                            <span>{viewData.BMI}</span>
                                         </div>
-                                        <div className='mx-1'>
-                                            <div>
-                                                <b>Weight :</b>
-                                                {viewData.weight ?
-                                                    <span>{viewData.weight}</span>
-                                                    :
-                                                    <span>{'-'}</span>
-                                                }
-                                            </div>
+                                        : null
+                                    }
+
+                                    {viewData.bp ?
+                                        <div>
+                                            <b> Bp :</b>
+                                            <span>{viewData.bp}</span>
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                    {viewData.height ?
+                                        <div >
+                                            <b>Height :</b>
+                                            <span>{viewData.height}</span>
+
+                                        </div>
+                                        : null
+                                    }
+                                    {viewData.weight ?
+                                        <div>
+                                            <b>Weight :</b>
+                                            <span>{viewData.weight}</span>
+                                        </div>
+                                        : null
+                                    }
+
+                                    {
+                                        viewData.pulse ?
                                             <div>
                                                 <b>Pulse :</b>
-                                                {
-                                                    viewData.pulse ?
-                                                        <span>{viewData.pulse}</span>
-                                                        :
-                                                        <span>{'-'}</span>
-                                                }
+                                                <span>{viewData.pulse}</span>
+
                                             </div>
+                                            : null
+                                    }
+
+                                    {
+                                        viewData.temp ?
                                             <div>
                                                 <b>Temprature :</b>
-                                                {
-                                                    viewData.temp ?
-                                                        <span>{viewData.temp}</span>
-                                                        :
-                                                        <span>{'-'}</span>
-                                                }
                                             </div>
-                                        </div>
-                                    </div>
+                                            :
+                                            null
+                                    }
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="white-box viewMreport">
                             <GetMedicinePriscription reportId={reportId} />
-                        </div>
 
-                        <div className="white-box viewMreport">
                             <GetLabPrescription reportId={reportId} />
-                        </div>
 
-                        <div className="white-box viewMreport">
                             <GetSymptomsData reportId={reportId} />
-                        </div>
 
+                            <GetDentalServices reportId={reportId} />
 
-                        <div className="white-box viewMreport">
-                            <div align="left">
-                                <b className='viewMreport'>Investigation :</b>
-                                {
-                                    viewData.investigation_note ?
-                                        <span>{viewData.investigation_note}</span>
-                                        :
-                                        <span>{'-'}</span>
-                                }
-                            </div>
+                            {viewData.investigation_note ?
+                                <div align="left" className='margin_top_15'>
+                                    <b className='viewMreport'>Investigation :</b>
+                                    <span>{viewData.investigation_note}</span>
+                                </div>
+                                : null
+                            }
 
-                            <div align="left">
-                                <b className='viewMreport'>Premedication :</b>
-                                {viewData.premedication_note ?
+                            {viewData.premedication_note ?
+                                <div align="left " className='viewMreport'>
+                                    <b >Premedication :</b>
                                     <span>{viewData.premedication_note}</span>
-                                    :
-                                    <span>{'-'}</span>
-                                }
-                            </div>
+                                </div>
+                                : null
+                            }
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,6 @@ import { MainNav } from '../../mainComponent/mainNav';
 import AuthApi from '../../services/AuthApi';
 import { Wrapper } from '../../mainComponent/Wrapper';
 import UserLinks from '../Dashboard-card/partial/uselinks';
-import { setHelperData } from "../../recoil/atom/setHelperData";
 import { useRecoilState } from "recoil";
 import { setDoctorId } from '../../recoil/atom/setDoctorId';
 
@@ -39,7 +38,6 @@ export default function PatientMedicalReport() {
     const { reportId } = useParams();
     const { getDrInfo } = AuthApi()
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId);
-    const [helpersData, setHelpersData] = useRecoilState(setHelperData)
     const [DoctorName, setDoctorsName] = useState([])
     const [value, setValue] = useState(0);
     const { state } = useLocation()
@@ -83,15 +81,6 @@ export default function PatientMedicalReport() {
                 </div>
             </MainNav>
             <div className='row'>
-                <div className="width16">
-                    <div className="dash row">
-                        <UserLinks
-                            doctorId={doctorId}
-                            helperId={helpersData._id}
-                            accessModule={helpersData.access_module}
-                        />
-                    </div>
-                </div>
                 <div className="width84">
                     <div className="common_box">
                         <div className="white-box">

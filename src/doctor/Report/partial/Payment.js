@@ -160,7 +160,7 @@ export default function Payment(props) {
                     <Modal.Title>Are You Sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-danger">You Want To Pay This Amount.? </div>
+                    <div className="alert alert-bgcolor">You Want To Pay This Amount.? </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => getPrescriptionData()}>

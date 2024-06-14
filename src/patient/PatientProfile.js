@@ -5,7 +5,6 @@ import { PatientPersonalInformation } from "../patient/patientPersonalInformatio
 import { MainNav } from "../mainComponent/mainNav";
 import { MainTabs } from "../mainComponent/mainTabs";
 import { Wrapper } from "../mainComponent/Wrapper";
-import { setHelperData } from "../recoil/atom/setHelperData";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
 import { useRecoilState } from "recoil";
 import { FetchPatientLifestyleData } from "./fetchPatientLifestyleData";

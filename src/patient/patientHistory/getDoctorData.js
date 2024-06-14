@@ -41,7 +41,7 @@ export default function GetDoctorData(props) {
                             className='doctorphotoPatient'
                         />
                     </div>
-                    <div className='col-md-7' align='center'>
+                    <div className='col-md-7 mt-3' align='left'>
                         <span className='patientName'>
                             Dr.{doctorData.name}
                         </span>
@@ -50,7 +50,7 @@ export default function GetDoctorData(props) {
                                 {
                                     doctorData['educationList'].map((item, i) => {
                                         return (
-                                            <div key={i} className=''>
+                                            <div key={i} >
                                                 {item.specialization}
                                             </div>
                                         )

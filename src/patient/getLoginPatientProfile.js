@@ -4,29 +4,12 @@ import { Wrapper } from "../mainComponent/Wrapper";
 import { useRecoilState } from "recoil";
 import { MainNav } from "../mainComponent/mainNav";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
-import { useEffect, useState } from "react";
-import AuthApi from "../services/AuthApi";
 import GetDependent from "./getDependent";
-import { setSessionData } from "../recoil/atom/setSessionData";
 
 export default function GetLoginPatientProfile() {
     const { patientId } = useParams()
-    const { getDrInfo } = AuthApi()
-    const [DoctorName, setDoctorsName] = useState([])
-    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
+    const [doctorId] = useRecoilState(setDoctorId)
 
-    // useEffect(() => {
-    //     doctorInfo()
-    // }, [])
-
-
-    // const doctorInfo = () => {
-    //     getDrInfo({ doctorId })
-    //         .then((res) => {
-    //             setDoctorsName(res.result[0].name)
-    //         })
-    // }
-   
     return (
         <>
             <Wrapper>
@@ -37,9 +20,6 @@ export default function GetLoginPatientProfile() {
                                 <i className="arrow_back backArrow" title="back button"></i>
                             </Link>
                             <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Patient Information</span>
-                        </div>
-                        <div className="width50 row justifyContent">
-                            {/* <div className="appColor normal-font" align='right'>Dr. {DoctorName}</div> */}
                         </div>
                     </div>
                 </MainNav>

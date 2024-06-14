@@ -30,6 +30,7 @@ const GetMedicinePriscription = (props) => {
         <>
             {showMedicineData.length > 0 ?
                 <>
+                    <h6 align="left" className='ml-2'><b>Medicine List</b></h6>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -38,6 +39,7 @@ const GetMedicinePriscription = (props) => {
                                     <TableCell align='center'><b>Medicine Name</b></TableCell>
                                     <TableCell align='center'><b>Take</b></TableCell>
                                     <TableCell align='center'><b>Duration</b></TableCell>
+                                    <TableCell align='center'><b>Mg</b></TableCell>
                                     <TableCell align='center'><b>Slots</b></TableCell>
                                 </TableRow>
                             </TableHead>
@@ -49,6 +51,7 @@ const GetMedicinePriscription = (props) => {
                                             <TableCell align='center'>{item.medicineName}</TableCell>
                                             <TableCell align='center'>{item.timing}</TableCell>
                                             <TableCell align='center'>{item.days}</TableCell>
+                                            <TableCell align='center'>{item.mg}</TableCell>
                                             <TableCell align='center'>
                                                 {item['frequency'].map((schedule, index) => {
                                                     return (

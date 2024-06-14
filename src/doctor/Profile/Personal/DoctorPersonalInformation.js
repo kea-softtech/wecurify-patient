@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import React from 'react';
-import avatarImage from '../../../img/profile.png'
 import AuthApi from "../../../services/AuthApi";
 import { Link } from "react-router-dom";
 

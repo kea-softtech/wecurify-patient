@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PatientApi from '../services/PatientApi';
 import { useRecoilState } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import { setSessionData } from '../recoil/atom/setSessionData';
 import { setSlotData } from '../recoil/atom/setSlotData';
 import { Button, Modal } from 'react-bootstrap';
+import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 
 export default function GetDependent(props) {
     const { patientId } = props;
-    const [fetchPatientData, setFetchPatientData] = useState([])
+    const [fetchPatientData] = useRecoilState(setPatientProfileData)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
-    const { patientDetailsData, paymentInfo } = PatientApi()
+    const {  paymentInfo } = PatientApi()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        getAllPatientData()
-    }, [])
-
-    function getAllPatientData() {
-        patientDetailsData({ patientId })
-            .then((response) => {
-                setFetchPatientData(response[0].dependent)
-            })
-    }
+   
     const handleShow = (item) => {
         setbookSlot(item)
         setShow(true)
@@ -63,10 +54,9 @@ export default function GetDependent(props) {
     }
     return (
         <>
-            {fetchPatientData.length !== 0 ?
+            {fetchPatientData["dependent"]?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
-                        {fetchPatientData ?
                             <>
                                 <div className="underline">
                                     <div className="form_title">
@@ -74,7 +64,7 @@ export default function GetDependent(props) {
                                     </div>
                                 </div>
                                 <div className="patientDataStyle">
-                                    {fetchPatientData.map((item, i) => {
+                                    {fetchPatientData["dependent"].map((item, i) => {
                                         return (
                                             <div key={i} className="row">
                                                 <div className='col-md-7'>
@@ -90,8 +80,6 @@ export default function GetDependent(props) {
                                     })}
                                 </div>
                             </>
-                            :
-                            null}
                     </div>
                 </div>
                 : null}
@@ -100,7 +88,7 @@ export default function GetDependent(props) {
                     <Modal.Title>Are You Sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-danger">You Want To Book This Slot. </div>
+                    <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(bookSlot)}>
