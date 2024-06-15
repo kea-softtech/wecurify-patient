@@ -21,6 +21,7 @@ import ClinicInto from "./doctor/Profile/Appointment/ClinicInfo";
 import Calender from "./doctor/Dashboard-card/Calender";
 import PatientQueue from "./patient/patientHistory/PatientQueue";
 import AddDependent from "./patient/AddDependent";
+import {FetchDoctorPersonalDetails} from './doctor/Profile/Personal/Partial/fetchDoctorPersonalDetails'
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -34,7 +35,7 @@ function MainContainer() {
       <Route path="/confirm/:patientAppointmentId" element={<SlotConfirmation />} />
       <Route path="/doctors" element={<DoctorList />} />
       <Route path="/booking/:doctorId" element={<AppointmentBookingSection />} />
-      <Route path="/profile/:doctorId" element={<DoctorProfile />} />
+      <Route path="/profile/:doctorId" element={<FetchDoctorPersonalDetails/>} />
       <Route path="/clinicinfo/:clinicId" element={<ClinicInto />} />
       <Route path="/calender/:patientId" element={<Calender />} />
       <Route path="/patientqueue/:patientId" element={<PatientQueue />} />

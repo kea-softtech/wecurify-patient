@@ -102,7 +102,7 @@ export default function Ongoing(props) {
                                                 {/* <Link to={`/patientqueue/${patientId}`}>
                                         <button className="btn appColor helperBtn ">Queue</button>
                                     </Link> */}
-                                                <Link to={`/fetchDoctorPersonalDetails/${details.doctorId}`}>
+                                                <Link to={`/profile/${details.doctorId}`}>
                                                     <button className="btn appColor helperBtn ">View Profile</button>
                                                 </Link>
                                                 <Link onClick={() => handleCancelShow(details)} >
