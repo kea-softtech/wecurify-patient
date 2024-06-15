@@ -17,7 +17,7 @@ export default function Incomplete(props) {
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, []);
+    }, [currentPage]);
 
 
     setTimeout(() => {

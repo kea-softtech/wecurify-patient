@@ -19,7 +19,7 @@ export default function Cancelled(props) {
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [])
+    }, [currentPage])
 
     setTimeout(() => {
         setIsLoading(false);

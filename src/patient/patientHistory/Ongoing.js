@@ -24,7 +24,7 @@ export default function Ongoing(props) {
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, [])
+    }, [currentPage])
 
     setTimeout(() => {
         setIsLoading(false);
@@ -139,7 +139,7 @@ export default function Ongoing(props) {
                                 activeClassName="active"
                             />
                         </div>
-                        : null}
+                         : null} 
                 </>
             }
 
