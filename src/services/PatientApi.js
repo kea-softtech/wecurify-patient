@@ -13,6 +13,7 @@ export default function PatientApi() {
 
     };
     const paymentInfo = async (transactionData) => {
+        console.log("transactionData------", transactionData)
         try {
             const result = await axios.post(`${API}/payment/order`, transactionData)
             return result.data

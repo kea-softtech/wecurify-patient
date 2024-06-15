@@ -10,20 +10,20 @@ import { setDoctorId } from "../recoil/atom/setDoctorId";
 import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
-    const { patientAppointmentId } = useParams()
+    // const { patientAppointmentId } = useParams()
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
     const [patientData, setPatientData] = useState([])
-    const [AppoinmentData, setAppointmentData] = useState([])
-    const { getappointment } = AppointmentApi()
+    // const [AppoinmentData, setAppointmentData] = useState([])
+    // const { getappointment } = AppointmentApi()
     const { getDrInfo } = AuthApi()
     const { fetchPatient } = PatientApi()
 
     useEffect(() => {
         doctorInfo()
         patientInfo()
-        getAppointmentData()
+        // getAppointmentData()
     }, [])
 
     const doctorInfo = () => {
@@ -39,14 +39,14 @@ export default function SlotConfirmation() {
                 setPatientData(res[0])
             })
     }
-    const getAppointmentData = () => {
-        getappointment(patientAppointmentId)
-            .then((res) => {
-                // console.log("res==>>>>", res)
+    // const getAppointmentData = () => {
+    //     getappointment(patientAppointmentId)
+    //         .then((res) => {
+    //             // console.log("res==>>>>", res)
 
-                setAppointmentData(res)
-            })
-    }
+    //             setAppointmentData(res)
+    //         })
+    // }
     return (
         <Wrapper>
             <MainNav>
@@ -72,9 +72,9 @@ export default function SlotConfirmation() {
                                     {patientData.name}  Your
                                     Appointment booked with
                                     Dr. {doctorData.name}
-                                    {AppoinmentData ?
+                                    {/* {AppoinmentData ?
                                         <div> On {AppoinmentData.date} At {AppoinmentData.slotTime}</div>
-                                        : null}
+                                        : null} */}
 
                                 </div>
                                 <Link to={`/`}>
