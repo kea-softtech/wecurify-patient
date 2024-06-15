@@ -63,7 +63,7 @@ function DependentRegistationForm(props) {
             </div>
             <form onSubmit={(e) => onSubmit(e)}>
                 <div className="row mt-3">
-                    <div className="col-sm-6">
+                    <div className="col-md-6">
                         <div align='left'><label>Full name</label></div>
                         <MainInput
                             type="text"
@@ -113,7 +113,7 @@ function DependentRegistationForm(props) {
                         {errors.gender && <span className="validation">Please enter your gender</span>}
                     </div>
 
-                    <div className="col-md-4 col-sm-6">
+                    <div className="col-md-4 col-sm-4">
                         <div align='left'><label>Email</label></div>
                         <MainInput
                             type="email"

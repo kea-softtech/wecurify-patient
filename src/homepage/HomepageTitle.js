@@ -3,24 +3,47 @@ import { NavLink } from "react-router-dom";
 import PatientCards from "../patient/PatientCards";
 import { useRecoilState } from "recoil";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
+import { Button } from "react-bootstrap";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
 
     return (
         <div className="container margin_120_95">
-            <div className="row mb-3">
-                <div align='left' className="col-md-6">
-                    {loggedIn === true ? <h4 className="colorNorm mt-3">Welcome to wecurify, </h4> : null}
+            <div className="row">
+                <div className="col-md-4">
+                    {loggedIn === true ?
+                        <div align='left' className="">
+                            <h4 className="colorNorm mt-3">Welcome to wecurify, </h4>
+                        </div>
+                        : null}
                 </div>
-                <div align='right' className="col-md-6 mb-2">
-                    <NavLink to="/doctors">
-                        <button className="btn appColor helperBtn fontSize">
-                            <b>Find Doctor</b>
-                        </button>
-                    </NavLink>
-                </div>
+                {loggedIn !== true ?
+                    <div className=" col-md-8 button_responsive row" align='left' >
+                        <div className="mb-3">
+                            <NavLink to="https://doctor.wecurify.com/">
+                                <Button className="radius btn-home ml-2 buttonPatient appColor fontS">
+                                    I am a doctor
+                                </Button>
+                            </NavLink>
+                            <NavLink to="/doctors">
+                                <Button className="radius ml-2 btn-home  buttonPatient appColor fontS">
+                                    Find a doctor
+                                </Button>
+                            </NavLink>
+                        </div>
+                    </div>
+                    : <div align='right' className="col-md-8 mt-3">
+                        <NavLink to="/doctors">
+                            <Button className="radius ml-2  buttonPatient appColor fontS">
+                                Find a doctor
+                            </Button>
+                        </NavLink>
+                    </div>
+                }
+
             </div>
+
 
             <div className="row add_bottom_30">
                 {loggedIn !== true ?

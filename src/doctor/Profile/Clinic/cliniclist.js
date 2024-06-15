@@ -16,7 +16,6 @@ export default function ClinicList(props) {
     const doctorServices = () => {
         getDrInfo({ doctorId })
             .then((res) => {
-                console.log("res----", res)
                 const clinics = res.result[0]['clinicList']
                 setclinics(clinics);
             })

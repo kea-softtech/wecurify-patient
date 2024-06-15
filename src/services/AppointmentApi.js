@@ -38,7 +38,6 @@ export default function AppointmentApi() {
         }
     }
     const createPDF = async ( reportId ) => {
-        console.log("reportId----------", reportId)
         try {
             const result = await axios.post(`${API}/createPrescriptionPdf/${reportId}`)
             return result.data

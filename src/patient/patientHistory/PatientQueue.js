@@ -36,7 +36,6 @@ export default function PatientQueue() {
     // const selectedSlot = () => {
     //     fetchSessionSlotsData({ doctorId }, clinicId)
     //         .then((response) => {
-    //             console.log('=======response', response)
     //             response.map((item) => {
     //                 setSelectedSlots(item.showSelectedSlots)
     //                 return item

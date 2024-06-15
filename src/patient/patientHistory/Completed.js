@@ -102,34 +102,35 @@ export default function Completed(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        {completedProduct.length > 6 ?
-                                            <div>
-                                                <ReactPaginate
-                                                    breakLabel="..."
-                                                    nextLabel="Next >"
-                                                    onPageChange={handlePageClick}
-                                                    pageRangeDisplayed={5}
-                                                    pageCount={totalPages}
-                                                    previousLabel="< Previous"
-                                                    renderOnZeroPageCount={null}
-                                                    marginPagesDisplayed={2}
-                                                    containerClassName="pagination "
-                                                    pageClassName="page-item"
-                                                    pageLinkClassName="page-link"
-                                                    previousClassName="page-item"
-                                                    previousLinkClassName="page-link"
-                                                    nextClassName="page-item"
-                                                    nextLinkClassName="page-link"
-                                                    activeClassName="active"
-                                                />
-                                            </div>
-                                            : null}
+
                                     </>
                                 )
 
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Data is not Available</b></div>}
+                    {completedProduct.length > 6 ?
+                        <div>
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel="Next >"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={5}
+                                pageCount={totalPages}
+                                previousLabel="< Previous"
+                                renderOnZeroPageCount={null}
+                                marginPagesDisplayed={2}
+                                containerClassName="pagination "
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                activeClassName="active"
+                            />
+                        </div>
+                        : null}
                 </>
             }
 

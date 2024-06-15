@@ -100,14 +100,14 @@ function FetchPatientInfo(props) {
                     <label className="mx-2"><b>Email :</b></label>
                     {fetchPatientData.email}
                 </div>
-                <div className='d-flex'>
-                    <div className="mr-2" >
-                        <Button onClick={() => handleShow(slotItem)} className="radius  buttonPatient appColor">
+                <div className='row'>
+                    <div className=" mt-2 col-6 " >
+                        <Button onClick={() => handleShow(slotItem)} className="radius buttonPatient appColor">
                             Book Appointment
                         </Button>
                     </div>
-                    <div className="mr-2" >
-                        <Button onClick={() => handleDependent(slotItem)} className="radius  buttonPatient appColor">
+                    <div className=" mt-2 col-6 " >
+                        <Button onClick={() => handleDependent()} className="radius  buttonPatient appColor">
                             Add Dependent
                         </Button>
                     </div>

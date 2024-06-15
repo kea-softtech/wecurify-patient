@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PatientApi from '../services/PatientApi';
 import { useRecoilState } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,15 +8,19 @@ import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 
 export default function GetDependent(props) {
-    const { patientId } = props;
+    const { patientId , doctorId} = props;
     const [fetchPatientData] = useRecoilState(setPatientProfileData)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
-    const {  paymentInfo } = PatientApi()
+    const { paymentInfo } = PatientApi()
     const navigate = useNavigate()
-   
+
+    useEffect(() => {
+
+    }, [fetchPatientData])
+
     const handleShow = (item) => {
         setbookSlot(item)
         setShow(true)
@@ -48,38 +52,43 @@ export default function GetDependent(props) {
         }
         paymentInfo(transactionData)
             .then((res) => {
+                if (slotItem._id) {
+                    navigate(`/confirm/${res._id}`)
+                } else {
+                    navigate(`/booking/${doctorId}`)
+                }
                 handleClose()
             })
         navigate(`/`)
     }
     return (
         <>
-            {fetchPatientData["dependent"]?
+            {fetchPatientData["dependent"]&&fetchPatientData["dependent"].length > 0 ?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
-                            <>
-                                <div className="underline">
-                                    <div className="form_title">
-                                        <h3>dependent Details</h3>
-                                    </div>
+                        <>
+                            <div className="underline">
+                                <div className="form_title">
+                                    <h3>dependent Details</h3>
                                 </div>
-                                <div className="patientDataStyle">
-                                    {fetchPatientData["dependent"].map((item, i) => {
-                                        return (
-                                            <div key={i} className="row">
-                                                <div className='col-md-7'>
-                                                    {item.name}
-                                                </div>
-                                                <div className='col-md-5' align='right'>
-                                                    <Link onClick={() => handleShow(item)} className="btn">
-                                                        <i className="arrow_carrot-right_alt" style={{ fontSize: 20 }}></i>
-                                                    </Link>
-                                                </div>
+                            </div>
+                            <div className="patientDataStyle">
+                                {fetchPatientData["dependent"].map((item, i) => {
+                                    return (
+                                        <div key={i} className="row">
+                                            <div className='col-md-7'>
+                                                {item.name}
                                             </div>
-                                        )
-                                    })}
-                                </div>
-                            </>
+                                            <div className='col-md-5' align='right'>
+                                                <Link onClick={() => handleShow(item)} className="btn">
+                                                    <i className="arrow_carrot-right_alt" style={{ fontSize: 20 }}></i>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </>
                     </div>
                 </div>
                 : null}

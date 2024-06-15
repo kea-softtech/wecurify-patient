@@ -102,7 +102,7 @@ export default function Ongoing(props) {
                                                 {/* <Link to={`/patientqueue/${patientId}`}>
                                         <button className="btn appColor helperBtn ">Queue</button>
                                     </Link> */}
-                                                <Link to={`/profile/${details.doctorId}`}>
+                                                <Link to={`/fetchDoctorPersonalDetails/${details.doctorId}`}>
                                                     <button className="btn appColor helperBtn ">View Profile</button>
                                                 </Link>
                                                 <Link onClick={() => handleCancelShow(details)} >
@@ -110,28 +110,7 @@ export default function Ongoing(props) {
                                                 </Link>
                                             </div>
                                         </div>
-                                        {ongoingProduct.length > 6 ?
-                                            <div>
-                                                <ReactPaginate
-                                                    breakLabel="..."
-                                                    nextLabel="Next >"
-                                                    onPageChange={handlePageClick}
-                                                    pageRangeDisplayed={5}
-                                                    pageCount={totalPages}
-                                                    previousLabel="< Previous"
-                                                    renderOnZeroPageCount={null}
-                                                    marginPagesDisplayed={2}
-                                                    containerClassName="pagination "
-                                                    pageClassName="page-item"
-                                                    pageLinkClassName="page-link"
-                                                    previousClassName="page-item"
-                                                    previousLinkClassName="page-link"
-                                                    nextClassName="page-item"
-                                                    nextLinkClassName="page-link"
-                                                    activeClassName="active"
-                                                />
-                                            </div>
-                                            : null}
+
                                     </div>
                                 )
 
@@ -139,6 +118,28 @@ export default function Ongoing(props) {
                         </div>
                         : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>
                     }
+                    {ongoingProduct.length > 6 ?
+                        <div>
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel="Next >"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={5}
+                                pageCount={totalPages}
+                                previousLabel="< Previous"
+                                renderOnZeroPageCount={null}
+                                marginPagesDisplayed={2}
+                                containerClassName="pagination "
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                activeClassName="active"
+                            />
+                        </div>
+                        : null}
                 </>
             }
 

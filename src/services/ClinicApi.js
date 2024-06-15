@@ -6,7 +6,6 @@ export default function ClinicApi() {
     const getAllClinicsData = async ({ doctorId }) => {
         try {
             const result = await axios.get(`${API}/fetchclinic/${doctorId}`)
-            console.log("result=====", result)
             return result.data
         }
         catch (err) {
@@ -113,8 +112,6 @@ export default function ClinicApi() {
     const getSingleClinic = async (clinicId) => {
         try {
             const result = await axios.get(`${API}/getclinic/${clinicId}`)
-            console.log('======', result)
-
             return result.data
         }
         catch (err) {

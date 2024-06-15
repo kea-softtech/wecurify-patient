@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PatientRegistrationForm } from "../patient/patientRegistrationForm";
 import { Wrapper } from "../mainComponent/Wrapper";
 import { MainNav } from "../mainComponent/mainNav";
@@ -11,9 +11,9 @@ export default function CreatePatientProfile() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        {/* <Link to={`/doctors`}>
+                        <Link to={`/patient`}>
                             <i className="arrow_back backArrow" title="back button"></i>
-                        </Link> */}
+                        </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Patient</span>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import PatientApi from "../../services/PatientApi";
 import GetDoctorData from "./getDoctorData";
 import ReactPaginate from "react-paginate";
 import Loader from "./Loader";
+
 export default function Incomplete(props) {
     const { patientId } = props
     const [patientHistoryData, setPatientHistoryData] = useState(null)
@@ -13,7 +14,6 @@ export default function Incomplete(props) {
     const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
-
 
     useEffect(() => {
         getPatientDetails(currentPage);
@@ -80,33 +80,34 @@ export default function Incomplete(props) {
                                                 }
                                             </div>
                                         </div>
-                                        {incompleteProduct.length > 6 ?
-                                            <div>
-                                                <ReactPaginate
-                                                    breakLabel="..."
-                                                    nextLabel="Next >"
-                                                    onPageChange={handlePageClick}
-                                                    pageRangeDisplayed={5}
-                                                    pageCount={totalPages}
-                                                    previousLabel="< Previous"
-                                                    renderOnZeroPageCount={null}
-                                                    marginPagesDisplayed={2}
-                                                    containerClassName="pagination "
-                                                    pageClassName="page-item"
-                                                    pageLinkClassName="page-link"
-                                                    previousClassName="page-item"
-                                                    previousLinkClassName="page-link"
-                                                    nextClassName="page-item"
-                                                    nextLinkClassName="page-link"
-                                                    activeClassName="active"
-                                                />
-                                            </div>
-                                            : null}
+
                                     </>
                                 )
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Data is not Available</b></div>}
+                    {incompleteProduct.length > 6 ?
+                        <div>
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel="Next >"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={5}
+                                pageCount={totalPages}
+                                previousLabel="< Previous"
+                                renderOnZeroPageCount={null}
+                                marginPagesDisplayed={2}
+                                containerClassName="pagination "
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                activeClassName="active"
+                            />
+                        </div>
+                        : null}
                 </>
             }
 

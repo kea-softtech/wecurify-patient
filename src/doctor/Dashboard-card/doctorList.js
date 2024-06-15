@@ -7,20 +7,26 @@ import ReactPaginate from "react-paginate";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
+import Loader from "../../patient/patientHistory/Loader";
 
 export default function DoctorList() {
-    const [doctorData, setDoctorData] = useState([]);
+    const [doctorData, setDoctorData] = useState(null);
     const [filterData, setFilterData] = useState([]);
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [key, setKey] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const { getdoctors } = AuthApi();
     const navigate = useNavigate();
 
     useEffect(() => {
         getDoctorList(currentPage, key)
     }, []);
+
+    setTimeout(() => {
+        setIsLoading(false);
+    }, 2000);
 
     const pageSize = 6;
     const getDoctorList = () => {
@@ -44,7 +50,7 @@ export default function DoctorList() {
 
     const handleShowProfile = (details, e) => {
         e.preventDefault();
-        navigate(`/profile/${details._id}`)
+        navigate(`/fetchDoctorPersonalDetails/${details._id}`)
     }
 
     const BookAppointments = (details, e) => {
@@ -72,7 +78,7 @@ export default function DoctorList() {
                 <div className="full-width">
                     <div className="common_box">
                         <div className="m-2" align='right'>
-                            <div className="width50 row justifyContent">
+                            <div className="width50 mr-2 row justifyContent">
                                 <div id="custom-search-input">
                                     <input type="text"
                                         onChange={(e) => searchDoctor(e.target.value)}
@@ -82,59 +88,74 @@ export default function DoctorList() {
                                 </div>
                             </div>
                         </div>
-                        <div className='row'>
-                            {doctorData.map((details, i) => {
-                                return (
-                                    <div key={i} className="col-md-4 ">
-                                        <div className="cardDiv">
-                                            <span className='cardSpan'>
-                                                <i className='icon-user color patientListIcon' />
-                                                <span align='left' className='patientName color'>
-                                                    <NavLink to="#" className='underLine' onClick={(e) => handleShowProfile(details, e)}>
-                                                        Dr.{details.name}
-                                                    </NavLink>
-                                                </span>
-                                            </span>
-                                            <span className='cardSpan'>
-                                                <i className='icon-mobile-1 color patientListIcon' />
-                                                <span className='patinetInfo'>{details.mobile}</span>
-                                            </span>
-                                            <span className='cardSpan '>
-                                                <i className='icon-building color patientListIcon' />
-                                                <span className='patinetInfo'>{details.address}</span>
-                                            </span>
-                                            <div className=' appointmentBtn'>
-                                                <NavLink onClick={(e) => BookAppointments(details, e)}>
-                                                    <button className='btn appColor helperBtn'>Book Appointment</button>
-                                                </NavLink>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        {doctorData.length > 0 ?
-                            <div>
-                                <ReactPaginate
-                                    breakLabel="..."
-                                    nextLabel="Next >"
-                                    onPageChange={handlePageClick}
-                                    pageRangeDisplayed={5}
-                                    pageCount={totalPages}
-                                    previousLabel="< Previous"
-                                    renderOnZeroPageCount={null}
-                                    marginPagesDisplayed={2}
-                                    containerClassName="pagination "
-                                    pageClassName="page-item"
-                                    pageLinkClassName="page-link"
-                                    previousClassName="page-item"
-                                    previousLinkClassName="page-link"
-                                    nextClassName="page-item"
-                                    nextLinkClassName="page-link"
-                                    activeClassName="active"
-                                />
+
+                        {isLoading ?
+                            <div className='loader-container'>
+                                <Loader />
                             </div>
-                            : <div className=""><b>Data is Not Available</b></div>}
+                            :
+                            <>
+                                {doctorData && doctorData ?
+                                    <div className='row'>
+                                        {doctorData.map((details, i) => {
+                                            return (
+                                                <div key={i} className="col-md-4 ">
+                                                    <div className="cardDiv">
+                                                        <span className='cardSpan'>
+                                                            <i className='icon-user color patientListIcon' />
+                                                            <span align='left' className='patientName color'>
+                                                                <NavLink to="#" className='underLine' onClick={(e) => handleShowProfile(details, e)}>
+                                                                    Dr.{details.name}
+                                                                </NavLink>
+                                                            </span>
+                                                        </span>
+                                                        <span className='cardSpan'>
+                                                            <i className='icon-mobile-1 color patientListIcon' />
+                                                            <span className='patinetInfo'>{details.mobile}</span>
+                                                        </span>
+                                                        <span className='cardSpan text-align'>
+                                                            <i className='icon-building color patientListIcon' />
+                                                            <span className='patinetInfo'>{details.address}</span>
+                                                        </span>
+                                                        <div className=' appointmentBtn' align='right'>
+                                                            <NavLink onClick={(e) => BookAppointments(details, e)}>
+                                                                <button className='btn appColor helperBtn'>Book Appointment</button>
+                                                            </NavLink>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            )
+                                        })}
+
+                                    </div>
+                                    : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>}
+                                {doctorData.length > 0 ?
+                                    <div>
+                                        <ReactPaginate
+                                            breakLabel="..."
+                                            nextLabel="Next >"
+                                            onPageChange={handlePageClick}
+                                            pageRangeDisplayed={5}
+                                            pageCount={totalPages}
+                                            previousLabel="< Previous"
+                                            renderOnZeroPageCount={null}
+                                            marginPagesDisplayed={2}
+                                            containerClassName="pagination "
+                                            pageClassName="page-item"
+                                            pageLinkClassName="page-link"
+                                            previousClassName="page-item"
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            activeClassName="active"
+                                        />
+                                    </div>
+                                    : null}
+                            </>
+                        }
+
+
                     </div >
                 </div>
             </div>

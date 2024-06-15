@@ -8,7 +8,6 @@ export default function AuthApi() {
             return result.data
         }
         catch (err) {
-            console.log("err", err)
             return err
         }
     }
@@ -46,7 +45,6 @@ export default function AuthApi() {
     const getdoctors = async (currentPage, pageSize, key) => {
         try {
             const result = await axios.post(`${API}/search?page=${currentPage}&pageSize=${pageSize}`,key)
-            console.log('=---------', result)
             return result.data
         }
         catch (err) {

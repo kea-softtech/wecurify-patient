@@ -271,6 +271,7 @@ strong {
 		flex: 0 0 40%;
 		min-width: 40%;
 	}
+	
 }
 
 @media (max-width: 476px) {
@@ -281,6 +282,14 @@ strong {
 	}
 	.MuiFormGroup-root {
 		flex-direction: column !important;
+	}
+	
+	.button_responsive{
+		width:100%;
+		text-align: center;
+	}
+	.btn-home{
+		margin-bottom: 20px;
 	}
 }
 
@@ -5630,7 +5639,9 @@ a.box_feat_about h3 {
 	padding-left: 10px;
 	width: 100%;
 }
-
+.text-align{
+	text-align: left;
+}
 .doctorCard {
 	display: flex;
 	padding: 5px;
