@@ -23,8 +23,8 @@ function FetchPatientInfo(props) {
     }, [])
 
     const handleShow = (item) => {
+        setSlotItem(' ')
         setShow(true)
-        setSlotItem('')
         setSlotItem(item)
     }
 
