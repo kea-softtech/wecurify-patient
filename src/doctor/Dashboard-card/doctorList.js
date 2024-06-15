@@ -70,7 +70,7 @@ export default function DoctorList() {
                         <Link to={`/`}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
-                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Doctor-List</span>
+                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Doctor list</span>
                     </div>
                 </div>
             </MainNav>
@@ -130,7 +130,7 @@ export default function DoctorList() {
 
                                     </div>
                                     : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>}
-                                {doctorData.length > 0 ?
+                                {doctorData ?
                                     <div>
                                         <ReactPaginate
                                             breakLabel="..."

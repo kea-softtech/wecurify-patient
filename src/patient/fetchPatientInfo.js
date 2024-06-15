@@ -59,11 +59,15 @@ function FetchPatientInfo(props) {
         }
         paymentInfo(transactionData)
             .then((res) => {
-                // console.log("-----",res._id)
                 // setDependentsId(" ")
-                const appointmentId =res._id
+                const appointmentId = res._id
+                console.log("-----",appointmentId)
+                console.log("--slotId---",slotId)
+
                 if (slotId) {
-                    navigate(`/confirm/${appointmentId}`)
+                    // navigate(`/confirm/${appointmentId}`)
+                    navigate(`/`)
+
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }

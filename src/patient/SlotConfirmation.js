@@ -11,7 +11,6 @@ import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
     const { patientAppointmentId } = useParams()
-    // console.log("patientAppointmentId",patientAppointmentId)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
@@ -41,9 +40,11 @@ export default function SlotConfirmation() {
             })
     }
     const getAppointmentData = () => {
-        getappointment( patientAppointmentId)
+        getappointment(patientAppointmentId)
             .then((res) => {
-                setAppointmentData(res[0])
+                console.log("res==>>>>", res)
+
+                setAppointmentData(res)
             })
     }
     return (
@@ -71,7 +72,10 @@ export default function SlotConfirmation() {
                                     {patientData.name}  Your
                                     Appointment booked with
                                     Dr. {doctorData.name}
-                                    <div> On {AppoinmentData.date} At {AppoinmentData.slotTime}</div>
+                                    {AppoinmentData ?
+                                        <div> On {AppoinmentData.date} At {AppoinmentData.slotTime}</div>
+                                        : null}
+
                                 </div>
                                 <Link to={`/`}>
                                     <button align='right' className='btn appColor helperBtn'>Done</button>
