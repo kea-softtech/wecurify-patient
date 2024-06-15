@@ -47,7 +47,7 @@ export default function AppointmentApi() {
         }
     };
 
-    const getappointment = async ({patientAppointmentId}) => {
+    const getappointment = async (patientAppointmentId) => {
         try {
             const result = await axios.get(`${API}/getappointment/${patientAppointmentId}`)
             return result.data

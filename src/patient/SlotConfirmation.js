@@ -11,6 +11,7 @@ import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
     const { patientAppointmentId } = useParams()
+    // console.log("patientAppointmentId",patientAppointmentId)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
@@ -40,7 +41,7 @@ export default function SlotConfirmation() {
             })
     }
     const getAppointmentData = () => {
-        getappointment({ patientAppointmentId })
+        getappointment( patientAppointmentId)
             .then((res) => {
                 setAppointmentData(res[0])
             })
