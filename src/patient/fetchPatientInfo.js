@@ -61,12 +61,12 @@ function FetchPatientInfo(props) {
             .then((res) => {
                 // setDependentsId(" ")
                 const appointmentId = res._id
-                console.log("-----",appointmentId)
-                console.log("--slotId---",slotId)
+                // console.log("-----",appointmentId)
+                // console.log("--slotId---",slotId)
 
                 if (slotId) {
-                    // navigate(`/confirm/${appointmentId}`)
-                    navigate(`/`)
+                    navigate(`/confirm/${appointmentId}`)
+                    // navigate(`/`)
 
                 } else {
                     navigate(`/booking/${doctorId}`)
