@@ -53,7 +53,7 @@ export default function GetDependent(props) {
         paymentInfo(transactionData)
             .then((res) => {
                 if (slotItem._id) {
-                    navigate(`/confirm/${res._id}`)
+                    navigate(`/confirm`)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }
