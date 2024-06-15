@@ -108,12 +108,12 @@ function FetchPatientInfo(props) {
                 </div>
                 <div className='row'>
                     <div className=" mt-2 col-6 " >
-                        <Button onClick={() => handleShow(slotItem)} className="radius buttonPatient appColor">
+                        <Button onClick={() => handleShow(slotItem)} className="radius btn-home button_responsive buttonPatient appColor">
                             Book Appointment
                         </Button>
                     </div>
                     <div className=" mt-2 col-6 " >
-                        <Button onClick={() => handleDependent()} className="radius  buttonPatient appColor">
+                        <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
                             Add Dependent
                         </Button>
                     </div>
