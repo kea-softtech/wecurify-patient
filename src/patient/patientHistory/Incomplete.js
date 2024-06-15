@@ -86,7 +86,7 @@ export default function Incomplete(props) {
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Data is not Available</b></div>}
-                    {incompleteProduct.length > 6 ?
+                    {incompleteProduct ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."

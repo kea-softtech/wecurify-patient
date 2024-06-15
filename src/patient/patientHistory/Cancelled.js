@@ -87,7 +87,7 @@ export default function Cancelled(props) {
                             })}
                         </div>
                         : <div className="clinicHistory"><b>Data is not Available</b></div>}
-                    {cancelledProduct.length > 6 ?
+                    {cancelledProduct ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."

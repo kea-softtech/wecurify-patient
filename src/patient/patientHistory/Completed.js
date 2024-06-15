@@ -109,7 +109,7 @@ export default function Completed(props) {
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Data is not Available</b></div>}
-                    {completedProduct.length > 6 ?
+                    {completedProduct?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."
