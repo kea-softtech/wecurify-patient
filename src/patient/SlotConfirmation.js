@@ -65,7 +65,7 @@ export default function SlotConfirmation() {
                     <div className="container common_box margin_60">
                         <div className=" patientFetch">
                             <div className="box_general_3">
-                                <h1 className='color'>Thank You For Book Your Appoinment</h1>
+                                <h1 className='color'>Thank You For Booking Your Appoinment</h1>
                                 <div className='fontS'>
                                     {patientData.name}  Your
                                     Appointment booked with
