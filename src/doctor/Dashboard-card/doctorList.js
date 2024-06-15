@@ -50,7 +50,7 @@ export default function DoctorList() {
 
     const handleShowProfile = (details, e) => {
         e.preventDefault();
-        navigate(`/fetchDoctorPersonalDetails/${details._id}`)
+        navigate(`/profile/${details._id}`)
     }
 
     const BookAppointments = (details, e) => {
