@@ -28,7 +28,7 @@ const DoctorAppointmentType = (props) => {
                     clinicId={clinicId} 
                     setSessions={clinicSession} 
                     />
-            ) : <div style={{ color: "black", margin: '20px' }}><b>Slots Not Available</b></div>}
+            ) : (<div style={{ color: "black", margin: '20px' }}><b>Slots Not Available</b></div>)}
         </div>
     )
 }

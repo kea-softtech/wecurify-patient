@@ -65,7 +65,7 @@ function FetchPatientInfo(props) {
                 // console.log("--slotId---",slotId)
 
                 if (slotId) {
-                    // navigate(`/confirm`)
+                    navigate(`/confirm`)
                     // navigate(`/`)
 
                 } else {
