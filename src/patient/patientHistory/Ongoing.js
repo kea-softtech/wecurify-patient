@@ -118,7 +118,7 @@ export default function Ongoing(props) {
                         </div>
                         : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>
                     }
-                    {ongoingProduct ?
+                    {patientList ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."

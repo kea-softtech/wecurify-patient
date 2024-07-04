@@ -22,7 +22,7 @@ export default function DoctorList() {
 
     useEffect(() => {
         getDoctorList(currentPage, key)
-    }, []);
+    }, [currentPage]);
 
     setTimeout(() => {
         setIsLoading(false);

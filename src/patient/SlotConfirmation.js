@@ -77,14 +77,20 @@ export default function SlotConfirmation() {
                                         : null} */}
 
                                 </div>
-                                <Link to={`/`}>
-                                    <button align='right' className='btn appColor helperBtn'>Done</button>
-                                </Link>
+                                {doctorId === '6685270e1ebefa0d78bdfb7d' ?
+                                    < Link to={`https://fly4smiles.com/`}>
+                                        <button align='right' className='btn appColor helperBtn'>Done</button>
+                                    </Link> :
+                                    <Link to={`/`}>
+                                        <button align='right' className='btn appColor helperBtn'>Done</button>
+                                    </Link>
+                                }
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </Wrapper>
+        </Wrapper >
     )
 }
