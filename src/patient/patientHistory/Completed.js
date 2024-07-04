@@ -21,7 +21,7 @@ export default function Completed(props) {
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [])
+    }, [currentPage])
 
     setTimeout(() => {
         setIsLoading(false);
