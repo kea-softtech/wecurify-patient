@@ -3816,6 +3816,10 @@ a.btn_2 .full-width {
 	padding-top: 20px !important;
 	padding-bottom: 20px !important;
 	color: #0a0a0a;
+	background-color: #fcfcfc;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	cursor: pointer;
 	text-align: center;
 }
 
@@ -6091,7 +6095,7 @@ textarea.form-control {
 }
 
 .box_form .form-group {
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
 
 .box_general {

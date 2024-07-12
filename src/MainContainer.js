@@ -22,6 +22,8 @@ import Calender from "./doctor/Dashboard-card/Calender";
 import PatientQueue from "./patient/patientHistory/PatientQueue";
 import AddDependent from "./patient/AddDependent";
 import {FetchDoctorPersonalDetails} from './doctor/Profile/Personal/Partial/fetchDoctorPersonalDetails'
+import CreatePatientMpin from "./patient/patientMpin/CreatePatientMpin";
+import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -30,6 +32,8 @@ function MainContainer() {
     <Routes>
       <Route exact path="/" element={<Home />} />
       <Route path="/patient" element={<LoginPatient />} />
+      <Route path="/createpatientmpin" element={<CreatePatientMpin /> } />
+      <Route path="/forgetpatientmpin" element={<ForgotPatientMpin /> } />
       <Route path="/createprofile/:patientId" element={<CreatePatientProfile />} />
       <Route path="/patientprofile/:patientId" element={<GetLoginPatientProfile />} />
       <Route path="/confirm" element={<SlotConfirmation />} />
