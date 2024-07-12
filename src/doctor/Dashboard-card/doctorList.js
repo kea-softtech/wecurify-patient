@@ -78,7 +78,7 @@ export default function DoctorList() {
                 <div className="full-width">
                     <div className="common_box">
                         <div className="m-2" align='right'>
-                            <div className="width50 mr-2 row justifyContent">
+                            <div className="width50 ml-2 mr-2 row justifyContent">
                                 <div id="custom-search-input">
                                     <input type="text"
                                         onChange={(e) => searchDoctor(e.target.value)}

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 const MainAccordion = (props) => {
     return (
         <div>
-            <div style={{ height: '40px', color:'#1a3c8b', backgroundColor: '#d7eaf5' }} >
+            <div style={{ padding: 6, color:'#1a3c8b', backgroundColor: '#d7eaf5' }} >
                 <Typography
                     className="m-2"
                     align='left'

@@ -3,6 +3,7 @@ import { PatientLoginForm } from "../patient/patientLoginForm";
 import { Wrapper } from "../mainComponent/Wrapper";
 import { useRecoilState } from "recoil";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
+import { PatientMpin } from "./patientMpin/PatientMpin";
 
 export default function LoginPatient() {
     const [DoctorId, setDoctorsId] = useRecoilState(setDoctorId)
@@ -12,7 +13,7 @@ export default function LoginPatient() {
             <div className='row'>
                 <div className="full-width">
                     <div className="common_box ">
-                        <PatientLoginForm doctorId={DoctorId} redirection="dashboard" />
+                        <PatientMpin doctorId={DoctorId} redirection="dashboard" />
                     </div>
                 </div>
             </div>

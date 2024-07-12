@@ -13,7 +13,6 @@ export default function PatientApi() {
 
     };
     const paymentInfo = async (transactionData) => {
-        console.log("transactionData------", transactionData)
         try {
             const result = await axios.post(`${API}/payment/order`, transactionData)
             return result.data
@@ -68,15 +67,43 @@ export default function PatientApi() {
             return err
         }
     }
-    const patientLogin = async ({ mobile }) => {
+    const loginPatient = async ({ mobile,password }) => {
         try {
-            const result = await axios.post(`${API}/patientLogin`, { mobile })
-            return result.data
+            const result = await axios.post(`${API}/patientLogin`, { mobile,password })
+            return result
         }
         catch (err) {
-            return err
+            return err;
         }
-    }
+    };
+    const patientSignUp = async ({ mobile, password }) => {
+        try {
+            const result = await axios.post(`${API}/patientsignup`, { mobile, password })
+            console.log('=======>>>>', result)
+            return result
+        }
+        catch (err) {
+            return err;
+        }
+    };
+    const patientSignIn = async ({ mobile, password }) => {
+        try {
+            const result = await axios.post(`${API}/patientsignin`, { mobile, password })
+            return result
+        }
+        catch (err) {
+            return err;
+        }
+    };
+    // const patientLogin = async ({ mobile }) => {
+    //     try {
+    //         const result = await axios.post(`${API}/patientLogin`, { mobile })
+    //         return result.data
+    //     }
+    //     catch (err) {
+    //         return err
+    //     }
+    // }
     const patientLoginOtp = async ({ otp, _id }) => {
         try {
             const result = await axios.post(`${API}/patientLoginOtp`, { otp, _id })
@@ -167,7 +194,9 @@ export default function PatientApi() {
         getAllPatient,
         fetchPatient,
         patientDetailsData,
-        patientLogin,
+        loginPatient,
+        patientSignUp,
+        patientSignIn,
         patientLoginOtp,
         insertPatientData,
         getPatientLifestyle,

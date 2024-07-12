@@ -52,7 +52,6 @@ function PatientLoginForm(props) {
                                             </MainInput>
                                             {<span className="validation">{isError}</span>}
                                         </div>
-
                                         <div className="width25 ml-2">
                                             <MainButtonInput onClick={getOTPSection}>Go</MainButtonInput>
                                         </div>
