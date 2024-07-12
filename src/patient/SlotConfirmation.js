@@ -80,10 +80,10 @@ export default function SlotConfirmation() {
                                 {doctorId === '6685270e1ebefa0d78bdfb7d' ?
                                     <>
                                         < Link to={`https://fly4smiles.com/`}>
-                                            <button align='right' className='btn appColor helperBtn'>Redirect</button>
+                                            <button align='right' className='btn appColor helperBtn'>Redirect fly4smiles</button>
                                         </Link>
                                         <Link to={`/`}>
-                                            <button align='right' className='btn appColor helperBtn'>Continue</button>
+                                            <button align='right' className='btn appColor helperBtn'>Go To Dashboard</button>
                                         </Link> 
                                     </> :
                                     <Link to={`/`}>

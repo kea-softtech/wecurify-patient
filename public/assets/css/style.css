@@ -123,6 +123,9 @@ hr.double {
 	border-color: #ededed;
 }
 
+.css-zpphrz-MuiTypography-root {
+	line-height: 2.5 !important;
+}
 @-webkit-keyframes circle {
 	0% {
 		-webkit-transform: rotate(0);
