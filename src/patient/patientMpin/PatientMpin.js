@@ -27,6 +27,7 @@ function PatientMpin(props) {
                 .then(data => {
                     if (data.data.isLoggedIn === true) {
                         navigate(`/`)
+                        setPatientId(data.data._id)
                         setIsLoggedIn(data.data.isLoggedIn )
                     }
                     else {

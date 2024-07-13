@@ -1,6 +1,6 @@
 const Wrapper=(props)=>{
     return(
-        <main className="wraper">
+        <main>
             <div className="wrapperCss ">			
                 <div className="row">
                     <div className="full-width ml-auto">

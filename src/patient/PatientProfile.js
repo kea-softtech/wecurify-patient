@@ -57,7 +57,7 @@ export default function PatientProfile() {
           </div>
         </MainNav>
 
-        <div className="row">  
+        <div className="wraper row">  
           <div className="full-width">
             <div className="common_box">
               <div className="white-box">

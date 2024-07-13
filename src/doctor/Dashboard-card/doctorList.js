@@ -99,7 +99,7 @@ export default function DoctorList() {
                                     <div className='row'>
                                         {doctorData.map((details, i) => {
                                             return (
-                                                <div key={i} className="col-md-4 ">
+                                                <div key={i} className="col-md-4">
                                                     <div className="cardDiv">
                                                         <span className='cardSpan'>
                                                             <i className='icon-user color patientListIcon' />

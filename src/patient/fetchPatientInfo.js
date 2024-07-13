@@ -59,15 +59,8 @@ function FetchPatientInfo(props) {
         }
         paymentInfo(transactionData)
             .then((res) => {
-                // setDependentsId(" ")
-                const appointmentId = res._id
-                // console.log("-----",appointmentId)
-                // console.log("--slotId---",slotId)
-
                 if (slotId) {
                     navigate(`/confirm`)
-                    // navigate(`/`)
-
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }
@@ -83,59 +76,61 @@ function FetchPatientInfo(props) {
     }
 
     return (
-        <>
-            <div className="underline">
-                <div className="form_title">
-                    <h3>Patient Details</h3>
-                </div>
-            </div>
-            <div className="patientDataStyle">
-                <div className="">
-                    <label className="mx-2"><b>Patient name :</b></label>
-                    {fetchPatientData.name}
-                </div>
-                <div className="">
-                    <label className="mx-2"><b>Age :</b></label>
-                    {fetchPatientData.age}
-                </div>
-                <div className="">
-                    <label className="mx-2"><b>Gender :</b></label>
-                    {fetchPatientData.gender}
-                </div>
-                <div className="">
-                    <label className="mx-2"><b>Email :</b></label>
-                    {fetchPatientData.email}
-                </div>
-                <div className='row'>
-                    <div className=" mt-2 col-6 " >
-                        <Button onClick={() => handleShow(slotItem)} className="radius btn-home button_responsive buttonPatient appColor">
-                            Book Appointment
-                        </Button>
-                    </div>
-                    <div className=" mt-2 col-6 " >
-                        <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
-                            Add Dependent
-                        </Button>
+        <div className="col-md-6 mb-2">
+            <div className="box_general_4 cart patientDetails">
+                <div className="underline">
+                    <div className="form_title">
+                        <h3>Patient Details</h3>
                     </div>
                 </div>
+                <div className="patientDataStyle">
+                    <div className="">
+                        <label className="mx-2"><b>Patient name :</b></label>
+                        {fetchPatientData.name}
+                    </div>
+                    <div className="">
+                        <label className="mx-2"><b>Age :</b></label>
+                        {fetchPatientData.age}
+                    </div>
+                    <div className="">
+                        <label className="mx-2"><b>Gender :</b></label>
+                        {fetchPatientData.gender}
+                    </div>
+                    <div className="">
+                        <label className="mx-2"><b>Email :</b></label>
+                        {fetchPatientData.email}
+                    </div>
+                    <div className='row'>
+                        <div className=" mt-2 col-md-6 " >
+                            <Button onClick={() => handleShow(slotItem)} className="radius btn-home button_responsive buttonPatient appColor">
+                                Book Appointment
+                            </Button>
+                        </div>
+                        <div className=" mt-2 col-md-6 " >
+                            <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
+                                Add Dependent
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Are You Sure?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
+                            Yes
+                        </Button>
+                        <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
+                            No
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Are You Sure?</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
-                        Yes
-                    </Button>
-                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
-                        No
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+        </div>
     )
 }
 export { FetchPatientInfo }

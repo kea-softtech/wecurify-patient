@@ -86,7 +86,7 @@ export default function Calender() {
           </div>
         </ul>
       </MainNav>
-      <div className="row">
+      <div className="wraper row">
         <div className="common_box full-width">
           <div className="myCustomHeight ">
             <Calendar

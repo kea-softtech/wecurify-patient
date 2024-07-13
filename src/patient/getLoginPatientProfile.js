@@ -8,7 +8,7 @@ import GetDependent from "./getDependent";
 
 export default function GetLoginPatientProfile() {
     const { patientId } = useParams()
-    const [doctorId] = useRecoilState(setDoctorId)
+    const [ doctorId] = useRecoilState(setDoctorId)
 
     return (
         <>
@@ -27,18 +27,13 @@ export default function GetLoginPatientProfile() {
                     <div className="full-width">
                         <div className="common_box mb-3">
                             <div className="row">
-                                <div className="col-md-6 mb-2">
-                                    <div className="box_general_4 cart patientDetails">
-                                        <FetchPatientInfo doctorId={doctorId} patientId={patientId}  />
-                                    </div>
-                                </div>
-                                <GetDependent  doctorId={doctorId} patientId={patientId} />
+                                <FetchPatientInfo doctorId={doctorId} patientId={patientId} />
+                                <GetDependent doctorId={doctorId} patientId={patientId} />
                             </div>
                         </div>
                     </div>
                 </div>
-                
-            </Wrapper >
+            </Wrapper>
         </>
     )
 }

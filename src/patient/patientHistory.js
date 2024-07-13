@@ -26,7 +26,7 @@ export default function PatientHistory() {
                         <Link to={`/`}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
-                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Appoinment</span>
+                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Appointments</span>
                     </div>
                 </div>
             </MainNav>

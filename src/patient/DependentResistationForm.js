@@ -12,6 +12,7 @@ function DependentRegistationForm(props) {
     const [updatePatientData, setUpdatePatientData] = useState(null)
     const [dependentId, setDependentsId] = useRecoilState(setDependentId)
     const [dependentData, setDependentData] = useState([])
+    console.log("dependentData----", dependentData)
     const {fetchPatient, AddDependents } = PatientApi()
     const navigate = useNavigate();
 
@@ -47,6 +48,8 @@ function DependentRegistationForm(props) {
             email: dependentData.email,
             patientId: patientId,
         }
+        console.log("========----", dependentAdd)
+
         AddDependents(patientId, dependentAdd)
         .then((response) => {
             setDependentsId(response._id)

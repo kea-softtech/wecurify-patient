@@ -7,7 +7,7 @@ import moment from "moment";
 
 function ShowDoctorInClinicAppointment(props) {
     const { setSessions, doctorId } = props;
-    const [showSlot, setShowSlot] = useState([]);
+    const [showSlot, setShowSlot] = useState(null);
     const [dayMonth, setDayMonth] = useState([]);
     const [error, setError] = useState([]);
     const [session, setSession] = useState([])
@@ -34,7 +34,7 @@ function ShowDoctorInClinicAppointment(props) {
             const time = moment(session[0].toTime).format("HH:MM")
             const slotTime = fullDate.concat(' ', time)
             if (slotTime < currentTime) {
-                setShowSlot('')
+                setShowSlot([])
             }
             else {
                 setShowSlot(session[0].showSelectedSlots)
@@ -43,10 +43,10 @@ function ShowDoctorInClinicAppointment(props) {
             setDate(item.dateMonth)
             setSelectedDate(item.fullDate)
         } else {
+            setShowSlot([])
             setError("slots are not available")
         }
     };
-
 
     const showDateMonth = (days) => {
         var d = new Date();
@@ -88,15 +88,18 @@ function ShowDoctorInClinicAppointment(props) {
     return (
         <div>
             {setSessions ? (
-                <div className="row  padding_2">
+                <div className="row">
                     <div className=" col-sm-4 white-box" style={{ borderRight: '1px solid #e1e8ed', paddingTop: '5px' }}>
                         <Carousel
                             interval={null}
                             controls={true}
                             nextIcon={<div className="AiArrowIcon"><AiOutlineArrowRight /></div>}
-                            prevIcon={<div className="AiArrowIcon"><AiOutlineArrowLeft /></div>}>
+                            prevIcon={<div className="AiArrowIcon"><AiOutlineArrowLeft /></div>}
+                            onSlide={(event, direction)=> {
+                                setShowSlot(null)
+                            }}>
                             {dayMonth.map((item, index) => (
-                                <Carousel.Item key={index}>
+                                <Carousel.Item key={index} onClick={() => handleChange(item)}>
                                     <div style={{ height: 100, background: "white", color: "black" }}>
                                         <Carousel.Caption>
                                             <Link
@@ -114,18 +117,29 @@ function ShowDoctorInClinicAppointment(props) {
                         </Carousel>
                     </div>
                     <div className="col-md-8 white-box">
-                        {showSlot.length > 0 ?
-                            <ShowInClinicAppointSlots
-                                doctorsId={doctorId}
-                                sessionSlot={showSlot}
-                                session={session}
-                                slotDate={date}
-                                selectedDate={selectedDate}
-                            />
-                            :
-                            <div style={{ color: "black", marginTop: '10px' }}>
-                                <b>Slots Not Available</b>
-                            </div>}
+                        {showSlot?(
+                            <>
+                                {showSlot.length > 0 ?
+                                <ShowInClinicAppointSlots
+                                    doctorsId={doctorId}
+                                    sessionSlot={showSlot}
+                                    session={session}
+                                    slotDate={date}
+                                    selectedDate={selectedDate}
+                                />
+                                :
+                                <div style={{ color: "black", marginTop: '10px' }}>
+                                    <b>Slots Not Available</b>
+                                </div>}
+                            </>
+                        ):(
+                            <>
+                                <div style={{ color: "black", marginTop: '10px' }}>
+                                    <b>Please select a day/date from the left panel</b>
+                                </div>
+                            </>
+                        )}
+                        
                     </div>
                 </div>
             ) : null}

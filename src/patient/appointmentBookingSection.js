@@ -41,7 +41,7 @@ function AppointmentBookingSection() {
                     </div>
                 </div>
             </MainNav>
-            <div className='row'>
+            <div className='wraper row'>
                 <div className="full-width">
                         <div className="common_box booking">
                             <div>

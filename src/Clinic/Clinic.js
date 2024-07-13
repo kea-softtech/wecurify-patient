@@ -67,7 +67,7 @@ export default function Clinic() {
         }
     }
     return (
-        <Wrapper>
+        <>
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
@@ -87,6 +87,7 @@ export default function Clinic() {
                     </div>
                 </div>
             </MainNav>
+            <Wrapper>
             <div className='row'>
                 {/* <div className="width16">
                     <div className="dash row">
@@ -195,6 +196,7 @@ export default function Clinic() {
                 </Modal>
             </div>
         </Wrapper>
+        </>
     )
 
 }
