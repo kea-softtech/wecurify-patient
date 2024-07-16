@@ -14,7 +14,6 @@ export default function ClinicData(props) {
     const doctorServices = () => {
         getSingleClinic({ clinicId })
             .then((res) => {
-                console.log("res----", res)
                 setclinics(res);
             })
     }

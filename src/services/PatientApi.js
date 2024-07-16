@@ -79,7 +79,6 @@ export default function PatientApi() {
     const patientSignUp = async ({ mobile, password }) => {
         try {
             const result = await axios.post(`${API}/patientsignup`, { mobile, password })
-            console.log('=======>>>>', result)
             return result
         }
         catch (err) {

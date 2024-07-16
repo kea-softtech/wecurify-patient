@@ -6,12 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 import PatientApi from "../../services/PatientApi";
 import { setloggedIn } from "../../recoil/atom/setloggedIn";
+import { setSlotData } from "../../recoil/atom/setSlotData";
 
 function PatientMpin(props) {
     const { doctorId } = props
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
     const [password, setPassword] = useState("")
+    const [slotItem] = useRecoilState(setSlotData)
     const { patientSignIn } = PatientApi()
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(setloggedIn);
@@ -26,15 +28,23 @@ function PatientMpin(props) {
             patientSignIn({ mobile, password })
                 .then(data => {
                     if (data.data.isLoggedIn === true) {
-                        navigate(`/`)
                         setPatientId(data.data._id)
-                        setIsLoggedIn(data.data.isLoggedIn )
+                        if (slotItem._id) {
+                            navigate(`/patientprofile/${data.data._id}`)
+                        } else {
+                            navigate(`/`)
+                        }
+                        setIsLoggedIn(data.data.isLoggedIn)
                     }
                     else {
                         setIsError("Enter Valid Mobile number and Password")
                     }
                 })
         }
+    }
+
+    const createMPIN = () => {
+        navigate(`/createpatientmpin`)
     }
 
     return (
@@ -44,43 +54,39 @@ function PatientMpin(props) {
                     <h1>Login to Wecurify</h1>
                     <form>
                         <div className="box_form clearfix">
-                            <div className="width50 mb-2 pl-3" align="left">
-                                <Link to={`/createpatientmpin`}>Create Account </Link>
-                            </div>
                             <div className="box_login last">
-                                <div className="width_80 ml-2 mr-2 ">
-                                    <label className='mb-2'>Mobile Number</label>
-                                    <MainInput
-                                        type="text"
-                                        name="mobile"
-                                        value={mobile.mobile}
-                                        maxLength={10}
-                                        pattern="[+-]?\d+(?:[.,]\d+)?"
-                                        onChange={(e) => setMobile(e.target.value)}
-                                        placeholder="Phone Number (+XX)">
-                                    </MainInput>
+                                <label className='mb-2'>Mobile Number</label>
+                                <MainInput
+                                    type="text"
+                                    name="mobile"
+                                    value={mobile.mobile}
+                                    maxLength={10}
+                                    pattern="[+-]?\d+(?:[.,]\d+)?"
+                                    onChange={(e) => setMobile(e.target.value)}
+                                    placeholder="Phone Number (+XX)">
+                                </MainInput>
 
-                                </div>
-                                {/* <lable align='left'>Enter MPIN</lable> */}
-                                <div className="width_80 ml-2 mr-2">
-                                    <label className='mb-2'>Mpin</label>
-                                    <MainInput
-                                        className=""
-                                        type="password"
-                                        name="password"
-                                        maxLength={6}
-                                        pattern="[+-]?\d+(?:[.,]\d+)?"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        placeholder="Enter Mpin"
-                                        required>
-                                    </MainInput>
-                                </div>
+                                <label className='mb-2'>MPIN</label>
+                                <MainInput
+                                    type="password"
+                                    name="password"
+                                    maxLength={6}
+                                    pattern="[+-]?\d+(?:[.,]\d+)?"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Enter Mpin"
+                                    required>
+                                </MainInput>
                                 {<span className="validation mt-2">{isError}</span>}
                                 <div className="width50 mt-4" align="left">
                                     <Link to={`/forgetpatientmpin`}>Forgot MPIN </Link>
                                 </div>
-                                <div className="mr-2 mt-2" align='right'>
-                                    <MainButtonInput onClick={handleMpin}>Login</MainButtonInput>
+                                <div className="row">
+                                    <div className="mr-2 mt-2" align='right'>
+                                        <MainButtonInput onClick={createMPIN}>Create Account</MainButtonInput>
+                                    </div>
+                                    <div className="mr-2 mt-2" align='right'>
+                                        <MainButtonInput onClick={handleMpin}>Login</MainButtonInput>
+                                    </div>
                                 </div>
                             </div>
                         </div>

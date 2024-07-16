@@ -23,7 +23,7 @@ export default function GetLoginPatientProfile() {
                         </div>
                     </div>
                 </MainNav>
-                <div className='row'>
+                <div className='wraper row'>
                     <div className="full-width">
                         <div className="common_box mb-3">
                             <div className="row">

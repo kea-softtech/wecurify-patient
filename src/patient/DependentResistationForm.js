@@ -6,13 +6,14 @@ import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { setDependentId } from "../recoil/atom/setDependentId";
+import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 function DependentRegistationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState(null)
-    const [dependentId, setDependentsId] = useRecoilState(setDependentId)
+    // const [dependentId, setDependentsId] = useRecoilState(setDependentId)
+    const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [dependentData, setDependentData] = useState([])
-    console.log("dependentData----", dependentData)
     const {fetchPatient, AddDependents } = PatientApi()
     const navigate = useNavigate();
 
@@ -43,16 +44,17 @@ function DependentRegistationForm(props) {
         e.preventDefault();
         const dependentAdd = {
             name: dependentData.name,
+            // mobile: updatePatientData.mobile,
             gender: dependentData.gender,
             age: dependentData.age,
             email: dependentData.email,
             patientId: patientId,
         }
-        console.log("========----", dependentAdd)
 
         AddDependents(patientId, dependentAdd)
-        .then((response) => {
-            setDependentsId(response._id)
+        .then((response) => { 
+            setFetchPatientData(response)
+            // setDependentsId(response._id)
         })
         navigate(`/patientprofile/${patientId}`)
     }

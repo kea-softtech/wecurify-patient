@@ -16,7 +16,6 @@ export default function SelectSlot() {
     // const doctorServices = () => {
     //     getSingleClinic({ clinicId })
     //         .then((res) => {
-    //             console.log("res----", res)
     //             const clinics = res.result[0]['clinicList']
     //             setclinics(clinics);
     //         })

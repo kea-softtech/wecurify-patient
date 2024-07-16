@@ -22,6 +22,13 @@ function FetchPatientInfo(props) {
         getAllPatientData()
     }, [])
 
+    function getAllPatientData() {
+        fetchPatient({ patientId })
+            .then(response => {
+                setFetchPatientData(response[0])
+            })
+    }
+
     const handleShow = (item) => {
         setSlotItem('')
         setShow(true)
@@ -68,13 +75,6 @@ function FetchPatientInfo(props) {
             })
     }
 
-    function getAllPatientData() {
-        fetchPatient({ patientId })
-            .then(function (response) {
-                setFetchPatientData(response[0])
-            })
-    }
-
     return (
         <div className="col-md-6 mb-2">
             <div className="box_general_4 cart patientDetails">
@@ -106,11 +106,11 @@ function FetchPatientInfo(props) {
                                 Book Appointment
                             </Button>
                         </div>
-                        <div className=" mt-2 col-md-6 " >
+                        {/* <div className=" mt-2 col-md-6 " >
                             <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
                                 Add Dependent
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <Modal show={show} onHide={handleClose}>

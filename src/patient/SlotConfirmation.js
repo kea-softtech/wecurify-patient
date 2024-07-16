@@ -42,8 +42,6 @@ export default function SlotConfirmation() {
     // const getAppointmentData = () => {
     //     getappointment(patientAppointmentId)
     //         .then((res) => {
-    //             // console.log("res==>>>>", res)
-
     //             setAppointmentData(res)
     //         })
     // }

@@ -30,16 +30,16 @@ export default function PatientHistory() {
                     </div>
                 </div>
             </MainNav>
-            <div className="row">
+            <div className="wraper row">
                 <div className="full-width">
                     <div className="common_box">
                         <MainTabs
                             value={value}
                             onChange={handleChange}
-                            label="Ongoing Appointment"
-                            label1="Completed Appointment"
-                            label2="Cancelled Appointment"
-                            label3="Incomplete Appointment">
+                            label="Ongoing"
+                            label1="Completed"
+                            label2="Cancelled"
+                            label3="Incomplete">
                         </MainTabs>
 
                         <TabPanel value={value} index={0}>

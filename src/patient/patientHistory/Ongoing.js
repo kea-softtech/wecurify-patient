@@ -67,7 +67,7 @@ export default function Ongoing(props) {
                 :
                 <>
                     {patientList ?
-                        <div className='row'>
+                        <div className='           row'>
                             {patientList && patientList.map((details, i) => {
                                 return (
                                     <div key={i} className="col-md-4">

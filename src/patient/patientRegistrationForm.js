@@ -8,6 +8,7 @@ import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { useRecoilState } from "recoil";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
+import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
@@ -15,6 +16,7 @@ function PatientRegistrationForm(props) {
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
+    const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
     const navigate = useNavigate();
 
@@ -53,6 +55,7 @@ function PatientRegistrationForm(props) {
         }
         insertPatientData(patientId, newPatientData)
             .then((response) => {
+                setCoilFetchPatientData(response)
                 setLoggedIn(response.isLoggedIn)
             })
         if (slotItem._id) {
