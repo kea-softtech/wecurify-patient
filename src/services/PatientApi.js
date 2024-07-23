@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API } from '../config';
 
 export default function PatientApi() {
-    const fetchSessionSlotsData = async ({ doctorId ,  clinicId}) => {
+    const fetchSessionSlotsData = async ({ doctorId, clinicId }) => {
         try {
             const result = await axios.get(`${API}/fetcSessionSlots/${doctorId}/${clinicId}`)
             return result.data
@@ -67,9 +67,9 @@ export default function PatientApi() {
             return err
         }
     }
-    const loginPatient = async ({ mobile,password }) => {
+    const loginPatient = async ({ mobile, password }) => {
         try {
-            const result = await axios.post(`${API}/patientLogin`, { mobile,password })
+            const result = await axios.post(`${API}/patientLogin`, { mobile, password })
             return result
         }
         catch (err) {
@@ -94,15 +94,7 @@ export default function PatientApi() {
             return err;
         }
     };
-    // const patientLogin = async ({ mobile }) => {
-    //     try {
-    //         const result = await axios.post(`${API}/patientLogin`, { mobile })
-    //         return result.data
-    //     }
-    //     catch (err) {
-    //         return err
-    //     }
-    // }
+
     const patientLoginOtp = async ({ otp, _id }) => {
         try {
             const result = await axios.post(`${API}/patientLoginOtp`, { otp, _id })
@@ -177,7 +169,7 @@ export default function PatientApi() {
     }
     const AddDependents = async (patientId, dependentAdd) => {
         try {
-            const result = await axios.post(`${API}/adddependent/${patientId}`,dependentAdd)
+            const result = await axios.post(`${API}/adddependent/${patientId}`, dependentAdd)
             return result.data
         }
         catch (err) {
@@ -204,7 +196,7 @@ export default function PatientApi() {
         addPatientLifestyle,
         updatePatientLifestyle,
         fetchUpdatePatientLifestyle,
-        AddDependents
+        AddDependents,
     }
 
 

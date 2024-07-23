@@ -48,11 +48,11 @@ export default function CreatePatientMpin() {
                                 <h1>Login to Wecurify</h1>
                                 <form >
                                     <div className="box_form clearfix">
-                                        <div className="width50 mb-2 pl-3 appcolor" align="left">
-                                            <Link to={`/patient`}>Already have account </Link>
+                                        <div className=" mb-2 pl-3 appcolor" align="left">
+                                            <Link to={`/patient`}><b>Already have account</b> </Link>
                                         </div>
-                                        <div className="box_login last">
-                                            <lable className='mb-2' align="left">Mobile Number</lable>
+                                        <div className="box_login last" align="left">
+                                            <lable className='' >Mobile Number</lable>
                                             <MainInput
                                                 name="mobile"
                                                 value={mobile.mobile}

@@ -50,13 +50,12 @@ function DependentRegistationForm(props) {
             email: dependentData.email,
             patientId: patientId,
         }
-
         AddDependents(patientId, dependentAdd)
         .then((response) => { 
-            setFetchPatientData(response)
+            // setFetchPatientData(response)
             // setDependentsId(response._id)
-        })
         navigate(`/patientprofile/${patientId}`)
+        })
     }
 
     return (
@@ -113,7 +112,7 @@ function DependentRegistationForm(props) {
                             name="gender"
                             value={dependentData.gender}
                             onChange={handleInputChange}
-                            placeholder="male">
+                            placeholder="Male">
                         </MainInput>
                         {errors.gender && <span className="validation">Please enter your gender</span>}
                     </div>

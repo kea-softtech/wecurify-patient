@@ -7,6 +7,7 @@ import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 import PatientApi from "../../services/PatientApi";
 import { setloggedIn } from "../../recoil/atom/setloggedIn";
 import { setSlotData } from "../../recoil/atom/setSlotData";
+import { SecondaryButton } from "../../mainComponent/SecondaryButton";
 
 function PatientMpin(props) {
     const { doctorId } = props
@@ -82,10 +83,10 @@ function PatientMpin(props) {
                                 </div>
                                 <div className="row">
                                     <div className="mr-2 mt-2" align='right'>
-                                        <MainButtonInput onClick={createMPIN}>Create Account</MainButtonInput>
-                                    </div>
-                                    <div className="mr-2 mt-2" align='right'>
                                         <MainButtonInput onClick={handleMpin}>Login</MainButtonInput>
+                                    </div>
+                                   <div className="mr-2 mt-2" align='right'>
+                                        <SecondaryButton onClick={createMPIN}>Create Account</SecondaryButton>
                                     </div>
                                 </div>
                             </div>

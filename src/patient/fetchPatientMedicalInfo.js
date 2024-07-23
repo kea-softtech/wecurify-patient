@@ -67,6 +67,10 @@ function FetchPatientMedicalInfo(props) {
                                             <div>{item.cmedication}</div>
                                         </div>
                                         <div className="fetchedudata">
+                                            <div><b>Allergies</b></div>
+                                            <div>{item.allergies}</div>
+                                        </div>
+                                        <div className="fetchedudata">
                                             <div><b>Past Medications</b></div>
                                             <div>{item.pmedication}</div>
                                         </div>

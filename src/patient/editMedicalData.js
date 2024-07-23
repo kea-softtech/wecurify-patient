@@ -36,7 +36,7 @@ function EditMedicalData(props){
         
         const updateMedical ={
             patientId:editPatientData.patientId,
-            Allergies:editPatientData.Allergies,
+            allergies:editPatientData.allergies,
             cmedication:editPatientData.cmedication,
             pmedication:editPatientData.pmedication,
             diseases:editPatientData.diseases,
@@ -64,7 +64,7 @@ function EditMedicalData(props){
                     <MainInput 
                         type="text" 
                         name="Allergies" 
-                        value=""
+                        value={editPatientData.allergies}
                         onChange={handleInputChange} 
                         placeholder="Allergies">
                     </MainInput>

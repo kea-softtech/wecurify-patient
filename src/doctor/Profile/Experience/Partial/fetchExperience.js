@@ -174,10 +174,10 @@ function FetchExperience(props) {
                 <div>
                     <Modal show={showDelete} onHide={handleDeleteClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Are You Sure?</Modal.Title>
+                            <Modal.Title>Are you sure?</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <div className="alert alert-bgcolor">You Want To Delete This Experience Details</div>
+                            <div className="alert alert-bgcolor">You want to delete this experience details.</div>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="default" className='appColor' onClick={()=>removeExperienceData(Item)}>

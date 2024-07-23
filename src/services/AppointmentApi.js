@@ -56,6 +56,15 @@ export default function AppointmentApi() {
             return err
         }
     };
+    const fetchAppointmentData = async ( appointmentId ) => {
+        try {
+            const result = await axios.get(`${API}/getappointmentdata/${appointmentId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
 
     return {
         cancelPatientAppointment,
@@ -63,6 +72,7 @@ export default function AppointmentApi() {
         getPatientListDetails,
         createPDF,
         getappointment,
-        updateIncompleteStatus
+        updateIncompleteStatus,
+        fetchAppointmentData
     }
 }

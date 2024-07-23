@@ -76,7 +76,7 @@ export default function DoctorList() {
             </MainNav>
             <div className='row'>
                 <div className="full-width">
-                    <div className="common_box">
+                    <div className="common_box wraper">
                         <div className="m-2" align='right'>
                             <div className="width50 ml-2 mr-2 row justifyContent">
                                 <div id="custom-search-input">
@@ -95,9 +95,9 @@ export default function DoctorList() {
                             </div>
                             :
                             <>
-                                {doctorData && doctorData ?
-                                    <div className='row'>
-                                        {doctorData.map((details, i) => {
+                                {doctorData ?
+                                    <div className='row '>
+                                        {doctorData && doctorData.map((details, i) => {
                                             return (
                                                 <div key={i} className="col-md-4">
                                                     <div className="cardDiv">
@@ -129,7 +129,7 @@ export default function DoctorList() {
                                         })}
 
                                     </div>
-                                    : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>}
+                                    : <div className="clinicHistory mb-3" ><b>Doctors are not available.</b></div>}
                                 {doctorData ?
                                     <div>
                                         <ReactPaginate

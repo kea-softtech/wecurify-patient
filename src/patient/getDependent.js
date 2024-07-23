@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PatientApi from '../services/PatientApi';
 import { useRecoilState } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 
 export default function GetDependent(props) {
-    const { patientId , doctorId} = props;
+    const { patientId, doctorId } = props;
     const [fetchPatientData] = useRecoilState(setPatientProfileData)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
@@ -16,10 +16,6 @@ export default function GetDependent(props) {
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
     const navigate = useNavigate()
-
-    useEffect(() => {
-
-    }, [fetchPatientData])
 
     const handleShow = (item) => {
         setbookSlot(item)
@@ -63,7 +59,7 @@ export default function GetDependent(props) {
     }
     return (
         <>
-            {fetchPatientData["dependent"]&&fetchPatientData["dependent"].length > 0 ?
+            {fetchPatientData["dependent"] && fetchPatientData["dependent"].lenght > 0 ?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
                         <>
@@ -94,10 +90,10 @@ export default function GetDependent(props) {
                 : null}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Are You Sure?</Modal.Title>
+                    <Modal.Title>Are you sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
+                    <div className="alert alert-bgcolor">You want to book this slot. </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(bookSlot)}>

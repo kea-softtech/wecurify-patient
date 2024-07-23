@@ -1,64 +1,98 @@
 import { useState, useEffect } from "react";
 import PatientProfile from "../../../img/profile.png"
-import { Link} from "react-router-dom";
-import PatientApi from "../../../services/PatientApi";
+import AppointmentApi from "../../../services/AppointmentApi";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
 function CalendarModalBox(props) {
-    const { patientId, doctorId, patientList } = props;
-    const [patientDetails, setPatientDetails] = useState([]);
-    const { patientDetailsData } = PatientApi()
-
+    const { handleClose,AppointmentData, appointmentId } = props;
+    const [appointmentDetails, setAppointmentDetails] = useState([]);
+    const [showCancel, setCancelDelete] = useState(false);
+    const { fetchAppointmentData, cancelPatientAppointment } = AppointmentApi()
     useEffect(() => {
-        getPatientInfoById();
+        fetchAppData();
     }, [])
 
-    
-
-    const getPatientInfoById = async () => {
-        await patientDetailsData({ patientId })
-            .then(jsonRes => {
-                setPatientDetails(jsonRes[0])
+    const fetchAppData = () => {
+        fetchAppointmentData(appointmentId)
+            .then((res) => {
+                setAppointmentDetails(res)
             })
-    };
+    }
+    const handleCancelShow = () => {
+        setCancelDelete(true)
+    }
+    const handleCancelClose = () => setCancelDelete(false)
 
+    const cancelAppointment = () => {
+        cancelPatientAppointment(appointmentDetails._id)
+            .then(() => {
+                handleCancelClose();
+                handleClose()
+                fetchAppData();
+            })
+
+    }
     return (
         <div>
             <div className="d-flex container " >
-                <div className=" mx-4 align-items-left ">
+                <div className="align-items-left ">
                     <img src={PatientProfile} alt="Patient Profile" />
                 </div>
 
-                <div>
+                <div className="ml-2">
                     <div className=" patientModalName align-item-right ">
-                        {patientDetails.name}
+                        Dr. {AppointmentData.drName}
+                    </div>
+                    <div className=" patientModalName align-item-right ">
+                        {appointmentDetails.name}
                     </div>
                     <div>
-                        <b className="patientModal">Email : </b>
-                        {patientDetails.email}
+                        <b className="patientModal">Date : </b>
+                        {appointmentDetails.date}
                     </div>
+                    {/* <div>
+                        <b className="patientModal">Time : </b>
+                        {appointmentDetails.timeSlot} Min
+                    </div> */}
                     <div>
-                        <b className="patientModal">Gender : </b>
-                        {patientDetails.gender}
-                    </div>
-                    <div>
-                        <b className="patientModal">Mobile No :  </b>
-                        {patientDetails.mobile}
-                    </div>
-                    <div>
-                        <b className="patientModal">Age :    </b>
-                        {patientDetails.age}
+                        <b className="patientModal">Fees :  </b>
+                        {appointmentDetails.fees}
                     </div>
                     <div>
                         <b className="patientModal">Time :    </b>
-                        {patientDetails.slotTime}
+                        {appointmentDetails.slotTime}
                     </div>
-
-                    <span  align='left'>
-                            <Link to={`/patientinfo/${patientId}`}>
-                                <button className="btn appColor modalbtn ">View Profile</button>
+                    <div>
+                        <b className="patientModal"> Patient :    </b>
+                        {AppointmentData.patientName}
+                    </div>
+                 
+                    {appointmentDetails.status !== "Cancelled" ?
+                        <span>
+                            <Link onClick={handleCancelShow}>
+                                <button className="btn appColor modalbtn ">Cancel</button>
                             </Link>
-                    </span>
+                        </span>
+                        : null}
                 </div>
             </div>
+            <Modal show={showCancel} onHide={handleCancelClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Are you sure?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="alert alert-bgcolor">You want to cancel this appointment. </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="default" className='appColor' onClick={cancelAppointment}>
+                        Yes
+                    </Button>
+                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
+                        No
+                    </Button>
+
+                </Modal.Footer>
+            </Modal>
         </div>
 
     )

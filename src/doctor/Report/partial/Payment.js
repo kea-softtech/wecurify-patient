@@ -157,10 +157,10 @@ export default function Payment(props) {
             </div>
             <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton>
-                    <Modal.Title>Are You Sure?</Modal.Title>
+                    <Modal.Title>Are you sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-bgcolor">You Want To Pay This Amount.? </div>
+                    <div className="alert alert-bgcolor">You want to pay this amount.? </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => getPrescriptionData()}>

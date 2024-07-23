@@ -22,7 +22,7 @@ function EditLifeStyleData(props) {
         fetchUpdatePatientLifestyle(lifeStyleId)
             .then(res => {
                 if (res) {
-                    return res.json()
+                    return res
                 }
             }).then(jsonRes => {
                 setEditPatientData(jsonRes)

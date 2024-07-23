@@ -106,19 +106,19 @@ function FetchPatientInfo(props) {
                                 Book Appointment
                             </Button>
                         </div>
-                        {/* <div className=" mt-2 col-md-6 " >
+                        <div className=" mt-2 col-md-6 " >
                             <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
                                 Add Dependent
                             </Button>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Are You Sure?</Modal.Title>
+                        <Modal.Title>Are you sure?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="alert alert-bgcolor">You Want To Book This Slot. </div>
+                        <div className="alert alert-bgcolor">You want to book this slot. </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>

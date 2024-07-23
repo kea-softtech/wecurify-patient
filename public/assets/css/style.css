@@ -3932,7 +3932,7 @@ a.btn_2 .full-width {
 .clinicHistory {
 	color: #000;
 	font-size: large;
-	margin-top: 10px;
+	margin-top: 25px;
 }
 
 .cardButton {
@@ -6033,6 +6033,7 @@ textarea.form-control {
 	border-radius: 5px;
 	margin-bottom: 15px;
 	/* margin-top: 4px; */
+	min-height: 350px;
 	border: 1px solid var(--borderColor);
 }
 

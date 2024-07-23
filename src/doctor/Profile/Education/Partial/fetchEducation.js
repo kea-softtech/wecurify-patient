@@ -79,25 +79,25 @@ function FetchEducation(props) {
                                         <div className='grayBox'>
                                             <div className='row'>
                                                 <div className='col-md-9'>
-                                                    <div className="" align='left'>
+                                                    <div align='left'>
                                                         {/* <span className="icon-icon">
                                                             <i className="pe-7s-medal" title="degree"></i>
                                                         </span> */}
                                                         <b>Doctor Degree</b>
                                                         <div>{education.degree}</div>
                                                     </div>
-                                                    <div className="" align='left'>
+                                                    <div align='left'>
                                                         {/* <span className="icon-icon">
                                                             <i className="icon_building" title="building"></i>
                                                         </span> */}
                                                         <b>Doctor Collage/University</b>
                                                         <div>{education.collage}</div>
                                                     </div>
-                                                    <div className="" align='left'>
+                                                    <div align='left'>
                                                         <b>Specialization</b>
                                                         <div>{education.specialization}</div>
                                                     </div>
-                                                    <div className="" align='left'>
+                                                    <div align='left'>
                                                         {/* <span className="icon-icon">
                                                             <i className="icon_calendar" title="calendar"></i>
                                                         </span> */}
@@ -140,10 +140,10 @@ function FetchEducation(props) {
             <div>
                 <Modal show={showDelete} onHide={handleDeleteClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Are You Sure?</Modal.Title>
+                        <Modal.Title>Are you sure?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="alert alert-bgcolor">You Want To Delete This Education Details</div>
+                        <div className="alert alert-bgcolor">You want to delete this education details.</div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="default" className='appColor' onClick={() => deleteEducation(Item)}>
@@ -152,7 +152,6 @@ function FetchEducation(props) {
                         <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleDeleteClose}>
                             No
                         </Button>
-
                     </Modal.Footer>
                 </Modal>
             </div>

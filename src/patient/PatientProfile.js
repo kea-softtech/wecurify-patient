@@ -46,10 +46,10 @@ export default function PatientProfile() {
         <MainNav>
           <div className="clearfix row">
             <div className="width50">
-              <Link to={`/`}>
+              <Link to={`/fetchpatientprofile/${patientId}`}>
                 <i className="arrow_back backArrow" title="back button"></i>
               </Link>
-              <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Personal Information</span>
+              <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Edit Information</span>
             </div>
             <div className="width50 row justifyContent">
               <div className="appColor normal-font">Patient - {patientName}</div>

@@ -117,7 +117,7 @@ function PatientRegistrationForm(props) {
                             name="gender"
                             value={updatePatientData.gender}
                             onChange={handleInputChange}
-                            placeholder="male">
+                            placeholder="Male">
                         </MainInput>
                         {errors.gender && <span className="validation">Please enter your gender</span>}
                     </div>

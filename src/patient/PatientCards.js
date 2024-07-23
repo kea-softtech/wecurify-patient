@@ -24,7 +24,7 @@ export default function PatientCards() {
                     </div>
                     <div className="col-lg-4">
                         <div className="hoverBox">
-                            <Link to={`/patientinfo/${patientData}`}>
+                            <Link to={`/fetchpatientprofile/${patientData}`}>
                                 <img className="patientImg" src={doctorprofile} alt="not found" />
                                 <h4 className="colorNorm  mt-2"> Profile</h4>
                                 <div>"View your profile and make any necessary edits, including adding your lifestyle habits."</div>

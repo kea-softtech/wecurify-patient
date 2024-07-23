@@ -5,8 +5,8 @@ import { FetchPatientLifestyleData } from "../patient/fetchPatientLifestyleData"
 function PatientLifestyle(props) {
     const [showLifeStyleInfo, setShowLifeStyleInfo] = useState(false)
     const { patientId } = props;//destructuring  
-    
-    function addLifestyleRecords() {
+
+    const addLifestyleRecords = () => {
         setShowLifeStyleInfo(true)
     }
     return (

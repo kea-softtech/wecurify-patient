@@ -49,7 +49,7 @@ function PatientPersonalInformation(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(()=>onSubmit())}>
             <div className="col-12" >
                 <div className="row">
                     <div className="col-sm-3">

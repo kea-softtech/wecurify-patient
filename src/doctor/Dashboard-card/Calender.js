@@ -7,33 +7,36 @@ import { Link, useParams } from 'react-router-dom';
 import CalendarModalBox from './partial/CalendarModalBox';
 import { MainNav } from '../../mainComponent/mainNav';
 import { Wrapper } from '../../mainComponent/Wrapper';
-import { useRecoilState } from "recoil";
-import AppointmentApi from '../../services/AppointmentApi';
 import PatientApi from '../../services/PatientApi';
+import Loader from '../../patient/patientHistory/Loader';
 const localizer = momentLocalizer(moment)
 
 export default function Calender() {
   const { patientId } = useParams();
-  const { getPatientListDetails } = AppointmentApi()
   const { getpaymentData } = PatientApi()
   const [getData, setGetData] = useState([])
   const [show, setShow] = useState(false);
-  const [patientIdDetails, setPatientIdDetails] = useState([])
+  const [appointmentId, setAppointmentId] = useState('')
   const [patientList, setPatientList] = useState([])
+  const [AppointmentData, setAppointmentData] = useState([])
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    //   handleOnSelectSlot();
     patientData()
-  }, [])
+  }, []);
+  
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 2000);
 
   const handleClose = () => {
     setShow(false)
   }
 
   const handleModalButtonClick = (item) => {
-    const patientId = item.patientId
+    setAppointmentData(item)
     setShow(true)
-    setPatientIdDetails(patientId)
+    setAppointmentId(item.id)
   }
 
   const patientData = () => {
@@ -43,7 +46,10 @@ export default function Calender() {
         res['test'] && res['test'].map((item) => {
           if (item.dependentId) {
             calendarData.push({
-              title: item['dependentDetails'][0].name,
+              // item['dependentDetails'][0].name
+              title: `Dr. ${item['doctorDetails'][0].name} (${item['dependentDetails'][0].name})`,
+              drName: item['doctorDetails'][0].name,
+              patientName: item['dependentDetails'][0].name,
               patientId: item['dependentDetails'][0]._id,
               id: item._id,
               start: new Date(item.startDate),
@@ -53,7 +59,9 @@ export default function Calender() {
             })
           } else {
             calendarData.push({
-              title: item.patientDetails[0].name,
+              title: `Dr. ${item['doctorDetails'][0].name} (${item['patientDetails'][0].name})`,
+              drName: item['doctorDetails'][0].name,
+              patientName: item['patientDetails'][0].name,
               patientId: item.patientDetails[0]._id,
               id: item._id,
               start: new Date(item.startDate),
@@ -69,10 +77,11 @@ export default function Calender() {
   }
 
   const eventPropGetter = (event) => {
-    const backgroundColor = event.status === "Completed" ? '#c0d2fc' : '#edebeb';
-    const color = event.status === "Completed" ? '#333' : '#333';
+    const backgroundColor = event.status === "Ongoing" ? '#c0d2fc' : '#edebeb';
+    const color = event.status === "Ongoing" ? '#333' : '#333';
     return { style: { backgroundColor, color } }
   }
+
 
   return (
     <Wrapper>
@@ -88,35 +97,41 @@ export default function Calender() {
       </MainNav>
       <div className="wraper row">
         <div className="common_box full-width">
-          <div className="myCustomHeight ">
-            <Calendar
-              messages={{
-                agenda: 'Schedule'
-              }}
-              localizer={localizer}
-              events={getData}
-              startAccessor="start"
-              endAccessor="end"
-              defaultView='agenda'
-              eventPropGetter={eventPropGetter}
-              showMultiDayTimes={true}
-              selectable={true}
-              onSelectEvent={handleModalButtonClick}
-              // style={{width:1000, height:500}}
-              style={{ height: 'calc(80vh - 80px)', width: '100%', cursor: 'pointer' }}
-            />
-          </div>
+          {isLoading ?
+            <div className='loader-container'>
+              <Loader />
+            </div>
+            :
+            <div className="myCustomHeight ">
+              <Calendar
+                messages={{
+                  agenda: 'Schedule'
+                }}
+                localizer={localizer}
+                events={getData}
+                startAccessor="start"
+                endAccessor="end"
+                defaultView='agenda'
+                eventPropGetter={eventPropGetter}
+                showMultiDayTimes={true}
+                selectable={true}
+                onSelectEvent={handleModalButtonClick}
+                style={{ height: 'calc(80vh - 80px)', width: '100%', cursor: 'pointer' }}
+              />
+            </div>
+          }
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title >Patient Details</Modal.Title>
+          <Modal.Title >Appointment Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CalendarModalBox
+            handleClose={handleClose}
+            AppointmentData={AppointmentData}
             patientList={patientList}
-            // doctorId={doctorId}
-            patientId={patientIdDetails} onSubmit={handleModalButtonClick} />
+            appointmentId={appointmentId} onSubmit={handleModalButtonClick} />
         </Modal.Body>
       </Modal>
     </Wrapper>

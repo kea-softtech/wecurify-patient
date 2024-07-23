@@ -36,8 +36,8 @@ function AddPatientMedicalInfo(props) {
         addPatientMedical(patientData)
             .then((response) => {
                 setCoilPatientMedical(coilPatientMedical.concat(response))
-                props.addMedicalRecord()
             })
+            props.addMedicalRecord()
             toast.success("Saved Successfully!")
     }
 

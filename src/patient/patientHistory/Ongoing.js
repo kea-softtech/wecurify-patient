@@ -66,9 +66,9 @@ export default function Ongoing(props) {
                 </div>
                 :
                 <>
-                    {patientList ?
-                        <div className='           row'>
-                            {patientList && patientList.map((details, i) => {
+                    {patientList && patientList.length > 0 ?
+                        <div className='row'>
+                            { patientList.map((details, i) => {
                                 return (
                                     <div key={i} className="col-md-4">
                                         <div className="cardDiv">
@@ -98,7 +98,7 @@ export default function Ongoing(props) {
                                                     </div>
                                                 </div>
                                             }
-                                            <div className=' appointmentBtn' align='right'>
+                                            <div className='appointmentBtn' align='right'>
                                                 {/* <Link to={`/patientqueue/${patientId}`}>
                                         <button className="btn appColor helperBtn ">Queue</button>
                                     </Link> */}
@@ -116,7 +116,7 @@ export default function Ongoing(props) {
 
                             })}
                         </div>
-                        : <div className="clinicHistory mb-3" ><b>Data is not Available</b></div>
+                        : <div className="clinicHistory mb-3" ><b>Appointments not found please book your appoinment.</b></div>
                     }
                     {patientList ?
                         <div>
@@ -139,17 +139,17 @@ export default function Ongoing(props) {
                                 activeClassName="active"
                             />
                         </div>
-                         : null} 
+                        : null}
                 </>
             }
 
 
             <Modal show={showCancel} onHide={handleCancelClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Are You Sure?</Modal.Title>
+                    <Modal.Title>Are you sure?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="alert alert-bgcolor">You Want To Cancel This Appoinment. </div>
+                    <div className="alert alert-bgcolor">You want to cancel this appointment. </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="default" className='appColor' onClick={() => cancelAppointment(id)}>

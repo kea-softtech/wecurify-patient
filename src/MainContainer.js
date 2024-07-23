@@ -24,6 +24,7 @@ import AddDependent from "./patient/AddDependent";
 import {FetchDoctorPersonalDetails} from './doctor/Profile/Personal/Partial/fetchDoctorPersonalDetails'
 import CreatePatientMpin from "./patient/patientMpin/CreatePatientMpin";
 import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
+import FetchPatientProfile from "./patient/FetchPatientProfile";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -53,6 +54,7 @@ function MainContainer() {
 
       <Route path="/patientappointment/:patientId" element={loggedIn ? <PatientHistory /> : null} />
       <Route path="/patientinfo/:patientId" element={loggedIn ? <PatientProfile /> : null} />
+      <Route path="/fetchpatientprofile/:patientId" element={loggedIn ? <FetchPatientProfile /> : null} />
 
       <Route path="/clinic" element={<Clinic />} />
 

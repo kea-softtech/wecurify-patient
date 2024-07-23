@@ -49,8 +49,8 @@ function AddPatientLifestyleInfo(props) {
         addPatientLifestyle(lifestyleData)
             .then((response) => {
                 setCoilPatientLifeStyle(coilPatientLifeStyle.concat(response))
-                props.addRecords()
             })
+            // props.addRecords()
         toast.success("Saved Successfully!")
     }
 
