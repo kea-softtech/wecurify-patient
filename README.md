@@ -1,1 +1,1 @@
-﻿# wecurify-patient-webapp
+﻿# wecurify-patient
