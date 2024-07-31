@@ -8,7 +8,7 @@ import GetDependent from "./getDependent";
 
 export default function GetLoginPatientProfile() {
     const { patientId } = useParams()
-    const [ doctorId] = useRecoilState(setDoctorId)
+    const [doctorId] = useRecoilState(setDoctorId)
 
     return (
         <>
@@ -20,6 +20,12 @@ export default function GetLoginPatientProfile() {
                                 <i className="arrow_back backArrow" title="back button"></i>
                             </Link>
                             <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Patient Information</span>
+                        </div>
+                        <div className='width50' align='right'>
+                            <Link
+                                to={`/patientinfo/${patientId}`}>
+                                <i className="icon_pencil-edit backArrow" title="Edit profile" />
+                            </Link>
                         </div>
                     </div>
                 </MainNav>

@@ -19,10 +19,15 @@ export default function Patient() {
     useEffect(() => {
         getPatientDetails()
     }, [])
+
     function getPatientDetails() {
         getPatientListDetails({ doctorId })
             .then((result) => {
-                patientData(result)
+                if(result){
+                    patientData(result)
+                }else{
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     const patientData = (list, e) => {

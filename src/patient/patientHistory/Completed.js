@@ -18,6 +18,7 @@ export default function Completed(props) {
     const { downloadPrescription } = AppointmentApi()
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getPatientHistory(currentPage);
@@ -31,10 +32,15 @@ export default function Completed(props) {
     function getPatientHistory() {
         getpaymentData({ patientId }, currentPage, pageSize)
             .then((result) => {
-                setCompletedProduct(result.ongoingProduct)
-                const totalPages = result.totalCompletedPages;
-                setTotalPages(totalPages)
-                setPatientHistoryData(result.completed)
+                if(result){
+                    setCompletedProduct(result.ongoingProduct)
+                    const totalPages = result.totalCompletedPages;
+                    setTotalPages(totalPages)
+                    setPatientHistoryData(result.completed)
+                }else{
+                    setIsError('Server Error')
+                }
+
             })
     }
 
@@ -105,6 +111,7 @@ export default function Completed(props) {
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Appointments are not available.</b></div>}
+                    {isError === true ? <span className="validation mb-2">Server error</span> : null}
                     {completedProduct ?
                         <div>
                             <ReactPaginate

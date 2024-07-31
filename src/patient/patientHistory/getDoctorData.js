@@ -8,6 +8,7 @@ export default function GetDoctorData(props) {
     const { doctorId, clinicId } = props
     const [doctorData, setDoctorData] = useState([]);
     const [clinicName, setClinicName] = useState([]);
+    const [isError, setIsError] = useState(false);
     const { getDrInfo } = AuthApi()
     const { getSingleClinic } = ClinicApi()
 
@@ -20,7 +21,12 @@ export default function GetDoctorData(props) {
     function getDoctorDetails() {
         getDrInfo({ doctorId })
             .then((result) => {
-                setDoctorData(result.result[0])
+                if (result.result) {
+                    setDoctorData(result.result[0])
+                }
+                else {
+                    setIsError(true)
+                }
             })
     }
     function getClinic() {
@@ -62,7 +68,7 @@ export default function GetDoctorData(props) {
 
                     </div>
                 </div>
-
+                {isError === true ? <span className="validation mb-2">Server error</span> : null}
             </div>
             <span className='cardSpan time'>
                 <i className=' color patientListIcon ml-1 mr-2' ><FaClinicMedical /> </i>

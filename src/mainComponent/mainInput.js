@@ -5,6 +5,7 @@ const MainInput = (props) => {
                 type={props.type}
                 name={props.name}
                 maxLength={props.maxLength}
+                minLength={props.minLength}
                 pattern={props.pattern}
                 className="form-control"
                 value={props.value}

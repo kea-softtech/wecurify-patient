@@ -16,8 +16,13 @@ export default function ClinicList(props) {
     const doctorServices = () => {
         getDrInfo({ doctorId })
             .then((res) => {
-                const clinics = res.result[0]['clinicList']
-                setclinics(clinics);
+                if (res) {
+                    const clinics = res.result[0]['clinicList']
+                    setclinics(clinics);
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 

@@ -4,20 +4,25 @@ export default function GetSymptomsData(props) {
     const { reportId } = props
     const { getMedicineReport } = ReportApi();
     const [symptomDataInfo, setSymptomDataInfo] = useState([])
-    
+
     useEffect(() => {
         symptomsData()
-    }, [symptomDataInfo])
+    }, [])
 
-    const symptomsData =  () => {
-         getMedicineReport({ reportId })
+    const symptomsData = () => {
+        getMedicineReport({ reportId })
             .then((res) => {
-                setSymptomDataInfo(res[0].symptoms)
+                if (res) {
+                    setSymptomDataInfo(res[0].symptoms)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 
     return (
-        <div align='left'> 
+        <div align='left'>
             {symptomDataInfo.length > 0 ?
                 <div className='  viewMreport' align='left'>
                     <h6><b>List of Symptoms</b></h6>

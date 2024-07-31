@@ -6,7 +6,7 @@ import application from '../images/appointment.jpg';
 import doctorprofile from '../images/doctorprofile.jpg'
 import calender from '../images/calender.jpg'
 export default function PatientCards() {
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId)
+    const [patientData] = useRecoilState(setNewPatientId)
 
     return (
         <div className="full-width mt-4">
@@ -40,6 +40,7 @@ export default function PatientCards() {
                             </Link>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>

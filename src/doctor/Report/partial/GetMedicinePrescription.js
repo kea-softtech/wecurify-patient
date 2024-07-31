@@ -17,18 +17,23 @@ const GetMedicinePriscription = (props) => {
 
     useEffect(() => {
         getMedicineData()
-    }, [showMedicineData])
+    }, [])
 
     function getMedicineData() {
         getMedicinePrescriptionData(reportId)
             .then((result) => {
-                setShowMedicineData(result);
+                if (result) {
+                    setShowMedicineData(result);
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 
     return (
         <>
-            {showMedicineData.length > 0 ?
+            {showMedicineData ?
                 <>
                     <h6 align="left" className='ml-2'><b>Medicine List</b></h6>
                     <TableContainer component={Paper}>

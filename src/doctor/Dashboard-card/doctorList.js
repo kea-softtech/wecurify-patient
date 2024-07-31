@@ -32,9 +32,14 @@ export default function DoctorList() {
     const getDoctorList = () => {
         getdoctors(currentPage, pageSize, key)
             .then((result) => {
-                setFilterData(result.doctorList)
-                setDoctorData(result.doctorList)
-                setTotalPages(result.doctorListPages)
+                if(result){
+                    setFilterData(result.doctorList)
+                    setDoctorData(result.doctorList)
+                    setTotalPages(result.doctorListPages)
+                }
+                else{
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     const searchDoctor = (value) => {

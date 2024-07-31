@@ -15,7 +15,7 @@ export default function Cancelled(props) {
     const [cancelledProduct, setCancelledProduct] = useState([]);
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
-
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getPatientHistory(currentPage);
@@ -29,10 +29,15 @@ export default function Cancelled(props) {
     function getPatientHistory(currentPage) {
         getpaymentData({ patientId }, currentPage, pageSize)
             .then((result) => {
-                setCancelledProduct(result.cancelledProduct)
-                const totalPages = result.totalCancelledPages;
-                setTotalPages(totalPages)
-                setPatientList(result.cancelled)
+                if (result) {
+                    setCancelledProduct(result.cancelledProduct)
+                    const totalPages = result.totalCancelledPages;
+                    setTotalPages(totalPages)
+                    setPatientList(result.cancelled)
+                }
+                else {
+                    setIsError('Server Error')
+                }
             })
     }
     const handlePageClick = (data) => {
@@ -85,7 +90,8 @@ export default function Cancelled(props) {
                         </div>
                         : <div className="clinicHistory"><b>Appointments are not available.</b></div>
                     }
-                    {cancelledProduct ?
+                    {isError === true ? <span className="validation mb-2">Server error</span> : null}
+                    {patientList ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."

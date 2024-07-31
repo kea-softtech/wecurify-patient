@@ -264,6 +264,30 @@ strong {
 .colorNorm {
 	color: #1a3c8b;
 }
+.stepper {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.step-number {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background-color: #e1e8ed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5px;
+	z-index: 2;
+}
 @media (max-width: 767px) {
 	.main_title {
 		margin-bottom: 15px;
@@ -274,7 +298,6 @@ strong {
 		flex: 0 0 40%;
 		min-width: 40%;
 	}
-	
 }
 
 @media (max-width: 476px) {
@@ -286,12 +309,12 @@ strong {
 	.MuiFormGroup-root {
 		flex-direction: column !important;
 	}
-	
-	.button_responsive{
-		width:100%;
+
+	.button_responsive {
+		width: 100%;
 		text-align: center;
 	}
-	.btn-home{
+	.btn-home {
 		margin-bottom: 20px;
 	}
 }
@@ -5646,7 +5669,7 @@ a.box_feat_about h3 {
 	padding-left: 10px;
 	width: 100%;
 }
-.text-align{
+.text-align {
 	text-align: left;
 }
 .doctorCard {
@@ -5827,16 +5850,15 @@ a.box_feat_about h3 {
 	min-height: 40px;
 	border-color: var(--appColor);
 }
-.loader-container{
+.loader-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: 40px;
 	margin-bottom: 40px;
-
 }
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-    color: #1976d2;
+	color: #1976d2;
 	font-weight: bold;
 }
 .appColor {

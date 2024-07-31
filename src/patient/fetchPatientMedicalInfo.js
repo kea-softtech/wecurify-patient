@@ -12,8 +12,12 @@ function FetchPatientMedicalInfo(props) {
     const [fetchPatientdata, setFetchPatientData] = useRecoilState(setPatientMedical)
     const [activeModal, setActiveModal] = useState()
     const [showMedicalInfo, setShowMedicalInfo] = useState(false)
-
     const { getPatientMedical } = PatientApi()
+
+    useEffect(() => {
+        getPatientData()
+    }, [])
+
     const handleClose = () => {
         setActiveModal(null)
     }
@@ -26,9 +30,7 @@ function FetchPatientMedicalInfo(props) {
     const MedicalData = () => {
         handleClose(true);
     };
-    useEffect(() => {
-        getPatientData()
-    }, [])
+
 
     function handleRecordAdded() {
         setShowMedicalInfo(false)
@@ -37,7 +39,12 @@ function FetchPatientMedicalInfo(props) {
     function getPatientData() {
         getPatientMedical(patientId)
             .then((result) => {
-                setFetchPatientData(result)
+                if (result) {
+                    setFetchPatientData(result)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 

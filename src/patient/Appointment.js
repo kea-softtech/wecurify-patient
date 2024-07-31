@@ -39,6 +39,7 @@ export default function Appointment() {
     useEffect(() => {
         appointmentData()
     }, []);
+    
     const appointmentData = () => {
         const result = axios(constants.PATIENTLIST_DATA);
         setRows(result.data);

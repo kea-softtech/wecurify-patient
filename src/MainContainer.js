@@ -43,7 +43,7 @@ function MainContainer() {
       <Route path="/profile/:doctorId" element={<FetchDoctorPersonalDetails/>} />
       <Route path="/clinicinfo/:clinicId" element={<ClinicInto />} />
       <Route path="/calender/:patientId" element={<Calender />} />
-      <Route path="/patientqueue/:patientId" element={<PatientQueue />} />
+      <Route path="/patientqueue/:clinicId" element={<PatientQueue />} />
       <Route path="/adddependent/:patientId" element={<AddDependent />} />
       <Route path="report/:reportId" element={<ViewMedicalReport />} />
 

@@ -8,7 +8,8 @@ import AuthApi from "../services/AuthApi";
 function GetDoctorDetails(props) {
     const doctorId = props.doctorId;
     const [fetchProfileData, setFetchProfileData] = useState([]);
-    const { getDrInfo } = AuthApi()
+    const { getDrInfo } = AuthApi();
+    
     useEffect(() => {
         getDoctorPersonalInfo();
     }, [])

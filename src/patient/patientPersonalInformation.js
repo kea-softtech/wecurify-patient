@@ -16,7 +16,11 @@ function PatientPersonalInformation(props) {
     function getPatientPersonalInfo() {
         fetchPatient({ patientId })
             .then((jsonRes) => {
-                setUpdateData(jsonRes[0])
+                if (jsonRes[0]) {
+                    setUpdateData(jsonRes[0])
+                } else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             });
     }
 
@@ -49,7 +53,7 @@ function PatientPersonalInformation(props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(()=>onSubmit())}>
+        <form onSubmit={handleSubmit(() => onSubmit())}>
             <div className="col-12" >
                 <div className="row">
                     <div className="col-sm-3">

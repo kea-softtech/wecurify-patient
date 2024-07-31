@@ -19,8 +19,14 @@ export default function Dependent() {
     const getPatient = () => {
         fetchPatient({ patientId })
             .then((res) => {
-                setMobileNo(res[0].mobile)
-                setDependentData(res[0]['dependent'])
+                if (res) {
+                    setMobileNo(res[0].mobile)
+                    setDependentData(res[0]['dependent'])
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
+
             })
     }
 

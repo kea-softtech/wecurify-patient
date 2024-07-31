@@ -7,9 +7,11 @@ export default function Sharing(props) {
     const { reportId } = props
     const [shareUrl, setShareUrl] = useState([])
     const { downloadPrescription } = AppointmentApi()
+
     useEffect(() => {
         SharePdf()
     }, [])
+    
     const SharePdf = () => {
         downloadPrescription(reportId)
             .then((result) => {

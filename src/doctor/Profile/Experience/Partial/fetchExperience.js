@@ -38,23 +38,33 @@ function FetchExperience(props) {
     const getAllExperience = () => {
         fetchExperienceData({ doctorId })
             .then(jsonRes => {
-                const exp = manipulateExperience(jsonRes)
-                setFetchExperience(exp)
+                if (jsonRes) {
+                    const exp = manipulateExperience(jsonRes)
+                    setFetchExperience(exp)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             });
     }
 
     function manipulateExperience(data) {
-        return data.map(function (item, index) {
-            const experiences = monthDiff(new Date(item.startYear), new Date(item.endYear))
-            const month = experiences % 12
-            let year = 0
-            if (experiences > 11) {
-                const exYear = experiences / 12
-                year = exYear.toFixed(0)
-            }
-            item.totalExperience = `${year}.${month}`;
-            return item;
-        })
+        if (data) {
+            return data.map(function (item, index) {
+                const experiences = monthDiff(new Date(item.startYear), new Date(item.endYear))
+                const month = experiences % 12
+                let year = 0
+                if (experiences > 11) {
+                    const exYear = experiences / 12
+                    year = exYear.toFixed(0)
+                }
+                item.totalExperience = `${year}.${month}`;
+                return item;
+            })
+        }
+        else {
+            return <span className="validation mb-2">Server error</span>
+        }
     }
 
     function monthDiff(start, end) {
@@ -70,7 +80,7 @@ function FetchExperience(props) {
             .then(() => {
                 getAllExperience()
             })
-            handleDeleteClose()
+        handleDeleteClose()
     }
 
     return (
@@ -180,7 +190,7 @@ function FetchExperience(props) {
                             <div className="alert alert-bgcolor">You want to delete this experience details.</div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="default" className='appColor' onClick={()=>removeExperienceData(Item)}>
+                            <Button variant="default" className='appColor' onClick={() => removeExperienceData(Item)}>
                                 Yes
                             </Button>
                             <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleDeleteClose}>

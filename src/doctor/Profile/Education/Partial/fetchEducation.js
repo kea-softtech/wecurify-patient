@@ -14,7 +14,12 @@ function FetchEducation(props) {
     const [Item, setItem] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
     const { fetchAllEducations, deleteEducationData } = EducationApi()
-   
+
+
+    useEffect(() => {
+        getAllEducations()
+    }, [])
+
     const handleDeleteShow = (item) => {
         setItem(item)
         setShowDelete(true)
@@ -31,14 +36,15 @@ function FetchEducation(props) {
         handleClose(true);
     };
 
-    useEffect(() => {
-        getAllEducations()
-    }, [])
-
     const getAllEducations = () => {
         fetchAllEducations({ doctorId })
             .then((res) => {
-                setEduData(res);
+                if (res) {
+                    setEduData(res);
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     const deleteEducation = (education) => {
@@ -47,7 +53,7 @@ function FetchEducation(props) {
             .then(() => {
                 getAllEducations()
             })
-            handleDeleteClose()
+        handleDeleteClose()
     }
 
     return (

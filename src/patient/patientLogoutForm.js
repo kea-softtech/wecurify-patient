@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 function PatientLogoutForm(){
     const [patientData , setPatientData] = useRecoilState(setNewPatientId);
+    
     useEffect(() =>{
         setPatientData("")
     }, [])

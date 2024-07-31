@@ -8,30 +8,31 @@ function EditLifeStyleData(props) {
     const { lifeStyleId } = props;
     const [editPatientData, setEditPatientData] = useState([])
     const [coilPatientMedical, setCoilPatientMedical] = useRecoilState(setPatientLifestyle)
-    const { updatePatientLifestyle ,fetchUpdatePatientLifestyle} =PatientApi()
-    const handleInputChange = event => {
-        const { name, value } = event.target;
-        setEditPatientData({ ...editPatientData, [name]: value })
-    };
+    const { updatePatientLifestyle, fetchUpdatePatientLifestyle } = PatientApi()
 
     useEffect(() => {
         fetchPatientData();
     }, [])
 
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setEditPatientData({ ...editPatientData, [name]: value })
+    };
+
     const fetchPatientData = () => {
         fetchUpdatePatientLifestyle(lifeStyleId)
-            .then(res => {
-                if (res) {
-                    return res
+            .then(jsonRes => {
+                if (jsonRes) {
+                    setEditPatientData(jsonRes)
                 }
-            }).then(jsonRes => {
-                setEditPatientData(jsonRes)
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             });
     }
 
     const UpdatePatientData = async (event) => {
         event.preventDefault();
-
         const updateMedical = {
             patientId: editPatientData.patientId,
             smokingHabits: editPatientData.smokingHabits,
@@ -42,15 +43,20 @@ function EditLifeStyleData(props) {
         }
         updatePatientLifestyle(lifeStyleId, updateMedical)
             .then((res) => {
-                const editMedical = coilPatientMedical.map(function (e, index) {
-                    if (lifeStyleId === e._id) {
-                        return res.data
-                    } else {
-                        return e
-                    }
-                })
-                setCoilPatientMedical(editMedical);
-                props.onSubmit();
+                if (res) {
+                    const editMedical = coilPatientMedical.map(function (e, index) {
+                        if (lifeStyleId === e._id) {
+                            return res.data
+                        } else {
+                            return e
+                        }
+                    })
+                    setCoilPatientMedical(editMedical);
+                    props.onSubmit();
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     return (

@@ -7,18 +7,18 @@ import ReactPaginate from "react-paginate";
 import Loader from "./Loader";
 
 export default function Incomplete(props) {
-    const { patientId } = props
+    const { patientId } = props;
     const [patientHistoryData, setPatientHistoryData] = useState(null)
     const [incompleteProduct, setIncompleteProduct] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getPatientDetails(currentPage);
     }, [currentPage]);
-
 
     setTimeout(() => {
         setIsLoading(false);
@@ -28,10 +28,14 @@ export default function Incomplete(props) {
     function getPatientDetails() {
         getpaymentData({ patientId }, currentPage, pageSize)
             .then((result) => {
-                setIncompleteProduct(result.incompleteProduct)
-                const totalPages = result.totalIncompletePages;
-                setTotalPages(totalPages)
-                setPatientHistoryData(result.incomplete)
+                if (result) {
+                    setIncompleteProduct(result.incompleteProduct)
+                    const totalPages = result.totalIncompletePages;
+                    setTotalPages(totalPages)
+                    setPatientHistoryData(result.incomplete)
+                } else {
+                    setIsError(true)
+                }
             })
     }
     const handlePageClick = (data) => {
@@ -83,7 +87,9 @@ export default function Incomplete(props) {
                             })}
                         </div>
                         : <div className="clinicHistory" ><b>Appointments are not available.</b></div>}
-                    {incompleteProduct ?
+                    {isError === true ? <span className="validation mb-2">Server error</span> : null}
+
+                    {patientHistoryData ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."

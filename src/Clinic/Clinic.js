@@ -48,10 +48,16 @@ export default function Clinic() {
     const fetchClinic = () => {
         getClinic(currentPage, pageSize)
             .then((res) => {
-                setTotalPages(res.clinicListPages)
-                setClinicData(res.clinicList)
-                setClinicList(res.clinicList)
-                setFilterData(res.result)
+                if(res){
+                    setTotalPages(res.clinicListPages)
+                    setClinicData(res.clinicList)
+                    setClinicList(res.clinicList)
+                    setFilterData(res.result)
+                }
+                else{
+                     <span className="validation mb-2">Server error</span> 
+                }
+                
             })
     }
     const handlePageClick = (data) => {

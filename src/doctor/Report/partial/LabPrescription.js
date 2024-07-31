@@ -14,6 +14,7 @@ export default function LabPrescription(props) {
     const [labTestData, setLabTestData] = useState([]);
     //for Selected data
     const [saveLabData, setSaveLabData] = useState('')
+    
     useEffect(() => {
         getLabTestData();
     }, [])

@@ -10,10 +10,10 @@ export default function Investigation(props) {
     const { onChange, reportId } = props;
     const { insertInvestigationNote, getMedicineReport } = ReportApi();
 
-
     useEffect(() => {
         investigationData()
     }, [])
+    
     const handleChange = (event) => {
         setInvestigation_note(event.target.value);
     }

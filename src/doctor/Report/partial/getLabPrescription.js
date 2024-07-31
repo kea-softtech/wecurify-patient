@@ -5,15 +5,20 @@ export default function GetLabPrescription(props) {
     const { reportId } = props;
     const { getLabTestPrescriptionData } = ReportApi();
     const [getLabData, setGetLabData] = useState([]);
-    
+
     useEffect(() => {
         getLabPrescriptionData()
-    }, [getLabData])
+    }, [])
 
     const getLabPrescriptionData = () => {
         getLabTestPrescriptionData({ reportId })
             .then((result) => {
-                setGetLabData(result)
+                if (result) {
+                    setGetLabData(result)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     return (

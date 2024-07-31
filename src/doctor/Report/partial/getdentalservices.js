@@ -5,15 +5,20 @@ export default function GetDentalServices(props) {
     const { reportId } = props;
     const { getDentalServicesPrescription } = ReportApi();
     const [getServices, setGetServices] = useState([]);
-    
+
     useEffect(() => {
         getServicesData()
-    }, [getServices])
+    }, [])
 
     const getServicesData = () => {
         getDentalServicesPrescription({ reportId })
             .then((result) => {
-                setGetServices(result)
+                if (result) {
+                    setGetServices(result)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 
@@ -31,7 +36,7 @@ export default function GetDentalServices(props) {
                             )
                         })}
                     </div>
-                : null
+                    : null
             }
         </>
     )

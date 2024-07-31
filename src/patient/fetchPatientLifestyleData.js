@@ -11,7 +11,12 @@ function FetchPatientLifestyleData(props) {
     const { patientId } = props;
     const [fetchPatientdata, setFetchPatientData] = useRecoilState(setPatientLifestyle)
     const [activeModal, setActiveModal] = useState()
-    const { getPatientLifestyle } = PatientApi()
+    const { getPatientLifestyle } = PatientApi();
+
+    useEffect(() => {
+        getPatientData()
+    }, [])
+
     const handleClose = () => {
         setActiveModal(null)
     }
@@ -24,14 +29,15 @@ function FetchPatientLifestyleData(props) {
     const lifeStyleData = () => {
         handleClose(true);
     };
-    useEffect(() => {
-        getPatientData()
-    }, [])
 
     function getPatientData() {
         getPatientLifestyle(patientId)
             .then((result) => {
-                setFetchPatientData(result)
+                if (result) {
+                    setFetchPatientData(result)
+                } else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
     return (

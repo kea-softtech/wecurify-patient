@@ -14,6 +14,11 @@ export default function NewFollowup(props) {
     const [appointmentId, setAppointmentId] = useState()
     const [doctorId, setDoctorId] = useState()
     const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        medicalReportData()
+    }, [])
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const onSubmit = () => {
@@ -30,9 +35,6 @@ export default function NewFollowup(props) {
         insertNewFollowUpDate({ reportId }, bodyData)
         toast.success("Saved Successfully!")
     }
-    useEffect(() => {
-        medicalReportData()
-    }, [])
 
     const medicalReportData = () => {
         getMedicineReport({ reportId })

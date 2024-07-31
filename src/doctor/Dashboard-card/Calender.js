@@ -24,7 +24,7 @@ export default function Calender() {
   useEffect(() => {
     patientData()
   }, []);
-  
+
   setTimeout(() => {
     setIsLoading(false);
   }, 2000);
@@ -42,37 +42,43 @@ export default function Calender() {
   const patientData = () => {
     getpaymentData({ patientId })
       .then((res) => {
-        const calendarData = []
-        res['test'] && res['test'].map((item) => {
-          if (item.dependentId) {
-            calendarData.push({
-              // item['dependentDetails'][0].name
-              title: `Dr. ${item['doctorDetails'][0].name} (${item['dependentDetails'][0].name})`,
-              drName: item['doctorDetails'][0].name,
-              patientName: item['dependentDetails'][0].name,
-              patientId: item['dependentDetails'][0]._id,
-              id: item._id,
-              start: new Date(item.startDate),
-              end: new Date(moment(item.startDate).add({ hours: 0, minutes: item.timeSlot }).toString()),
-              timeslots: item.timeSlot,
-              status: item.status,
-            })
-          } else {
-            calendarData.push({
-              title: `Dr. ${item['doctorDetails'][0].name} (${item['patientDetails'][0].name})`,
-              drName: item['doctorDetails'][0].name,
-              patientName: item['patientDetails'][0].name,
-              patientId: item.patientDetails[0]._id,
-              id: item._id,
-              start: new Date(item.startDate),
-              end: new Date(moment(item.startDate).add({ hours: 0, minutes: item.timeSlot }).toString()),
-              timeslots: item.timeSlot,
-              status: item.status,
-            })
-          }
-          setPatientList(item)
-          setGetData(calendarData);
-        })
+        if (res) {
+          const calendarData = []
+          res['test'] && res['test'].map((item) => {
+            if (item.dependentId) {
+              calendarData.push({
+                // item['dependentDetails'][0].name
+                title: `Dr. ${item['doctorDetails'][0].name} (${item['dependentDetails'][0].name})`,
+                drName: item['doctorDetails'][0].name,
+                patientName: item['dependentDetails'][0].name,
+                patientId: item['dependentDetails'][0]._id,
+                id: item._id,
+                start: new Date(item.startDate),
+                end: new Date(moment(item.startDate).add({ hours: 0, minutes: item.timeSlot }).toString()),
+                timeslots: item.timeSlot,
+                status: item.status,
+              })
+            } else {
+              calendarData.push({
+                title: `Dr. ${item['doctorDetails'][0].name} (${item['patientDetails'][0].name})`,
+                drName: item['doctorDetails'][0].name,
+                patientName: item['patientDetails'][0].name,
+                patientId: item.patientDetails[0]._id,
+                id: item._id,
+                start: new Date(item.startDate),
+                end: new Date(moment(item.startDate).add({ hours: 0, minutes: item.timeSlot }).toString()),
+                timeslots: item.timeSlot,
+                status: item.status,
+              })
+            }
+            setPatientList(item)
+            setGetData(calendarData);
+          })
+        }
+        else {
+          return <span className="validation mb-2">Server error</span>
+        }
+
       })
   }
 

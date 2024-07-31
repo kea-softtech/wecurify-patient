@@ -82,8 +82,12 @@ export default function PatientApi() {
             return result
         }
         catch (err) {
-            return err;
+            return {
+                status: "error",
+                message: err.message
+            }
         }
+        
     };
     const patientSignIn = async ({ mobile, password }) => {
         try {
@@ -161,6 +165,24 @@ export default function PatientApi() {
     const fetchUpdatePatientLifestyle = async (lifeStyleId) => {
         try {
             const result = await axios.get(`${API}/fetchUpdatedPatientLifestyle/${lifeStyleId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
+    const getPatientData = async (medicalId) => {
+        try {
+            const result = await axios.get(`${API}/fetchUpdatedPatient/${medicalId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
+    const updatePatientData = async (medicalId,updateMedical) => {
+        try {
+            const result = await axios.post(`${API}/updatePatientMedicalInfo/${medicalId}`, updateMedical)
             return result
         }
         catch (err) {
@@ -197,6 +219,8 @@ export default function PatientApi() {
         updatePatientLifestyle,
         fetchUpdatePatientLifestyle,
         AddDependents,
+        getPatientData,
+        updatePatientData
     }
 
 

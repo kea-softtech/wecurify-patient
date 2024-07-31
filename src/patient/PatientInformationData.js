@@ -15,55 +15,89 @@ function PatientInformationData(props) {
     function getAllPatientData() {
         fetchPatient({ patientId })
             .then(response => {
-                setFetchPatientData(response[0])
+                if (response[0]) {
+                    setFetchPatientData(response[0])
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
 
-   
+
     return (
-        <div className="col-md-6 mb-2">
-            <div className="box_general_4 cart patientDetails">
-                {/* <div className="underline">
-                    <div className="form_title">
-                        <h3>Patient Details</h3>
-                    </div>
-                </div> */}
+        <div className="mt-3">
+            <div className="box_general_4 col-md-8">
                 <div className="patientDataStyle">
                     <div>
-                        <label className="mx-2 fontS"><b>{fetchPatientData.name}</b></label>
+                        <label className="mx-2 fontS col-md-6" >
+                            <b>{fetchPatientData.name}</b>
+                        </label>
                     </div>
-                    
-                    <div>
-                        <label className="mx-2"><b>Emergency contact :</b></label>
-                        {fetchPatientData.emcontact}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Emergency contact </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.emcontact ? fetchPatientData.emcontact : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Email :</b></label>
-                        {fetchPatientData.email}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Email </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.email ? fetchPatientData.email : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Bloodgroup :</b></label>
-                        {fetchPatientData.bloodgroup}
+                    <div className="row ">
+                        <label className="mx-2 col-md-6">
+                            <b>Bloodgroup </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.bloodgroup ? fetchPatientData.bloodgroup : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Height :</b></label>
-                        {fetchPatientData.height}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Height </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.height ? fetchPatientData.height : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Weight :</b></label>
-                        {fetchPatientData.weight}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Weight </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.weight ? fetchPatientData.weight : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Address :</b></label>
-                        {fetchPatientData.address}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Address </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.address ? fetchPatientData.address : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Marital Status :</b></label>
-                        {fetchPatientData.maritalstatus}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Marital Status </b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.maritalstatus ? fetchPatientData.maritalstatus : "--"}
+                        </span>
                     </div>
-                    <div>
-                        <label className="mx-2"><b>Gender :</b></label>
-                        {fetchPatientData.gender}
+                    <div className="row">
+                        <label className="mx-2 col-md-6">
+                            <b>Gender</b>
+                        </label>
+                        <span className="col-md-4">
+                            {fetchPatientData.gender ? fetchPatientData.gender : "--"}
+                        </span>
+
                     </div>
                     <div className='row'>
                         {/* <div className=" mt-2 col-md-6 " >

@@ -25,6 +25,7 @@ export default function EditDoctorProfile() {
     useEffect(() => {
         doctorInfo()
     }, [])
+    
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
     };

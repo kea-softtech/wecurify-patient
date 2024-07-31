@@ -13,6 +13,7 @@ function PatientMpin(props) {
     const { doctorId } = props
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
+    const [error, setError] = useState(false);
     const [password, setPassword] = useState("")
     const [slotItem] = useRecoilState(setSlotData)
     const { patientSignIn } = PatientApi()
@@ -23,22 +24,27 @@ function PatientMpin(props) {
     const handleMpin = (e) => {
         e.preventDefault()
         if (mobile.length < 10) {
-            setIsError('Please Enter valid mobile number.')
+            setIsError(true)
         }
         else {
             patientSignIn({ mobile, password })
                 .then(data => {
-                    if (data.data.isLoggedIn === true) {
-                        setPatientId(data.data._id)
-                        if (slotItem._id) {
-                            navigate(`/patientprofile/${data.data._id}`)
-                        } else {
-                            navigate(`/`)
+                    if (data.data) {
+                        if (data.data.isLoggedIn === true) {
+                            setPatientId(data.data._id)
+                            if (slotItem._id) {
+                                navigate(`/patientprofile/${data.data._id}`)
+                            } else {
+                                navigate(`/`)
+                            }
+                            setIsLoggedIn(data.data.isLoggedIn)
                         }
-                        setIsLoggedIn(data.data.isLoggedIn)
+                        else {
+                            setIsError(true)
+                        }
                     }
                     else {
-                        setIsError("Enter Valid Mobile number and Password")
+                        setError(true)
                     }
                 })
         }
@@ -77,15 +83,16 @@ function PatientMpin(props) {
                                     placeholder="Enter Mpin"
                                     required>
                                 </MainInput>
-                                {<span className="validation mt-2">{isError}</span>}
+                                {isError === true ? <span className="validation mb-2">Enter valid mobile number and password</span> : null}
+                                {error === true ? <span className="validation mb-2">Server error</span> : null}
                                 <div className="width50 mt-4" align="left">
                                     <Link to={`/forgetpatientmpin`}>Forgot MPIN </Link>
                                 </div>
-                                <div className="row">
-                                    <div className="mr-2 mt-2" align='right'>
+                                <div className="row" align='right'>
+                                    <div className="mr-2 mt-2" >
                                         <MainButtonInput onClick={handleMpin}>Login</MainButtonInput>
                                     </div>
-                                   <div className="mr-2 mt-2" align='right'>
+                                    <div className="mr-2 mt-2" >
                                         <SecondaryButton onClick={createMPIN}>Create Account</SecondaryButton>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { Button, Modal } from 'react-bootstrap';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
@@ -9,6 +9,8 @@ import GetDoctorData from './getDoctorData';
 import AppointmentApi from '../../services/AppointmentApi';
 import ReactPaginate from 'react-paginate';
 import Loader from './Loader';
+import { useRecoilState } from 'recoil';
+import { setDoctorId } from '../../recoil/atom/setDoctorId';
 
 export default function Ongoing(props) {
     const { patientId } = props
@@ -17,10 +19,14 @@ export default function Ongoing(props) {
     const [ongoingProduct, setOngoingProduct] = useState([]);
     const [id, setId] = useState()
     const [currentPage, setCurrentPage] = useState(1)
+    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
+    // const [day, setDay] = useRecoilState()
     const [totalPages, setTotalPages] = useState(0);
-    const { cancelPatientAppointment } = AppointmentApi()
+    const { cancelPatientAppointment, updateIncompleteStatus } = AppointmentApi()
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getPatientDetails(currentPage);
@@ -44,6 +50,21 @@ export default function Ongoing(props) {
                 const totalPages = result.totalOngoingPages;
                 setTotalPages(totalPages)
                 setPatientList(result.ongoing)
+                if (result.test) {
+                    result.test.filter((data) => {
+                        const patientAppointmentId = data._id;
+                        const currentDate = moment(new Date()).format("YYYY-MM-DD HH:MM")
+                        const slotDate = moment(data.selectedDate).format("YYYY-MM-DD") + " " + data.slotTime
+                        if (slotDate < currentDate && data.status !== "Completed" && data.status !== "Cancelled") {
+                            const bodyData = {
+                                'status': "Incomplete"
+                            }
+                            updateIncompleteStatus(patientAppointmentId, bodyData)
+                        }
+                    })
+                } else {
+                    return <div className="clinicHistory" ><b>Appointments are not Available</b></div>
+                }
             })
     }
     const handlePageClick = (data) => {
@@ -53,9 +74,13 @@ export default function Ongoing(props) {
     function cancelAppointment(id) {
         cancelPatientAppointment(id)
             .then(() => {
-                getPatientDetails()
+                getPatientDetails(currentPage)
                 handleCancelClose()
             })
+    }
+    const handleQueueClick = (details) => {
+        setDoctorsId(details.doctorId)
+        navigate(`/patientqueue/${details.clinicId}`, { state: details })
     }
 
     return (
@@ -68,7 +93,7 @@ export default function Ongoing(props) {
                 <>
                     {patientList && patientList.length > 0 ?
                         <div className='row'>
-                            { patientList.map((details, i) => {
+                            {patientList.map((details, i) => {
                                 return (
                                     <div key={i} className="col-md-4">
                                         <div className="cardDiv">
@@ -99,25 +124,34 @@ export default function Ongoing(props) {
                                                 </div>
                                             }
                                             <div className='appointmentBtn' align='right'>
-                                                {/* <Link to={`/patientqueue/${patientId}`}>
-                                        <button className="btn appColor helperBtn ">Queue</button>
-                                    </Link> */}
                                                 <Link to={`/profile/${details.doctorId}`}>
-                                                    <button className="btn appColor helperBtn ">View Profile</button>
+                                                    <button className="btn appColor helperBtn ">
+                                                        View Profile
+                                                    </button>
                                                 </Link>
+
+                                                <button
+                                                    onClick={() => handleQueueClick(details)}
+                                                    className="btn appColor helperBtn">
+                                                    Queue
+                                                </button>
+
                                                 <Link onClick={() => handleCancelShow(details)} >
-                                                    <button className='btn btn-default btnMargin ' >Cancel</button>
+                                                    <button className='btn btn-default btnMargin'>
+                                                        Cancel
+                                                    </button>
                                                 </Link>
                                             </div>
                                         </div>
-
                                     </div>
                                 )
-
                             })}
                         </div>
-                        : <div className="clinicHistory mb-3" ><b>Appointments not found please book your appoinment.</b></div>
+                        : <div className="clinicHistory mb-3" >
+                            <b>Appointments not found please book your appoinment.</b>
+                        </div>
                     }
+                    {isError === true ? <span className="validation mb-2">Server error</span> : null}
                     {patientList ?
                         <div>
                             <ReactPaginate
@@ -158,7 +192,6 @@ export default function Ongoing(props) {
                     <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
                         No
                     </Button>
-
                 </Modal.Footer>
             </Modal>
         </>

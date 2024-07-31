@@ -1,124 +1,130 @@
-import axios from "axios";
-import { API } from "../config";
 import { useEffect, useState } from "react"
 import { MainButtonInput } from "../mainComponent/mainButtonInput"
 import { MainInput } from "../mainComponent/mainInput"
-import { setPatientMedical} from "../recoil/atom/setPatientMedical";
-import { useRecoilState } from 'recoil'; 
+import { setPatientMedical } from "../recoil/atom/setPatientMedical";
+import { useRecoilState } from 'recoil';
+import PatientApi from "../services/PatientApi";
 
-function EditMedicalData(props){
-    const { medicalId} = props;
-    const [ editPatientData, setEditPatientData] = useState([])
-    const [ coilPatientMedical , setCoilPatientMedical] = useRecoilState(setPatientMedical)
+function EditMedicalData(props) {
+    const { medicalId } = props;
+    const [editPatientData, setEditPatientData] = useState([])
+    const [coilPatientMedical, setCoilPatientMedical] = useRecoilState(setPatientMedical)
+    const { getPatientData, updatePatientData } = PatientApi()
+
+    useEffect(() => {
+        fetchPatientData();
+    }, [])
 
     const handleInputChange = event => {
         const { name, value } = event.target;
-        setEditPatientData({...editPatientData ,[name]:value})
+        setEditPatientData({ ...editPatientData, [name]: value })
     };
-  
-    useEffect(()=>{
-        fetchPatientData();
-    },[])
 
-    const fetchPatientData =()=>{
-        fetch(`${API}/fetchUpdatedPatient/${medicalId}`).then(res =>{
-            if(res){
-                return res.json()
-            }
-        }).then(jsonRes => {
-            setEditPatientData(jsonRes)
-        }); 
+    const fetchPatientData = () => {
+        getPatientData(medicalId)
+            .then(jsonRes => {
+                if (jsonRes) {
+                    setEditPatientData(jsonRes)
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
+            });
     }
-    
 
-    const UpdatePatientData = async(event)=>{
+    const UpdatePatientData = async (event) => {
         event.preventDefault();
-        
-        const updateMedical ={
-            patientId:editPatientData.patientId,
-            allergies:editPatientData.allergies,
-            cmedication:editPatientData.cmedication,
-            pmedication:editPatientData.pmedication,
-            diseases:editPatientData.diseases,
-            injuries:editPatientData.injuries,
-            surgeries:editPatientData.surgeries,
+        const updateMedical = {
+            patientId: editPatientData.patientId,
+            allergies: editPatientData.allergies,
+            cmedication: editPatientData.cmedication,
+            pmedication: editPatientData.pmedication,
+            diseases: editPatientData.diseases,
+            injuries: editPatientData.injuries,
+            surgeries: editPatientData.surgeries,
         }
-        await axios.post(`${API}/updatePatientMedicalInfo/${medicalId}` , updateMedical)
-         .then((res)=>{
-                const editMedical = coilPatientMedical.map(function(e,index){
-                    if(medicalId === e._id){
-                        return res.data
-                    }else{
-                        return e
-                    }
-                })
-                setCoilPatientMedical(editMedical);
-                props.onSubmit();
+        updatePatientData(medicalId, updateMedical)
+            .then((res) => {
+                if (res) {
+                    const editMedical = coilPatientMedical.map(function (e, index) {
+                        if (medicalId === e._id) {
+                            return res.data
+                        } else {
+                            return e
+                        }
+                    })
+                    setCoilPatientMedical(editMedical);
+                    props.onSubmit();
+                }
+                else {
+                    return <span className="validation mb-2">Server error</span>
+                }
             })
     }
-    return(
+
+    return (
         <form onSubmit={UpdatePatientData} id={"updateData"}>
             <div className="row">
                 <div className="col-md-6 ">
-                <label><b>Allergies</b></label>
-                    <MainInput 
-                        type="text" 
-                        name="Allergies" 
+                    <label><b>Allergies</b></label>
+                    <MainInput
+                        type="text"
+                        name="Allergies"
                         value={editPatientData.allergies}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="Allergies">
                     </MainInput>
                 </div>
                 <div className="col-md-6 ">
-                <label><b>Current Medication</b></label>
-                    <MainInput 
-                        type="text" 
-                        name="cmedication" 
+                    <label><b>Current Medication</b></label>
+                    <MainInput
+                        type="text"
+                        name="cmedication"
                         value={editPatientData.cmedication}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="cmedication">
                     </MainInput>
-                </div>  
+                </div>
                 <div className="col-md-12 ">
                     <label><b>Past Medication</b></label>
-                    <MainInput 
-                        type="text" 
-                        name="pmedication" 
+                    <MainInput
+                        type="text"
+                        name="pmedication"
                         value={editPatientData.pmedication}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="pmedication">
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                <label><b> Chronic Diseases</b></label>
-                    <MainInput 
-                        type="text" 
-                        name="diseases" 
+                    <label><b> Chronic Diseases</b></label>
+                    <MainInput
+                        type="text"
+                        name="diseases"
                         value={editPatientData.diseases}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="diseases">
                     </MainInput>
-                </div>  
+                </div>
                 <div className="col-lg-12">
                     <label><b>Injuries</b></label>
-                    <MainInput 
-                        type="text" 
-                        name="injuries" 
+                    <MainInput
+                        type="text"
+                        name="injuries"
                         value={editPatientData.injuries}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="injuries">
                     </MainInput>
-                </div>  
+                </div>
                 <div className="col-lg-12">
                     <label><b>Surgeries</b></label>
                     <MainInput
-                        type="text" 
-                        name="surgeries" 
+                        type="text"
+                        name="surgeries"
                         value={editPatientData.surgeries}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         placeholder="surgeries">
                     </MainInput>
-                </div>  
+                </div>
             </div>
             <div className="text-center add_top_30">
                 <MainButtonInput>Save</MainButtonInput>
@@ -126,4 +132,4 @@ function EditMedicalData(props){
         </form>
     )
 }
-export {EditMedicalData}
+export { EditMedicalData }
