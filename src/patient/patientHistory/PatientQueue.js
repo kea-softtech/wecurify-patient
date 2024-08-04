@@ -75,7 +75,7 @@ export default function PatientQueue() {
                     </div>
                 </div>
             </div>
-            <div className="stepper">
+            {/* <div className="stepper">
                 {selectedSlots.map((step, index) => {
                     return (
                         <div key={index}>
@@ -90,8 +90,8 @@ export default function PatientQueue() {
                         </div>
                     )
                 })}
-            </div>
-           
+            </div> */}
+
         </Wrapper >
     )
 }

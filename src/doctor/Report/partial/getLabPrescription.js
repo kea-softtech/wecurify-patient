@@ -4,7 +4,7 @@ import ReportApi from '../../../services/ReportApi';
 export default function GetLabPrescription(props) {
     const { reportId } = props;
     const { getLabTestPrescriptionData } = ReportApi();
-    const [getLabData, setGetLabData] = useState([]);
+    const [getLabData, setGetLabData] = useState(null);
 
     useEffect(() => {
         getLabPrescriptionData()
@@ -24,7 +24,7 @@ export default function GetLabPrescription(props) {
     return (
         <>
             {
-                getLabData.length > 0 ?
+                getLabData && getLabData.length > 0 ?
                     <div className='viewMreport' align='left'>
                         <h6> <b>List of Test</b></h6>
                         {getLabData && getLabData.map((item, i) => {
