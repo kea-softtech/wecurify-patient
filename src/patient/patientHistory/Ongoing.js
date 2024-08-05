@@ -20,7 +20,6 @@ export default function Ongoing(props) {
     const [id, setId] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
-    // const [day, setDay] = useRecoilState()
     const [totalPages, setTotalPages] = useState(0);
     const { cancelPatientAppointment, updateIncompleteStatus } = AppointmentApi()
     const { getpaymentData } = PatientApi()
@@ -148,7 +147,7 @@ export default function Ongoing(props) {
                             })}
                         </div>
                         : <div className="clinicHistory mb-3" >
-                            <b>Appointments not found please book your appoinment.</b>
+                            <b>Appointments not found please book your appoitnment.</b>
                         </div>
                     }
                     {isError === true ? <span className="validation mb-2">Server error</span> : null}

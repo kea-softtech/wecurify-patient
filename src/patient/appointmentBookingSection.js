@@ -9,7 +9,7 @@ import { Wrapper } from "../mainComponent/Wrapper";
 
 function AppointmentBookingSection() {
     const { doctorId } = useParams()
-    const [clinicData, setClinicData] = useState([])
+    const [clinicData, setClinicData] = useState(null)
     const [doctorName, setDoctorName] = useState([])
     const { getDrInfo } = AuthApi()
 
@@ -20,8 +20,13 @@ function AppointmentBookingSection() {
     function doctorData() {
         getDrInfo({ doctorId })
             .then((res) => {
-                setDoctorName(res.result[0])
-                setClinicData(res.result[0].clinicList)
+                if (res.result) {
+                    setDoctorName(res.result[0])
+                    setClinicData(res.result[0].clinicList)
+                } else {
+                    <div align='center' className="validation mb-2">Server error</div>
+                }
+
             })
     }
     return (
@@ -41,15 +46,17 @@ function AppointmentBookingSection() {
             </MainNav>
             <div className='wraper row'>
                 <div className="full-width">
-                        <div className="common_box booking">
+                    <div className="common_box booking">
+                        {clinicData && clinicData.length > 0 ?
                             <div>
-                                {clinicData.map((clinicItem, id) => (
+                                {clinicData && clinicData.map((clinicItem, id) => (
                                     <MainAccordion key={id} icon={<FaClinicMedical />} title={clinicItem.clinicName}>
                                         <DoctorAppointmentType clinicData={clinicItem} doctorId={doctorId} />
                                     </MainAccordion>
                                 ))}
                             </div>
-                        </div>
+                            : <div className="servererror" align='center'>Server error</div>}
+                    </div>
                 </div>
             </div>
         </Wrapper>

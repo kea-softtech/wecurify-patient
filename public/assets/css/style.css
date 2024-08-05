@@ -271,7 +271,10 @@ strong {
 	align-items: center;
 	margin-bottom: 20px;
 }
-
+.servererror{
+	color: red;
+	font-size: large;
+}
 .step {
 	display: flex;
 	flex-direction: column;

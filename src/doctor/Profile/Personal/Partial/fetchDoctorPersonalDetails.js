@@ -55,7 +55,7 @@ function FetchDoctorPersonalDetails() {
                     </div>
                     :
                     <>
-                        <div className="common_box p-2">
+                        <div className="common_box p-2 wraper">
                             <div className="white-box pb-5 ">
                                 <div className="profile"  >
                                     <div className="row" key={fetchPersonalData.id}>
@@ -66,7 +66,7 @@ function FetchDoctorPersonalDetails() {
                                                 className='doctorPic borderRadius'
                                             />
                                         </div>
-                                        <div className=" col-md-6" >
+                                        <div className=" col-md-6" align='left' >
                                             <h1>Dr. {fetchPersonalData.name}</h1>
                                             <div className="contacts">
                                                 <address>

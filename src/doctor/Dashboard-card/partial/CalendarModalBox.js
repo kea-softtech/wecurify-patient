@@ -67,10 +67,10 @@ function CalendarModalBox(props) {
                         {AppointmentData.patientName}
                     </div>
                  
-                    {appointmentDetails.status !== "Cancelled" ?
+                    {appointmentDetails.status === "Ongoing"   ?
                         <span>
                             <Link onClick={handleCancelShow}>
-                                <button className="btn appColor modalbtn ">Cancel</button>
+                                <button className="btn appColor modalbtn ">Cancel Appointment</button>
                             </Link>
                         </span>
                         : null}
