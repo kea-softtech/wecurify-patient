@@ -10,6 +10,9 @@ import { setSessionData } from "../recoil/atom/setSessionData";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
+import { Modal } from "react-bootstrap";
+import { PatientMpin } from "./patientMpin/PatientMpin";
+import { PatientLoginMpin } from "./patientMpin/PatientLoginMpin";
 
 const ShowInClinicAppointSlots = (props) => {
     const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
@@ -18,6 +21,7 @@ const ShowInClinicAppointSlots = (props) => {
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [loggedIn] = useRecoilState(setloggedIn)
+    const [show, setShow] = useState(false);
     const [bookingSlots, setBookingSlots] = useState([]);
     const { getbookedSlots } = PatientApi();
     const data = props;
@@ -29,17 +33,20 @@ const ShowInClinicAppointSlots = (props) => {
         setDoctorsId(doctorsId)
     }, [props])
 
+    const handleshow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
     const handleShow = (item) => {
         setSlotItem('')
         setSlotItem(item)
         if (loggedIn !== true) {
-            navigate(`/patient`)
+            setShow(true)
+            // navigate(`/patient`)
         } else {
             navigate(`/patientprofile/${patientData}`)
         }
-        
     }
-  
+
     const checkSlotAvailability = (slot) => {
         const currentDate = moment(new Date()).format("YYYY-MM-DD HH:mm")
         const slotDateTime = moment(new Date(selectedDate)).format("YYYY-MM-DD") + " " + slot.time
@@ -95,7 +102,14 @@ const ShowInClinicAppointSlots = (props) => {
                     ))}
                 </section>
             </div >
-
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Login to wecurify</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <PatientLoginMpin onSubmit={handleClose} />
+                    </Modal.Body>
+                </Modal>
         </>
     )
 }

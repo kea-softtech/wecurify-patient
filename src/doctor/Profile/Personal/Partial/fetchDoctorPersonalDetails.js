@@ -13,9 +13,10 @@ function FetchDoctorPersonalDetails() {
     const { getDrInfo } = AuthApi()
     const [fetchPersonalData, setFetchPersonalData] = useState([])
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
+    console.log(patientId, '========')
     const [isLoading, setIsLoading] = useState(true);
 
- 
+
     useEffect(() => {
         getDoctorPersonalDetails();
     }, [])
@@ -23,7 +24,7 @@ function FetchDoctorPersonalDetails() {
     setTimeout(() => {
         setIsLoading(false);
     }, 2000);
-    
+
     const getDoctorPersonalDetails = () => {
         getDrInfo({ doctorId })
             .then((result) => {
@@ -36,9 +37,13 @@ function FetchDoctorPersonalDetails() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/patientappointment/${patientId}`}>
-                            <i className="arrow_back backArrow" title="back button"></i>
-                        </Link>
+                        {patientId ?
+                            <Link to={`/patientappointment/${patientId}`}>
+                                <i className="arrow_back backArrow" title="back button"></i>
+                            </Link> :
+                            <Link to={`/doctors`}>
+                                <i className="arrow_back backArrow" title="back button"></i>
+                            </Link>}
                         <span to="#section_1" className="active ml-2">
                             Doctor Information
                         </span>

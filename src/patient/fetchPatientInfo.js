@@ -25,6 +25,7 @@ function FetchPatientInfo(props) {
     function getAllPatientData() {
         fetchPatient({ patientId })
             .then(response => {
+                console.log('response-----', response)
                 setFetchPatientData(response[0])
             })
     }

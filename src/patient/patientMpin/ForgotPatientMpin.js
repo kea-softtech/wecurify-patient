@@ -37,7 +37,6 @@ export default function ForgotPatientMpin() {
 
     return (
         <Wrapper>
-            <div className=" ">
                 <div className="full-width common_box">
                     <div className="bg_color_2">
                         <div className="container margin_60_35">
@@ -63,19 +62,13 @@ export default function ForgotPatientMpin() {
                                                 {isLoggedIn === true ?
                                                     <ForgotMpin doctorId={doctorId} patientId={patientId} mobile={mobile} /> :
                                                     <>
-                                                        {/* {isError === true ? */}
-                                                            <span className="validation mb-2 mr-3">{isError}</span>
-                                                            {/* : null} */}
-                                                        {/* {isError === true ?
-                                                            <div className="validation mb-2 mr-3" align='right'>Server Error</div>
-                                                            : null} */}
+                                                        <span className="validation mb-2 mr-3">{isError}</span>
                                                         <div align='left' className="ml-3" >
                                                             <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                                                         </div>
                                                     </>
                                                 }
                                             </div>
-
                                         </div>
                                     </div>
                                 </form>
@@ -83,7 +76,6 @@ export default function ForgotPatientMpin() {
                         </div>
                     </div>
                 </div>
-            </div>
         </Wrapper>
     )
 }

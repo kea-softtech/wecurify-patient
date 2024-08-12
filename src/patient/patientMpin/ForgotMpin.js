@@ -7,7 +7,6 @@ import PatientApi from "../../services/PatientApi";
 function ForgotMpin(props) {
     const { doctorId, mobile } = props;
     const [password, setPassword] = useState('');
-    console.log('------', password.length)
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState(false);
@@ -53,7 +52,7 @@ function ForgotMpin(props) {
                 <MainInput
                     type="password"
                     name="password"
-                    MaxLength={6}
+                    maxLength={6}
                     pattern="[+-]?\d+(?:[.,]\d+)?"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm MPIN"

@@ -15,7 +15,7 @@ import Loader from '../../patient/patientHistory/Loader';
 export default function ViewMedicalReport() {
     const { reportId } = useParams();
     const { getMedicineReport } = ReportApi();
-    const { patientDetailsData } = PatientApi();
+    const { fetchPatient } = PatientApi();
     const [viewData, setViewData] = useState([]);
     const [patientData, setPatientData] = useRecoilState(setNewPatientId);
     const [patientDetails, setPatientDetails] = useState([]);
@@ -35,7 +35,7 @@ export default function ViewMedicalReport() {
                 if (res[0]) {
                     setViewData(res[0])
                     const patientId = res[0].patientId
-                    patientDetailsData({ patientId })
+                    fetchPatient({ patientId })
                         .then((response) => {
                             setPatientDetails(response[0])
                         })

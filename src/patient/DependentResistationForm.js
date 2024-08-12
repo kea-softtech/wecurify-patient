@@ -4,15 +4,10 @@ import { MainInput } from "../mainComponent/mainInput";
 import { MainButtonInput } from "../mainComponent/mainButtonInput";
 import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { setDependentId } from "../recoil/atom/setDependentId";
-import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 function DependentRegistationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState(null)
-    // const [dependentId, setDependentsId] = useRecoilState(setDependentId)
-    const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [dependentData, setDependentData] = useState([])
     const {fetchPatient, AddDependents } = PatientApi()
     const navigate = useNavigate();

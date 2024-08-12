@@ -10,7 +10,7 @@ import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
     const [fetchPatientData] = useRecoilState(setPatientProfileData)
-    console.log('======',fetchPatientData.dependent)
+    console.log('======',fetchPatientData)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);

@@ -58,15 +58,15 @@ export default function PatientApi() {
             return err
         }
     }
-    const patientDetailsData = async ({ patientId }) => {
-        try {
-            const result = await axios.get(`${API}/patientById/${patientId}`)
-            return result.data
-        }
-        catch (err) {
-            return err
-        }
-    }
+    // const patientDetailsData = async ({ patientId }) => {
+    //     try {
+    //         const result = await axios.get(`${API}/patientById/${patientId}`)
+    //         return result.data
+    //     }
+    //     catch (err) {
+    //         return err
+    //     }
+    // }
     const loginPatient = async ({ mobile, password }) => {
         try {
             const result = await axios.post(`${API}/patientLogin`, { mobile, password })
@@ -206,7 +206,7 @@ export default function PatientApi() {
         getpaymentData,
         getAllPatient,
         fetchPatient,
-        patientDetailsData,
+        // patientDetailsData,
         loginPatient,
         patientSignUp,
         patientSignIn,

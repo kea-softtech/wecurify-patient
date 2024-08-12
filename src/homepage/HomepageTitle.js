@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import PatientCards from "../patient/PatientCards";
 import { useRecoilState } from "recoil";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { Button } from "react-bootstrap";
+import { setNewPatientId } from "../recoil/atom/setNewPatientId";
+import PatientApi from "../services/PatientApi";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
+    const [patientId, setPatientId] = useRecoilState(setNewPatientId)
+    const [patientData, setPatientData] = useState(null)
+    const { fetchPatient } = PatientApi()
 
+    useEffect(() => {
+        getAllPatientData()
+    }, [])
+
+    function getAllPatientData() {
+        fetchPatient({ patientId })
+            .then((response) => {
+                if (response[0]) {
+                    setPatientData(response[0])
+                }
+            })
+    }
     return (
         <div className="container margin_120_95">
             <div className="row">
