@@ -10,10 +10,10 @@ export default function PatientCards() {
 
     return (
         <div className="full-width mt-4">
-            <div className="">
+            <div className="wraper">
                 {/* <div className="row"> */}
                 <div className="row add_bottom_30">
-                    <div className="col-lg-4">
+                    <div className="col-4">
                         <div className="hoverBox ">
                             <Link to={`/patientappointment/${patientData}`}>
                                 <img className="patientImg" src={application} alt="not found" />
@@ -22,7 +22,7 @@ export default function PatientCards() {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-4">
                         <div className="hoverBox">
                             <Link to={`/fetchpatientprofile/${patientData}`}>
                                 <img className="patientImg" src={doctorprofile} alt="not found" />
@@ -31,7 +31,7 @@ export default function PatientCards() {
                             </Link>
                         </div>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-4">
                         <div className="hoverBox" >
                             <Link to={`/calender/${patientData}`}>
                                 <img className="patientImg " src={calender} alt="not found" />
