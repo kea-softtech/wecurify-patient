@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate, } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import appLogo from '../../src/img/small_wecurify.png'
 import { setloggedIn } from "../recoil/atom/setloggedIn";
@@ -17,16 +17,21 @@ export default function Header() {
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loggedIn === false) {
+            navigate("/");
+        }
+    }, [loggedIn])
 
     const handleLogout = () => {
         setDoctor("")
-        setLoggedIn('')
+        setLoggedIn(false)
         setPatientId('')
         setSlotItem('')
         setSessionsData('')
         setFetchPatientData('')
-        navigate("/")
     }
 
     return (
@@ -42,7 +47,7 @@ export default function Header() {
                     </div>
                     <div className="width70">
                         <nav id="menu" className="main-menu">
-                            {loggedIn === true ?
+                            {loggedIn ?
                                 <li className="fontSize"><Link onClick={handleLogout} ><b>Logout </b></Link></li>
                                 :
                                 <li className="fontSize"><Link to="/patient"><b>Login </b></Link></li>

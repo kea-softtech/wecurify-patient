@@ -11,7 +11,7 @@ import Loader from "../../patient/patientHistory/Loader";
 
 export default function DoctorList() {
     const [doctorData, setDoctorData] = useState(null);
-    const [filterData, setFilterData] = useState([]);
+    const [filterData, setFilterData] = useState(null);
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -32,12 +32,12 @@ export default function DoctorList() {
     const getDoctorList = () => {
         getdoctors(currentPage, pageSize, key)
             .then((result) => {
-                if(result){
+                if (result) {
                     setFilterData(result.doctorList)
                     setDoctorData(result.doctorList)
                     setTotalPages(result.doctorListPages)
                 }
-                else{
+                else {
                     return <span className="validation mb-2">Server error</span>
                 }
             })
@@ -100,7 +100,7 @@ export default function DoctorList() {
                             </div>
                             :
                             <>
-                                {doctorData ?
+                                {doctorData && doctorData.length>0 ?
                                     <div className='row '>
                                         {doctorData && doctorData.map((details, i) => {
                                             return (

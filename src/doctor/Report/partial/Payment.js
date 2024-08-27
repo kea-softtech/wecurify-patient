@@ -117,7 +117,7 @@ export default function Payment(props) {
                         <label className='totalFees'><b>Total</b></label>
                     </div>
                 </div>
-                <div className='width_50'>
+                <div className='width50'>
                     <div className=' paymentInput'>
                         <span className=" totalInput ">{patientFees}</span>
                     </div>

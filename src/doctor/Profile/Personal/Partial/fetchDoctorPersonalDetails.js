@@ -13,7 +13,6 @@ function FetchDoctorPersonalDetails() {
     const { getDrInfo } = AuthApi()
     const [fetchPersonalData, setFetchPersonalData] = useState([])
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
-    console.log(patientId, '========')
     const [isLoading, setIsLoading] = useState(true);
 
 

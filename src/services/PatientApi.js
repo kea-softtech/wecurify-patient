@@ -30,6 +30,17 @@ export default function PatientApi() {
             return err
         }
     };
+
+    const PatientForgetMpin = async (bodyData) => {
+        try {
+            const result = await axios.post(`${API}/patientforgetmpin`, bodyData)
+            return result
+        }
+        catch (err) {
+            return err;
+        }
+    };
+
     // fetch patientList after payment
     const getpaymentData = async ({ patientId }, currentPage, pageSize) => {
         try {
@@ -76,9 +87,18 @@ export default function PatientApi() {
             return err;
         }
     };
-    const patientSignUp = async ({ mobile, password }) => {
+    const validLoginPatient = async ({ mobile }) => {
         try {
-            const result = await axios.post(`${API}/patientsignup`, { mobile, password })
+            const result = await axios.post(`${API}/forgetmpinpatientlogin`, { mobile })
+            return result
+        }
+        catch (err) {
+            return err;
+        }
+    };
+    const patientSignUp = async (bodyData) => {
+        try {
+            const result = await axios.post(`${API}/patientsignup`, bodyData)
             return result
         }
         catch (err) {
@@ -87,7 +107,7 @@ export default function PatientApi() {
                 message: err.message
             }
         }
-        
+
     };
     const patientSignIn = async ({ mobile, password }) => {
         try {
@@ -180,7 +200,7 @@ export default function PatientApi() {
             return err
         }
     }
-    const updatePatientData = async (medicalId,updateMedical) => {
+    const updatePatientData = async (medicalId, updateMedical) => {
         try {
             const result = await axios.post(`${API}/updatePatientMedicalInfo/${medicalId}`, updateMedical)
             return result
@@ -220,7 +240,9 @@ export default function PatientApi() {
         fetchUpdatePatientLifestyle,
         AddDependents,
         getPatientData,
-        updatePatientData
+        updatePatientData,
+        validLoginPatient,
+        PatientForgetMpin
     }
 
 

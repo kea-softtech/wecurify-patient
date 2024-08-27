@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { MainInput } from "../../mainComponent/mainInput";
 import { useRecoilState } from "recoil";
 import { Wrapper } from "../../mainComponent/Wrapper";
-import { ForgotMpin } from "./ForgotMpin";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
+import { ShowPatientOtp } from "./ShowPatientOtp";
+import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 
 export default function ForgotPatientMpin() {
-    const { patientId } = useParams()
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
-    // const [error, setError] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState('');
+    const [loginData, setLoginData] = useState([])
+    const { validLoginPatient } = PatientApi();
+    const [showOTP, setShowOTP] = useState(false);
     const [doctorId, setdoctorId] = useRecoilState(setDoctorId);
-    const { loginPatient } = PatientApi();
+    const [patientId, setPatientId] = useRecoilState(setNewPatientId);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,59 +23,66 @@ export default function ForgotPatientMpin() {
             setIsError("Mobile number must have 10 number")
         }
         else {
-            loginPatient({ mobile })
+            validLoginPatient({ mobile })
                 .then(response => {
-                    if (response.data) {
-                        setIsLoggedIn(response.data.isLoggedIn)
+                    if (response.data.isLoggedIn === true) {
+                        setPatientId(response.data._id)
+                        alert(response.data.otp)
+                        setIsError(false)
                     }
                     else {
-                        setIsError('Server Error')
+                        setIsError(true)
                     }
+                    let item = response.data
+                    setLoginData(item)
+                    setShowOTP(true)
                 })
         }
     };
 
     return (
         <Wrapper>
-                <div className="full-width common_box">
-                    <div className="bg_color_2">
-                        <div className="container margin_60_35">
-                            <div id="login-2">
-                                <h1>Reset Password</h1>
-                                <form >
-                                    <div className="box_form clearfix">
-                                        <div className="box_login last">
-                                            <div className="">
-                                                <label className='mb-2 ml-3'>Mobile Number</label>
-                                                <div className="mr-2 col-md-12">
-                                                    <MainInput
-                                                        name="mobile"
-                                                        value={mobile.mobile}
-                                                        type="text"
-                                                        maxLength={10}
-                                                        minLength={10}
-                                                        pattern="[+-]?\d+(?:[.,]\d+)?"
-                                                        onChange={(e) => setMobile(e.target.value)}
-                                                        placeholder="Phone Number (+XX)" >
-                                                    </MainInput>
+            <div className=" common_box">
+                <div className="bg_color_2">
+                    <div className="container margin_60_35">
+                        <div id="login-2">
+                            <h1>Reset Password</h1>
+                            <form >
+                                <div className="clearfix">
+                                    <div className=" last">
+                                        <label className='mb-2'>Mobile Number</label>
+                                            <MainInput
+                                                name="mobile"
+                                                value={mobile.mobile}
+                                                type="text"
+                                                maxLength={10}
+                                                minLength={10}
+                                                pattern="[+-]?\d+(?:[.,]\d+)?"
+                                                onChange={(e) => setMobile(e.target.value)}
+                                                placeholder="Phone Number (+XX)" >
+                                            </MainInput>
+                                        {showOTP === true ?
+                                            <ShowPatientOtp
+                                                doctorId={doctorId}
+                                                patientId={patientId}
+                                                loginData={loginData}
+                                                mobile={mobile}
+                                            />
+                                            :
+                                            <>
+                                                <span className="validation mb-2 ">{isError}</span>
+                                                <div align='left' >
+                                                    <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                                                 </div>
-                                                {isLoggedIn === true ?
-                                                    <ForgotMpin doctorId={doctorId} patientId={patientId} mobile={mobile} /> :
-                                                    <>
-                                                        <span className="validation mb-2 mr-3">{isError}</span>
-                                                        <div align='left' className="ml-3" >
-                                                            <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
-                                                        </div>
-                                                    </>
-                                                }
-                                            </div>
-                                        </div>
+                                            </>
+                                        }
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
         </Wrapper>
     )
 }

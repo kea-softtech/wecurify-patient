@@ -58,7 +58,7 @@ function HomePageTitle() {
                     </div>
                 }
             </div>
-            <div className="row add_bottom_30">
+            <div className="row wraper add_bottom_30">
                 {loggedIn !== true ?
                     <>
                         <div className="col-4">

@@ -10,7 +10,6 @@ import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
     const [fetchPatientData] = useRecoilState(setPatientProfileData)
-    console.log('======',fetchPatientData)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
@@ -60,7 +59,7 @@ export default function GetDependent(props) {
     }
     return (
         <>
-            {fetchPatientData["dependent"]?
+            {fetchPatientData["dependent"] && fetchPatientData["dependent"].length > 0 ?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
                         <>
@@ -70,7 +69,7 @@ export default function GetDependent(props) {
                                 </div>
                             </div>
                             <div className="patientDataStyle">
-                                {fetchPatientData["dependent"].map((item, i) => {
+                                {fetchPatientData["dependent"]&&fetchPatientData["dependent"].map((item, i) => {
                                     return (
                                         <div key={i} className="row">
                                             <div className='col-md-7'>

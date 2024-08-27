@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import DoctorProfile from "./doctor/Profile/DoctorProfile";
 import PatientMedicalReport from "./doctor/Report/PatientMedicalReport";
 import User from "./user";
 import ViewMedicalReport from './doctor/Report/ViewMedicalReport';
@@ -21,10 +20,10 @@ import ClinicInto from "./doctor/Profile/Appointment/ClinicInfo";
 import Calender from "./doctor/Dashboard-card/Calender";
 import PatientQueue from "./patient/patientHistory/PatientQueue";
 import AddDependent from "./patient/AddDependent";
-import {FetchDoctorPersonalDetails} from './doctor/Profile/Personal/Partial/fetchDoctorPersonalDetails'
-import CreatePatientMpin from "./patient/patientMpin/CreatePatientMpin";
+import { FetchDoctorPersonalDetails } from './doctor/Profile/Personal/Partial/fetchDoctorPersonalDetails'
 import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
 import FetchPatientProfile from "./patient/FetchPatientProfile";
+import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -33,14 +32,14 @@ function MainContainer() {
     <Routes>
       <Route exact path="/" element={<Home />} />
       <Route path="/patient" element={<LoginPatient />} />
-      <Route path="/createpatientmpin" element={<CreatePatientMpin /> } />
-      <Route path="/forgetpatientmpin" element={<ForgotPatientMpin /> } />
+      <Route path="/createpatientmpin" element={<CreatePatientLogin />} />
+      <Route path="/forgetpatientmpin" element={<ForgotPatientMpin />} />
       <Route path="/createprofile/:patientId" element={<CreatePatientProfile />} />
       <Route path="/patientprofile/:patientId" element={<GetLoginPatientProfile />} />
       <Route path="/confirm" element={<SlotConfirmation />} />
       <Route path="/doctors" element={<DoctorList />} />
       <Route path="/booking/:doctorId" element={<AppointmentBookingSection />} />
-      <Route path="/profile/:doctorId" element={<FetchDoctorPersonalDetails/>} />
+      <Route path="/profile/:doctorId" element={<FetchDoctorPersonalDetails />} />
       <Route path="/clinicinfo/:clinicId" element={<ClinicInto />} />
       <Route path="/calender/:patientId" element={<Calender />} />
       <Route path="/patientqueue/:clinicId" element={<PatientQueue />} />
@@ -50,7 +49,7 @@ function MainContainer() {
       {/* <Route path="appointment/:doctorId" >
         <Route index element={<PatientAppointment />} />
       </Route> */}
-        <Route path="consultation/:reportId" element={<PatientMedicalReport />} />
+      <Route path="consultation/:reportId" element={<PatientMedicalReport />} />
 
       <Route path="/patientappointment/:patientId" element={loggedIn ? <PatientHistory /> : null} />
       <Route path="/patientinfo/:patientId" element={loggedIn ? <PatientProfile /> : null} />

@@ -4101,7 +4101,7 @@ input[type="radio"]:checked + label {
 } */
 .box_general_4 {
 	background-color: #fff;
-	padding: 30px;
+	padding: 15px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	border: 1px solid var(--borderColor);
@@ -4221,9 +4221,16 @@ input[type="radio"]:checked + label {
 }
 
 #login-2 {
-	width: 300px;
+	width: 30%;
+    margin: 60px auto;
+    padding: 1rem;
+    border: 1px solid #dedede;
+    /* color: #fff; */
+    background: #fefefe;
+	text-align: left;
+	/* width: 300px;
 	margin: 60px auto;
-	color: #fff;
+	color: #fff; */
 }
 
 #login-2 .box_form {
@@ -4338,7 +4345,8 @@ input[type="radio"]:checked + label {
 	font-size: 28px;
 	font-size: 1.75rem;
 	margin: 0 0 30px;
-	color: #fff;
+	color: var(--appColor);
+	text-align: left;
 }
 
 .box_login {

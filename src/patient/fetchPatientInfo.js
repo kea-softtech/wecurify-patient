@@ -25,7 +25,6 @@ function FetchPatientInfo(props) {
     function getAllPatientData() {
         fetchPatient({ patientId })
             .then(response => {
-                console.log('response-----', response)
                 setFetchPatientData(response[0])
             })
     }
@@ -34,10 +33,6 @@ function FetchPatientInfo(props) {
         setSlotItem('')
         setShow(true)
         setSlotItem(item)
-    }
-
-    const handleDependent = () => {
-        navigate(`/adddependent/${patientId}`)
     }
 
     const handleClose = () => {
@@ -103,14 +98,11 @@ function FetchPatientInfo(props) {
                         {fetchPatientData.email}
                     </div>
                     <div className='row'>
-                        <div className=" mt-2 col-md-6 " >
-                            <Button onClick={() => handleShow(slotItem)} className="radius btn-home button_responsive buttonPatient appColor">
+                        <div className="mr-2   ml-1" >
+                            <Button
+                             onClick={() => handleShow(slotItem)} 
+                             className="radius  buttonPatient appColor">
                                 Book Appointment
-                            </Button>
-                        </div>
-                        <div className=" mt-2 col-md-6 " >
-                            <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
-                                Add Dependent
                             </Button>
                         </div>
                     </div>

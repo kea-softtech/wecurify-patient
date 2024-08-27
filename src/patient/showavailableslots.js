@@ -107,7 +107,8 @@ const ShowInClinicAppointSlots = (props) => {
                     <Modal.Title>Login to wecurify</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <PatientLoginMpin onSubmit={handleClose} />
+                        <PatientLoginMpin 
+                        onSubmit={handleClose} />
                     </Modal.Body>
                 </Modal>
         </>

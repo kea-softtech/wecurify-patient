@@ -13,7 +13,7 @@ import ForgotPatientLoginMpin from "./ForgotPatientLoginMpin";
 import CreatePatientLoginMpin from "./CreatePatientLoginMpin";
 
 function PatientLoginMpin(props) {
-    const { doctorId } = props
+    const { doctorId, onSubmit } = props
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState(false);
@@ -26,8 +26,10 @@ function PatientLoginMpin(props) {
     const [createShow, setCreateShow] = useState(false);
     const navigate = useNavigate();
 
-    const handleshow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const handleForgotShow = () => {
+        setShow(true);
+    }
+    const handleForgotClose = () => setShow(false);
 
     const handleCreateshow = () => setCreateShow(true);
     const handleCreateClose = () => setCreateShow(false);
@@ -61,10 +63,6 @@ function PatientLoginMpin(props) {
         }
     }
 
-    const createMPIN = () => {
-        navigate(`/createpatientmpin`)
-    }
-
     return (
         <div>
             <form>
@@ -93,7 +91,7 @@ function PatientLoginMpin(props) {
                         {isError === true ? <span className="validation mb-2">Enter valid mobile number and password</span> : null}
                         {error === true ? <span className="validation mb-2">Server error</span> : null}
                         <div className="width50 mt-4" align="left">
-                            <Link onClick={handleshow}>Forgot MPIN </Link>
+                            <Link onClick={handleForgotShow}>Forgot MPIN </Link>
                         </div>
                         <div className="row" align='right'>
                             <div className="mr-2 mt-2" >
@@ -106,20 +104,24 @@ function PatientLoginMpin(props) {
                     </div>
                 </div>
             </form>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleForgotClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login to wecurify</Modal.Title>
+                    <Modal.Title>Reset Mpin</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ForgotPatientLoginMpin onSubmit={handleClose} />
+                    <ForgotPatientLoginMpin
+                        patientId={patientId}
+                        onSubmit={handleForgotClose} />
                 </Modal.Body>
             </Modal>
             <Modal show={createShow} onHide={handleCreateClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login to wecurify</Modal.Title>
+                    <Modal.Title>Create Account</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreatePatientLoginMpin onSubmit={handleClose} />
+                    <CreatePatientLoginMpin
+                        patientId={patientId}
+                        onSubmit={handleForgotClose} />
                 </Modal.Body>
             </Modal>
         </div>

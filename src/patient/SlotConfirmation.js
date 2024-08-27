@@ -50,9 +50,6 @@ export default function SlotConfirmation() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/patientprofile/${patientId}`}>
-                            <i className="arrow_back backArrow" title="back button"></i>
-                        </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Booking Confirmation</span>
                     </div>
                     <div className="width50 row justifyContent">

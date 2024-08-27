@@ -24,7 +24,6 @@ function PatientInformationData(props) {
             })
     }
 
-
     return (
         <div className="mt-3">
             <div className="box_general_4 col-md-8">

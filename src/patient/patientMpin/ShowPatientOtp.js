@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { MainButtonInput } from "../mainComponent/mainButtonInput";
-import { MainInput } from "../mainComponent/mainInput";
-import { setNewPatientId } from "../recoil/atom/setNewPatientId";
-import { useRecoilState } from "recoil";
-import PatientApi from "../services/PatientApi";
-import CreatePatientMpin from "./patientMpin/CreatePatientMpin";
+import { Outlet } from "react-router-dom";
+import { MainButtonInput } from "../../mainComponent/mainButtonInput";
+import { MainInput } from "../../mainComponent/mainInput";
+import PatientApi from "../../services/PatientApi";
+import { ForgotMpin } from "./ForgotMpin";
 
-function LoginPatientOtp(props) {
-    const { patientId, loginData } = props;
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId);
+function ShowPatientOtp(props) {
+    const { loginData, patientId, doctorId } = props;
     const [loginotp, setLoginOtp] = useState('');
     const [data, setData] = useState(false)
     const getOTP = loginData.otp
@@ -20,7 +17,6 @@ function LoginPatientOtp(props) {
         e.preventDefault();
         patientLoginOtp({ otp: loginotp, _id: patientId })
             .then((response) => {
-                setPatientData(patientId)
                 if (getOTP !== loginotp) {
                     setErrormessage("Please Enter Valid OTP");
                 } else {
@@ -29,11 +25,18 @@ function LoginPatientOtp(props) {
             })
     }
     return (
+
         <>
             <div className="row">
-                {getOTP === loginotp && data === true ? <CreatePatientMpin loginData={loginData} /> :
+                {getOTP === loginotp && data === true ?
+                    <ForgotMpin
+                        doctorId={doctorId}
+                        mobile={loginData.mobile}
+                        loginData={loginData}
+                    />
+                    :
                     <>
-                        <div className="width_35">
+                        <div className="width_30">
                             <MainInput
                                 type="text"
                                 name="otp"
@@ -52,6 +55,5 @@ function LoginPatientOtp(props) {
             <Outlet />
         </>
     )
-
 }
-export { LoginPatientOtp }
+export { ShowPatientOtp }

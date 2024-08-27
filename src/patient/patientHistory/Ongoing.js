@@ -45,7 +45,6 @@ export default function Ongoing(props) {
     function getPatientDetails(currentPage) {
         getpaymentData({ patientId }, currentPage, pageSize)
             .then((result) => {
-                console.log('-------', result)
                 setOngoingProduct(result.ongoingProduct)
                 const totalPages = result.totalOngoingPages;
                 setTotalPages(totalPages)
@@ -93,10 +92,9 @@ export default function Ongoing(props) {
                 <>
                     {patientList && patientList.length > 0 ?
                         <div className='row'>
-                            {patientList.map((details, i) => {
+                            {patientList && patientList.map((details, i) => {
                                 return (
                                     <div key={i} className="col-md-4">
-                                        {console.log('--------details', details)}
                                         <div className="cardDiv">
                                             <GetDoctorData clinicId={details.clinicId} doctorId={details.doctorId} />
                                             <span className='cardSpan time'>

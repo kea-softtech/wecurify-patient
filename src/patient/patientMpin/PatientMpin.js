@@ -60,8 +60,8 @@ function PatientMpin(props) {
                 <div id="login-2">
                     <h1>Login to Wecurify</h1>
                     <form>
-                        <div className="box_form clearfix">
-                            <div className="box_login last">
+                        <div className=" clearfix">
+                            <div className="last">
                                 <label className='mb-2'>Mobile Number</label>
                                 <MainInput
                                     type="text"
