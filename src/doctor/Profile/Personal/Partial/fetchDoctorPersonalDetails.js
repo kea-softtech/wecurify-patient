@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Experience from "../../Partial/totalExperience";
 import AuthApi from "../../../../services/AuthApi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Wrapper } from "../../../../mainComponent/Wrapper";
 import { MainNav } from "../../../../mainComponent/mainNav";
 import { useRecoilState } from "recoil";
@@ -14,7 +14,7 @@ function FetchDoctorPersonalDetails() {
     const [fetchPersonalData, setFetchPersonalData] = useState([])
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [isLoading, setIsLoading] = useState(true);
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         getDoctorPersonalDetails();
@@ -31,13 +31,17 @@ function FetchDoctorPersonalDetails() {
             })
     }
 
+    const goBack = () => {
+        navigate(-1)
+    }
+
     return (
         <Wrapper>
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
                         {patientId ?
-                            <Link to={`/patientappointment/${patientId}`}>
+                            <Link onClick={goBack}>
                                 <i className="arrow_back backArrow" title="back button"></i>
                             </Link> :
                             <Link to={`/doctors`}>

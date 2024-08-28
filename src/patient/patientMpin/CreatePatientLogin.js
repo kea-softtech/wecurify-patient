@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { MainInput } from "../../mainComponent/mainInput";
 import { LoginPatientOtp } from "../loginPatientOtp";
@@ -17,7 +17,7 @@ export default function CreatePatientLogin() {
     const [showOTP, setShowOTP] = useState(false)
     const [loginData, setLoginData] = useState([])
     const { loginPatient } = PatientApi()
-
+    const navigate = useNavigate()
     const getOTPSection = (e) => {
         e.preventDefault()
         if (mobile.length < 10) {
@@ -26,8 +26,14 @@ export default function CreatePatientLogin() {
         else {
             loginPatient({ mobile })
                 .then(data => {
+                    if (data.data.isLoggedIn !== true) {
+                        alert(data.data.otp)
+                        setIsError(false)
+                    }
+                    else {
+                        setIsError(true)
+                    }
                     setPatientId(data.data._id)
-                    alert(data.data.otp)
                     let item = data.data
                     setLoginData(item)
                     setShowOTP(true)
@@ -35,14 +41,18 @@ export default function CreatePatientLogin() {
         }
     }
 
+    const goback = () => {
+        navigate(-1)
+    }
+
     return (
         <Wrapper>
-            <div className="row ">
+            <div className=" ">
                 <div className="full-width common_box">
                     <div className="bg_color_2">
                         <div className="container margin_60_35">
                             <div id="login-2">
-                                <h1>Login to Wecurify</h1>
+                                <h1>Create Account</h1>
                                 <form >
                                     <div className=" clearfix">
                                         <div className="last" align="left">
@@ -57,7 +67,7 @@ export default function CreatePatientLogin() {
                                                 placeholder="Phone Number (+XX)" >
                                             </MainInput>
 
-                                            {showOTP === true ?
+                                            {showOTP === true && isError !== true ?
                                                 <>
                                                     <LoginPatientOtp loginData={loginData} />
                                                     <Outlet />
@@ -68,25 +78,24 @@ export default function CreatePatientLogin() {
                                             }
                                         </div>
                                         {isError === true ?
-                                            <div className="validation mb-2 ml-3">
+                                            <div className="mb-2 validation">
                                                 Please enter valid mobile number.
                                             </div>
                                             : null
                                         }
-                                        {/* <div className="mr-3" align='right'>
-                                            <MainButtonInput onClick={getOTPSection}>Login</MainButtonInput>
-                                        </div> */}
-                                        <div className="mr-3 appcolor" align='right'>
-                                            <Link to={`/appointments/${doctorId}`}>Already have account </Link>
-                                        </div>
+
                                     </div>
                                 </form>
+                                <div align='right'>
+                                    <Link onClick={goback}>
+                                        Already have account
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </Wrapper >
-
     )
 }

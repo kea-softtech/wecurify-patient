@@ -67,7 +67,7 @@ function PatientLoginMpin(props) {
         <div>
             <form>
                 <div className=" clearfix">
-                    <div className="box_login last">
+                    <div className="last">
                         <label className='mb-2'>Mobile Number</label>
                         <MainInput
                             type="text"
@@ -88,8 +88,7 @@ function PatientLoginMpin(props) {
                             placeholder="Enter Mpin"
                             required>
                         </MainInput>
-                        {isError === true ? <span className="validation mb-2">Enter valid mobile number and password</span> : null}
-                        {error === true ? <span className="validation mb-2">Server error</span> : null}
+
                         <div className="width50 mt-4" align="left">
                             <Link onClick={handleForgotShow}>Forgot MPIN </Link>
                         </div>
@@ -102,6 +101,16 @@ function PatientLoginMpin(props) {
                             </div>
                         </div>
                     </div>
+                    {isError === true ?
+                        <div className="validation mb-2">
+                            Enter valid mobile number and password
+                        </div>
+                        : null}
+                    {error === true ?
+                        <div className="validation mb-2">
+                            Server error
+                        </div>
+                        : null}
                 </div>
             </form>
             <Modal show={show} onHide={handleForgotClose}>

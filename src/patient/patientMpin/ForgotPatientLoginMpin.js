@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { MainInput } from "../../mainComponent/mainInput";
 import { useRecoilState } from "recoil";
-import { ForgotMpin } from "./ForgotMpin";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
 import { ShowPatientOtp } from "./ShowPatientOtp";
@@ -11,22 +10,19 @@ export default function ForgotPatientLoginMpin(props) {
     const { patientId } = props
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState('');
     const [doctorId, setdoctorId] = useRecoilState(setDoctorId);
     const [loginData, setLoginData] = useState([])
     const { validLoginPatient } = PatientApi();
     const [showOTP, setShowOTP] = useState(false);
-    // const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError("Mobile number must have 10 number")
+            setIsError(true)
         }
         else {
             validLoginPatient({ mobile })
                 .then(response => {
                     if (response.data.isLoggedIn === true) {
-                        // setPatientId(response.data._id)
                         alert(response.data.otp)
                         setIsError(false)
                     }
@@ -55,7 +51,7 @@ export default function ForgotPatientLoginMpin(props) {
                     placeholder="Phone Number (+XX)" >
                 </MainInput>
             </div>
-            {showOTP === true ?
+            {showOTP === true && isError !== true ?
                 <ShowPatientOtp
                     doctorId={doctorId}
                     patientId={patientId}
@@ -63,12 +59,15 @@ export default function ForgotPatientLoginMpin(props) {
                     mobile={mobile}
                 />
                 :
-                <>
-                    <span className="validation mb-2 ">{isError}</span>
-                    <div align='left' >
-                        <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
-                    </div>
-                </>
+                <div align='left' >
+                    <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
+                </div>
+            }
+            {isError === true ?
+                <div className="validation">
+                    Please enter valid mobile number.
+                </div>
+                : null
             }
         </div>
     )

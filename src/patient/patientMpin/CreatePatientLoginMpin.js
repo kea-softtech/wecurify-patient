@@ -24,8 +24,14 @@ export default function CreatePatientLoginMpin() {
         else {
             loginPatient({ mobile })
                 .then(data => {
+                    if (data.data.isLoggedIn !== true) {
+                        alert(data.data.otp)
+                        setIsError(false)
+                    }
+                    else {
+                        setIsError(true)
+                    }
                     setPatientId(data.data._id)
-                    alert(data.data.otp)
                     let item = data.data
                     setLoginData(item)
                     setShowOTP(true)
@@ -34,11 +40,10 @@ export default function CreatePatientLoginMpin() {
     }
 
     return (
-        <div className="row ">
             <div className="full-width ">
                 <form >
                     <div className="clearfix">
-                        <div className="box_login last" align="left">
+                        <div className="last" align="left">
                             <label className='mb-2'>Mobile Number</label>
                             <MainInput
                                 name="mobile"
@@ -50,7 +55,7 @@ export default function CreatePatientLoginMpin() {
                                 placeholder="Phone Number (+XX)" >
                             </MainInput>
 
-                            {showOTP === true ?
+                            {showOTP === true && isError !== true ?
                                 <>
                                     <LoginPatientOtp loginData={loginData} />
                                     <Outlet />
@@ -60,14 +65,15 @@ export default function CreatePatientLoginMpin() {
                                 </div>
                             }
                             {isError === true ?
-                                <span className="validation mb-2 ml-3">Passwords don't match</span>
-                                : null}
-                            <div align='right' className="validation  mb-2 mr-3">{isError}</div>
+                                <span className="validation mb-2 ml-3">
+                                    Please Enter Valid Mobile Number
+                                </span>
+                                : null
+                            }
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
 
     )
 }
