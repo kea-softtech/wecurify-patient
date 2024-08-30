@@ -29,7 +29,9 @@ export default function GetLoginPatientProfile() {
                             <Link onClick={goBack}>
                                 <i className="arrow_back backArrow" title="back button"></i>
                             </Link>
-                            <span className='float-none ml-2' style={{ fontSize: 'inherit' }}> Patient Information</span>
+                            <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>
+                                Patient Information
+                            </span>
                         </div>
                         <div className='width50 row justifyContent'>
                             <Button

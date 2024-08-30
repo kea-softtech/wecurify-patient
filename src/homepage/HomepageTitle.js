@@ -6,6 +6,7 @@ import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { Button } from "react-bootstrap";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
+import { Center, Text } from "@chakra-ui/react";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
@@ -30,10 +31,10 @@ function HomePageTitle() {
             <div className="wraper">
                 {loggedIn === true ?
                     <div className="row">
-                        <div  className="col-xl-6 text_align ">
+                        <div className="col-xl-6 text_align ">
                             <h4 className="colorNorm mt-3">Welcome to wecurify,{patientData.name}</h4>
                         </div>
-                        <div  className="col-xl-6 align-items-right mt-3">
+                        <div className="col-xl-6 align-items-right mt-3">
                             <NavLink to="/doctors">
                                 <Button className="radius ml-2  buttonPatient appColor fontS">
                                     Find a doctor
@@ -63,14 +64,15 @@ function HomePageTitle() {
                     <>
                         <div className="col-4">
                             <div className="box_feat" id="icon_1">
-                                <span></span>
+                                {/* <span></span> */}
+                               
                                 <h3>Find Doctor</h3>
                                 <div>"Click the 'Find Doctors' button, then choose a doctor based on what you need."</div>
                             </div>
                         </div>
                         <div className="col-4">
                             <div className="box_feat" id="icon_2">
-                                <span></span>
+                                {/* <span></span> */}
                                 <h3>Create profile</h3>
                                 <div>"If you're not logged in, please create your profile to schedule an appointment."</div>
                             </div>

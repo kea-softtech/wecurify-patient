@@ -66,7 +66,7 @@ function PatientRegistrationForm(props) {
     }
 
     return (
-        <div >
+        <div>
             <div className="underline">
                 <h3 className="mb-3">Patient Details</h3>
             </div>
@@ -135,7 +135,7 @@ function PatientRegistrationForm(props) {
                     </div>
                 </div>
 
-                <div className="text-right add_top_30 m-2">
+                <div className="text-right add_top_30  mr-3">
                     <MainButtonInput>Verify & Save</MainButtonInput>
                 </div>
 

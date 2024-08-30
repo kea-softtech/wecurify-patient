@@ -20,15 +20,15 @@ function FetchDoctorPersonalDetails() {
         getDoctorPersonalDetails();
     }, [])
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
-
     const getDoctorPersonalDetails = () => {
+        setIsLoading(true);
         getDrInfo({ doctorId })
             .then((result) => {
                 setFetchPersonalData(result.result[0]);
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const goBack = () => {
@@ -51,9 +51,6 @@ function FetchDoctorPersonalDetails() {
                             Doctor Information
                         </span>
                     </div>
-                    {/* <div className="width50 row justifyContent">
-                        <div className="appColor normal-font" align='right'>Dr. {DoctorName}</div>
-                    </div> */}
                 </div>
             </MainNav>
             <>
@@ -74,7 +71,7 @@ function FetchDoctorPersonalDetails() {
                                                 className='doctorPic borderRadius'
                                             />
                                         </div>
-                                        <div className=" col-md-6" align='left' >
+                                        <div className="mt-2 col-md-6 text-align-left" >
                                             <h1>Dr. {fetchPersonalData.name}</h1>
                                             <div className="contacts">
                                                 <address>

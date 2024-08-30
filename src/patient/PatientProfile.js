@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { TabPanel } from "../common/tabpanel";
 import { PatientPersonalInformation } from "../patient/patientPersonalInformation";
 import { MainNav } from "../mainComponent/mainNav";
 import { MainTabs } from "../mainComponent/mainTabs";
 import { Wrapper } from "../mainComponent/Wrapper";
-import { setDoctorId } from "../recoil/atom/setDoctorId";
-import { useRecoilState } from "recoil";
 import { FetchPatientLifestyleData } from "./fetchPatientLifestyleData";
 import { FetchPatientMedicalInfo } from "./fetchPatientMedicalInfo";
 import PatientApi from "../services/PatientApi";
 
 export default function PatientProfile() {
   const { patientId } = useParams();
-  const [getDoctorId, setGetDoctorId] = useRecoilState(setDoctorId)
   const [value, setValue] = useState(0);
   const [patientName, setPatientName] = useState([])
   const { fetchPatient } = PatientApi()
-
+  const navigate = useNavigate();
   useEffect(() => {
     patientData()
   }, [])
@@ -25,7 +22,6 @@ export default function PatientProfile() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const doctorId = getDoctorId;
 
   const goToMedical = () => {
     setValue(1)
@@ -40,24 +36,31 @@ export default function PatientProfile() {
         setPatientName(res[0].name)
       })
   }
+
+  const goBack = () => {
+    navigate(-1)
+  }
+
   return (
     <>
       <Wrapper>
         <MainNav>
           <div className="clearfix row">
             <div className="width50">
-              <Link to={`/fetchpatientprofile/${patientId}`}>
+              <Link onClick={goBack}>
                 <i className="arrow_back backArrow" title="back button"></i>
               </Link>
               <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Edit Information</span>
             </div>
             <div className="width50 row justifyContent">
-              <div className="appColor normal-font">Patient - {patientName}</div>
+              <Link to={`/fetchpatientprofile/${patientId}`} className="appColor">
+                Done
+              </Link>
             </div>
           </div>
         </MainNav>
 
-        <div className="wraper row">  
+        <div className="wraper row">
           <div className="full-width">
             <div className="common_box">
               <div className="white-box">
@@ -70,15 +73,23 @@ export default function PatientProfile() {
                 </MainTabs>
 
                 <TabPanel value={value} index={0}>
-                  <PatientPersonalInformation personal={goToMedical} patientId={patientId} />
+                  <PatientPersonalInformation
+                    personal={goToMedical}
+                    patientId={patientId}
+                  />
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>
-                  <FetchPatientMedicalInfo Medical={goToLifestyle} patientId={patientId} />
+                  <FetchPatientMedicalInfo
+                    Medical={goToLifestyle}
+                    patientId={patientId}
+                  />
                 </TabPanel>
 
                 <TabPanel value={value} index={2}>
-                  <FetchPatientLifestyleData patientId={patientId} />
+                  <FetchPatientLifestyleData
+                    patientId={patientId}
+                  />
                 </TabPanel>
               </div>
             </div>

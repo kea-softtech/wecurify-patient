@@ -25,11 +25,11 @@ export default function DoctorList() {
     }, [currentPage]);
 
     setTimeout(() => {
-        setIsLoading(false);
     }, 2000);
 
     const pageSize = 6;
     const getDoctorList = () => {
+        setIsLoading(true);
         getdoctors(currentPage, pageSize, key)
             .then((result) => {
                 if (result) {
@@ -41,6 +41,9 @@ export default function DoctorList() {
                     return <span className="validation mb-2">Server error</span>
                 }
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     const searchDoctor = (value) => {
         setKey(value)
@@ -100,7 +103,7 @@ export default function DoctorList() {
                             </div>
                             :
                             <>
-                                {doctorData && doctorData.length>0 ?
+                                {doctorData && doctorData.length > 0 ?
                                     <div className='row '>
                                         {doctorData && doctorData.map((details, i) => {
                                             return (

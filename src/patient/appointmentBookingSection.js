@@ -19,21 +19,16 @@ function AppointmentBookingSection() {
         doctorData()
     }, [])
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
-
     function doctorData() {
+        setIsLoading(true);
         getDrInfo({ doctorId })
             .then((res) => {
-                // if (res.result) {
                 setDoctorName(res.result[0])
                 setClinicData(res.result[0].clinicList)
-                // } else {
-                //     <div align='center' className="validation mb-2">Server error</div>
-                // }
-
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     return (
         <Wrapper>
@@ -68,7 +63,10 @@ function AppointmentBookingSection() {
                                             </MainAccordion>
                                         ))}
                                     </div>
-                                    : <div className="servererror" align='center'>Server error</div>}
+                                    : <div className="clinicHistory mb-3 fontS font-weight" >
+                                       Clinics are not available.
+                                        </div>
+                                }
                             </>}
                     </div>
                 </div>
