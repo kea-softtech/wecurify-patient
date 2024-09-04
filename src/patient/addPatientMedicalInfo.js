@@ -45,7 +45,7 @@ function AddPatientMedicalInfo(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <div align='left' className="patientData"><b>Allergies</b></div>
+                    <div align='left' className="patientData">Allergies</div>
                     <MainInput
                         type="text"
                         name="allergies"
@@ -53,7 +53,7 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.allergies}
                         placeholder="Allergies">
                     </MainInput>
-                    <div align='left' className="patientData"><b>Current Medications</b></div>
+                    <div align='left' className="font_weight patientData">Current Medications</div>
                     <MainInput
                         type="text"
                         name="cmedication"
@@ -61,7 +61,7 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.cmedication}
                         placeholder="Current Medications">
                     </MainInput>
-                    <div align='left' className="patientData"><b>Past Medications</b></div>
+                    <div align='left' className="font_weight patientData">Past Medications</div>
                     <MainInput
                         type="text"
                         name="pmedication"
@@ -72,7 +72,7 @@ function AddPatientMedicalInfo(props) {
                 </div>
 
                 <div className="col-md-6 ">
-                    <div align='left' className="patientData"><b>Chronic diseases</b></div>
+                    <div align='left' className="font_weight patientData">Chronic diseases</div>
                     <MainInput
                         type="text"
                         name="diseases"
@@ -80,7 +80,7 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.diseases}
                         placeholder="Chronic diseases">
                     </MainInput>
-                    <div align='left' className="patientData"><b>Injuries</b></div>
+                    <div align='left' className="font_weight patientData">Injuries</div>
                     <MainInput
                         type="text"
                         name="injuries"
@@ -89,7 +89,7 @@ function AddPatientMedicalInfo(props) {
                         placeholder="Injuries">
                     </MainInput>
 
-                    <div align='left' className="patientData"><b>Surgeries</b></div>
+                    <div align='left' className="font_weight patientData">Surgeries</div>
                     <MainInput
                         type="text"
                         name="surgeries"

@@ -35,17 +35,17 @@ const GetMedicinePriscription = (props) => {
         <>
             {showMedicineData ?
                 <>
-                    <h6 align="left" className='ml-2'><b>Medicine List</b></h6>
+                    <h6 align="left" className='ml-2 font_weight'>Medicine List</h6>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align='center'><b>Index</b></TableCell>
-                                    <TableCell align='center'><b>Medicine Name</b></TableCell>
-                                    <TableCell align='center'><b>Take</b></TableCell>
-                                    <TableCell align='center'><b>Duration</b></TableCell>
-                                    <TableCell align='center'><b>Mg</b></TableCell>
-                                    <TableCell align='center'><b>Slots</b></TableCell>
+                                    <TableCell className="font_weight"  align='center'>Index</TableCell>
+                                    <TableCell className="font_weight" align='center'>Medicine Name</TableCell>
+                                    <TableCell className="font_weight" align='center'>Take</TableCell>
+                                    <TableCell className="font_weight" align='center'>Duration</TableCell>
+                                    <TableCell className="font_weight" align='center'>Mg</TableCell>
+                                    <TableCell className="font_weight" align='center'>Slots</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

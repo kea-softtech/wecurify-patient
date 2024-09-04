@@ -113,7 +113,7 @@ function AddDoctorProfessionalExperience(props) {
                     </div>
                     <div className='ml-3 mt-2 mr-3'>
                         <div className="text-left">
-                            <label><b>Clinic/Hospital Name</b></label>
+                            <label className="font_weight">Clinic/Hospital Name</label>
                         </div>
                         <MainInput
                             type="text"
@@ -127,7 +127,7 @@ function AddDoctorProfessionalExperience(props) {
                 </div>
                 <div className="col-md-5 ml-3 mr-3">
                     <div className="form-group text-left">
-                        <label><b>Description</b></label>
+                        <label className="font_weight">Description</label>
                         <div>
                             <textarea
                                 type="text"

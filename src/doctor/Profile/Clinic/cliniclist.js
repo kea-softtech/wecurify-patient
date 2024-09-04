@@ -52,7 +52,9 @@ export default function ClinicList(props) {
                                         />
                                     </div>
                                     <div className="ml-2">
-                                        <div for="visit1" className="css-label"><b>{clinic.clinicName}</b></div>
+                                        <div for="visit1" className="css-label font_weight">
+                                            {clinic.clinicName}
+                                        </div>
                                         {/* <MainButtonInput onClick={(e) => BookAppointments(clinic, e)}>Check Availability</MainButtonInput> */}
                                     </div>
                                 </div>

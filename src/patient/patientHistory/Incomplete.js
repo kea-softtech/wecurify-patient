@@ -86,7 +86,7 @@ export default function Incomplete(props) {
                                 )
                             })}
                         </div>
-                        : <div className="clinicHistory" ><b>Appointments are not available.</b></div>}
+                        : <div className="clinicHistory font_weight" >Appointments are not available.</div>}
                     {isError === true ? <span className="validation mb-2">Server error</span> : null}
 
                     {patientHistoryData ?

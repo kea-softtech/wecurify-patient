@@ -71,19 +71,19 @@ export default function ViewMedicalReport() {
                             </div>
                             :
                             <div className="white-box" >
-                                <h6 align="left" className='ml-2'><b>Patient Information</b></h6>
+                                <h6 align="left" className='ml-2 font_weight'>Patient Information</h6>
                                 <div className="row viewMreport">
                                     <div className="col-md-6 mb-2 " align='left' >
-                                        <div><b>Patient Name :</b>{patientDetails.name}</div>
-                                        <div><b>Email :</b>{patientDetails.email}</div>
-                                        <div><b>Gender :</b>{patientDetails.gender}</div>
-                                        <div><b>Age :</b>{patientDetails.age}</div>
-                                        <div><b>Mobile no :</b>{patientDetails.mobile}</div>
+                                        <div><span className="font_weight">Patient Name :</span>{patientDetails.name}</div>
+                                        <div><span className="font_weight">Email :</span>{patientDetails.email}</div>
+                                        <div><span className="font_weight">Gender :</span>{patientDetails.gender}</div>
+                                        <div><span className="font_weight">Age :</span>{patientDetails.age}</div>
+                                        <div><span className="font_weight">Mobile no :</span>{patientDetails.mobile}</div>
                                     </div>
                                     <div className="col-md-6 " align='left'>
                                         {viewData.BMI ?
                                             <div >
-                                                <b>BMI :</b>
+                                                <span className="font_weight">BMI :</span>
                                                 <span>{viewData.BMI}</span>
                                             </div>
                                             : null
@@ -91,7 +91,7 @@ export default function ViewMedicalReport() {
 
                                         {viewData.bp ?
                                             <div>
-                                                <b> Bp :</b>
+                                                <span className="font_weight"> Bp :</span>
                                                 <span>{viewData.bp}</span>
                                             </div>
                                             :
@@ -99,15 +99,14 @@ export default function ViewMedicalReport() {
                                         }
                                         {viewData.height ?
                                             <div >
-                                                <b>Height :</b>
+                                                <span className="font_weight">Height :</span>
                                                 <span>{viewData.height}</span>
-
                                             </div>
                                             : null
                                         }
                                         {viewData.weight ?
                                             <div>
-                                                <b>Weight :</b>
+                                                <span className="font_weight">Weight :</span>
                                                 <span>{viewData.weight}</span>
                                             </div>
                                             : null
@@ -116,7 +115,7 @@ export default function ViewMedicalReport() {
                                         {
                                             viewData.pulse ?
                                                 <div>
-                                                    <b>Pulse :</b>
+                                                    <span className="font_weight">Pulse :</span>
                                                     <span>{viewData.pulse}</span>
 
                                                 </div>
@@ -126,7 +125,7 @@ export default function ViewMedicalReport() {
                                         {
                                             viewData.temp ?
                                                 <div>
-                                                    <b>Temprature :</b>
+                                                    <span>Temprature :</span>
                                                 </div>
                                                 :
                                                 null
@@ -143,7 +142,7 @@ export default function ViewMedicalReport() {
 
                                 {viewData.investigation_note ?
                                     <div align="left" className='margin_top_15'>
-                                        <b className='viewMreport'>Investigation :</b>
+                                        <span className='viewMreport font_weight'>Investigation :</span>
                                         <span>{viewData.investigation_note}</span>
                                     </div>
                                     : null
@@ -151,7 +150,7 @@ export default function ViewMedicalReport() {
 
                                 {viewData.premedication_note ?
                                     <div align="left " className='viewMreport'>
-                                        <b >Premedication :</b>
+                                        <span className="font_weight" >Premedication :</span>
                                         <span>{viewData.premedication_note}</span>
                                     </div>
                                     : null

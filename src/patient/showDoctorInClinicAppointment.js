@@ -105,8 +105,8 @@ function ShowDoctorInClinicAppointment(props) {
                                             <Link
                                                 to="#"
                                                 onClick={() => handleChange(item)}>
-                                                <div>
-                                                    <b>{item.dateMonth}</b>
+                                                <div className="font_weight ">
+                                                   {item.dateMonth}
                                                 </div>
                                                 Show Available Slots
                                             </Link>
@@ -128,14 +128,14 @@ function ShowDoctorInClinicAppointment(props) {
                                     selectedDate={selectedDate}
                                 />
                                 :
-                                <div style={{ color: "black", marginTop: '10px' }}>
-                                    <b>Slots Not Available</b>
+                                <div className="font_weight " style={{ color: "black", marginTop: '10px' }}>
+                                 Slots Not Available
                                 </div>}
                             </>
                         ):(
                             <>
-                                <div style={{ color: "black", marginTop: '10px' }}>
-                                    <b>Please select a day/date from the left panel</b>
+                                <div className="font_weight " style={{ color: "black", marginTop: '10px' }}>
+                                    Please select a day/date from the left panel
                                 </div>
                             </>
                         )}

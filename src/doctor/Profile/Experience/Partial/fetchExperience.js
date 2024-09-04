@@ -89,7 +89,7 @@ function FetchExperience(props) {
                 {fetchExperience.map((experience, index) => {
                     return (
                         <div className='col-md-5'>
-                            <div className="" key={index}>
+                            <div  key={index}>
                                 <Modal
                                     show={activeModal === index}
                                     onHide={handleClose}
@@ -109,11 +109,11 @@ function FetchExperience(props) {
                                     <div className="grayBox">
                                         <div className="row">
                                             <div className='col-md-9'>
-                                                <div className="" align='left'>
+                                                <div align='left'>
                                                     {/* <span className="icon-icon">
                                                         <i className="icon_calendar" title="Calender profile"></i>
                                                     </span> */}
-                                                    <b>Start Year  - </b>
+                                                    <span className="font_weight">Start Year  - </span>
                                                     <span>
                                                         {new Date(experience.startYear)
                                                             .toLocaleDateString(undefined,
@@ -123,11 +123,11 @@ function FetchExperience(props) {
                                                                 })}
                                                     </span>
                                                 </div>
-                                                <div className="" align='left'>
+                                                <div align='left'>
                                                     {/* <span className="icon-icon">
                                                         <i className="icon_calendar" title="Calender profile"></i>
                                                     </span> */}
-                                                    <b>End Year  - </b>
+                                                    <span className="font_weight">End Year  - </span>
                                                     <span>
                                                         {new Date(experience.endYear)
                                                             .toLocaleDateString(undefined,
@@ -137,20 +137,20 @@ function FetchExperience(props) {
                                                                 })}
                                                     </span>
                                                 </div>
-                                                <div className="" align='left'>
+                                                <div align='left'>
                                                     {/* <span className="icon-icon">
                                                         <i className="icon_building" title="Clinic"></i>
                                                     </span> */}
-                                                    <b>Clinic/Hospital Name  - </b>
+                                                    <span className="font_weight">Clinic/Hospital Name  - </span>
                                                     <span>{experience.clinicName}</span>
                                                 </div>
-                                                <div className="" align='left'>
-                                                    <b>Doctor Experience  - </b>
+                                                <div  align='left'>
+                                                    <span className="font_weight">Doctor Experience  - </span>
                                                     <span>{experience.totalExperience} years</span>
                                                 </div>
 
-                                                <div className="" align='left'>
-                                                    <b>Description  - </b>
+                                                <div  align='left'>
+                                                    <span className="font_weight">Description  - </span>
                                                     <span>{experience.description}</span>
                                                 </div>
                                             </div>

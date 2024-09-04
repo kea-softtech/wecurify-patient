@@ -58,22 +58,22 @@ function FetchPatientLifestyleData(props) {
                             <div className="row">
                                 <div className="col-md-6 ">
                                     <div className="fetchedudata">
-                                        <div align='left' className="patientData"><b>Smoking Habits</b></div>
+                                        <div align='left' className="font_weight patientData">Smoking Habits</div>
                                         <div>{item.smokingHabits}</div>
                                     </div>
                                     <div className="fetchedudata">
-                                        <div align='left' className="patientData"><b>Alcohol Consumption</b></div>
+                                        <div align='left' className="font_weight patientData">Alcohol Consumption</div>
                                         <div>{item.alcoholConsumption}</div>
                                     </div>
                                 </div>
 
                                 <div className="col-md-6 ">
                                     <div className="fetchedudata">
-                                        <div align='left' className="patientData"><b>Food Preferences</b></div>
+                                        <div align='left' className="font_weight patientData">Food Preferences</div>
                                         <div>{item.foodPreferences}</div>
                                     </div>
                                     <div className="fetchedudata">
-                                        <div align='left' className="patientData"><b>Occupation</b></div>
+                                        <div align='left' className="font_weight patientData">Occupation</div>
                                         <div>{item.occupation}</div>
                                     </div>
                                 </div>

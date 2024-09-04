@@ -48,9 +48,9 @@ export default function Header() {
                     <div className="width70">
                         <nav id="menu" className="main-menu">
                             {loggedIn ?
-                                <li className="fontSize"><Link onClick={handleLogout} ><b>Logout </b></Link></li>
+                                <li className="fontSize"><Link className="font_weight" onClick={handleLogout} >Logout </Link></li>
                                 :
-                                <li className="fontSize"><Link to="/patient"><b>Login </b></Link></li>
+                                <li className="fontSize"><Link className="font_weight" to="/patient">Login </Link></li>
                             }
                         </nav>
                     </div>

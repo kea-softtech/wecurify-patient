@@ -137,7 +137,9 @@ export default function DoctorList() {
                                         })}
 
                                     </div>
-                                    : <div className="clinicHistory mb-3" ><b>Doctors are not available.</b></div>}
+                                    : <div className="clinicHistory mb-3 font_weight">
+                                        Doctors are not available.
+                                    </div>}
                                 {doctorData ?
                                     <div>
                                         <ReactPaginate

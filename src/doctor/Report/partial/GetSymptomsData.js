@@ -25,7 +25,7 @@ export default function GetSymptomsData(props) {
         <div align='left'>
             {symptomDataInfo.length > 0 ?
                 <div className='  viewMreport' align='left'>
-                    <h6><b>List of Symptoms</b></h6>
+                    <h6 className="font_weight">List of Symptoms</h6>
                     {symptomDataInfo && symptomDataInfo.map((item, i) => {
                         return (
                             <span key={i}>

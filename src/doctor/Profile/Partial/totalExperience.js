@@ -1,29 +1,29 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Experience (props) {
-    const [totalExperience,setTotalExperience] = useState('')
+export default function Experience(props) {
+    const [totalExperience, setTotalExperience] = useState('')
     const experienceData = props.experienceData;
     useEffect(() => {
         let totalExp = 0
-        if(experienceData.length > 0) {
+        if (experienceData.length > 0) {
             totalExp = manipulateExperience(experienceData)
-            const month = totalExp%12
+            const month = totalExp % 12
             let year = 0;
-            if(totalExp > 11) {
-                const exYear = totalExp/12
+            if (totalExp > 11) {
+                const exYear = totalExp / 12
                 year = exYear.toFixed(0)
             }
-            const experience = year +"."+ month;
+            const experience = year + "." + month;
             setTotalExperience(experience);
         } else {
             setTotalExperience("I am a beginner");
         }
-    },[props])
+    }, [props])
 
     function manipulateExperience(data) {
         let totalExperience = 0;
-        data.map(function(item, index){
-            const experiences =  monthDiff(new Date(item.startYear), new Date(item.endYear))
+        data.map(function (item, index) {
+            const experiences = monthDiff(new Date(item.startYear), new Date(item.endYear))
             totalExperience = totalExperience + experiences
         })
         return totalExperience;
@@ -37,10 +37,12 @@ export default function Experience (props) {
         return months <= 0 ? 0 : months;
     }
 
-    return(  
+    return (
         <div>
-        <b>Total Experience : </b>{totalExperience} Year Experience
+            <span className="font_weight">Total Experience : </span>
+            {totalExperience}
+            Year Experience
         </div>
     )
-    
+
 }

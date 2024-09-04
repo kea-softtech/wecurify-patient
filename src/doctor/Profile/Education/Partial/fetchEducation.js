@@ -89,25 +89,25 @@ function FetchEducation(props) {
                                                         {/* <span className="icon-icon">
                                                             <i className="pe-7s-medal" title="degree"></i>
                                                         </span> */}
-                                                        <b>Doctor Degree</b>
+                                                        <span className="font_weight">Doctor Degree</span>
                                                         <div>{education.degree}</div>
                                                     </div>
                                                     <div align='left'>
                                                         {/* <span className="icon-icon">
                                                             <i className="icon_building" title="building"></i>
                                                         </span> */}
-                                                        <b>Doctor Collage/University</b>
+                                                        <span className="font_weight">Doctor Collage/University</span>
                                                         <div>{education.collage}</div>
                                                     </div>
                                                     <div align='left'>
-                                                        <b>Specialization</b>
+                                                        <span className="font_weight">Specialization</span>
                                                         <div>{education.specialization}</div>
                                                     </div>
                                                     <div align='left'>
                                                         {/* <span className="icon-icon">
                                                             <i className="icon_calendar" title="calendar"></i>
                                                         </span> */}
-                                                        <b>Complition Year  -</b>
+                                                        <span className="font_weight">Complition Year  -</span>
                                                         <span>{education.comYear}</span>
                                                     </div>
                                                 </div>

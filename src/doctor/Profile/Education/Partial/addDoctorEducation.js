@@ -80,7 +80,7 @@ function AddDoctorEducation(props) {
             <div className="row">
                 <div className="col-md-6">
                     <div className=" text-left">
-                        <label><b>Doctor Degree</b></label>
+                        <label className="font_weight">Doctor Degree</label>
                     </div>
                     <MainSelect
                         name="degree"
@@ -94,7 +94,7 @@ function AddDoctorEducation(props) {
                     {errors.degree && <span className="validation">Please Select your degree</span>}
                     <div className='margin_top_30'>
                         <div className=" text-left">
-                            <label><b>Doctor Collage/University</b></label>
+                            <label className="font_weight">Doctor Collage/University</label>
                         </div>
                         <MainInput
                             type="text"
@@ -108,7 +108,7 @@ function AddDoctorEducation(props) {
 
                 <div className="col-md-6 ">
                     <div className=" text-left">
-                        <label><b>Specialization</b></label>
+                        <label className="font_weight">Specialization</label>
                     </div>
                     <MainSelect
                         name="specialization"
@@ -123,7 +123,7 @@ function AddDoctorEducation(props) {
                     {errors.specialization && <span className="validation">Please select your specialization</span>}
                     <div className='margin_top_30'>
                     <div className=" text-left">
-                        <label><b>Complition Year</b></label>
+                        <label className="font_weight">Complition Year</label>
                     </div>
                     <MainSelect
                         name="comYear"
@@ -137,7 +137,7 @@ function AddDoctorEducation(props) {
                     {errors.comYear && <span className="validation">Please select your complition Year</span>}
                     </div>
                     {/* <div className=" text-left">
-                        <label><b>Qualification Document Photo</b></label>
+                        <label>Qualification Document Photo</label>
                     </div>
                     <MainInput
                         type="file"

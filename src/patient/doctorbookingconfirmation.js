@@ -18,10 +18,10 @@ function DoctorBookingConfirmation(props) {
                                 <h5 className="float-center">Dr. {doctorData.name}</h5>
                             </li>
                             <li className="PatientDataS">
-                                <b>Email : </b><strong className="float-center">{doctorData.personalEmail}</strong>
+                                <span className="font_weight">Email : </span><strong className="float-center">{doctorData.personalEmail}</strong>
                             </li>
                             <li className="PatientDataS">
-                                <b>Address : </b><strong className="float-center">{doctorData.address}</strong>
+                                <span className="font_weight">Address : </span><strong className="float-center">{doctorData.address}</strong>
                             </li>
                         </ul>
                     </div>

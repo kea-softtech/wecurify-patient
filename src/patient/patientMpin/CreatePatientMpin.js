@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { MainInput } from "../../mainComponent/mainInput";
 import { useRecoilState } from "recoil";
-import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 import PatientApi from "../../services/PatientApi";
 

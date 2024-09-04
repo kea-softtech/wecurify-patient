@@ -6078,7 +6078,9 @@ textarea.form-control {
 .css-1wcaknn {
 	padding: 0px !important;
 }
-
+.font_weight {
+	font-weight: bold;
+}
 .common_box {
 	background-color: var(--bgColor);
 	padding-top: 10px;

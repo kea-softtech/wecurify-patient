@@ -102,11 +102,11 @@ export default function Appointment() {
                                     <Table className={classes.table} size="medium" aria-label="a dense table">
                                         <TableHead>
                                             <TableRow>
-                                                {/* <TableCell align="right"><b>Patient Name</b></TableCell> */}
-                                                <TableCell align="right"><b>Appointment Date</b></TableCell>
-                                                <TableCell align="right"><b>Mode of Appointment</b></TableCell>
-                                                <TableCell align="right"><b>Mode of Payment</b></TableCell>
-                                                <TableCell align="right"><b>Action</b></TableCell>
+                                                {/* <TableCell align="right">Patient Name</TableCell> */}
+                                                <TableCell className="font_weight" align="right">Appointment Date</TableCell>
+                                                <TableCell className="font_weight" align="right">Mode of Appointment</TableCell>
+                                                <TableCell className="font_weight" align="right">Mode of Payment</TableCell>
+                                                <TableCell className="font_weight" align="right">Action</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>

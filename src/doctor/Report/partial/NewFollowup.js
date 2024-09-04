@@ -59,8 +59,8 @@ export default function NewFollowup(props) {
         <div >
             <div className="row">
                 <div className="col-lg-2">
-                    <div className="form-group">
-                        <b>Follow-Up:</b>
+                    <div className=" font_weight form-group">
+                        Follow-Up:
                     </div>
                 </div>
                 <div className="col-lg-2">

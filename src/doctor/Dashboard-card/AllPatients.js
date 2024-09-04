@@ -132,7 +132,7 @@ export default function AllPatients() {
                                     activeClassName="active"
                                 />
                             </div>
-                            : <div className="clinicHistory" ><b>Data is Not Available</b></div>}
+                            : <div className="clinicHistory font_weight">Data is Not Available</div>}
                     </div >
                 </div>
             </div>

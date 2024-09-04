@@ -38,9 +38,9 @@ export default function MedicineHistory(props) {
                 <Table className={classes.table} size="medium" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="right"><b>Sr NO.</b></TableCell>
-                            <TableCell align="right"><b>Prisciption Date & Time</b></TableCell>
-                            <TableCell align="right"><b>Action</b></TableCell>
+                            <TableCell className="font_weight" align="right">Sr NO.</TableCell>
+                            <TableCell className="font_weight" align="right">Prisciption Date & Time</TableCell>
+                            <TableCell className="font_weight" align="right">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

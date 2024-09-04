@@ -11,7 +11,7 @@ function FetchImages(props){
 
     return(
         <div className="fetchedudata">
-            <div><b>Qualification Document Photo</b></div>
+            <div className="font_weight">Qualification Document Photo</div>
             {drDocument.map((eduImage ,index) => {
                 return (
                     <div  key={index}>

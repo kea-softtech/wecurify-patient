@@ -81,20 +81,20 @@ function FetchPatientInfo(props) {
                     </div>
                 </div>
                 <div className="patientDataStyle">
-                    <div className="">
-                        <label className="mx-2"><b>Patient name :</b></label>
+                    <div >
+                        <label className="font_weight mx-2">Patient name :</label>
                         {fetchPatientData.name}
                     </div>
-                    <div className="">
-                        <label className="mx-2"><b>Age :</b></label>
+                    <div >
+                        <label className="font_weight mx-2">Age :</label>
                         {fetchPatientData.age}
                     </div>
-                    <div className="">
-                        <label className="mx-2"><b>Gender :</b></label>
+                    <div >
+                        <label className="font_weight mx-2">Gender :</label>
                         {fetchPatientData.gender}
                     </div>
-                    <div className="">
-                        <label className="mx-2"><b>Email :</b></label>
+                    <div >
+                        <label className="font_weight mx-2">Email :</label>
                         {fetchPatientData.email}
                     </div>
                     <div className='row'>

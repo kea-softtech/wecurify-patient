@@ -73,8 +73,8 @@ export default function Payment(props) {
             <div className='row'>
                 <div className='width_40'>
                     <div className='paymentInput'>
-                        <label className='consultationFees'>
-                            <b>Consultation Fees</b>
+                        <label className=' consultationFees'>
+                           Consultation Fees
                         </label>
 
                     </div>
@@ -95,7 +95,7 @@ export default function Payment(props) {
             <div className='row'>
                 <div className='width_40'>
                     <div className=' paymentInput'>
-                        <label className='otherFees'><b>Other Fees</b></label>
+                        <label className='font_weight otherFees'>Other Fees</label>
                     </div>
                 </div>
                 <div className='width_60'>
@@ -114,7 +114,7 @@ export default function Payment(props) {
             <div className='row'>
                 <div className='width_40'>
                     <div className=' paymentInput'>
-                        <label className='totalFees'><b>Total</b></label>
+                        <label className="font_weight totalFees">Total</label>
                     </div>
                 </div>
                 <div className='width50'>
@@ -124,7 +124,7 @@ export default function Payment(props) {
                 </div>
             </div>
             <div className='width_60' >
-                <span className='paymentSpan mb-2'><b>Mode of Payment</b></span>
+                <span className='paymentSpan mb-2 font_weight'>Mode of Payment</span>
                 <Autocomplete
                     disablePortal={true}
                     disableClearable
@@ -143,7 +143,7 @@ export default function Payment(props) {
 
             {/* <div className=' border-payment' />
             <div className='paymentInput'>
-                <label className='totalFees'><b>Total</b></label>
+                <label className='totalFees'>Total</label>
                 <span className=" totalInput ">{patientFees}</span>
 
             </div> */}

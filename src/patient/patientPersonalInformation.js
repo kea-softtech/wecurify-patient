@@ -57,7 +57,7 @@ function PatientPersonalInformation(props) {
             <div className="col-12" >
                 <div className="row">
                     <div className="col-sm-3">
-                        <div align='left' className="patientData"><b >Full Name</b></div>
+                        <div align='left' className="patientData font_weight ">Full Name</div>
                         <MainInput
                             type="text"
                             value={updateData.name}
@@ -67,7 +67,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div className="patientData" align='left'><b>Age</b></div>
+                        <div className="patientData font_weight " align='left'>Age</div>
                         <MainInput
                             type="text"
                             value={updateData.age}
@@ -77,7 +77,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div align='left' className="patientData"><b>Email</b></div>
+                        <div align='left' className=" font_weight patientData">Email</div>
                         <MainInput
                             type="text"
                             value={updateData.email}
@@ -87,7 +87,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div className="patientData" align='left'><b>Marital status</b></div>
+                        <div className="patientData font_weight " align='left'>Marital status</div>
                         <MainInput
                             type="text"
                             value={updateData.maritalstatus}
@@ -97,7 +97,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div className="patientData" align='left'><b>Date Of Birth</b></div>
+                        <div className="patientData font_weight " align='left'>Date Of Birth</div>
                         <MainInput
                             type="date"
                             name="birthdate"
@@ -106,7 +106,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div align='left' className="patientData"><b>Height</b></div>
+                        <div align='left' className="patientData font_weight ">Height</div>
                         <MainInput
                             type="text"
                             name="height"
@@ -116,7 +116,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div align='left' className="patientData"><b>Weight</b></div>
+                        <div align='left' className="patientData font_weight ">Weight</div>
                         <MainInput
                             type="text"
                             name="weight"
@@ -126,8 +126,8 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div className="patientData">
-                            <div align='left'><b>Blood Group</b></div>
+                        <div className="patientData font_weight ">
+                            <div align='left'>Blood Group</div>
                         </div>
                         <MainInput
                             type="text"
@@ -138,7 +138,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div align='left' className="patientData"><b>Emergency Contact</b></div>
+                        <div align='left' className="patientData font_weight ">Emergency Contact</div>
                         <MainInput
                             type="text"
                             name="emcontact"
@@ -150,8 +150,8 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-3">
-                        <div className="patientData">
-                            <div align='left'><b>Mobile No</b></div>
+                        <div className="patientData font_weight ">
+                            <div align='left'>Mobile No</div>
                         </div>
                         <MainInput
                             type="text"
@@ -163,7 +163,7 @@ function PatientPersonalInformation(props) {
                         </MainInput>
                     </div>
                     <div className="col-sm-4">
-                        <div align='left' className="patientData"><b>Gender</b></div>
+                        <div align='left' className="patientData font_weight ">Gender</div>
                         <div align='left'>
                             <input
                                 className="radio_button"
@@ -195,8 +195,8 @@ function PatientPersonalInformation(props) {
                         </div>
                     </div>
                     <div className="col-sm-8" >
-                        <div align='left' className="patientData">
-                            <b>Address</b>
+                        <div align='left' className="patientData font_weight ">
+                            Address
                         </div>
                         <textarea
                             value={updateData.address}

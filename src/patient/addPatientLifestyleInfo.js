@@ -58,7 +58,7 @@ function AddPatientLifestyleInfo(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <div align='left' className="patientData"><b>Smoking Habits</b></div>
+                    <div align='left' className="font_weight patientData">Smoking Habits</div>
                     <div align='left'  className="form-group">
                         <MainRadioGroup
                             name="smokingHabits"
@@ -72,7 +72,7 @@ function AddPatientLifestyleInfo(props) {
                         </MainRadioGroup>
                         {errors.smokingHabits && <span className="validation">Select smoking habits</span>}
                     </div>
-                    <div align='left' className="patientData"><b>Alcohol Cunsumption</b></div>
+                    <div align='left' className="font_weight patientData ">Alcohol Cunsumption</div>
                     <MainInput
                         type="text"
                         name="alcoholConsumption"
@@ -81,7 +81,7 @@ function AddPatientLifestyleInfo(props) {
                         placeholder="Alcohol Cunsumption">
                         {errors.alcoholConsumption && <span className="validation">Please enter your alcohol consumption </span>}
                     </MainInput>
-                    {/* <div align='left' className="patientData"><b>Activity Level</b></div>
+                    {/* <div align='left' className="patientData">Activity Level</div>
                     <div>
                         <PrettoSlider
                             valueLabelDisplay="auto"
@@ -93,7 +93,7 @@ function AddPatientLifestyleInfo(props) {
                     </div> */}
                 </div>
                 <div className="col-md-6 ">
-                    <div align='left' className="patientData"><b>Food Preferences</b></div>
+                    <div align='left'className="font_weight patientData">Food Preferences</div>
                     <div align='left' className="form-group">
                         <MainRadioGroup
                             name="foodPreferences"
@@ -108,7 +108,7 @@ function AddPatientLifestyleInfo(props) {
                         </MainRadioGroup>
                     </div>
                     <div className="form-group">
-                        <div align='left' className="patientData"><b>Occupation</b></div>
+                        <div align='left' className="font_weight patientData">Occupation</div>
                         <MainInput
                             type="text"
                             name="occupation"

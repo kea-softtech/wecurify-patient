@@ -48,16 +48,16 @@ export default function Clinic() {
     const fetchClinic = () => {
         getClinic(currentPage, pageSize)
             .then((res) => {
-                if(res){
+                if (res) {
                     setTotalPages(res.clinicListPages)
                     setClinicData(res.clinicList)
                     setClinicList(res.clinicList)
                     setFilterData(res.result)
                 }
-                else{
-                     <span className="validation mb-2">Server error</span> 
+                else {
+                    <span className="validation mb-2">Server error</span>
                 }
-                
+
             })
     }
     const handlePageClick = (data) => {
@@ -94,114 +94,117 @@ export default function Clinic() {
                 </div>
             </MainNav>
             <Wrapper>
-            <div className='row'>
-                {/* <div className="width16">
+                <div className='row'>
+                    {/* <div className="width16">
                     <div className="dash row">
                         <UserLinks />
                     </div>
                 </div> */}
-                <div className="full-width">
-                    <div className="common_box">
-                        <div className='row'>
-                            {clinicData.map((details, i) => {
-                                return (
-                                    <div key={i} className="col-md-4">
-                                        <div className="cardDiv">
-                                            <div className='doctorCard'>
-                                                <div className='row'>
-                                                    <div className='col-md-5'>
-                                                        <img
-                                                            src={details.clinicLogo}
-                                                            alt="doctorProfile"
-                                                            className='doctorphotoPatient'
-                                                        />
-                                                    </div>
-                                                    <div className='col-md-7 ' align='center'>
-                                                        <span className='patientName fontS font-weight'>
-                                                            {details.clinicName.charAt(0).toUpperCase() + details.clinicName.slice(1)}
-                                                        </span>
+                    <div className="full-width">
+                        <div className="common_box">
+                            <div className='row'>
+                                {clinicData.map((details, i) => {
+                                    return (
+                                        <div key={i} className="col-md-4">
+                                            <div className="cardDiv">
+                                                <div className='doctorCard'>
+                                                    <div className='row'>
+                                                        <div className='col-md-5'>
+                                                            <img
+                                                                src={details.clinicLogo}
+                                                                alt="doctorProfile"
+                                                                className='doctorphotoPatient'
+                                                            />
+                                                        </div>
+                                                        <div className='col-md-7 ' align='center'>
+                                                            <span className='patientName fontS font-weight'>
+                                                                {details.clinicName.charAt(0).toUpperCase() + details.clinicName.slice(1)}
+                                                            </span>
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <span className='cardSpan'>
-                                                <span className="fontSize ">
-                                                    <b>Address : </b> {details.address}
+                                                <span className='cardSpan'>
+                                                    <span className="fontSize">
+                                                        <span className="font_weight">
+                                                            Address :
+                                                        </span>
+                                                        {details.address}
+                                                    </span>
                                                 </span>
-                                            </span>
-                                            <span className='cardSpan'>
-                                                <span className=' fontSize '>
-                                                    <b>Clinic Number : </b>{details.clinicNumber}
+                                                <span className='cardSpan'>
+                                                    <span className=' fontSize '>
+                                                        <span className="font_weight">Clinic Number : </span>{details.clinicNumber}
+                                                    </span>
                                                 </span>
-                                            </span>
-                                            <div className=' appointmentBtn' align='right'>
-                                                <Link >
-                                                    <button onClick={() => ClinicsShow(details)} className="btn appColor helperBtn ">View More</button>
-                                                </Link>
-                                                {/* <Link  >
+                                                <div className=' appointmentBtn' align='right'>
+                                                    <Link >
+                                                        <button onClick={() => ClinicsShow(details)} className="btn appColor helperBtn ">View More</button>
+                                                    </Link>
+                                                    {/* <Link  >
                                                     <button onClick={() => EditClinicShow(details)} className='btn btn-default btnMargin ' >Edit Clinic</button>
                                                 </Link> */}
-                                            </div>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        {clinicData.length > 0 ?
-                            <div>
-                                <ReactPaginate
-                                    breakLabel="..."
-                                    nextLabel="Next >"
-                                    onPageChange={handlePageClick}
-                                    pageRangeDisplayed={5}
-                                    pageCount={totalPages}
-                                    previousLabel="< Previous"
-                                    renderOnZeroPageCount={null}
-                                    marginPagesDisplayed={2}
-                                    containerClassName="pagination "
-                                    pageClassName="page-item"
-                                    pageLinkClassName="page-link"
-                                    previousClassName="page-item"
-                                    previousLinkClassName="page-link"
-                                    nextClassName="page-item"
-                                    nextLinkClassName="page-link"
-                                    activeClassName="active"
-                                />
+                                    )
+                                })}
                             </div>
-                            : <div className="clinicHistory" ><b>Data is not Available</b></div>}
+                            {clinicData.length > 0 ?
+                                <div>
+                                    <ReactPaginate
+                                        breakLabel="..."
+                                        nextLabel="Next >"
+                                        onPageChange={handlePageClick}
+                                        pageRangeDisplayed={5}
+                                        pageCount={totalPages}
+                                        previousLabel="< Previous"
+                                        renderOnZeroPageCount={null}
+                                        marginPagesDisplayed={2}
+                                        containerClassName="pagination "
+                                        pageClassName="page-item"
+                                        pageLinkClassName="page-link"
+                                        previousClassName="page-item"
+                                        previousLinkClassName="page-link"
+                                        nextClassName="page-item"
+                                        nextLinkClassName="page-link"
+                                        activeClassName="active"
+                                    />
+                                </div>
+                                : <div className="clinicHistory font_weight" >Data is not Available</div>}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="modalbtn">
-                <Modal show={show} onHide={handleClose}>
+                <div className="modalbtn">
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add Clinic</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <AddClinic onSubmit={onClinicFormSubmit} />
+                        </Modal.Body>
+                    </Modal>
+                </div>
+                <Modal show={clinicShow} onHide={ClinicsClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Clinic</Modal.Title>
+                        <Modal.Title >Clinic Details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddClinic onSubmit={onClinicFormSubmit} />
+                        <ViewClinic clinicData={clinicInfo} onSubmit={onClinicFormSubmit} />
                     </Modal.Body>
                 </Modal>
-            </div>
-            <Modal show={clinicShow} onHide={ClinicsClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title >Clinic Details</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ViewClinic clinicData={clinicInfo} onSubmit={onClinicFormSubmit} />
-                </Modal.Body>
-            </Modal>
-            <div className="modalbtn">
-                <Modal show={editClinicShow} onHide={EditClinicClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Edit Clinic</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <EditClinic clinicsData={clinicInfo} onSubmit={EditClinicClose} />
-                    </Modal.Body>
-                </Modal>
-            </div>
-        </Wrapper>
+                <div className="modalbtn">
+                    <Modal show={editClinicShow} onHide={EditClinicClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Clinic</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <EditClinic clinicsData={clinicInfo} onSubmit={EditClinicClose} />
+                        </Modal.Body>
+                    </Modal>
+                </div>
+            </Wrapper>
         </>
     )
 

@@ -63,7 +63,7 @@ function EditLifeStyleData(props) {
         <form onSubmit={UpdatePatientData} id={"updateData"}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <label><b>smoking Habits</b></label>
+                    <label className="font_weight">smoking Habits</label>
                     <MainInput
                         type="text"
                         name="smokingHabits"
@@ -73,7 +73,7 @@ function EditLifeStyleData(props) {
                     </MainInput>
                 </div>
                 <div className="col-md-6 ">
-                    <label><b>Alcohol Consumption</b></label>
+                    <label className="font_weight">Alcohol Consumption</label>
                     <MainInput
                         type="text"
                         name="alcoholConsumption"
@@ -83,7 +83,7 @@ function EditLifeStyleData(props) {
                     </MainInput>
                 </div>
                 <div className="col-md-12 ">
-                    <label><b>Food Preferences</b></label>
+                    <label className="font_weight">Food Preferences</label>
                     <MainInput
                         type="text"
                         name="foodPreferences"
@@ -93,7 +93,7 @@ function EditLifeStyleData(props) {
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                    <label><b>Occupation</b></label>
+                    <label className="font_weight">Occupation</label>
                     <MainInput
                         type="text"
                         name="occupation"
@@ -103,7 +103,7 @@ function EditLifeStyleData(props) {
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                    <label><b>Activity Level</b></label>
+                    <label className="font_weight">Activity Level</label>
                     <MainInput
                         type="text"
                         name="activityLevel"

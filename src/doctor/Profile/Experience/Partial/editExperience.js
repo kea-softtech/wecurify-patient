@@ -113,7 +113,7 @@ function EditExperience(props) {
                         </MainMuiPickers>
                     </div>
                     <div className="col-md-12 ">
-                        <label><b>Clinic/Hospital Name</b></label>
+                        <label className="font_weight">Clinic/Hospital Name</label>
                         <MainInput
                             type="text"
                             name="clinicName"
@@ -124,7 +124,7 @@ function EditExperience(props) {
                     </div>
                     <div className="col-lg-12">
                         <div className="textarea">
-                            <label><b>Description</b></label>
+                            <label className="font_weight">Description</label>
                             <textarea
                                 type="text"
                                 name="description"

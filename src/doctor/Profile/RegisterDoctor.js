@@ -95,9 +95,7 @@ export default function RegisterDoctor() {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <div className="form-group">
-                                            <label><b>Gender</b></label>
-                                        </div> */}
+                                      
                                         <div className="row">
                                             <div className="form-group">
                                                 <div className="col-6">

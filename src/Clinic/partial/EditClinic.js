@@ -93,7 +93,7 @@ const EditClinic = (props) => {
         <div className="col-lg-12">
             <form onSubmit={sendClinicInfo}>
                 <div className="text-left">
-                    <label><b>Clinic Logo</b></label>
+                    <label>Clinic Logo</label>
                     <MainInput
                         type="file"
                         accept=".png, .jpg, .jpeg"
@@ -104,7 +104,7 @@ const EditClinic = (props) => {
                     </MainInput>
                 </div>
                 <div className="form-group">
-                    <label><b>Clinic Name *</b></label>
+                    <label>Clinic Name *</label>
                     <MainInput
                         type="text"
                         name="clinicName"
@@ -117,7 +117,7 @@ const EditClinic = (props) => {
                 </div>
 
                 <div className="form-group">
-                    <label><b>Location *</b></label>
+                    <label>Location *</label>
                     <MainInput
                         type="text"
                         name="address"
@@ -129,7 +129,7 @@ const EditClinic = (props) => {
 
                 </div>
                 <div className="form-group">
-                    <label><b>Clinic Number</b></label>
+                    <label className="font_weight">Clinic Number</label>
                     <MainInput
                         type="text"
                         name="clinicNumber"
@@ -142,7 +142,7 @@ const EditClinic = (props) => {
                 </div>
 
                 <div className="form-group">
-                    <label><b>Account Number</b></label>
+                    <label className="font_weight">Account Number</label>
                     <MainInput
                         type="text"
                         name="accountNumber"
@@ -154,7 +154,7 @@ const EditClinic = (props) => {
                     </MainInput>
                 </div>
                 <div className="form-group">
-                    <label><b>IFSC Code</b></label>
+                    <label className="font_weight">IFSC Code</label>
                     <MainInput
                         type="text"
                         name="IFSCcode"
@@ -166,8 +166,8 @@ const EditClinic = (props) => {
                     </MainInput>
                 </div>
                 <div className='align-left '>
-                    <div align='left' className="patientData mt-2 mb-2">
-                        <b>Clinic Services *</b>
+                    <div align='left' className="patientData mt-2 mb-2 font_weight">
+                        Clinic Services *
                     </div>
                     <Autocomplete
                         disablePortal={true}

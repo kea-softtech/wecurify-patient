@@ -107,7 +107,7 @@ function EditEducation(props) {
         <form onSubmit={EditData} id={"EditData"} encType='multipart/form-data'>
             <div className="row">
                 <div className="col-md-12 ">
-                    <label><b>Doctor Degree</b></label>
+                    <label className="font_weight">Doctor Degree</label>
                     <MainSelect
                         name="degree"
                         value={updateEducation.degree}
@@ -118,7 +118,7 @@ function EditEducation(props) {
                         ))}
                     </MainSelect>
 
-                    <label><b>Doctor Collage/University</b></label>
+                    <label className="font_weight">Doctor Collage/University</label>
                     <MainInput
                         type="text"
                         value={updateEducation.collage}
@@ -127,7 +127,7 @@ function EditEducation(props) {
                         placeholder="Doctor Collage/University">
                     </MainInput>
 
-                    <label><b>Complition Year</b></label>
+                    <label className="font_weight">Complition Year</label>
                     <MainSelect
                         value={updateEducation.comYear}
                         name="comYear"
@@ -137,7 +137,7 @@ function EditEducation(props) {
                             <option key={index}>{option}</option>
                         ))}
                     </MainSelect>
-                    <label><b>Specialization</b></label>
+                    <label className="font_weight">Specialization</label>
                     <MainSelect
                         name="specialization"
                         value={updateEducation.specialization}

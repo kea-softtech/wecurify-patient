@@ -27,7 +27,7 @@ export default function GetDentalServices(props) {
             {
                 getServices.length > 0 ?
                     <div className='viewMreport' align='left'>
-                        <h6><b>List of Services</b></h6>
+                        <h6 className="font_weight">List of Services</h6>
                         {getServices && getServices.map((item, i) => {
                             return (
                                 <span key={i}>

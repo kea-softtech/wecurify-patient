@@ -5,7 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 const MainMuiPickers = (props) =>{
     return(
         <div className="form-group">
-            <label><b>{props.children}</b></label>
+            <label className="font_weight">{props.children}</label>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
                 className="form-control"

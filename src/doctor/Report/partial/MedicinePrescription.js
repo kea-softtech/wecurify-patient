@@ -126,11 +126,11 @@ export default function MedicinePrescription(props) {
                     <Table className={classes.table} size="large" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center"><b>Medicine Name</b></TableCell>
-                                <TableCell align="center"><b>Take</b></TableCell>
-                                <TableCell align="center"><b>Duration</b></TableCell>
-                                <TableCell align="center" className="tablecell">
-                                    <b>Slots</b>
+                                <TableCell className="font_weight" align="center">Medicine Name</TableCell>
+                                <TableCell className="font_weight" align="center">Take</TableCell>
+                                <TableCell className="font_weight" align="center">Duration</TableCell>
+                                <TableCell className="font_weight tablecell" align="center">
+                                    Slots
                                 </TableCell>
                             </TableRow>
                         </TableHead>

@@ -66,7 +66,7 @@ function EditMedicalData(props) {
         <form onSubmit={UpdatePatientData} id={"updateData"}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <label><b>Allergies</b></label>
+                    <label className="font_weight">Allergies</label>
                     <MainInput
                         type="text"
                         name="Allergies"
@@ -76,7 +76,7 @@ function EditMedicalData(props) {
                     </MainInput>
                 </div>
                 <div className="col-md-6 ">
-                    <label><b>Current Medication</b></label>
+                    <label className="font_weight">Current Medication</label>
                     <MainInput
                         type="text"
                         name="cmedication"
@@ -86,7 +86,7 @@ function EditMedicalData(props) {
                     </MainInput>
                 </div>
                 <div className="col-md-12 ">
-                    <label><b>Past Medication</b></label>
+                    <label className="font_weight">Past Medication</label>
                     <MainInput
                         type="text"
                         name="pmedication"
@@ -96,7 +96,7 @@ function EditMedicalData(props) {
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                    <label><b> Chronic Diseases</b></label>
+                    <label className="font_weight"> Chronic Diseases</label>
                     <MainInput
                         type="text"
                         name="diseases"
@@ -106,7 +106,7 @@ function EditMedicalData(props) {
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                    <label><b>Injuries</b></label>
+                    <label className="font_weight">Injuries</label>
                     <MainInput
                         type="text"
                         name="injuries"
@@ -116,7 +116,7 @@ function EditMedicalData(props) {
                     </MainInput>
                 </div>
                 <div className="col-lg-12">
-                    <label><b>Surgeries</b></label>
+                    <label className="font_weight">Surgeries</label>
                     <MainInput
                         type="text"
                         name="surgeries"

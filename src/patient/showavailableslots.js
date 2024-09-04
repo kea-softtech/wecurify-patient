@@ -68,9 +68,10 @@ const ShowInClinicAppointSlots = (props) => {
     return (
         <>
             <div style={{ flexWrap: 'wrap' }}>
-                <span style={{ color: "black" }}>
-                    <b>{slotDate}  </b>
-                    <b>  Fees - <FaRupeeSign /> {session.fees} /-</b></span>
+                <span className="font_weight " style={{ color: "black" }}>
+                    {slotDate}
+                    Fees - <FaRupeeSign /> {session.fees} /-
+                </span>
                 <section className=" radiobutton">
                     {sessionSlot.map((item, index) => (
                         <>
@@ -102,15 +103,15 @@ const ShowInClinicAppointSlots = (props) => {
                     ))}
                 </section>
             </div >
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
                     <Modal.Title>Login to wecurify</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <PatientLoginMpin 
+                </Modal.Header>
+                <Modal.Body>
+                    <PatientLoginMpin
                         onSubmit={handleClose} />
-                    </Modal.Body>
-                </Modal>
+                </Modal.Body>
+            </Modal>
         </>
     )
 }

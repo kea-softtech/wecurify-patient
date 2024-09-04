@@ -62,7 +62,7 @@ export default function Ongoing(props) {
                         }
                     })
                 } else {
-                    return <div className="clinicHistory" ><b>Appointments are not Available</b></div>
+                    return <div className=" font_weight clinicHistory" >Appointments are not Available</div>
                 }
             })
     }
@@ -146,8 +146,8 @@ export default function Ongoing(props) {
                                 )
                             })}
                         </div>
-                        : <div className="clinicHistory mb-3" >
-                            <b>Appointments not found please book your appoitnment.</b>
+                        : <div className="clinicHistory font_weight mb-3" >
+                            Appointments not found please book your appoitnment.
                         </div>
                     }
                     {isError === true ? <span className="validation mb-2">Server error</span> : null}

@@ -75,9 +75,9 @@ function FetchDoctorPersonalDetails() {
                                             <h1>Dr. {fetchPersonalData.name}</h1>
                                             <div className="contacts">
                                                 <address>
-                                                    <div><b>Email  :</b>  {fetchPersonalData.personalEmail}</div>
-                                                    <div> <b>Location : </b> {fetchPersonalData.address}</div>
-                                                    <span>  <b>Phone :</b> {fetchPersonalData.mobile}</span>
+                                                    <div><span className="font_weight">Email  :</span>  {fetchPersonalData.personalEmail}</div>
+                                                    <div> <span className="font_weight">Location : </span > {fetchPersonalData.address}</div>
+                                                    <span>  <span className="font_weight">Phone :</span > {fetchPersonalData.mobile}</span>
                                                     {fetchPersonalData["experienceList"] ?
                                                         (
                                                             <Experience experienceData={fetchPersonalData.experienceList}></Experience>
