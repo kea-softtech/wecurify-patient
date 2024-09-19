@@ -69,8 +69,7 @@ const ShowInClinicAppointSlots = (props) => {
         <>
             <div style={{ flexWrap: 'wrap' }}>
                 <span className="font_weight " style={{ color: "black" }}>
-                    {slotDate}
-                    Fees - <FaRupeeSign /> {session.fees} /-
+                    {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
                 </span>
                 <section className=" radiobutton">
                     {sessionSlot.map((item, index) => (

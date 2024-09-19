@@ -59,7 +59,7 @@ export default function GetDependent(props) {
     }
     return (
         <>
-            {fetchPatientData["dependent"] && fetchPatientData["dependent"].length > 0 ?
+            {fetchPatientData["dependent"] && fetchPatientData["dependent"] ?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
                         <>
@@ -68,8 +68,9 @@ export default function GetDependent(props) {
                                     <h3>dependent Details</h3>
                                 </div>
                             </div>
+
                             <div className="patientDataStyle">
-                                {fetchPatientData["dependent"]&&fetchPatientData["dependent"].map((item, i) => {
+                                {fetchPatientData["dependent"] && fetchPatientData["dependent"].map((item, i) => {
                                     return (
                                         <div key={i} className="row">
                                             <div className='col-md-7'>
@@ -88,6 +89,7 @@ export default function GetDependent(props) {
                     </div>
                 </div>
                 : null}
+            {/* <div className=" font_weight clinicHistory" >Appointments are not Available</div> */}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Are you sure?</Modal.Title>

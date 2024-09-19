@@ -12,8 +12,8 @@ function AppointmentBookingSection() {
     const { doctorId } = useParams()
     const [clinicData, setClinicData] = useState(null)
     const [doctorName, setDoctorName] = useState([])
-    const { getDrInfo } = AuthApi()
     const [isLoading, setIsLoading] = useState(true);
+    const { getDrInfo } = AuthApi()
 
     useEffect(() => {
         doctorData()

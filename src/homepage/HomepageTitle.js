@@ -32,7 +32,7 @@ function HomePageTitle() {
                 {loggedIn === true ?
                     <div className="row">
                         <div className="col-xl-6 text_align ">
-                            <h4 className="colorNorm mt-3">Welcome to wecurify,{patientData.name}</h4>
+                            <h4 className="colorNorm mt-3">Welcome to wecurify,&nbsp;{patientData.name}</h4>
                         </div>
                         <div className="col-xl-6 align-items-right mt-3">
                             <NavLink to="/doctors">
