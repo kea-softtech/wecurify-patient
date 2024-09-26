@@ -24,6 +24,7 @@ import { FetchDoctorPersonalDetails } from './doctor/Profile/Personal/Partial/fe
 import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
 import FetchPatientProfile from "./patient/FetchPatientProfile";
 import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
+import { ClinicList } from "./patient/clinicList";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -38,7 +39,8 @@ function MainContainer() {
       <Route path="/patientprofile/:patientId" element={<GetLoginPatientProfile />} />
       <Route path="/confirm" element={<SlotConfirmation />} />
       <Route path="/doctors" element={<DoctorList />} />
-      <Route path="/booking/:doctorId" element={<AppointmentBookingSection />} />
+      <Route path="/booking/:doctorId" element={<ClinicList />} />
+      <Route path="/bookAppointment/:doctorId/:clinicId" element={<AppointmentBookingSection />} />
       <Route path="/profile/:doctorId" element={<FetchDoctorPersonalDetails />} />
       <Route path="/clinicinfo/:clinicId" element={<ClinicInto />} />
       <Route path="/calender/:patientId" element={<Calender />} />

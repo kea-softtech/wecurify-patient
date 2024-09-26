@@ -39,13 +39,9 @@ const AddClinic = (props) => {
 
     function handleChange(event) {
         const { name, value } = event.target;
-        setClinicInfo(prevInput => {
-            return {
-                ...prevInput,
-                [name]: value
-            }
-        })
+        setClinicInfo({ ...clinicInfo, [name]: value });
     }
+
     const handleService = (e, selectedValue) => {
         e.preventDefault()
         setSelectedService(selectedValue)
@@ -68,7 +64,6 @@ const AddClinic = (props) => {
         const fileRef = ref(getStorage(), uuid.v4());
 
         const result = await uploadBytes(fileRef, blob);
-        // blob.close();
         return await getDownloadURL(fileRef);
     }
     async function sendClinicInfo(e) {
@@ -155,7 +150,7 @@ const AddClinic = (props) => {
                     </MainInput>
                 </div>
                 <div className="form-group">
-                    <label className="font_weight"v>IFSC Code</label>
+                    <label className="font_weight" v>IFSC Code</label>
                     <MainInput
                         type="text"
                         name="IFSCcode"

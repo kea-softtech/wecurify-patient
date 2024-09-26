@@ -7,38 +7,48 @@ import { Link, useParams } from "react-router-dom";
 import { MainNav } from "../mainComponent/mainNav";
 import { Wrapper } from "../mainComponent/Wrapper";
 import Loader from "./patientHistory/Loader";
+import ClinicApi from "../services/ClinicApi";
 
 function AppointmentBookingSection() {
-    const { doctorId } = useParams()
+    const { doctorId, clinicId } = useParams()
     const [clinicData, setClinicData] = useState(null)
     const [doctorName, setDoctorName] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const { getDrInfo } = AuthApi()
+    const { getClinic } = ClinicApi()
 
     useEffect(() => {
-        doctorData()
+        doctorData();
+        clinic();
     }, [])
 
     function doctorData() {
-        setIsLoading(true);
         getDrInfo({ doctorId })
             .then((res) => {
                 setDoctorName(res.result[0])
-                setClinicData(res.result[0].clinicList)
+            })
+    }
+
+    function clinic() {
+        setIsLoading(true);
+        getClinic({ clinicId })
+            .then((res) => {
+                setClinicData(res)
             })
             .finally(() => {
                 setIsLoading(false);
             });
     }
+
     return (
         <Wrapper>
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/doctors`}>
+                        <Link to={`/booking/${doctorId}`}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
-                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Clinic List  </span>
+                        <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Book Appointment</span>
                     </div>
                     <div className="width50 row justifyContent">
                         <div className="appColor normal-font" align='right'>Dr. {doctorName.name}</div>
@@ -55,18 +65,12 @@ function AppointmentBookingSection() {
                             </div>
                             :
                             <>
-                                {clinicData && clinicData.length > 0 ?
-                                    <div>
-                                        {clinicData && clinicData.map((clinicItem, id) => (
-                                            <MainAccordion key={id} icon={<FaClinicMedical />} title={clinicItem.clinicName}>
-                                                <DoctorAppointmentType clinicData={clinicItem} doctorId={doctorId} />
-                                            </MainAccordion>
-                                        ))}
-                                    </div>
-                                    : <div className="clinicHistory mb-3 fontS font-weight" >
-                                       Clinics are not available.
-                                        </div>
-                                }
+                                <div>
+                                    <MainAccordion icon={<FaClinicMedical />} title={clinicData.clinicName}>
+                                        <DoctorAppointmentType clinicData={clinicData} doctorId={doctorId} />
+                                    </MainAccordion>
+                                </div>
+
                             </>}
                     </div>
                 </div>

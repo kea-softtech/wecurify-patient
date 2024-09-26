@@ -127,7 +127,7 @@ export default function DoctorList() {
                                                         </span>
                                                         <div className=' appointmentBtn' align='right'>
                                                             <NavLink onClick={(e) => BookAppointments(details, e)}>
-                                                                <button className='btn appColor helperBtn'>Book Appointment</button>
+                                                                <button className='btn appColor helperBtn'>Book Clinic</button>
                                                             </NavLink>
                                                         </div>
                                                     </div>
