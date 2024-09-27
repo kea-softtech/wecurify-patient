@@ -40,9 +40,9 @@ export default function Header() {
                 <div className="row">
                     <div className="width30">
                         <div id="logo_home" align='left'>
-                            <Link to={`/`}>
+                            {/* <Link to={`/`}> */}
                                 <img className='appLogo' src={appLogo} alt="Something Went Wrong" />
-                            </Link>
+                            {/* </Link> */}
                         </div>
                     </div>
                     <div className="width70">

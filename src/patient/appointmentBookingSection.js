@@ -3,7 +3,7 @@ import { DoctorAppointmentType } from "../patient/doctorAppointmentType";
 import { MainAccordion } from "../mainComponent/MainAccordion";
 import { FaClinicMedical } from "react-icons/fa";
 import AuthApi from "../services/AuthApi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MainNav } from "../mainComponent/mainNav";
 import { Wrapper } from "../mainComponent/Wrapper";
 import Loader from "./patientHistory/Loader";
@@ -16,7 +16,7 @@ function AppointmentBookingSection() {
     const [isLoading, setIsLoading] = useState(true);
     const { getDrInfo } = AuthApi()
     const { getClinic } = ClinicApi()
-
+    const navigate = useNavigate()
     useEffect(() => {
         doctorData();
         clinic();
@@ -40,12 +40,15 @@ function AppointmentBookingSection() {
             });
     }
 
+    const goBack = () => {
+        navigate(-1)
+    }
     return (
         <Wrapper>
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/booking/${doctorId}`}>
+                        <Link onClick={goBack}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Book Appointment</span>

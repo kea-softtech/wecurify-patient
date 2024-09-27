@@ -65,7 +65,7 @@ export default function GetDependent(props) {
                         <>
                             <div className="underline">
                                 <div className="form_title">
-                                    <h3>dependent Details</h3>
+                                    <h3>Dependent Details</h3>
                                 </div>
                             </div>
 
