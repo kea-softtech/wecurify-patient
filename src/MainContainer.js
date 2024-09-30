@@ -53,9 +53,9 @@ function MainContainer() {
       </Route> */}
       <Route path="consultation/:reportId" element={<PatientMedicalReport />} />
 
-      <Route path="/patientappointment/:patientId" element={loggedIn ? <PatientHistory /> : null} />
-      <Route path="/patientinfo/:patientId" element={loggedIn ? <PatientProfile /> : null} />
-      <Route path="/fetchpatientprofile/:patientId" element={loggedIn ? <FetchPatientProfile /> : null} />
+      <Route path="/patientappointment/:patientId" element={<PatientHistory />} />
+      <Route path="/patientinfo/:patientId" element={<PatientProfile />} />
+      <Route path="/fetchpatientprofile/:patientId" element={<FetchPatientProfile />} />
 
       <Route path="/clinic" element={<Clinic />} />
 
