@@ -6,6 +6,7 @@ import { setSessionData } from '../recoil/atom/setSessionData';
 import { setSlotData } from '../recoil/atom/setSlotData';
 import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
+import { setAppointmentType } from '../recoil/atom/setAppointmentType';
 
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
@@ -16,6 +17,7 @@ export default function GetDependent(props) {
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
     const navigate = useNavigate()
+    const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
 
     const handleShow = (item) => {
         setbookSlot(item)
@@ -43,6 +45,7 @@ export default function GetDependent(props) {
             "selectedDate": sessionData.selectedDate,
             "timeSlot": sessionData.session.timeSlot,
             "startDate": startDate,
+            "selectedType": selectedType,
             "status": "Ongoing",
             "payment": "hold"
         }

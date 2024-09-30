@@ -11,8 +11,8 @@ import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
 import { Modal } from "react-bootstrap";
-import { PatientMpin } from "./patientMpin/PatientMpin";
 import { PatientLoginMpin } from "./patientMpin/PatientLoginMpin";
+import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 
 const ShowInClinicAppointSlots = (props) => {
     const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
@@ -21,6 +21,8 @@ const ShowInClinicAppointSlots = (props) => {
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [loggedIn] = useRecoilState(setloggedIn)
+    const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
+    console.log('=====selectedType===', selectedType)
     const [show, setShow] = useState(false);
     const [bookingSlots, setBookingSlots] = useState([]);
     const { getbookedSlots } = PatientApi();
@@ -28,12 +30,14 @@ const ShowInClinicAppointSlots = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!selectedType) {
+            setSelectedType("In Clinic");
+        }
         availableSlots()
         setSessionsData(data)
         setDoctorsId(doctorsId)
     }, [props])
 
-    const handleshow = () => setShow(true);
     const handleClose = () => setShow(false);
 
     const handleShow = (item) => {
@@ -65,12 +69,47 @@ const ShowInClinicAppointSlots = (props) => {
             })
 
     }
+
+    const handleAppointmentType = (e) => {
+        const value = e.target.value;
+        setSelectedType(value || "In Clinic");
+    };
+
     return (
         <>
             <div style={{ flexWrap: 'wrap' }}>
-                <span className="font_weight " style={{ color: "black" }}>
-                    {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
-                </span>
+                <div className="row">
+                    <div align='left'
+                        className="font_weight col-sm-6"
+                        style={{ color: "black" }}>
+                        {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
+                    </div>
+
+                    <div align='right' className="col-sm-6">
+                        <input
+                            type="radio"
+                            name='appointment'
+                            value='In Clinic'
+                            onChange={handleAppointmentType}
+                            className=" medicineCheckbox"
+                            checked={selectedType === 'In Clinic'}
+                        />
+                        <span className="font_weight  ">
+                            &nbsp;In Clinic&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <input
+                            type="radio"
+                            name='appointment'
+                            value='Video Consultation'
+                            onChange={handleAppointmentType}
+                            className=" medicineCheckbox "
+                            checked={selectedType === 'Video Consultation'}
+                        />
+                        <span className="font_weight  ">
+                            &nbsp;Video Consultation
+                        </span>
+                    </div>
+                </div>
                 <section className=" radiobutton">
                     {sessionSlot.map((item, index) => (
                         <>
