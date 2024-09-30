@@ -22,7 +22,6 @@ const ShowInClinicAppointSlots = (props) => {
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [loggedIn] = useRecoilState(setloggedIn)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
-    console.log('=====selectedType===', selectedType)
     const [show, setShow] = useState(false);
     const [bookingSlots, setBookingSlots] = useState([]);
     const { getbookedSlots } = PatientApi();
@@ -112,32 +111,29 @@ const ShowInClinicAppointSlots = (props) => {
                 </div>
                 <section className=" radiobutton">
                     {sessionSlot.map((item, index) => (
-                        <>
-                            <div key={index}>
-                                {checkSlotAvailability(item)
-                                    ?
-                                    <div key={index}>
-                                        <div
-                                            className="disabled-div"
-                                            type="radio"
-                                            time={slots}>
-                                            <label>{item.time}</label>
-                                        </div>
+                        <div key={index}>
+                            {checkSlotAvailability(item)
+                                ?
+                                <div key={index}>
+                                    <div
+                                        className="disabled-div"
+                                        type="radio"
+                                        time={slots}>
+                                        <label>{item.time}</label>
                                     </div>
-                                    :
-                                    <div key={index}>
-                                        <button
-                                            onClick={() => handleShow(item)}
-                                            className="btn_1"
-                                            type="radio"
-                                            time={slots}>
-                                            {item.time}
-                                        </button>
-                                    </div>
-                                }
-                            </div>
-
-                        </>
+                                </div>
+                                :
+                                <div key={index}>
+                                    <button
+                                        onClick={() => handleShow(item)}
+                                        className="btn_1"
+                                        type="radio"
+                                        time={slots}>
+                                        {item.time}
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     ))}
                 </section>
             </div >

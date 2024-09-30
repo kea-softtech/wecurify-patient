@@ -99,8 +99,8 @@ function ShowDoctorInClinicAppointment(props) {
                                 setShowSlot(null)
                             }}>
                             {dayMonth.map((item, index) => (
-                                <Carousel.Item key={index} onClick={() => handleChange(item)}>
-                                    <div style={{ height: 100, background: "white", color: "black" }}>
+                                <Carousel.Item onClick={() => handleChange(item)}>
+                                    <div key={index}  style={{ height: 100, background: "white", color: "black" }}>
                                         <Carousel.Caption>
                                             <Link
                                                 to="#"
