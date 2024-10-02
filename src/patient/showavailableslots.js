@@ -42,12 +42,12 @@ const ShowInClinicAppointSlots = (props) => {
     const handleShow = (item) => {
         setSlotItem('')
         setSlotItem(item)
-        if (loggedIn !== true) {
-            setShow(true)
-            // navigate(`/patient`)
-        } else {
-            navigate(`/patientprofile/${patientData}`)
-        }
+        setShow(true)
+        // if (loggedIn !== true) {
+        //     setShow(true)
+        // } else {
+        //     navigate(`/patientprofile/${patientData}`)
+        // }
     }
 
     const checkSlotAvailability = (slot) => {
