@@ -7,6 +7,7 @@ import { Button, Modal } from "react-bootstrap";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setDependentId } from "../recoil/atom/setDependentId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
+import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
@@ -15,6 +16,8 @@ function FetchPatientInfo(props) {
     const [sessionData] = useRecoilState(setSessionData)
     const [dependentId] = useRecoilState(setDependentId)
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
+    const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
+    console.log('selected--------', selectedType)
     const { fetchPatient, paymentInfo } = PatientApi()
     const navigate = useNavigate()
 
@@ -57,6 +60,7 @@ function FetchPatientInfo(props) {
             "selectedDate": sessionData.selectedDate,
             "timeSlot": sessionData.session.timeSlot,
             "startDate": startDate,
+            "selectedType":selectedType,
             "status": "Ongoing",
             "payment": "hold"
         }
@@ -69,7 +73,7 @@ function FetchPatientInfo(props) {
                 }
                 handleClose()
             })
-           
+
     }
 
     return (
@@ -100,8 +104,8 @@ function FetchPatientInfo(props) {
                     <div className='row'>
                         <div className="mr-2   ml-1" >
                             <Button
-                             onClick={() => handleShow(slotItem)} 
-                             className="radius  buttonPatient appColor">
+                                onClick={() => handleShow(slotItem)}
+                                className="radius  buttonPatient appColor">
                                 Book Appointment
                             </Button>
                         </div>
