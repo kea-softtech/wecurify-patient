@@ -61,7 +61,7 @@ export default function CreatePatientLoginMpin() {
                                     <Outlet />
                                 </>
                                 : <div className="mr-3 " align='left'>
-                                    <MainButtonInput onClick={handleSubmit}>go</MainButtonInput>
+                                    <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                                 </div>
                             }
                             {isError === true ?
