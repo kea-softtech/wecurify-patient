@@ -1,2 +1,2 @@
 ﻿# wecurify-patient
-changes added by shubhu- 2/10
+changes added by komal- 2/10
