@@ -10,7 +10,6 @@ import { setSessionData } from "../recoil/atom/setSessionData";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 
 export default function Header() {
-    // const [loggedIn] = useRecoilState(setloggedIn);
     const [doctorId, setDoctor] = useRecoilState(setDoctorId);
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn);
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
@@ -20,9 +19,9 @@ export default function Header() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (loggedIn === false) {
-            navigate("/");
-        }
+        // if (loggedIn === false) {
+        //     navigate("/");
+        // }
     }, [loggedIn])
 
     const handleLogout = () => {
@@ -48,9 +47,9 @@ export default function Header() {
                     <div className="width70">
                         <nav id="menu" className="main-menu">
                             {loggedIn ?
-                                <li className="fontSize"><Link className="font_weight" onClick={handleLogout} >Logout </Link></li>
+                                <li className="fontSize"><Link className="font_weight" onClick={handleLogout}> Logout </Link></li>
                                 :
-                                <li className="fontSize"><Link className="font_weight" to="/patient">Login </Link></li>
+                                <li className="fontSize"><Link className="font_weight" to="/patient"> Login </Link></li>
                             }
                         </nav>
                     </div>
