@@ -19,22 +19,22 @@ export default function CreatePatientLoginMpin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError(true)
+            setIsError("Please Enter Valid Mobile Number")
         }
         else {
             loginPatient({ mobile })
                 .then(data => {
                     if (data.data.isLoggedIn !== true) {
                         alert(data.data.otp)
+                        setShowOTP(true)
                         setIsError(false)
                     }
                     else {
-                        setIsError(true)
+                        setIsError("Mobile number is already exit")
                     }
                     setPatientId(data.data._id)
                     let item = data.data
                     setLoginData(item)
-                    setShowOTP(true)
                 })
         }
     }
@@ -64,9 +64,9 @@ export default function CreatePatientLoginMpin() {
                                     <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                                 </div>
                             }
-                            {isError === true ?
+                            {isError !== false ?
                                 <span className="validation mb-2 ml-3">
-                                    Please Enter Valid Mobile Number
+                                   {isError}
                                 </span>
                                 : null
                             }

@@ -11,9 +11,9 @@ import ClinicApi from "../services/ClinicApi";
 
 function AppointmentBookingSection() {
     const { doctorId, clinicId } = useParams()
-    const [clinicData, setClinicData] = useState(null)
-    const [doctorName, setDoctorName] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
+    const [ clinicData, setClinicData] = useState(null)
+    const [ doctorName, setDoctorName] = useState([])
+    const [ isLoading, setIsLoading] = useState(true);
     const { getDrInfo } = AuthApi()
     const { getClinic } = ClinicApi()
     const navigate = useNavigate()
