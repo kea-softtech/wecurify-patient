@@ -30,7 +30,7 @@ export default function CreatePatientLoginMpin() {
                         setIsError(false)
                     }
                     else {
-                        setIsError("Mobile number is already exit")
+                        setIsError("Mobile number is already exists")
                     }
                     setPatientId(data.data._id)
                     let item = data.data
