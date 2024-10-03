@@ -84,7 +84,7 @@ const ShowInClinicAppointSlots = (props) => {
                         {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
                     </div>
 
-                    <div align='right' className="col-sm-6">
+                    <div align='right' style={{ color: "black" }} className="col-sm-6">
                         <input
                             type="radio"
                             name='appointment'
