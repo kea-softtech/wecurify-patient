@@ -1,32 +1,37 @@
 import { slots } from "../common/constant";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import PatientApi from "../services/PatientApi";
-import { useEffect, useState } from "react";
 import moment from "moment";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
-import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
 import { Modal } from "react-bootstrap";
 import { PatientLoginMpin } from "./patientMpin/PatientLoginMpin";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
+import { setNewPatientId } from "../recoil/atom/setNewPatientId";
+import CreatePatientLoginMpin from "./patientMpin/CreatePatientLoginMpin";
+import ForgotPatientLoginMpin from "./patientMpin/ForgotPatientLoginMpin";
 
 const ShowInClinicAppointSlots = (props) => {
     const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [loggedIn] = useRecoilState(setloggedIn)
+    const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const [show, setShow] = useState(false);
     const [bookingSlots, setBookingSlots] = useState([]);
+    const [showCreate, setShowCreate] = useState(false);
+    const [showForgot, setShowForgot] = useState(false);
+
     const { getbookedSlots } = PatientApi();
     const data = props;
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         if (!selectedType) {
@@ -69,10 +74,22 @@ const ShowInClinicAppointSlots = (props) => {
 
     }
 
+    const handleCreateShow = () => {
+        setShowCreate(true); 
+        setShow(false)
+    };
+    const handleCreateClose = () => setShowCreate(false);
+
     const handleAppointmentType = (e) => {
         const value = e.target.value;
         setSelectedType(value || "In Clinic");
     };
+
+    const handleForgotShow = () => {
+        setShowForgot(true);
+        setShow(false)
+    }
+    const handleForgotClose = () => setShowForgot(false);
 
     return (
         <>
@@ -143,7 +160,28 @@ const ShowInClinicAppointSlots = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <PatientLoginMpin
-                        onSubmit={handleClose} />
+                        onSubmit={handleClose}  
+                        onCreateAccount={handleCreateShow}                   
+                        onForgotAccount={handleForgotShow}                   
+                    />
+                </Modal.Body>
+            </Modal>
+
+            <Modal show={showForgot} onHide={handleForgotClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reset MPIN</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ForgotPatientLoginMpin patientId={patientId} onSubmit={handleForgotClose} />
+                </Modal.Body>
+            </Modal>
+
+            <Modal show={showCreate} onHide={handleCreateClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create Account</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CreatePatientLoginMpin onSubmit={handleCreateClose} />
                 </Modal.Body>
             </Modal>
         </>

@@ -17,7 +17,6 @@ function FetchPatientInfo(props) {
     const [dependentId] = useRecoilState(setDependentId)
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
-    console.log('selected--------', selectedType)
     const { fetchPatient, paymentInfo } = PatientApi()
     const navigate = useNavigate()
 

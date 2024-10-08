@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { MainInput } from "../../mainComponent/mainInput";
@@ -19,7 +19,7 @@ export default function CreatePatientLoginMpin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError("Please Enter Valid Mobile Number")
+            setIsError("Please enter valid mobile number")
         }
         else {
             loginPatient({ mobile })
