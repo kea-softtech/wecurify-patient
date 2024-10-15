@@ -10,20 +10,16 @@ import { setDoctorId } from "../recoil/atom/setDoctorId";
 import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
-    // const { patientAppointmentId } = useParams()
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
     const [patientData, setPatientData] = useState([])
-    // const [AppoinmentData, setAppointmentData] = useState([])
-    // const { getappointment } = AppointmentApi()
     const { getDrInfo } = AuthApi()
     const { fetchPatient } = PatientApi()
 
     useEffect(() => {
         doctorInfo()
         patientInfo()
-        // getAppointmentData()
     }, [])
 
     const doctorInfo = () => {
@@ -39,12 +35,7 @@ export default function SlotConfirmation() {
                 setPatientData(res[0])
             })
     }
-    // const getAppointmentData = () => {
-    //     getappointment(patientAppointmentId)
-    //         .then((res) => {
-    //             setAppointmentData(res)
-    //         })
-    // }
+
     return (
         <Wrapper>
             <MainNav>
@@ -79,7 +70,7 @@ export default function SlotConfirmation() {
                                         </Link>
                                         <Link to={`/`}>
                                             <button align='right' className='btn appColor helperBtn'>Go To Dashboard</button>
-                                        </Link> 
+                                        </Link>
                                     </> :
                                     <Link to={`/`}>
                                         <button align='right' className='btn appColor helperBtn'>Done</button>

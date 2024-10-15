@@ -27,7 +27,7 @@ function ShowPatientOtp(props) {
     return (
 
         <>
-            <div className="row">
+            <div className="">
                 {getOTP === loginotp && data === true ?
                     <ForgotMpin
                         doctorId={doctorId}
@@ -46,7 +46,7 @@ function ShowPatientOtp(props) {
                             </MainInput>
                             {errormessage && (<span className="validation">{errormessage}</span>)}
                         </div>
-                        <div className="width_20 ml-2">
+                        <div className="width_20">
                             <MainButtonInput onClick={handleSubmit}>Login</MainButtonInput>
                         </div>
                     </>

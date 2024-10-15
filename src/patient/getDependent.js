@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PatientApi from '../services/PatientApi';
 import { useRecoilState } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { setSlotData } from '../recoil/atom/setSlotData';
 import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 import { setAppointmentType } from '../recoil/atom/setAppointmentType';
+import AuthApi from '../services/AuthApi';
 
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
@@ -14,10 +15,16 @@ export default function GetDependent(props) {
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
+    const [doctorName, setDoctorName] = useState([])
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
+    const { addDoctorInformation } = AuthApi()
     const navigate = useNavigate()
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
+
+    useEffect(() => {
+        getDoctorData()
+    }, [])
 
     const handleShow = (item) => {
         setbookSlot(item)
@@ -26,6 +33,16 @@ export default function GetDependent(props) {
     const handleClose = () => {
         setShow(false)
     }
+    function getDoctorData() {
+        addDoctorInformation({ doctorId })
+            .then((response) => {
+                let fullName = response.name.split(' '),
+                    firstName = fullName[0],
+                    lastName = fullName[fullName.length - 1];
+                setDoctorName("Dr. " + lastName)
+            })
+    }
+
     const handleSelectedSlot = (item) => {
         const startDate = (sessionData.selectedDate + " " + slotItem.time)
         const slotId = slotItem._id
@@ -46,6 +63,8 @@ export default function GetDependent(props) {
             "timeSlot": sessionData.session.timeSlot,
             "startDate": startDate,
             "selectedType": selectedType,
+            "patientmobile": fetchPatientData.mobile,
+            "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold"
         }

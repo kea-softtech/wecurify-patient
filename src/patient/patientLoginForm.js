@@ -13,19 +13,26 @@ function PatientLoginForm(props) {
     const [showOTP, setShowOTP] = useState(false)
     const [loginData, setLoginData] = useState([])
     const [patientData, setPatientData] = useRecoilState(setNewPatientId);
+    const [message, setMessage] = useState(false)
     const { patientLogin } = PatientApi()
     const getOTPSection = (e) => {
         e.preventDefault()
         if (mobile.length < 10) {
-            setIsError('Please Enter valid mobile number.')
+            setIsError('Mobile number must be 10 digits.')
         }
         else {
             patientLogin({ mobile: mobile })
                 .then(data => {
-                    setPatientData(data._id)
-                    alert(data.otp)
-                    setLoginData(data)
-                    setShowOTP(true)
+                    if (data.isLoggedIn !== true) {
+                        setPatientData(data._id)
+                        setLoginData(data)
+                        setMessage(true)
+                        setShowOTP(true)
+                    }
+                    else {
+                        setIsError('Mobile number is already exists')
+                    }
+                   
                 })
         }
     };
@@ -40,16 +47,17 @@ function PatientLoginForm(props) {
                             <div className="box_login last">
                                 <div className="full-width">
                                     <div className="row mt-3">
-                                        <div className="width75">
-                                            <MainInput
-                                                type="text"
+                                        <div className="width75  mb-2">
+                                            <input 
                                                 name="mobile"
                                                 value={mobile.mobile}
                                                 maxLength={10}
                                                 pattern="[+-]?\d+(?:[.,]\d+)?"
                                                 onChange={(e) => setMobile(e.target.value)}
-                                                placeholder="Phone Number (+XX)">
-                                            </MainInput>
+                                                placeholder="Phone Number (+XX)"
+                                                className="form-control" 
+                                            />
+                                            {message && (<span className="sendotp-message"> OTP is sent to the mobile number</span>)}
                                             {<span className="validation">{isError}</span>}
                                         </div>
                                         <div className="width25 ml-2">

@@ -31,7 +31,6 @@ const ShowInClinicAppointSlots = (props) => {
 
     const { getbookedSlots } = PatientApi();
     const data = props;
-    // const navigate = useNavigate();
 
     useEffect(() => {
         if (!selectedType) {
@@ -48,11 +47,6 @@ const ShowInClinicAppointSlots = (props) => {
         setSlotItem('')
         setSlotItem(item)
         setShow(true)
-        // if (loggedIn !== true) {
-        //     setShow(true)
-        // } else {
-        //     navigate(`/patientprofile/${patientData}`)
-        // }
     }
 
     const checkSlotAvailability = (slot) => {

@@ -8,6 +8,7 @@ import { setSessionData } from "../recoil/atom/setSessionData";
 import { setDependentId } from "../recoil/atom/setDependentId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
+import AuthApi from "../services/AuthApi";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
@@ -15,19 +16,32 @@ function FetchPatientInfo(props) {
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
     const [dependentId] = useRecoilState(setDependentId)
+    const [doctorName, setDoctorName] = useState([])
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const { fetchPatient, paymentInfo } = PatientApi()
+    const { addDoctorInformation } = AuthApi()
     const navigate = useNavigate()
 
     useEffect(() => {
         getAllPatientData()
+        getDoctorData()
     }, [])
 
     function getAllPatientData() {
         fetchPatient({ patientId })
             .then(response => {
                 setFetchPatientData(response[0])
+            })
+    }
+
+    function getDoctorData() {
+        addDoctorInformation({ doctorId })
+            .then((response) => {
+                let fullName = response.name.split(' '),
+                    firstName = fullName[0],
+                    lastName = fullName[fullName.length - 1];
+                setDoctorName("Dr. " + lastName)
             })
     }
 
@@ -59,7 +73,9 @@ function FetchPatientInfo(props) {
             "selectedDate": sessionData.selectedDate,
             "timeSlot": sessionData.session.timeSlot,
             "startDate": startDate,
-            "selectedType":selectedType,
+            "selectedType": selectedType,
+            "patientmobile": fetchPatientData.mobile,
+            "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold"
         }

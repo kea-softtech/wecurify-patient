@@ -17,7 +17,6 @@ function PatientLoginMpin(props) {
     const [mobile, setMobile] = useState("");
     const [password, setPassword] = useState("");
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState(false);
     const [slotItem] = useRecoilState(setSlotData);
     const { patientSignIn } = PatientApi();
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
@@ -25,13 +24,10 @@ function PatientLoginMpin(props) {
     const [showForgot, setShowForgot] = useState(false);
     const navigate = useNavigate();
 
-    // const handleForgotShow = () => setShowForgot(true);
-    // const handleForgotClose = () => setShowForgot(false);
-
     const handleMpin = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError(true);
+            setIsError('Please Enter valid mobile number.');
         } else {
             patientSignIn({ mobile, password })
                 .then(data => {
@@ -40,10 +36,10 @@ function PatientLoginMpin(props) {
                         setIsLoggedIn(data.data.isLoggedIn);
                         navigate(slotItem._id ? `/patientprofile/${data.data._id}` : `/`);
                     } else {
-                        setIsError(true);
+                        setIsError('You have entered an invalid credentails');
                     }
                 })
-                .catch(() => setError(true));
+                .catch(() => setIsError('server error'));
         }
     };
 
@@ -82,28 +78,9 @@ function PatientLoginMpin(props) {
                             </div>
                         </div>
                     </div>
-                    {isError && <div className="validation mb-2">Enter valid mobile number and password</div>}
-                    {error && <div className="validation mb-2">Server error</div>}
+                    <div className="validation mb-2">{isError}</div>
                 </div>
             </form>
-
-            {/* <Modal show={showForgot} onHide={handleForgotClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reset MPIN</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ForgotPatientLoginMpin patientId={patientId} onSubmit={handleForgotClose} />
-                </Modal.Body>
-            </Modal> */}
-
-            {/* <Modal show={showCreate} onHide={handleCreateClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Create Account</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CreatePatientLoginMpin modalShowBox={onSubmit} patientId={patientId} onSubmit={handleCreateClose} />
-                </Modal.Body>
-            </Modal> */}
         </div>
     );
 }

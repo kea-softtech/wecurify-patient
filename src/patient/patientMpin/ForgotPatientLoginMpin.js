@@ -12,26 +12,27 @@ export default function ForgotPatientLoginMpin(props) {
     const [isError, setIsError] = useState(false);
     const [doctorId, setdoctorId] = useRecoilState(setDoctorId);
     const [loginData, setLoginData] = useState([])
+    const [message, setMessage] = useState(false)
     const { validLoginPatient } = PatientApi();
     const [showOTP, setShowOTP] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError(true)
+            setIsError('Please Enter valid mobile number.')
         }
         else {
             validLoginPatient({ mobile })
                 .then(response => {
                     if (response.data.isLoggedIn === true) {
-                        alert(response.data.otp)
                         setIsError(false)
+                        setShowOTP(true)
+                        setMessage(true)
                     }
                     else {
-                        setIsError(true)
+                        setIsError('Entered mobile number is not register')
                     }
                     let item = response.data
                     setLoginData(item)
-                    setShowOTP(true)
                 })
         }
     };
@@ -39,17 +40,18 @@ export default function ForgotPatientLoginMpin(props) {
     return (
         <div >
             <label className='mb-2'>Mobile Number</label>
-            <div className="">
-                <MainInput
+            <div className="mb-2">
+                <input
                     name="mobile"
                     value={mobile.mobile}
-                    type="text"
                     maxLength={10}
-                    minLength={10}
                     pattern="[+-]?\d+(?:[.,]\d+)?"
                     onChange={(e) => setMobile(e.target.value)}
-                    placeholder="Phone Number (+XX)" >
-                </MainInput>
+                    placeholder="Phone Number (+XX)"
+                    className="form-control"
+                />
+                {message && (<span className="sendotp-message"> OTP is sent to the mobile number</span>)}
+                <div className="validation">{isError} </div>
             </div>
             {showOTP === true && isError !== true ?
                 <ShowPatientOtp
@@ -63,12 +65,7 @@ export default function ForgotPatientLoginMpin(props) {
                     <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                 </div>
             }
-            {isError === true ?
-                <div className="validation">
-                    Please enter valid mobile number.
-                </div>
-                : null
-            }
+
         </div>
     )
 }

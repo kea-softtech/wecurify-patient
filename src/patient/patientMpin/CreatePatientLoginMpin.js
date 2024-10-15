@@ -13,20 +13,22 @@ export default function CreatePatientLoginMpin() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [loginData, setLoginData] = useState([])
     const [showOTP, setShowOTP] = useState(false)
+    const [message, setMessage] = useState(false)
 
     const { loginPatient } = PatientApi();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError("Please enter valid mobile number")
+            setIsError("Mobile number must be 10 digits")
         }
         else {
             loginPatient({ mobile })
                 .then(data => {
                     if (data.data.isLoggedIn !== true) {
-                        alert(data.data.otp)
+                        // alert(data.data.otp)
                         setShowOTP(true)
+                        setMessage(true)
                         setIsError(false)
                     }
                     else {
@@ -40,40 +42,37 @@ export default function CreatePatientLoginMpin() {
     }
 
     return (
-            <div className="full-width ">
-                <form >
-                    <div className="clearfix">
-                        <div className="last" align="left">
+        <div className="full-width ">
+            <form >
+                <div className="clearfix">
+                    <div className="last" align="left">
+                        <div className="  mb-2">
                             <label className='mb-2'>Mobile Number</label>
-                            <MainInput
+                            <input
                                 name="mobile"
                                 value={mobile.mobile}
-                                type="text"
                                 maxLength={10}
                                 pattern="[+-]?\d+(?:[.,]\d+)?"
                                 onChange={(e) => setMobile(e.target.value)}
-                                placeholder="Phone Number (+XX)" >
-                            </MainInput>
-
-                            {showOTP === true && isError !== true ?
-                                <>
-                                    <LoginPatientOtp loginData={loginData} />
-                                    <Outlet />
-                                </>
-                                : <div className="mr-3 " align='left'>
-                                    <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
-                                </div>
-                            }
-                            {isError !== false ?
-                                <span className="validation mb-2 ml-3">
-                                   {isError}
-                                </span>
-                                : null
-                            }
+                                placeholder="Phone Number (+XX)"
+                                className="form-control"
+                            />
+                            {message && (<div className="sendotp-message mb-2"> OTP is sent to the mobile number</div>)}
+                            <div className=" validation">{isError}</div>
                         </div>
+                        {showOTP === true && isError !== true ?
+                            <>
+                                <LoginPatientOtp loginData={loginData} />
+                                <Outlet />
+                            </>
+                            : <div className="mr-3 " align='left'>
+                                <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
+                            </div>
+                        }
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 
     )
 }

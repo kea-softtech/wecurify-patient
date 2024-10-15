@@ -16,23 +16,24 @@ export default function ForgotPatientMpin() {
     const [showOTP, setShowOTP] = useState(false);
     const [doctorId, setdoctorId] = useRecoilState(setDoctorId);
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
+    const [message, setMessage] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (mobile.length < 10) {
-            setIsError(true)
+            setIsError('Mobile number must be 10 digits.')
         }
         else {
             validLoginPatient({ mobile })
                 .then(response => {
                     if (response.data.isLoggedIn === true) {
                         setPatientId(response.data._id)
-                        alert(response.data.otp)
                         setIsError(false)
+                        setMessage(true)
                         setShowOTP(true)
                     }
                     else {
-                        setIsError(true)
+                        setIsError('Entered mobile number is not register')
                     }
                     let item = response.data
                     setLoginData(item)
@@ -51,16 +52,19 @@ export default function ForgotPatientMpin() {
                                 <div className="clearfix">
                                     <div className=" last">
                                         <label className='mb-2'>Mobile Number</label>
-                                        <MainInput
-                                            name="mobile"
-                                            value={mobile.mobile}
-                                            type="text"
-                                            maxLength={10}
-                                            minLength={10}
-                                            pattern="[+-]?\d+(?:[.,]\d+)?"
-                                            onChange={(e) => setMobile(e.target.value)}
-                                            placeholder="Phone Number (+XX)" >
-                                        </MainInput>
+                                        <div className="mb-2">
+                                            <input 
+                                                name="mobile"
+                                                value={mobile.mobile}
+                                                maxLength={10}
+                                                pattern="[+-]?\d+(?:[.,]\d+)?"
+                                                onChange={(e) => setMobile(e.target.value)}
+                                                placeholder="Phone Number (+XX)"
+                                                className="form-control" 
+                                            />
+                                            {message && (<span className="sendotp-message mb-2"> OTP is sent to the mobile number</span>)}
+                                            {<span className="validation mb-2">{isError}</span>}
+                                        </div>
                                         {showOTP === true && isError !== true ?
                                             <ShowPatientOtp
                                                 doctorId={doctorId}
@@ -74,13 +78,6 @@ export default function ForgotPatientMpin() {
                                                     <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
                                                 </div>
                                             </>
-                                        }
-                                        {
-                                            isError === true ?
-                                                <div className="validation">
-                                                    Please enter valid mobile number.
-                                                </div>
-                                                : null
                                         }
                                     </div>
                                 </div>
