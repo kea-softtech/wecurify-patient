@@ -219,7 +219,6 @@ export default function PatientApi() {
         }
     }
     return {
-
         fetchSessionSlotsData,
         paymentInfo,
         getbookedSlots,
@@ -242,7 +241,7 @@ export default function PatientApi() {
         getPatientData,
         updatePatientData,
         validLoginPatient,
-        PatientForgetMpin
+        PatientForgetMpin,
     }
 
 

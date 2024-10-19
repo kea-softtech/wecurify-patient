@@ -14,7 +14,10 @@ export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
+    console.log('=========doctorData', doctorData)
+
     const [patientData, setPatientData] = useState([])
+    console.log('=========patie', patientData)
     // const [AppoinmentData, setAppointmentData] = useState([])
     // const { getappointment } = AppointmentApi()
     const { getDrInfo } = AuthApi()

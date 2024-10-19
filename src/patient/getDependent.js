@@ -7,6 +7,8 @@ import { setSlotData } from '../recoil/atom/setSlotData';
 import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 import { setAppointmentType } from '../recoil/atom/setAppointmentType';
+import AuthApi from '../services/AuthApi';
+import { generateToken } from '../firebase.config';
 
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
@@ -16,6 +18,7 @@ export default function GetDependent(props) {
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
+    const { notifyDoctor } = AuthApi()
     const navigate = useNavigate()
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
 
@@ -58,8 +61,58 @@ export default function GetDependent(props) {
                 }
                 handleClose()
             })
+        // requestToken(item._id, sessionData.session.doctorId, slotItem.time, sessionData.selectedDate)
         navigate(`/`)
     }
+    // const requestToken = (dependentId, doctorId, time, selectedDate) => {
+    //     const userType = {
+    //         doctor: 'doctor',
+    //         patient: 'patient'
+    //     }
+    //     generateToken(userType.doctor)
+    //         .then((doctorToken) => {
+    //             if (!doctorToken) {
+    //                 console.error('Failed to get doctor token.');
+    //                 return;
+    //             }
+    //             generateToken(userType.patient)
+    //                 .then((patientToken) => {
+    //                     if (!patientToken) {
+    //                         console.error('Failed to get patient token.');
+    //                         return;
+    //                     }
+    //                     sendNotification(dependentId, doctorId, time, selectedDate, patientToken, doctorToken, userType);
+    //                 })
+    //                 .catch((error) => {
+    //                     console.error('Error generating patient token:', error);
+    //                 });
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error generating doctor token:', error);
+    //         });
+    // };
+
+    // const sendNotification = async (dependentId, doctorId, time, selectedDate, patientToken, doctorToken, userType) => {
+    //     const notificationData = {
+    //         title: "New Appointment Booked",
+    //         doctorId: doctorId,
+    //         userType: userType,
+    //         patientToken: patientToken,
+    //         doctorToken: doctorToken,
+    //         patientId: dependentId,
+    //         selectedDate: selectedDate,
+    //         time: time,
+    //     };
+    //     try {
+    //         await notifyDoctor(notificationData)
+    //             .then((res) => {
+    //                 alert(res.notificationData.notification[0].body)
+    //             })
+    //     } catch (error) {
+    //         console.error('Error sending notification:', error);
+    //     }
+    // };
+
     return (
         <>
             {fetchPatientData["dependent"] && fetchPatientData["dependent"] ?
