@@ -27,9 +27,6 @@ function ForgotMpin(props) {
         setData({ ...data, [name]: value });
     };
 
-    const handleshow = () => {
-        setShow(true);
-    }
     const handleClose = () => setShow(false);
 
     const handleSubmit = (e) => {
@@ -37,7 +34,7 @@ function ForgotMpin(props) {
         const password = data.password.trim();
         const confirmPassword = data.confirmPassword.trim();
         if (password === '' || confirmPassword === '') {
-            setIsError(true);
+            setIsError("Please enter password");
         }
         else if (password === confirmPassword) {
             const bodyData = {
@@ -55,7 +52,7 @@ function ForgotMpin(props) {
                 })
         }
         else {
-            setIsError(true)
+            setIsError("Password must have 6 number")
         }
         
     };
@@ -86,12 +83,7 @@ function ForgotMpin(props) {
                     required>
                 </MainInput>
             </div>
-            {isError === true ?
-                <span className="validation mb-2 ml-3">Please enter password</span>
-                : null}
-            {error === true ?
-                <span className="validation mb-2 ml-3">Password must have 6 number</span>
-                : null}
+            <span className="validation mb-2 ml-3">{isError}</span>
             <div align='left'>
                 <MainButtonInput onClick={handleSubmit}>Set Mpin</MainButtonInput>
             </div>

@@ -17,20 +17,33 @@ function FetchPatientInfo(props) {
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
     const [dependentId] = useRecoilState(setDependentId)
+    const [doctorName, setDoctorName] = useState([])
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const { fetchPatient, paymentInfo } = PatientApi()
     const { notifyDoctor, saveNotification } = AuthApi();
+    const { addDoctorInformation } = AuthApi()
     const navigate = useNavigate()
 
     useEffect(() => {
         getAllPatientData()
+        getDoctorData()
     }, [])
 
     function getAllPatientData() {
         fetchPatient({ patientId })
             .then(response => {
                 setFetchPatientData(response[0])
+            })
+    }
+
+    function getDoctorData() {
+        addDoctorInformation({ doctorId })
+            .then((response) => {
+                let fullName = response.name.split(' '),
+                    firstName = fullName[0],
+                    lastName = fullName[fullName.length - 1];
+                setDoctorName("Dr. " + lastName)
             })
     }
 
@@ -63,6 +76,8 @@ function FetchPatientInfo(props) {
             "timeSlot": sessionData.session.timeSlot,
             "startDate": startDate,
             "selectedType": selectedType,
+            "patientmobile": fetchPatientData.mobile,
+            "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold"
         }

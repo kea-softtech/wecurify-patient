@@ -18,7 +18,7 @@ export default function CreatePatientMpin(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (loginData.mobile.length < 10) {
-            setIsError('Please Enter valid mobile number.')
+            setIsError('Mobile number must be 10 digits.')
         }
         else if (password === confirmPassword) {
             const bodyData = {

@@ -30,7 +30,7 @@ function LoginPatientOtp(props) {
     }
     return (
         <>
-            <div className="row">
+            <div>
                 {getOTP === loginotp && data === true ? <CreatePatientMpin loginData={loginData} /> :
                     <>
                         <div className="width_35">

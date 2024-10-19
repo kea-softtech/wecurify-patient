@@ -16,27 +16,28 @@ export default function CreatePatientLogin() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [showOTP, setShowOTP] = useState(false)
     const [loginData, setLoginData] = useState([])
+    const [message, setMessage] = useState(false)
     const { loginPatient } = PatientApi()
     const navigate = useNavigate()
     const getOTPSection = (e) => {
         e.preventDefault()
         if (mobile.length < 10) {
-            setIsError(true)
+            setIsError('Mobile number must be 10 digits')
         }
         else {
             loginPatient({ mobile })
                 .then(data => {
                     if (data.data.isLoggedIn !== true) {
-                        alert(data.data.otp)
+                        setPatientId(data.data._id)
+                        let item = data.data
+                        setLoginData(item)
+                        setMessage(true)
+                        setShowOTP(true)
                         setIsError(false)
                     }
                     else {
-                        setIsError(true)
+                        setIsError('Mobile number is already exists')
                     }
-                    setPatientId(data.data._id)
-                    let item = data.data
-                    setLoginData(item)
-                    setShowOTP(true)
                 })
         }
     }
@@ -57,33 +58,29 @@ export default function CreatePatientLogin() {
                                     <div className=" clearfix">
                                         <div className="last" align="left">
                                             <label className='mb-2'>Mobile Number</label>
-                                            <MainInput
-                                                name="mobile"
-                                                value={mobile.mobile}
-                                                type="text"
-                                                maxLength={10}
-                                                pattern="[+-]?\d+(?:[.,]\d+)?"
-                                                onChange={(e) => setMobile(e.target.value)}
-                                                placeholder="Phone Number (+XX)" >
-                                            </MainInput>
-
+                                            <div className='mb-2'>
+                                                <input
+                                                    name="mobile"
+                                                    value={mobile.mobile}
+                                                    maxLength={10}
+                                                    pattern="[+-]?\d+(?:[.,]\d+)?"
+                                                    onChange={(e) => setMobile(e.target.value)}
+                                                    placeholder="Phone Number (+XX)"
+                                                    className="form-control mb-2"
+                                                />
+                                                {message && (<span className="sendotp-message  mb-2"> OTP is sent to the mobile number</span>)}
+                                                <div className="mb-2 validation">{isError}</div>
+                                            </div>
                                             {showOTP === true && isError !== true ?
                                                 <>
                                                     <LoginPatientOtp loginData={loginData} />
                                                     <Outlet />
                                                 </>
                                                 : <div align='left'>
-                                                    <MainButtonInput onClick={getOTPSection}>go</MainButtonInput>
+                                                    <MainButtonInput onClick={getOTPSection}>Go</MainButtonInput>
                                                 </div>
                                             }
                                         </div>
-                                        {isError === true ?
-                                            <div className="mb-2 validation">
-                                                Please enter valid mobile number.
-                                            </div>
-                                            : null
-                                        }
-
                                     </div>
                                 </form>
                                 <div align='right'>

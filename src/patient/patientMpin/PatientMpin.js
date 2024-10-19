@@ -24,7 +24,7 @@ function PatientMpin(props) {
     const handleMpin = (e) => {
         e.preventDefault()
         if (mobile.length < 10) {
-            setIsError(true)
+            setIsError('Mobile number must be 10 digits.')
         }
         else {
             patientSignIn({ mobile, password })
@@ -40,11 +40,11 @@ function PatientMpin(props) {
                             setIsLoggedIn(data.data.isLoggedIn)
                         }
                         else {
-                            setIsError(true)
+                            setIsError('You have entered an invalid credentails');
                         }
                     }
                     else {
-                        setError(true)
+                        setIsError('server error')
                     }
                 })
         }
@@ -83,9 +83,10 @@ function PatientMpin(props) {
                                     placeholder="Enter Mpin"
                                     required>
                                 </MainInput>
-                                {isError === true ? <span className="validation mb-2">Enter valid mobile number and password</span> : null}
-                                {error === true ? <span className="validation mb-2">Server error</span> : null}
-                                <div className="width50 mt-4" align="left">
+
+                                <div className="validation mb-2">{isError}</div>
+                                
+                                <div className="width50 mt-5" align="left">
                                     <Link to={`/forgetpatientmpin`}>Forgot MPIN </Link>
                                 </div>
                                 <div className="row" align='right'>

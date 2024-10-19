@@ -3643,6 +3643,12 @@ a.social_bt {
 .profile p {
 	color: #999;
 }
+.sendotp-message{
+    margin-top: 4px;
+    font-size: 12px;
+    float: right;
+	margin-left: 4px;
+}
 
 .doctorProfile {
 	height: 75%;
@@ -3651,7 +3657,7 @@ a.social_bt {
 
 .doctorPic {
 	height: 200px;
-	width: 250px;
+	/* width: 250px; */
 }
 
 .normal-font {
