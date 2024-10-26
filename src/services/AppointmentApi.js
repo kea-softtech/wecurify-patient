@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { API } from '../config'
 export default function AppointmentApi() {
+    
     const cancelPatientAppointment = async (id) => {
         try {
             const result = await axios.delete(`${API}/cancelappointment/${id}`)

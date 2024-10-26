@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import moment from "moment";
 import PatientApi from "../../services/PatientApi";
@@ -9,37 +9,43 @@ import Loader from "./Loader";
 export default function Incomplete(props) {
     const { patientId } = props;
     const [patientHistoryData, setPatientHistoryData] = useState(null)
-    const [incompleteProduct, setIncompleteProduct] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const paginationRef = useRef(currentPage)
+    const pageSize = 6;
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, [currentPage]);
+    }, []);
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
-
-    const pageSize = 6;
-    function getPatientDetails() {
-        getpaymentData({ patientId }, currentPage, pageSize)
+    function getPatientDetails(currentPage) {
+        setIsLoading(true)
+        const data = {
+            page: currentPage,
+            pageSize: pageSize,
+            status: "Incomplete",
+        }
+        getpaymentData({ patientId }, data)
             .then((result) => {
                 if (result) {
-                    setIncompleteProduct(result.incompleteProduct)
-                    const totalPages = result.totalIncompletePages;
+                    const totalPages = result.totalPages;
                     setTotalPages(totalPages)
-                    setPatientHistoryData(result.incomplete)
+                    setPatientHistoryData(result.pageIndex)
                 } else {
                     setIsError(true)
                 }
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     const handlePageClick = (data) => {
         setCurrentPage(data.selected + 1);
+        paginationRef.current = data.selected + 1
+        getPatientDetails(data.selected + 1)
     }
     return (
         <>
@@ -72,7 +78,7 @@ export default function Incomplete(props) {
                                                     <span className='patientName'>Patient:  </span> {details['patientDetails'][0].name}
                                                 </div>
                                                 :
-                                                <div className='row mb-2'>
+                                                <div className='row mb-2 mr-3'>
                                                     <div align='left' className=' ml-3 width_60 fontSize'>
                                                         <span className='patientName '>Patient:  </span>{details['dependentDetails'][0].name}
                                                     </div>
@@ -108,6 +114,7 @@ export default function Incomplete(props) {
                                 nextClassName="page-item"
                                 nextLinkClassName="page-link"
                                 activeClassName="active"
+                                forcePage={currentPage - 1}
                             />
                         </div>
                         : null}

@@ -46,13 +46,13 @@ export default function PatientProfile() {
       <Wrapper>
         <MainNav>
           <div className="clearfix row">
-            <div className="width50">
+            <div className="getDependent col-md-7">
               <Link onClick={goBack}>
                 <i className="arrow_back backArrow" title="back button"></i>
               </Link>
               <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Edit Information</span>
             </div>
-            <div className="width50 row justifyContent">
+            <div className="getDependent col-md-5 row justifyContent">
               <Link to={`/fetchpatientprofile/${patientId}`} className="appColor">
                 Done
               </Link>

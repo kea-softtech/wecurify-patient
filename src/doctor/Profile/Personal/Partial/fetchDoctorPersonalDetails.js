@@ -24,12 +24,20 @@ function FetchDoctorPersonalDetails() {
         setIsLoading(true);
         getDrInfo({ doctorId })
             .then((result) => {
-                setFetchPersonalData(result.result[0]);
+                if (result && Array.isArray(result.result) && result.result.length > 0) {
+                    setFetchPersonalData(result.result[0]);
+                } else {
+                    setFetchPersonalData(null);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching doctor details:", error);
+                setFetchPersonalData(null);
             })
             .finally(() => {
                 setIsLoading(false);
             });
-    }
+    };
 
     const goBack = () => {
         navigate(-1)
@@ -62,19 +70,19 @@ function FetchDoctorPersonalDetails() {
                     <>
                         <div className="common_box p-2 wraper">
                             <div className="white-box pb-5 ">
-                                <div className="profile"  >
-                                    <div className="row" key={fetchPersonalData.id}>
-                                        <div className="col-md-6">
-                                            <img
-                                                src={fetchPersonalData.photo}
-                                                alt="doctorProfile"
-                                                className='doctorPic borderRadius'
-                                            />
-                                        </div>
-                                        <div className="mt-2 col-md-6 text-align-left" >
-                                            <h1>Dr. {fetchPersonalData.name}</h1>
-                                            <div className="contacts">
-                                                <address>
+                                {fetchPersonalData ? (
+                                    <div className="profile"  >
+                                        <div className="row" key={fetchPersonalData.id}>
+                                            <div className="col-md-6">
+                                                <img
+                                                    src={fetchPersonalData.photo}
+                                                    alt="doctorProfile"
+                                                    className='doctorPic borderRadius'
+                                                />
+                                            </div>
+                                            <div className="mt-2 col-md-6 text-align-left" >
+                                                <h1>Dr. {fetchPersonalData.name}</h1>
+                                                <div className="contacts">
                                                     <div><span className="font_weight">Email  :</span>  {fetchPersonalData.personalEmail}</div>
                                                     <div> <span className="font_weight">Location : </span > {fetchPersonalData.address}</div>
                                                     <span>  <span className="font_weight">Phone :</span > {fetchPersonalData.mobile}</span>
@@ -83,12 +91,14 @@ function FetchDoctorPersonalDetails() {
                                                             <Experience experienceData={fetchPersonalData.experienceList}></Experience>
                                                         ) : null
                                                     }
-
-                                                </address>
+                                                    <div><span className="font_weight">Bio  :</span>  {fetchPersonalData.bio}</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>)
+                                    : (<div className="clinicHistory font_weight">
+                                        <p>Doctor data is not available.</p>
+                                    </div>)}
                             </div>
                         </div>
                     </>

@@ -23,7 +23,7 @@ export default function AddDependent() {
                 <div className="full-width">
                     <div className="container margin_60">
                         <div className="patientFetch">
-                            <div className="">
+                            <div className="Form-data">
                                 <div className="box_general_3">
                                     <DependentRegistationForm patientId={patientId} />
                                 </div>

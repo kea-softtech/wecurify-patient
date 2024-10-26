@@ -18,19 +18,6 @@ function App() {
       toast(payload.notification.body)
     })
 
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/firebase-messaging-sw.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
-      })
-    }
-
     const host = window.location.host
     const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -2);
     if(arr.length > 0) setSubDomain(arr[0])

@@ -90,12 +90,12 @@ const ShowInClinicAppointSlots = (props) => {
             <div style={{ flexWrap: 'wrap' }}>
                 <div className="row">
                     <div align='left'
-                        className="font_weight col-sm-6"
+                        className="font_weight  col-sm-6"
                         style={{ color: "black" }}>
                         {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
                     </div>
 
-                    <div align='right' style={{ color: "black" }} className="col-sm-6">
+                    <div align='right' style={{ color: "black" }} className="slots col-sm-6">
                         <input
                             type="radio"
                             name='appointment'
@@ -115,7 +115,7 @@ const ShowInClinicAppointSlots = (props) => {
                             className=" medicineCheckbox "
                             checked={selectedType === 'Video Consultation'}
                         />
-                        <span className="font_weight  ">
+                        <span className="font_weight">
                             &nbsp;Video Consultation
                         </span>
                     </div>

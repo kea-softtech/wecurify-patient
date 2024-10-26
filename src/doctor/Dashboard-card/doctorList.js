@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Wrapper } from "../../mainComponent/Wrapper";
 import { MainNav } from "../../mainComponent/mainNav";
 import AuthApi from "../../services/AuthApi";
@@ -19,23 +19,26 @@ export default function DoctorList() {
     const [isLoading, setIsLoading] = useState(true);
     const { getdoctors } = AuthApi();
     const navigate = useNavigate();
+    const paginationRef = useRef(currentPage)
+    const pageSize = 6;
 
     useEffect(() => {
         getDoctorList(currentPage, key)
-    }, [currentPage]);
+    }, []);
 
-    setTimeout(() => {
-    }, 2000);
-
-    const pageSize = 6;
-    const getDoctorList = () => {
+    const getDoctorList = (currentPage) => {
         setIsLoading(true);
-        getdoctors(currentPage, pageSize, key)
+        const data = {
+            page: currentPage,
+            pageSize: pageSize,
+            key: key
+        }
+        getdoctors(data)
             .then((result) => {
                 if (result) {
                     setFilterData(result.doctorList)
                     setDoctorData(result.doctorList)
-                    setTotalPages(result.doctorListPages)
+                    setTotalPages(result.totalPages)
                 }
                 else {
                     return <span className="validation mb-2">Server error</span>
@@ -67,7 +70,9 @@ export default function DoctorList() {
         navigate(`/booking/${details._id}`)
     }
     const handlePageClick = (data) => {
+        paginationRef.current = data.selected + 1;
         setCurrentPage(data.selected + 1)
+        getDoctorList(data.selected + 1)
     }
 
     return (
@@ -159,6 +164,7 @@ export default function DoctorList() {
                                             nextClassName="page-item"
                                             nextLinkClassName="page-link"
                                             activeClassName="active"
+                                            forcePage={currentPage - 1}
                                         />
                                     </div>
                                     : null}

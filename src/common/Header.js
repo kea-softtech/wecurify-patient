@@ -46,11 +46,11 @@ export default function Header() {
                     </div>
                     <div className="width70">
                         <nav id="menu" className="main-menu">
-                            {/* {loggedIn ?
+                            {loggedIn ?
                                 <li className="fontSize"><Link className="font_weight" onClick={handleLogout}> Logout </Link></li>
                                 :
                                 <li className="fontSize"><Link className="font_weight" to="/patient"> Login </Link></li>
-                            } */}
+                            }
                         </nav>
                     </div>
                 </div>

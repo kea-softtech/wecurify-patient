@@ -21,7 +21,7 @@ export default function PatientApi() {
             return err
         }
     };
-    
+
     const getbookedSlots = async (doctorId, clinicId) => {
         try {
             const result = await axios.get(`${API}/getBookingData/${doctorId}/${clinicId}`)
@@ -43,9 +43,9 @@ export default function PatientApi() {
     };
 
     // fetch patientList after payment
-    const getpaymentData = async ({ patientId }, currentPage, pageSize) => {
+    const getpaymentData = async ({ patientId }, data) => {
         try {
-            const result = await axios.get(`${API}/getBookings/${patientId}?page=${currentPage}&pageSize=${pageSize}`)
+            const result = await axios.post(`${API}/getBookings/${patientId}`,  data )
             return result.data
         }
         catch (err) {

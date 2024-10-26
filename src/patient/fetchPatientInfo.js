@@ -89,24 +89,24 @@ function FetchPatientInfo(props) {
                     navigate(`/booking/${doctorId}`)
                 }
             })
-        const doctorId = sessionData.session.doctorId
-        requestPermission(doctorId)
-            .then(() => {
-                return generateToken(doctorId)
-            })
-            // .then((doctorToken) => {
-                // const notificationData = {
-                //     title: "New Appointment Booked",
-                //     body: `You have a new appointment booked by patient ${patientId}`,
-                //     doctorToken: [doctorToken]
-                // }
-                // notifyDoctor(doctorId, notificationData)
-                    // .catch((error) => {
-                    //     console.error('Error sending notification:', error);
-                    // });
-                // requestToken(patientId, sessionData.session.doctorId, item.time, sessionData.selectedDate)
-                handleClose()
-            // })
+        // const doctorId = sessionData.session.doctorId
+        // requestPermission(doctorId)
+        //     .then(() => {
+        //         return generateToken(doctorId)
+        //     })
+        // .then((doctorToken) => {
+        // const notificationData = {
+        //     title: "New Appointment Booked",
+        //     body: `You have a new appointment booked by patient ${patientId}`,
+        //     doctorToken: [doctorToken]
+        // }
+        // notifyDoctor(doctorId, notificationData)
+        // .catch((error) => {
+        //     console.error('Error sending notification:', error);
+        // });
+        // requestToken(patientId, sessionData.session.doctorId, item.time, sessionData.selectedDate)
+        handleClose()
+        // })
     }
     // const requestToken = (patientId, doctorId, time, selectedDate) => {
     //     const userType = {
@@ -157,30 +157,30 @@ function FetchPatientInfo(props) {
     //     }
     // };
 
-    async function requestPermission(doctorId) {
-        const permission = await Notification.requestPermission();
-        if (permission === "granted") {
-            console.log("Notification permission granted.----------------");
-            getToken(doctorId);
-        }
-        else {
-            console.error("Notification permission not granted----------",);
+    // async function requestPermission(doctorId) {
+    //     const permission = await Notification.requestPermission();
+    //     if (permission === "granted") {
+    //         console.log("Notification permission granted.----------------");
+    //         getToken(doctorId);
+    //     }
+    //     else {
+    //         console.error("Notification permission not granted----------",);
 
-        }
-    }
-    async function getToken(doctorId) {
-        // try {
-        generateToken(doctorId)
-            .then((res) => {
-                const currentToken = res
-                if (currentToken) {
-                    saveNotification(doctorId, currentToken);
-                } else {
-                    console.log("No  token available.");
-                }
-            })
+    //     }
+    // }
+    // async function getToken(doctorId) {
+    //     // try {
+    //     generateToken(doctorId)
+    //         .then((res) => {
+    //             const currentToken = res
+    //             if (currentToken) {
+    //                 saveNotification(doctorId, currentToken);
+    //             } else {
+    //                 console.log("No  token available.");
+    //             }
+    //         })
 
-    }
+    // }
 
 
     return (
@@ -208,14 +208,12 @@ function FetchPatientInfo(props) {
                         <label className="font_weight mx-2">Email :</label>
                         {fetchPatientData.email}
                     </div>
-                    <div className='row'>
-                        <div className="mr-2   ml-1" >
-                            <Button
-                                onClick={() => handleShow(slotItem)}
-                                className="radius  buttonPatient appColor">
-                                Book Appointment
-                            </Button>
-                        </div>
+                    <div align='right' className="mr-2 ml-1" >
+                        <Button
+                            onClick={() => handleShow(slotItem)}
+                            className="radius  buttonPatient appColor">
+                            Book Appointment
+                        </Button>
                     </div>
                 </div>
                 <Modal show={show} onHide={handleClose}>

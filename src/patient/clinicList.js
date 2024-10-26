@@ -47,8 +47,7 @@ function ClinicList() {
                     </div>
                 </div>
             </MainNav>
-
-            <div className='wraper row'>
+            <div className='wraper  row'>
                 <div className="full-width">
                     <div className="common_box p-2 booking">
                         <div className="whiteBox p-2">
@@ -64,7 +63,7 @@ function ClinicList() {
                                                 <div key={clinicItem._id}>
                                                     <div className='row underline mb-3'>
                                                         {clinicItem.clinicLogo ?
-                                                            <figure className="col-md-3" >
+                                                            <figure className="clinicList col-sm-3" >
                                                                 <img
                                                                     className='clinicLogo borderRadius'
                                                                     src={clinicItem.clinicLogo}
@@ -72,7 +71,7 @@ function ClinicList() {
                                                                 />
                                                             </figure>
                                                             : null}
-                                                        <div className="col-md-6" align='left' >
+                                                        <div className="clinicList col-sm-6" align='left' >
                                                             <div className="mb-4">
                                                                 <div className='font_weight fontS'>{clinicItem.clinicName}
                                                                     <div className="icon-location fontSize color">
@@ -82,7 +81,7 @@ function ClinicList() {
                                                             </div>
                                                         </div>
 
-                                                        <div className=' col-md-3 ' align='right'>
+                                                        <div className='clinicList col-sm-3' align='right'>
                                                             <NavLink onClick={(e) => BookAppointments(clinicItem, e)}>
                                                                 <button className='btn appColor helperBtn'>Book Appointment</button>
                                                             </NavLink>

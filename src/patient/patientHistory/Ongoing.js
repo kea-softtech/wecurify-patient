@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import moment from 'moment';
@@ -16,7 +16,6 @@ export default function Ongoing(props) {
     const { patientId } = props
     const [patientList, setPatientList] = useState(null);
     const [showCancel, setCancelDelete] = useState(false);
-    const [ongoingProduct, setOngoingProduct] = useState([]);
     const [id, setId] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
@@ -26,14 +25,12 @@ export default function Ongoing(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
+    const paginationRef = useRef(currentPage)
+    const pageSize = 6;
 
     useEffect(() => {
         getPatientDetails(currentPage);
-    }, [currentPage])
-
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
+    }, [])
 
     const handleCancelShow = (details) => {
         setId(details._id)
@@ -41,14 +38,18 @@ export default function Ongoing(props) {
     }
     const handleCancelClose = () => setCancelDelete(false)
 
-    const pageSize = 6;
     function getPatientDetails(currentPage) {
-        getpaymentData({ patientId }, currentPage, pageSize)
+        setIsLoading(true)
+        const data = {
+            page: currentPage,
+            pageSize: pageSize,
+            status: "Ongoing",
+        }
+        getpaymentData({ patientId }, data)
             .then((result) => {
-                setOngoingProduct(result.ongoingProduct)
-                const totalPages = result.totalOngoingPages;
+                setPatientList(result.pageIndex)
+                const totalPages = result.totalPages;
                 setTotalPages(totalPages)
-                setPatientList(result.ongoing)
                 if (result.test) {
                     result.test.filter((data) => {
                         const patientAppointmentId = data._id;
@@ -65,18 +66,23 @@ export default function Ongoing(props) {
                     return <div className=" font_weight clinicHistory" >Appointments are not Available</div>
                 }
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
-    const handlePageClick = (data) => {
-        setCurrentPage(data.selected + 1);
-    }
-
     function cancelAppointment(id) {
         cancelPatientAppointment(id)
-            .then(() => {
-                getPatientDetails(currentPage)
-                handleCancelClose()
-            })
+        getPatientDetails()
+        handleCancelClose()
     }
+
+    const handlePageClick = (data) => {
+        setCurrentPage(data.selected + 1);
+        paginationRef.current = data.selected + 1
+        getPatientDetails(data.selected + 1)
+    }
+
+
     const handleQueueClick = (details) => {
         setDoctorsId(details.doctorId)
         navigate(`/patientqueue/${details.clinicId}`, { state: details })
@@ -113,7 +119,7 @@ export default function Ongoing(props) {
                                                     <span className='patientName'>Patient:  </span> {details['patientDetails'][0].name}
                                                 </div>
                                                 :
-                                                <div className='row mb-2'>
+                                                <div className='row mb-2 mr-3'>
                                                     <div align='left' className=' ml-3 width_60 fontSize'>
                                                         <span className='patientName '>Patient:  </span>{details['dependentDetails'][0].name}
                                                     </div>
@@ -170,6 +176,7 @@ export default function Ongoing(props) {
                                 nextClassName="page-item"
                                 nextLinkClassName="page-link"
                                 activeClassName="active"
+                                forcePage={currentPage - 1}
                             />
                         </div>
                         : null}

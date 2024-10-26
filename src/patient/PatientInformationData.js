@@ -29,71 +29,71 @@ function PatientInformationData(props) {
             <div className="box_general_4 col-md-8">
                 <div className="patientDataStyle">
                     <div>
-                        <label className=" font_weight mx-2 fontS col-md-6" >
+                        <label className=" font_weight mx-2 fontS  col-md-6" >
                            {fetchPatientData.name} 
                         </label>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight  patient col-md-6">
                            Emergency contact 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.emcontact ? fetchPatientData.emcontact : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                            Email 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.email ? fetchPatientData.email : "--"}
                         </span>
                     </div>
                     <div className="row ">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                            Bloodgroup 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.bloodgroup ? fetchPatientData.bloodgroup : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                             Height 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.height ? fetchPatientData.height : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                             Weight 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.weight ? fetchPatientData.weight : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                             Address 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.address ? fetchPatientData.address : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                             Marital Status 
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.maritalstatus ? fetchPatientData.maritalstatus : "--"}
                         </span>
                     </div>
                     <div className="row">
-                        <label className="font_weight mx-2 col-md-6">
+                        <label className="font_weight patient col-md-6">
                            Gender
                         </label>
-                        <span className="col-md-4">
+                        <span className="patient col-md-6">
                             {fetchPatientData.gender ? fetchPatientData.gender : "--"}
                         </span>
 

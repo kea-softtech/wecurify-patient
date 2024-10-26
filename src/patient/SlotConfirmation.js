@@ -13,7 +13,6 @@ export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
-    console.log('=========doctorData', doctorData)
 
     const [patientData, setPatientData] = useState([])
     console.log('=========patie', patientData)
@@ -48,8 +47,8 @@ export default function SlotConfirmation() {
                     <div className="width50">
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Booking Confirmation</span>
                     </div>
-                    <div className="width50 row justifyContent">
-                        <div className="appColor normal-font" align='right'>Dr. {doctorData.name}</div>
+                    <div className="width50 row justifyContent" align='right'>
+                        <div className="appColor normal-font" >Dr. {doctorData.name}</div>
                     </div>
                 </div>
             </MainNav>

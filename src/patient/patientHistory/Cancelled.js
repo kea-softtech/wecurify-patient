@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
@@ -12,36 +12,42 @@ export default function Cancelled(props) {
     const [patientList, setPatientList] = useState(null);
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
-    const [cancelledProduct, setCancelledProduct] = useState([]);
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const paginationRef = useRef(currentPage)
+    const pageSize = 6;
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [currentPage])
+    }, [])
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
-
-    const pageSize = 6;
     function getPatientHistory(currentPage) {
-        getpaymentData({ patientId }, currentPage, pageSize)
+        setIsLoading(true)
+        const data = {
+            page: currentPage,
+            pageSize: pageSize,
+            status: "Cancelled",
+        }
+        getpaymentData({ patientId }, data)
             .then((result) => {
                 if (result) {
-                    setCancelledProduct(result.cancelledProduct)
-                    const totalPages = result.totalCancelledPages;
+                    const totalPages = result.totalPages;
                     setTotalPages(totalPages)
-                    setPatientList(result.cancelled)
+                    setPatientList(result.pageIndex)
                 }
                 else {
                     setIsError('Server Error')
                 }
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
     const handlePageClick = (data) => {
         setCurrentPage(data.selected + 1);
+        paginationRef.current = data.selected + 1
+        getPatientHistory(data.selected + 1)
     }
     return (
         <>
@@ -74,7 +80,7 @@ export default function Cancelled(props) {
                                                     <span className='patientName'>Patient:  </span> {details['patientDetails'][0].name}
                                                 </div>
                                                 :
-                                                <div className='row mb-2'>
+                                                <div className='row mb-2 mr-3'>
                                                     <div align='left' className=' ml-3 width_60 fontSize'>
                                                         <span className='patientName '>Patient:  </span>{details['dependentDetails'][0].name}
                                                     </div>
@@ -110,6 +116,7 @@ export default function Cancelled(props) {
                                 nextClassName="page-item"
                                 nextLinkClassName="page-link"
                                 activeClassName="active"
+                                forcePage={currentPage - 1}
                             />
                         </div>
                         : null}

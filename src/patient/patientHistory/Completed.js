@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { Button } from 'react-bootstrap';
@@ -12,36 +12,40 @@ import Loader from './Loader';
 export default function Completed(props) {
     const { patientId } = props
     const [patientHistoryData, setPatientHistoryData] = useState(null)
-    const [completedProduct, setCompletedProduct] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const { downloadPrescription } = AppointmentApi()
     const { getpaymentData } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const paginationRef = useRef(currentPage)
 
     useEffect(() => {
         getPatientHistory(currentPage);
-    }, [currentPage])
-
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
+    }, [])
 
     const pageSize = 6;
-    function getPatientHistory() {
-        getpaymentData({ patientId }, currentPage, pageSize)
+    function getPatientHistory(currentPage) {
+        setIsLoading(true)
+        const data = {
+            page: currentPage,
+            pageSize: pageSize,
+            status: "Completed",
+        }
+        getpaymentData({ patientId }, data)
             .then((result) => {
-                if(result){
-                    setCompletedProduct(result.ongoingProduct)
-                    const totalPages = result.totalCompletedPages;
+                if (result) {
+                    const totalPages = result.totalPages;
                     setTotalPages(totalPages)
-                    setPatientHistoryData(result.completed)
-                }else{
+                    setPatientHistoryData(result.pageIndex)
+                } else {
                     setIsError('Server Error')
                 }
 
             })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const downloadPdf = async (details) => {
@@ -57,6 +61,8 @@ export default function Completed(props) {
     }
     const handlePageClick = (data) => {
         setCurrentPage(data.selected + 1);
+        paginationRef.current = data.selected + 1
+        getPatientHistory(data.selected + 1)
     }
 
     return (
@@ -90,11 +96,11 @@ export default function Completed(props) {
                                                     <span className='patientName'>Patient:  </span> {details['patientDetails'][0].name}
                                                 </div>
                                                 :
-                                                <div className='row mb-2'>
+                                                <div className='row mb-2 mr-3'>
                                                     <div align='left' className=' ml-3 width_60 fontSize'>
                                                         <span className='patientName '>Patient:  </span>{details['dependentDetails'][0].name}
                                                     </div>
-                                                    <div className='width_20' align='right'>
+                                                    <div className='width_20 ' align='right'>
                                                         <span className='dependent'>Dependent</span>
                                                     </div>
                                                 </div>
@@ -112,7 +118,7 @@ export default function Completed(props) {
                         </div>
                         : <div className="clinicHistory font_weight" >Appointments are not available.</div>}
                     {isError === true ? <span className="validation mb-2">Server error</span> : null}
-                    {completedProduct ?
+                    {patientHistoryData ?
                         <div>
                             <ReactPaginate
                                 breakLabel="..."
@@ -131,6 +137,7 @@ export default function Completed(props) {
                                 nextClassName="page-item"
                                 nextLinkClassName="page-link"
                                 activeClassName="active"
+                                forcePage={currentPage - 1}
                             />
                         </div>
                         : null}

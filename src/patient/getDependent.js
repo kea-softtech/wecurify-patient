@@ -133,7 +133,7 @@ export default function GetDependent(props) {
 
     return (
         <>
-            {fetchPatientData["dependent"] && fetchPatientData["dependent"] ?
+            {fetchPatientData["dependent"] && fetchPatientData["dependent"].length > 0 ?
                 <div className="col-md-6 mb-2">
                     <div className="box_general_4 cart patientDetails">
                         <>
@@ -147,10 +147,10 @@ export default function GetDependent(props) {
                                 {fetchPatientData["dependent"] && fetchPatientData["dependent"].map((item, i) => {
                                     return (
                                         <div key={i} className="row">
-                                            <div className='col-md-7'>
+                                            <div className=' getDependent col-md-7'>
                                                 {item.name}
                                             </div>
-                                            <div className='col-md-5' align='right'>
+                                            <div className=' getDependent col-md-5' align='right'>
                                                 <Link onClick={() => handleShow(item)} className="btn">
                                                     <i className="arrow_carrot-right_alt" style={{ fontSize: 20 }}></i>
                                                 </Link>

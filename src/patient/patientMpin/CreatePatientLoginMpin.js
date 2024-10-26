@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Outlet } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
-import { MainInput } from "../../mainComponent/mainInput";
 import { useRecoilState } from "recoil";
 import PatientApi from "../../services/PatientApi";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";

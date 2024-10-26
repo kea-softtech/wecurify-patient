@@ -1,5 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
-import UserLinks from "../doctor/Dashboard-card/partial/uselinks";
+import {  Modal } from "react-bootstrap";
 import { Wrapper } from "../mainComponent/Wrapper";
 import { MainNav } from "../mainComponent/mainNav";
 import { AddClinic } from "./addClinic";
@@ -21,6 +20,7 @@ export default function Clinic() {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0);
     const [filterData, setFilterData] = useState([])
+    
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
