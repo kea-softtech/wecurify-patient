@@ -13,9 +13,7 @@ export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
-
     const [patientData, setPatientData] = useState([])
-    console.log('=========patie', patientData)
     // const [AppoinmentData, setAppointmentData] = useState([])
     // const { getappointment } = AppointmentApi()
     const { getDrInfo } = AuthApi()
@@ -67,20 +65,9 @@ export default function SlotConfirmation() {
                                         : null} */}
 
                                 </div>
-                                {doctorId === '6698d3f5a895e509cc5ad938' ?
-                                    <>
-                                        < Link to={`https://fly4smiles.com/`}>
-                                            <button align='right' className='btn appColor helperBtn'>Redirect fly4smiles</button>
-                                        </Link>
-                                        <Link to={`/`}>
-                                            <button align='right' className='btn appColor helperBtn'>Go To Dashboard</button>
-                                        </Link>
-                                    </> :
-                                    <Link to={`/`}>
-                                        <button align='right' className='btn appColor helperBtn'>Done</button>
-                                    </Link>
-                                }
-
+                                <Link to={`/`}>
+                                    <button align='right' className='btn appColor helperBtn'>Done</button>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,14 @@ ul,
 ul#cat_nav {
 	list-style: none;
 }
+.smallLogo{
+	height: 25px;
+}
 
+.bottom-Border {
+	border-bottom: 1px solid var(--appColor);
+	margin-bottom: 5px;
+}
 .editbutton {
 	float: right;
 	color: var(--appColor);

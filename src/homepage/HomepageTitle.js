@@ -32,7 +32,7 @@ function HomePageTitle() {
             {loggedIn === true ?
             <div className="wraper">
                 <div className="align-items-right mt-3 mb-3">
-                    <NavLink to={`/booking/66ed48c3d46e251f20c27f07`}>
+                    <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>
                         <Button className="radius ml-2  buttonPatient appColor fontS">
                             Book Appointment
                         </Button>
