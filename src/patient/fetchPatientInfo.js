@@ -10,6 +10,7 @@ import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 import AuthApi from "../services/AuthApi";
 import { generateToken } from "../firebase.config";
+import { Theme_Color } from "../config";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
@@ -227,7 +228,7 @@ function FetchPatientInfo(props) {
                         <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
                             Yes
                         </Button>
-                        <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
+                        <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleClose}>
                             No
                         </Button>
                     </Modal.Footer>

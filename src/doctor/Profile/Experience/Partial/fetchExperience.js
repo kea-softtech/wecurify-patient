@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { setDoctorExperience } from "../../../../recoil/atom/setDoctorExperience";
 import { useRecoilState } from 'recoil';
 import ExperienceApi from '../../../../services/ExperienceApi';
+import { Theme_Color } from '../../../../config';
 function FetchExperience(props) {
     const { doctorId } = props;
     const [fetchExperience, setFetchExperience] = useRecoilState(setDoctorExperience)
@@ -193,7 +194,7 @@ function FetchExperience(props) {
                             <Button variant="default" className='appColor' onClick={() => removeExperienceData(Item)}>
                                 Yes
                             </Button>
-                            <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleDeleteClose}>
+                            <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleDeleteClose}>
                                 No
                             </Button>
                         </Modal.Footer>

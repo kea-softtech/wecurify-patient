@@ -5,6 +5,7 @@ import AppointmentApi from '../../../services/AppointmentApi';
 import ReportApi from '../../../services/ReportApi';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Theme_Color } from '../../../config';
 export default function Payment(props) {
     const { reportId, appointmentId, fees, doctorId } = props;
     const navigate = useNavigate()
@@ -166,7 +167,7 @@ export default function Payment(props) {
                     <Button variant="default" className='appColor' onClick={() => getPrescriptionData()}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
+                    <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleClose}>
                         No
                     </Button>
                 </Modal.Footer>

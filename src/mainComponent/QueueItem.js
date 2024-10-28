@@ -1,5 +1,5 @@
 import { Center, Text, Wrap, WrapItem } from '@chakra-ui/react';
-
+import { Theme_Color } from '../config';
 const QueueItem = ({ item, selectedData }) => (
     <>
         <Text fontSize='x-large' fontWeight="bold">
@@ -23,8 +23,8 @@ const QueueItem = ({ item, selectedData }) => (
                     <WrapItem>
                         <Center
                             className='step-number'
-                            bg={selectedData === item ? '#1a3c8b' : '#e1e8ed;'}
-                            color={selectedData === item ? 'white' : 'black'} >
+                            bg={selectedData === item ? {Theme_Color} : '#e1e8ed;'}
+                            color={selectedData === item ? '#fff' : 'black'} >
                             {item}
                         </Center>
                     </WrapItem >

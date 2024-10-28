@@ -3,6 +3,7 @@ import PatientProfile from "../../../img/profile.png"
 import AppointmentApi from "../../../services/AppointmentApi";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import { Theme_Color } from "../../../config";
 function CalendarModalBox(props) {
     const { handleClose,AppointmentData, appointmentId } = props;
     const [appointmentDetails, setAppointmentDetails] = useState([]);
@@ -87,7 +88,7 @@ function CalendarModalBox(props) {
                     <Button variant="default" className='appColor' onClick={cancelAppointment}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
+                    <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleCancelClose}>
                         No
                     </Button>
 

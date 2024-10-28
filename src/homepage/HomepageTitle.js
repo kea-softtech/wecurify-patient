@@ -7,6 +7,7 @@ import { Button } from "react-bootstrap";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
 import { Center, Text } from "@chakra-ui/react";
+import { PatientMpin } from "../patient/patientMpin/PatientMpin";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
@@ -28,63 +29,24 @@ function HomePageTitle() {
     }
     return (
         <div className=" padding_top_20">
+            {loggedIn === true ?
             <div className="wraper">
-                {loggedIn === true ?
-                    <div className="row">
-                        <div className="col-xl-6 text_align ">
-                            <h4 className="colorNorm mt-3">Welcome to wecurify,&nbsp;{patientData.name}</h4>
-                        </div>
-                        <div className="col-xl-6 align-items-right mt-3">
-                            <NavLink to="/doctors">
-                                <Button className="radius ml-2  buttonPatient appColor fontS">
-                                    Find a doctor
-                                </Button>
-                            </NavLink>
-                        </div>
-                    </div>
-                    :
-                    <div className=" justify-content button_responsive row" >
-                        <div className="mb-3">
-                            <NavLink to="https://doctor.wecurify.com/">
-                                <Button className="radius btn-home ml-2 buttonPatient appColor fontS">
-                                    I am a doctor
-                                </Button>
-                            </NavLink>
-                            <NavLink to="/doctors">
-                                <Button className="radius ml-2 btn-home  buttonPatient appColor fontS">
-                                    Find a doctor
-                                </Button>
-                            </NavLink>
-                        </div>
-                    </div>
-                }
+                <div className="align-items-right mt-3 mb-3">
+                    <NavLink to={`/booking/66ed48c3d46e251f20c27f07`}>
+                        <Button className="radius ml-2  buttonPatient appColor fontS">
+                            Book Appointment
+                        </Button>
+                    </NavLink>
+                </div>
             </div>
-            <div className="row wraper add_bottom_30">
+            :null}
+            <div className="">
                 {loggedIn !== true ?
-                    <>
-                        <div className="col-4">
-                            <div className="box_feat" id="icon_1">
-                                {/* <span></span> */}
-                               
-                                <h3>Find Doctor</h3>
-                                <div>"Click the 'Find Doctors' button, then choose a doctor based on what you need."</div>
-                            </div>
-                        </div>
-                        <div className="col-4">
-                            <div className="box_feat" id="icon_2">
-                                {/* <span></span> */}
-                                <h3>Create profile</h3>
-                                <div>"If you're not logged in, please create your profile to schedule an appointment."</div>
-                            </div>
-                        </div>
-                        <div className="col-4">
-                            <div className="box_feat" id="icon_3">
-                                <h3>Book a visit</h3>
-                                <div>"After creating your profile, schedule your appointment based on your preferred time slot."</div>
-                            </div>
-                        </div>
-                    </>
-                    : <PatientCards />
+                    <PatientMpin redirection="dashboard" />
+                    : 
+                    <div className="pb-3">
+                        <PatientCards />
+                    </div>
                 }
             </div>
 

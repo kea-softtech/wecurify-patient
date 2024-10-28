@@ -18,13 +18,8 @@ export default function Header() {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // if (loggedIn === false) {
-        //     navigate("/");
-        // }
-    }, [loggedIn])
-
     const handleLogout = () => {
+        navigate("/patient");
         setDoctor("")
         setLoggedIn(false)
         setPatientId('')
@@ -39,9 +34,9 @@ export default function Header() {
                 <div className="row">
                     <div className="width30">
                         <div id="logo_home" align='left'>
-                            {/* <Link to={`/`}> */}
+                            <Link to={`/https://fly4smiles.com/`}>
                                 <img className='appLogo' src={appLogo} alt="Something Went Wrong" />
-                            {/* </Link> */}
+                            </Link>
                         </div>
                     </div>
                     <div className="width70">
@@ -49,8 +44,7 @@ export default function Header() {
                             {loggedIn ?
                                 <li className="fontSize"><Link className="font_weight" onClick={handleLogout}> Logout </Link></li>
                                 :
-                                <li className="fontSize"><Link className="font_weight" to="/patient"> Login </Link></li>
-                            }
+                            null}
                         </nav>
                     </div>
                 </div>

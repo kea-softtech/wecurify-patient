@@ -5,6 +5,7 @@ import PatientApi from "../../services/PatientApi";
 import GetDoctorData from "./getDoctorData";
 import ReactPaginate from "react-paginate";
 import Loader from "./Loader";
+import { Theme_Color } from "../../config";
 
 export default function Incomplete(props) {
     const { patientId } = props;
@@ -70,7 +71,7 @@ export default function Incomplete(props) {
                                                 </span>
                                             </span>
                                             <span className='cardSpan'>
-                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: '#1a3c8b' }} />
+                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: { Theme_Color } }} />
                                                 {details.timeSlot} Min.
                                             </span>
                                             {!details.dependentId ?

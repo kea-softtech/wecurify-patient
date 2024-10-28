@@ -3,7 +3,7 @@ html * {
 }
 
 :root {
-	--appColor: #1a3c8b;
+	--appColor: #209fd6;
 	--disabled: rgb(228, 217, 217);
 	--borderColor: #e1e8ed;
 	--bgColor: hsl(0, 7%, 97%);
@@ -4760,7 +4760,7 @@ ul.treatments.checkout li strong {
 
 .appLogo {
 	height: 50px;
-	width: 140px;
+	/* width: 140px; */
 	/* z-index: 1; */
 }
 
@@ -5674,9 +5674,9 @@ a.box_feat_about h3 {
 	color: #ffc107;
 }
 
-.bg_color_2 {
+/* .bg_color_2 {
 	background: url(../img/hero_bg_1.svg) fixed #3f4079;
-}
+} */
 
 .vital-signInput {
 	width: 110px;
