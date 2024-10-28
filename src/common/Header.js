@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import appLogo from '../../src/img/small_wecurify.png'
+import appLogo from '../../src/img/fly4smile.png'
 import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
