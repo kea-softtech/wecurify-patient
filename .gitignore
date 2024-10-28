@@ -1,2 +1,7 @@
 node_modules
 src/common/Header.js
+src/common/Footer.js
+public/assets/css/style.js
+src/homepage/HompageTitle.js
+src/homepage/Home.js
+config.js
