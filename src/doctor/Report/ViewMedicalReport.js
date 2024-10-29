@@ -12,6 +12,7 @@ import GetDentalServices from './partial/getdentalservices';
 import { setNewPatientId } from '../../recoil/atom/setNewPatientId';
 import Loader from '../../patient/patientHistory/Loader';
 import appLogo from '../../img/fly4smile.png'
+import wecurifyLogo from '../../img/small_wecurify.png'
 import AuthApi from '../../services/AuthApi';
 import ClinicApi from '../../services/ClinicApi';
 
@@ -170,7 +171,7 @@ export default function ViewMedicalReport() {
                                         <div>Dr. {doctorDetails.name}</div>
                                     </div>
                                     <div className="width50" align="right">
-                                        <div>manage by <img className='smallLogo' src={appLogo} alt="Something Went Wrong" /></div>
+                                        <div>manage by <img className='smallLogo' src={wecurifyLogo} alt="Something Went Wrong" /></div>
                                     </div>
                                 </div>
                             </div>

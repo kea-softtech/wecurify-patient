@@ -167,7 +167,7 @@ export default function Payment(props) {
                     <Button variant="default" className='appColor' onClick={() => getPrescriptionData()}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleClose}>
+                    <Button variant="default" className='appColorBorder'  onClick={handleClose}>
                         No
                     </Button>
                 </Modal.Footer>

@@ -73,7 +73,7 @@ export default function Cancelled(props) {
                                                 </span>
                                             </span>
                                             <span className='cardSpan'>
-                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: {Theme_Color} }} />
+                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: Theme_Color }} />
                                                 {details.timeSlot} Min.
                                             </span>
                                             {!details.dependentId ?

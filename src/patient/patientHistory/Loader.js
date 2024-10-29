@@ -7,7 +7,7 @@ export default function Loader() {
         <TailSpin
             height="40"
             width="40"
-            color={ Theme_Color}
+            color={Theme_Color}
             ariaLabel="tail-spin-loading"
             radius="1"
             wrapperStyle={{}}

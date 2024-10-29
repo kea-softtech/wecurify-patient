@@ -88,7 +88,7 @@ function CalendarModalBox(props) {
                     <Button variant="default" className='appColor' onClick={cancelAppointment}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: `1px solid ${Theme_Color}` }} onClick={handleCancelClose}>
+                    <Button variant="default" className='appColorBorder'  onClick={handleCancelClose}>
                         No
                     </Button>
 

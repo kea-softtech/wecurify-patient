@@ -12,7 +12,7 @@ const MainTabs = (props) => {
                 onChange={props.onChange}
                 indicatorColor="primary"
                 textColor="primary"
-                TabIndicatorProps={{ style: { background: {Theme_Color}, fontSize:20} }}
+                TabIndicatorProps={{ style: { background: Theme_Color, fontSize:20} }}
             >
                 <Tab label={props.label} />
                 <Tab label={props.label1} />

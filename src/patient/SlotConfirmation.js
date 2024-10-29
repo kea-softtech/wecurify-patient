@@ -7,15 +7,12 @@ import { useRecoilState } from "recoil";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
 import { setDoctorId } from "../recoil/atom/setDoctorId";
-import AppointmentApi from "../services/AppointmentApi";
 
 export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [doctorData, setDoctorData] = useState([])
     const [patientData, setPatientData] = useState([])
-    // const [AppoinmentData, setAppointmentData] = useState([])
-    // const { getappointment } = AppointmentApi()
     const { getDrInfo } = AuthApi()
     const { fetchPatient } = PatientApi()
 
@@ -60,10 +57,6 @@ export default function SlotConfirmation() {
                                     {patientData.name}  Your
                                     Appointment booked with
                                     Dr. {doctorData.name}
-                                    {/* {AppoinmentData ?
-                                        <div> On {AppoinmentData.date} At {AppoinmentData.slotTime}</div>
-                                        : null} */}
-
                                 </div>
                                 <Link to={`/`}>
                                     <button align='right' className='btn appColor helperBtn'>Done</button>

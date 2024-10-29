@@ -30,12 +30,12 @@ function PatientInformationData(props) {
                 <div className="patientDataStyle">
                     <div>
                         <label className=" font_weight mx-2 fontS  col-md-6" >
-                           {fetchPatientData.name} 
+                            {fetchPatientData.name}
                         </label>
                     </div>
                     <div className="row">
                         <label className="font_weight  patient col-md-6">
-                           Emergency contact 
+                            Emergency contact
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.emcontact ? fetchPatientData.emcontact : "--"}
@@ -43,7 +43,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                           Email 
+                            Email
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.email ? fetchPatientData.email : "--"}
@@ -51,7 +51,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row ">
                         <label className="font_weight patient col-md-6">
-                           Bloodgroup 
+                            Bloodgroup
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.bloodgroup ? fetchPatientData.bloodgroup : "--"}
@@ -59,7 +59,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                            Height 
+                            Height
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.height ? fetchPatientData.height : "--"}
@@ -67,7 +67,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                            Weight 
+                            Weight
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.weight ? fetchPatientData.weight : "--"}
@@ -75,7 +75,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                            Address 
+                            Address
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.address ? fetchPatientData.address : "--"}
@@ -83,7 +83,7 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                            Marital Status 
+                            Marital Status
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.maritalstatus ? fetchPatientData.maritalstatus : "--"}
@@ -91,42 +91,13 @@ function PatientInformationData(props) {
                     </div>
                     <div className="row">
                         <label className="font_weight patient col-md-6">
-                           Gender
+                            Gender
                         </label>
                         <span className="patient col-md-6">
                             {fetchPatientData.gender ? fetchPatientData.gender : "--"}
                         </span>
-
-                    </div>
-                    <div className='row'>
-                        {/* <div className=" mt-2 col-md-6 " >
-                            <Button onClick={() => handleShow(slotItem)} className="radius btn-home button_responsive buttonPatient appColor">
-                                Book Appointment
-                            </Button>
-                        </div> */}
-                        {/* <div className=" mt-2 col-md-6 " >
-                            <Button onClick={() => handleDependent()} className="radius btn-home button_responsive buttonPatient appColor">
-                                Add Dependent
-                            </Button>
-                        </div> */}
                     </div>
                 </div>
-                {/* <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Are you sure?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="alert alert-bgcolor">You want to book this slot. </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
-                            Yes
-                        </Button>
-                        <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
-                            No
-                        </Button>
-                    </Modal.Footer>
-                </Modal> */}
             </div>
         </div>
     )

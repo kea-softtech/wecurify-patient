@@ -112,7 +112,7 @@ export default function Ongoing(props) {
                                                 </span>
                                             </span>
                                             <span className='cardSpan'>
-                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: { Theme_Color } }} />
+                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: '#1a3c8b' }} />
                                                 {details.timeSlot} Min.
                                             </span>
                                             {!details.dependentId ?
@@ -196,7 +196,7 @@ export default function Ongoing(props) {
                     <Button variant="default" className='appColor' onClick={() => cancelAppointment(id)}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: `1px solid ${Theme_Color} ` }} onClick={handleCancelClose}>
+                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
                         No
                     </Button>
                 </Modal.Footer>
