@@ -30,26 +30,24 @@ function HomePageTitle() {
     return (
         <div className=" padding_top_20">
             {loggedIn === true ?
-            <div className="wraper">
-                <div className="align-items-right mt-3 mb-3">
-                    <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>
-                        <Button className="radius ml-2  buttonPatient appColor fontS">
-                            Book Appointment
-                        </Button>
-                    </NavLink>
-                </div>
-            </div>
-            :null}
-            <div className="">
-                {loggedIn !== true ?
-                    <PatientMpin redirection="dashboard" />
-                    : 
-                    <div className="pb-3">
-                        <PatientCards />
+                <div className="wraper">
+                    <div className="align-items-right mt-3 mb-3">
+                        <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>
+                            <Button className="radius ml-2  buttonPatient appColor fontS">
+                                Book Appointment
+                            </Button>
+                        </NavLink>
                     </div>
-                }
-            </div>
-
+                </div>
+                : null
+            }
+            {loggedIn !== true ?
+                <PatientMpin redirection="dashboard" />
+                :
+                <div className="p-3">
+                    <PatientCards />
+                </div>
+            }
         </div>
     )
 }

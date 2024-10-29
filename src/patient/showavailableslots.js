@@ -150,7 +150,7 @@ const ShowInClinicAppointSlots = (props) => {
             </div >
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login to wecurify</Modal.Title>
+                    <Modal.Title>Login to Fly4smiles</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <PatientLoginMpin

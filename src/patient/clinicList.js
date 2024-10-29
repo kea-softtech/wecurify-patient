@@ -32,12 +32,16 @@ function ClinicList() {
         e.preventDefault();
         navigate(`/bookAppointment/${doctorId}/${clinicId._id}`)
     }
+
+    const goBack = () => {
+        navigate(-1)
+    }
     return (
         <Wrapper>
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={`/doctors`}>
+                        <Link to={goBack}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Clinic List  </span>

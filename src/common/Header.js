@@ -34,7 +34,7 @@ export default function Header() {
                 <div className="row">
                     <div className="width30">
                         <div id="logo_home" align='left'>
-                            <Link to={`/https://fly4smiles.com/`}>
+                            <Link to={`/`}>
                                 <img className='appLogo' src={appLogo} alt="Something Went Wrong" />
                             </Link>
                         </div>

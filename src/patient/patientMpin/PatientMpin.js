@@ -58,7 +58,7 @@ function PatientMpin(props) {
         <div className="bg_color_2">
             <div className="container margin_60_35">
                 <div id="login-2">
-                    <h1>Login to Wecurify</h1>
+                    <h1>Login to Fly4smiles</h1>
                     <form>
                         <div className=" clearfix">
                             <div className="last">

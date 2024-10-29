@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import application from '../images/appointment.jpg';
 import doctorprofile from '../images/doctorprofile.jpg'
 import calender from '../images/calender.jpg'
+
 export default function PatientCards() {
     const [patientData] = useRecoilState(setNewPatientId)
 

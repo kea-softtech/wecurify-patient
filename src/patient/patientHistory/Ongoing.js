@@ -112,7 +112,7 @@ export default function Ongoing(props) {
                                                 </span>
                                             </span>
                                             <span className='cardSpan'>
-                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: '#1a3c8b' }} />
+                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: Theme_Color }} />
                                                 {details.timeSlot} Min.
                                             </span>
                                             {!details.dependentId ?
