@@ -227,7 +227,7 @@ function FetchPatientInfo(props) {
                         <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
                             Yes
                         </Button>
-                        <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleClose}>
+                        <Button variant="default" className='appColorBorder'  onClick={handleClose}>
                             No
                         </Button>
                     </Modal.Footer>

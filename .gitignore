@@ -5,3 +5,5 @@ public/assets/css/style.js
 src/homepage/HompageTitle.js
 src/homepage/Home.js
 config.js
+.env
+src/doctor/ViewMedicalReport.js

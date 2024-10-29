@@ -193,7 +193,7 @@ function FetchExperience(props) {
                             <Button variant="default" className='appColor' onClick={() => removeExperienceData(Item)}>
                                 Yes
                             </Button>
-                            <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleDeleteClose}>
+                            <Button variant="default" className='appColorBorder'  onClick={handleDeleteClose}>
                                 No
                             </Button>
                         </Modal.Footer>

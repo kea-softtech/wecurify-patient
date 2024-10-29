@@ -11,6 +11,7 @@ import ReactPaginate from 'react-paginate';
 import Loader from './Loader';
 import { useRecoilState } from 'recoil';
 import { setDoctorId } from '../../recoil/atom/setDoctorId';
+import { Theme_Color } from '../../config';
 
 export default function Ongoing(props) {
     const { patientId } = props
@@ -111,7 +112,7 @@ export default function Ongoing(props) {
                                                 </span>
                                             </span>
                                             <span className='cardSpan'>
-                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: '#1a3c8b' }} />
+                                                <AccessTimeRoundedIcon style={{ fontSize: 25, paddingRight: 2, paddingLeft: 2, color: Theme_Color }} />
                                                 {details.timeSlot} Min.
                                             </span>
                                             {!details.dependentId ?
@@ -195,7 +196,7 @@ export default function Ongoing(props) {
                     <Button variant="default" className='appColor' onClick={() => cancelAppointment(id)}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
+                    <Button variant="default" className='appColorBorder'  onClick={handleCancelClose}>
                         No
                     </Button>
                 </Modal.Footer>
