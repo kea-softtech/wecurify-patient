@@ -35,7 +35,7 @@ export default function Header() {
                     <div className="width30">
                         <div id="logo_home" align='left'>
                             <Link to={`https://fly4smiles.com`}>
-                                <img className='appLogo' src={appLogo} alt="Something Went Wrong" />
+                                <img className='appLogo' src={appLogo} alt="Fly4smiles" />
                             </Link>
                         </div>
                     </div>
