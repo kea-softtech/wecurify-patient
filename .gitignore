@@ -8,3 +8,4 @@ config.js
 public/index.html
 .env
 src/doctor/ViewMedicalReport.js
+src/mainComponent/QueueItem.js
