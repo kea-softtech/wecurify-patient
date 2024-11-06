@@ -17,6 +17,7 @@ function AppointmentBookingSection() {
     const { getDrInfo } = AuthApi()
     const { getClinic } = ClinicApi()
     const navigate = useNavigate()
+    
     useEffect(() => {
         doctorData();
         clinic();

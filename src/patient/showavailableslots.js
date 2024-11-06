@@ -1,6 +1,5 @@
 import { slots } from "../common/constant";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import PatientApi from "../services/PatientApi";
@@ -56,6 +55,26 @@ const ShowInClinicAppointSlots = (props) => {
         return returnData
     }
 
+
+    const categorizeSlots = () => {
+        const morningSlots = [];
+        const afternoonSlots = [];
+        const eveningSlots = [];
+        sessionSlot.forEach((slot) => {
+            const [hour] = slot.time.split(":").map(Number);
+            if (hour < 12) {
+                morningSlots.push(slot);
+            } else if (hour < 17) {
+                afternoonSlots.push(slot);
+            } else {
+                eveningSlots.push(slot);
+            }
+        });
+        return { morningSlots, afternoonSlots, eveningSlots };
+    };
+
+    const { morningSlots, afternoonSlots, eveningSlots } = categorizeSlots();
+
     const availableSlots = () => {
         getbookedSlots(session.doctorId, session.clinicId)
             .then((result) => {
@@ -69,7 +88,7 @@ const ShowInClinicAppointSlots = (props) => {
     }
 
     const handleCreateShow = () => {
-        setShowCreate(true); 
+        setShowCreate(true);
         setShow(false)
     };
     const handleCreateClose = () => setShowCreate(false);
@@ -120,33 +139,108 @@ const ShowInClinicAppointSlots = (props) => {
                         </span>
                     </div>
                 </div>
-                <section className=" radiobutton">
-                    {sessionSlot.map((item, index) => (
-                        <div key={index}>
-                            {checkSlotAvailability(item)
-                                ?
+                {morningSlots.length === 0 ? (
+                    null
+                ) : (
+                    <>
+                        <h6 align='left' className="font_weight mt-2">MORNING </h6>
+                        <section className=" radiobutton">
+                            {morningSlots.map((item, index) => (
                                 <div key={index}>
-                                    <div
-                                        className="disabled-div"
-                                        type="radio"
-                                        time={slots}>
-                                        <label>{item.time}</label>
-                                    </div>
+                                    {checkSlotAvailability(item)
+                                        ?
+                                        <div key={index}>
+                                            <div
+                                                className="disabled-div"
+                                                type="radio"
+                                                time={slots}>
+                                                <label>{item.time}</label>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div key={index}>
+                                            <button
+                                                onClick={() => handleShow(item)}
+                                                className="btn_1"
+                                                type="radio"
+                                                time={slots}>
+                                                {item.time}
+                                            </button>
+                                        </div>
+                                    }
                                 </div>
-                                :
+                            ))}
+                        </section>
+                    </>
+                )}
+                {afternoonSlots.length === 0 ? (
+                    null
+                ) : (
+                    <>
+                        <h6 align='left' className="font_weight  mt-2">  AFTERNOON </h6>
+                        <section className=" radiobutton">
+                            {afternoonSlots.map((item, index) => (
                                 <div key={index}>
-                                    <button
-                                        onClick={() => handleShow(item)}
-                                        className="btn_1"
-                                        type="radio"
-                                        time={slots}>
-                                        {item.time}
-                                    </button>
+                                    {checkSlotAvailability(item)
+                                        ?
+                                        <div key={index}>
+                                            <div
+                                                className="disabled-div"
+                                                type="radio"
+                                                time={slots}>
+                                                <label>{item.time}</label>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div key={index}>
+                                            <button
+                                                onClick={() => handleShow(item)}
+                                                className="btn_1"
+                                                type="radio"
+                                                time={slots}>
+                                                {item.time}
+                                            </button>
+                                        </div>
+                                    }
                                 </div>
-                            }
-                        </div>
-                    ))}
-                </section>
+                            ))}
+                        </section>
+                    </>
+                )}
+                {eveningSlots.length === 0 ? (
+                    null
+                ) : (
+                    <>
+                        <h6 align='left' className="font_weight mt-2">EVENING </h6>
+                        <section className=" radiobutton">
+                            {eveningSlots.map((item, index) => (
+                                <div key={index}>
+                                    {checkSlotAvailability(item)
+                                        ?
+                                        <div key={index}>
+                                            <div
+                                                className="disabled-div"
+                                                type="radio"
+                                                time={slots}>
+                                                <label>{item.time}</label>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div key={index}>
+                                            <button
+                                                onClick={() => handleShow(item)}
+                                                className="btn_1"
+                                                type="radio"
+                                                time={slots}>
+                                                {item.time}
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            ))}
+                        </section>
+                    </>
+                )}
             </div >
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -154,9 +248,9 @@ const ShowInClinicAppointSlots = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <PatientLoginMpin
-                        onSubmit={handleClose}  
-                        onCreateAccount={handleCreateShow}                   
-                        onForgotAccount={handleForgotShow}                   
+                        onSubmit={handleClose}
+                        onCreateAccount={handleCreateShow}
+                        onForgotAccount={handleForgotShow}
                     />
                 </Modal.Body>
             </Modal>
@@ -166,7 +260,9 @@ const ShowInClinicAppointSlots = (props) => {
                     <Modal.Title>Reset MPIN</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ForgotPatientLoginMpin patientId={patientId} onSubmit={handleForgotClose} />
+                    <ForgotPatientLoginMpin
+                        patientId={patientId}
+                        onSubmit={handleForgotClose} />
                 </Modal.Body>
             </Modal>
 
@@ -175,7 +271,8 @@ const ShowInClinicAppointSlots = (props) => {
                     <Modal.Title>Create Account</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreatePatientLoginMpin onSubmit={handleCreateClose} />
+                    <CreatePatientLoginMpin
+                        onSubmit={handleCreateClose} />
                 </Modal.Body>
             </Modal>
         </>

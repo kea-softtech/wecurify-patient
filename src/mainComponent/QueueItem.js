@@ -24,7 +24,7 @@ const QueueItem = ({ item, selectedData }) => (
                     <WrapItem>
                         <Center
                             className='step-number'
-                            bg={selectedData === item ? Theme_Color : '#e1e8ed;'}
+                            bg={selectedData === item ? '#1a3c8b;' : '#e1e8ed;'}
                             color={selectedData === item ? '#fff' : 'black'} >
                             {item}
                         </Center>

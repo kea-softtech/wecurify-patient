@@ -60,8 +60,7 @@ export default function PatientQueue() {
             <div className="wraper row">
                 <div className="full-width">
                     <div className="common_box">
-                        <HStack>
-                            <div></div>
+                        {/* <HStack> */}
                             <Wrap justify='center'>
                                 {selectedSlots.map((item, index) => (
                                     < QueueItem
@@ -71,7 +70,7 @@ export default function PatientQueue() {
                                         item={item.time} />
                                 ))}
                             </Wrap>
-                        </HStack>
+                        {/* </HStack> */}
                     </div>
                 </div>
             </div>
