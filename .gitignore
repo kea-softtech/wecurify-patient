@@ -4,6 +4,7 @@ src/common/Footer.js
 public/assets/css/style.js
 src/homepage/HompageTitle.js
 src/homepage/Home.js
+src/mainComponent/QueueItem.js
 config.js
 public/index.html
 .env

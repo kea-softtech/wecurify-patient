@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
 import { Theme_Color } from "../../../config";
 function CalendarModalBox(props) {
-    const { handleClose,AppointmentData, appointmentId } = props;
+    const { handleClose, AppointmentData, appointmentId } = props;
     const [appointmentDetails, setAppointmentDetails] = useState([]);
     const [showCancel, setCancelDelete] = useState(false);
     const { fetchAppointmentData, cancelPatientAppointment } = AppointmentApi()
@@ -48,33 +48,38 @@ function CalendarModalBox(props) {
                         {appointmentDetails.name}
                     </div>
                     <div>
-                        <b className="patientModal">Date : </b>
+                        <span className="patientModal">Date : </span>
                         {appointmentDetails.date}
                     </div>
                     {/* <div>
-                        <b className="patientModal">Time : </b>
+                        <span className="patientModal">Time : </span>
                         {appointmentDetails.timeSlot} Min
                     </div> */}
                     <div>
-                        <b className="patientModal">Fees :  </b>
+                        <span className="patientModal">Fees :  </span>
                         {appointmentDetails.fees}
                     </div>
                     <div>
-                        <b className="patientModal">Time :    </b>
+                        <span className="patientModal">Time :    </span>
                         {appointmentDetails.slotTime}
                     </div>
                     <div>
-                        <b className="patientModal"> Patient :    </b>
+                        <span className="patientModal"> Patient :    </span>
                         {AppointmentData.patientName}
                     </div>
-                 
-                    {appointmentDetails.status === "Ongoing"   ?
+
+
+                    {appointmentDetails.status === "Ongoing" ?
                         <span>
                             <Link onClick={handleCancelShow}>
                                 <button className="btn appColor modalbtn ">Cancel Appointment</button>
                             </Link>
                         </span>
-                        : null}
+                        : <div>
+                            <span className=" validation">
+                                {appointmentDetails.status}
+                            </span>
+                        </div>}
                 </div>
             </div>
             <Modal show={showCancel} onHide={handleCancelClose}>
@@ -88,7 +93,7 @@ function CalendarModalBox(props) {
                     <Button variant="default" className='appColor' onClick={cancelAppointment}>
                         Yes
                     </Button>
-                    <Button variant="default" className='appColorBorder'  onClick={handleCancelClose}>
+                    <Button variant="default" className='appColorBorder' onClick={handleCancelClose}>
                         No
                     </Button>
 

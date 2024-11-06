@@ -8,9 +8,6 @@ import PatientApi from "../../services/PatientApi";
 import { setloggedIn } from "../../recoil/atom/setloggedIn";
 import { setSlotData } from "../../recoil/atom/setSlotData";
 import { SecondaryButton } from "../../mainComponent/SecondaryButton";
-import { Modal } from "react-bootstrap";
-import ForgotPatientLoginMpin from "./ForgotPatientLoginMpin";
-import CreatePatientLoginMpin from "./CreatePatientLoginMpin";
 
 function PatientLoginMpin(props) {
     const { onSubmit,onForgotAccount, onCreateAccount } = props;
@@ -21,7 +18,6 @@ function PatientLoginMpin(props) {
     const { patientSignIn } = PatientApi();
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(setloggedIn);
-    const [showForgot, setShowForgot] = useState(false);
     const navigate = useNavigate();
 
     const handleMpin = (e) => {

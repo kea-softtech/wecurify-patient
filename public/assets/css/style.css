@@ -73,16 +73,16 @@ ul#cat_nav {
 	margin-right: 5px;
 	font-size: 15px;
 }
-.appColorBorder{
-	border: 1px solid var(--appColor)
+.appColorBorder {
+	border: 1px solid var(--appColor);
 }
 .consultationbtn {
 	background-color: var(--appColor);
 	color: #fdf2f2;
 	font-size: small;
 }
-.smallLogo{
-	height: 25px
+.smallLogo {
+	height: 25px;
 }
 .consultationbtn:focus,
 .consultationbtn:hover {
@@ -2055,11 +2055,11 @@ video {
 	height: auto;
 }
 
-#app_logo{
-	background: url(../../../src/img/small_wecurify.png) ;
+#app_logo {
+	background: url(../../../src/img/small_wecurify.png);
 }
 
-.bottom-Border{
+.bottom-Border {
 	border-bottom: 1px solid var(--appColor);
 	margin-bottom: 5px;
 }
@@ -3662,10 +3662,10 @@ a.social_bt {
 .profile p {
 	color: #999;
 }
-.sendotp-message{
-    margin-top: 4px;
-    font-size: 12px;
-    float: right;
+.sendotp-message {
+	margin-top: 4px;
+	font-size: 12px;
+	float: right;
 	margin-left: 4px;
 }
 
@@ -5585,6 +5585,23 @@ a.box_feat_about {
 	-ms-border-radius: 3px;
 	border-radius: 3px;
 	overflow: hidden;
+}
+
+.css-gmuwbf {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	position: relative !important;
+	top: 15px !important;
 }
 
 @media (max-width: 767px) {
