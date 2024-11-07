@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { Button, Modal } from "react-bootstrap";
 import { setSessionData } from "../recoil/atom/setSessionData";
@@ -12,7 +12,7 @@ import AuthApi from "../services/AuthApi";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
-    const [slotItem, setSlotItem] = useRecoilState(setSlotData)
+    const slotItem = useRecoilValue(setSlotData)
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
     const [dependentId] = useRecoilState(setDependentId)
@@ -46,9 +46,9 @@ function FetchPatientInfo(props) {
     }
 
     const handleShow = (item) => {
-        setSlotItem('')
+        //setSlotItem('')
+        //setSlotItem(item)
         setShow(true)
-        setSlotItem(item)
     }
 
     const handleClose = () => {
@@ -133,7 +133,7 @@ function FetchPatientInfo(props) {
                         <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
                             Yes
                         </Button>
-                        <Button variant="default" className='appColorBorder'  onClick={handleClose}>
+                        <Button variant="default" className='appColorBorder' onClick={handleClose}>
                             No
                         </Button>
                     </Modal.Footer>

@@ -44,9 +44,8 @@ const ShowInClinicAppointSlots = (props) => {
     const handleClose = () => setShow(false);
 
     const handleShow = (item) => {
+        setSlotItem(item)
         if (!loggedIn) {
-            setSlotItem('')
-            setSlotItem(item)
             setShow(true)
         } else {
             navigate(`/patientprofile/${patientId}`)
