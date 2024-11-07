@@ -28,17 +28,29 @@ function HomePageTitle() {
             })
     }
     return (
-        <div className=" padding_top_20">
+        <div className=" padding_top_20 wraper">
             {loggedIn === true ?
-                <div className="wraper">
-                    <div className="align-items-right mt-3 mb-3">
+                <div className="row ">
+                    <div className="col-xl-6 text_align ">
+                        <h4 className="colorNorm mt-3">Welcome to fly4smile,&nbsp;{patientData.name}</h4>
+                    </div>
+                    <div className="col-xl-6 align-items-right mt-3">
                         <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>
-                            <Button className="radius ml-2  buttonPatient appColor fontS">
-                                Book Appointment
+                            <Button className="radius appColor fontS">
+                                Book an Appointment
                             </Button>
                         </NavLink>
                     </div>
                 </div>
+                // <div className="wraper">
+                //     <div className="align-items-right mt-3 mb-3">
+                //         <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>
+                //             <Button className="radius ml-2  buttonPatient appColor fontS">
+                //                 Book Appointment
+                //             </Button>
+                //         </NavLink>
+                //     </div>
+                // </div>
                 : null
             }
             {loggedIn !== true ?
