@@ -23,20 +23,20 @@ if (firebase.apps.length === 0) {
 const app = initializeApp(firebaseConfig);
 export const messaging = getMessaging(app)
 
-export const generateToken = async (userType) => {
-    const permission = await Notification.requestPermission();
-    const messaging = getMessaging(app)
-    if (permission === 'granted') {
-        const token = await getToken(messaging, {
-            vapidKey:
-                "BMDWDXwp1RZdzOcaUXFFQvlHbRjT3KiXqMxbMpcMWQXfX7lnstS9ROKx5_dZSSWtXqu1_JGF88bFUafvcQR0R_s"
-        })
-        return token;
-    }
-    else {
-        console.error("permission not granted.");
-    }
-}
+// export const generateToken = async (userType) => {
+//     const permission = await Notification.requestPermission();
+//     const messaging = getMessaging(app)
+//     if (permission === 'granted') {
+//         const token = await getToken(messaging, {
+//             vapidKey:
+//                 "BMDWDXwp1RZdzOcaUXFFQvlHbRjT3KiXqMxbMpcMWQXfX7lnstS9ROKx5_dZSSWtXqu1_JGF88bFUafvcQR0R_s"
+//         })
+//         return token;
+//     }
+//     else {
+//         console.error("permission not granted.");
+//     }
+// }
 
 export const listenForMessages = (callback) => {
     onMessage(messaging, (payload) => {

@@ -9,8 +9,6 @@ import { setDependentId } from "../recoil/atom/setDependentId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 import AuthApi from "../services/AuthApi";
-import { generateToken } from "../firebase.config";
-import { Theme_Color } from "../config";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
@@ -22,7 +20,6 @@ function FetchPatientInfo(props) {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const { fetchPatient, paymentInfo } = PatientApi()
-    const { notifyDoctor, saveNotification } = AuthApi();
     const { addDoctorInformation } = AuthApi()
     const navigate = useNavigate()
 
@@ -90,100 +87,8 @@ function FetchPatientInfo(props) {
                     navigate(`/booking/${doctorId}`)
                 }
             })
-        // const doctorId = sessionData.session.doctorId
-        // requestPermission(doctorId)
-        //     .then(() => {
-        //         return generateToken(doctorId)
-        //     })
-        // .then((doctorToken) => {
-        // const notificationData = {
-        //     title: "New Appointment Booked",
-        //     body: `You have a new appointment booked by patient ${patientId}`,
-        //     doctorToken: [doctorToken]
-        // }
-        // notifyDoctor(doctorId, notificationData)
-        // .catch((error) => {
-        //     console.error('Error sending notification:', error);
-        // });
-        // requestToken(patientId, sessionData.session.doctorId, item.time, sessionData.selectedDate)
         handleClose()
-        // })
     }
-    // const requestToken = (patientId, doctorId, time, selectedDate) => {
-    //     const userType = {
-    //         doctor: 'doctor',
-    //         patient: 'patient'
-    //     }
-    //     generateToken(userType.doctor)
-    //         .then((doctorToken) => {
-    //             if (!doctorToken) {
-    //                 console.error('Failed to get doctor token.');
-    //                 return;
-    //             }
-    //             generateToken(userType.patient)
-    //                 .then((patientToken) => {
-    //                     if (!patientToken) {
-    //                         console.error('Failed to get patient token.');
-    //                         return;
-    //                     }
-    //                     sendNotification( patientId, doctorId, time, selectedDate, patientToken, doctorToken, userType);
-    //                 })
-    //                 .catch((error) => {
-    //                     console.error('Error generating patient token:', error);
-    //                 });
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error generating doctor token:', error);
-    //         });
-    // };
-
-    // const sendNotification = async ( patientId, doctorId, time, selectedDate, patientToken, doctorToken, userType) => {
-    //     const notificationData = {
-    //         title: "New Appointment Booked",
-    //         doctorId: doctorId,
-    //         userType: userType,
-    //         patientToken: patientToken,
-    //         doctorToken: doctorToken,
-    //         patientId: patientId,
-    //         selectedDate: selectedDate,
-    //         time: time,
-    //     };
-    //     try {
-    //         await notifyDoctor(notificationData)
-    //             .then((res) => {
-    //                 alert(res.notificationData.notification[0].body)
-    //             })
-    //     } catch (error) {
-    //         console.error('Error sending notification:', error);
-    //     }
-    // };
-
-    // async function requestPermission(doctorId) {
-    //     const permission = await Notification.requestPermission();
-    //     if (permission === "granted") {
-    //         console.log("Notification permission granted.----------------");
-    //         getToken(doctorId);
-    //     }
-    //     else {
-    //         console.error("Notification permission not granted----------",);
-
-    //     }
-    // }
-    // async function getToken(doctorId) {
-    //     // try {
-    //     generateToken(doctorId)
-    //         .then((res) => {
-    //             const currentToken = res
-    //             if (currentToken) {
-    //                 saveNotification(doctorId, currentToken);
-    //             } else {
-    //                 console.log("No  token available.");
-    //             }
-    //         })
-
-    // }
-
-
     return (
         <div className="col-md-6 mb-2">
             <div className="box_general_4 cart patientDetails">

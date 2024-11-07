@@ -9,6 +9,7 @@ import { useRecoilState } from "recoil";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
+import Loader from "./patientHistory/Loader";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
@@ -18,6 +19,7 @@ function PatientRegistrationForm(props) {
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     const handleInputChange = event => {
@@ -35,6 +37,10 @@ function PatientRegistrationForm(props) {
         register("mobile", { required: true });
         setPatientData(patientId)
     }, [])
+
+    setTimeout(() => {
+        setIsLoading(false)
+    }, 2000)
 
     function getPatientDetails() {
         fetchPatient({ patientId })
@@ -67,79 +73,87 @@ function PatientRegistrationForm(props) {
 
     return (
         <div>
-            <div className="underline">
-                <h3 className="mb-3">Patient Details</h3>
-            </div>
-            <form onSubmit={(e) => onSubmit(e)}>
-                <div className="row mt-3">
-                    <div className="col-md-6">
-                        <div align='left'><label>Full name</label></div>
-                        <MainInput
-                            type="text"
-                            name="name"
-                            value={updatePatientData.name}
-                            onChange={handleInputChange}
-                            placeholder="Jhon">
-                        </MainInput>
-                        {errors.name && <span className="validation">Please enter your full name</span>}
-                    </div>
-                    <div className="col-md-4 col-sm-4">
-                        <div align='left'> <label>Mobile</label></div>
-                        <MainInput
-                            type="text"
-                            name="mobile"
-                            value={updatePatientData.mobile}
-                            maxLength={10}
-                            pattern="[+-]?\d+(?:[.,]\d+)?"
-                            onChange={handleInputChange}
-                            placeholder="Mobile Number (+XX)">
-                        </MainInput>
-                        {errors.mobile && <span className="validation">Please enter your Mobile Number</span>}
-                    </div>
+            {isLoading ?
+                <div className='loader-container'>
+                    <Loader />
                 </div>
-                <div className="row">
-                    <div className="col-md-3  ">
-                        <div align='left'><label>Age</label></div>
-                        <MainInput
-                            type="text"
-                            name="age"
-                            value={updatePatientData.age}
-                            onChange={handleInputChange}
-                            placeholder="25">
-                        </MainInput>
-                        {errors.age && <span className="validation">Please enter your Age</span>}
+                :
+                <>
+                    <div className="underline">
+                        <h3 className="mb-3">Patient Details</h3>
                     </div>
+                    <form onSubmit={(e) => onSubmit(e)}>
+                        <div className="row mt-3">
+                            <div className="col-md-6">
+                                <div align='left'><label>Full name</label></div>
+                                <MainInput
+                                    type="text"
+                                    name="name"
+                                    value={updatePatientData.name}
+                                    onChange={handleInputChange}
+                                    placeholder="Jhon">
+                                </MainInput>
+                                {errors.name && <span className="validation">Please enter your full name</span>}
+                            </div>
+                            <div className="col-md-4 col-sm-4">
+                                <div align='left'> <label>Mobile</label></div>
+                                <MainInput
+                                    type="text"
+                                    name="mobile"
+                                    value={updatePatientData.mobile}
+                                    maxLength={10}
+                                    pattern="[+-]?\d+(?:[.,]\d+)?"
+                                    onChange={handleInputChange}
+                                    placeholder="Mobile Number (+XX)">
+                                </MainInput>
+                                {errors.mobile && <span className="validation">Please enter your Mobile Number</span>}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-3  ">
+                                <div align='left'><label>Age</label></div>
+                                <MainInput
+                                    type="text"
+                                    name="age"
+                                    value={updatePatientData.age}
+                                    onChange={handleInputChange}
+                                    placeholder="25">
+                                </MainInput>
+                                {errors.age && <span className="validation">Please enter your Age</span>}
+                            </div>
 
-                    <div className="col-md-3 ">
-                        <div align='left'><label>Gender</label></div>
-                        <MainInput
-                            type="text"
-                            name="gender"
-                            value={updatePatientData.gender}
-                            onChange={handleInputChange}
-                            placeholder="Male">
-                        </MainInput>
-                        {errors.gender && <span className="validation">Please enter your gender</span>}
-                    </div>
+                            <div className="col-md-3 ">
+                                <div align='left'><label>Gender</label></div>
+                                <MainInput
+                                    type="text"
+                                    name="gender"
+                                    value={updatePatientData.gender}
+                                    onChange={handleInputChange}
+                                    placeholder="Male">
+                                </MainInput>
+                                {errors.gender && <span className="validation">Please enter your gender</span>}
+                            </div>
 
-                    <div className="col-md-4 col-sm-4">
-                        <div align='left'><label>Email</label></div>
-                        <MainInput
-                            type="email"
-                            name="email"
-                            value={updatePatientData.email}
-                            onChange={handleInputChange}
-                            placeholder="jhon@doe.com">
-                        </MainInput>
-                        {errors.email && <span className="validation">Please enter your email address</span>}
-                    </div>
-                </div>
+                            <div className="col-md-4 col-sm-4">
+                                <div align='left'><label>Email</label></div>
+                                <MainInput
+                                    type="email"
+                                    name="email"
+                                    value={updatePatientData.email}
+                                    onChange={handleInputChange}
+                                    placeholder="jhon@doe.com">
+                                </MainInput>
+                                {errors.email && <span className="validation">Please enter your email address</span>}
+                            </div>
+                        </div>
 
-                <div className="text-right add_top_30  mr-3">
-                    <MainButtonInput>Verify & Save</MainButtonInput>
-                </div>
+                        <div className="text-right add_top_30  mr-3">
+                            <MainButtonInput>Verify & Save</MainButtonInput>
+                        </div>
 
-            </form>
+                    </form>
+                </>
+            }
         </div>
     )
 }
