@@ -25,10 +25,6 @@ export default function Calender() {
     patientData()
   }, []);
 
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
-
   const handleClose = () => {
     setShow(false)
   }
@@ -40,6 +36,7 @@ export default function Calender() {
   }
 
   const patientData = () => {
+    setIsLoading(true);
     getpaymentData({ patientId })
       .then((res) => {
         if (res) {
@@ -74,6 +71,7 @@ export default function Calender() {
             setPatientList(item)
             setGetData(calendarData);
           })
+          setIsLoading(false);
         }
         else {
           return <span className="validation mb-2">Server error</span>

@@ -18,11 +18,11 @@ export default function Header() {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // if (loggedIn === false) {
-        //     navigate("/");
-        // }
-    }, [loggedIn])
+    // useEffect(() => {
+    //     // if (loggedIn === false) {
+    //     //     navigate("/");
+    //     // }
+    // }, [loggedIn])
 
     const handleLogout = () => {
         setDoctor("")
@@ -40,16 +40,25 @@ export default function Header() {
                     <div className="width30">
                         <div id="logo_home" align='left'>
                             {/* <Link to={`/`}> */}
-                                <img className='appLogo' src={appLogo} alt="Something Went Wrong" />
+                            <img className='appLogo' src={appLogo} alt="Wecurify" />
                             {/* </Link> */}
                         </div>
                     </div>
                     <div className="width70">
                         <nav id="menu" className="main-menu">
-                            {loggedIn ?
-                                <li className="fontSize"><Link className="font_weight" onClick={handleLogout}> Logout </Link></li>
-                                :
-                                <li className="fontSize"><Link className="font_weight" to="/patient"> Login </Link></li>
+                            {!loggedIn ?
+                                (
+                                    <li className="fontSize">
+                                        <Link className="font_weight" to="/patient">
+                                            Login
+                                        </Link>
+                                    </li>)
+                                : (
+                                    <li className="fontSize">
+                                        <Link className="font_weight" onClick={handleLogout}>
+                                            Logout
+                                        </Link>
+                                    </li>)
                             }
                         </nav>
                     </div>

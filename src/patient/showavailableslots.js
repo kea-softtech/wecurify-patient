@@ -14,6 +14,7 @@ import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import CreatePatientLoginMpin from "./patientMpin/CreatePatientLoginMpin";
 import ForgotPatientLoginMpin from "./patientMpin/ForgotPatientLoginMpin";
+import { useNavigate } from "react-router-dom";
 
 const ShowInClinicAppointSlots = (props) => {
     const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
@@ -27,8 +28,8 @@ const ShowInClinicAppointSlots = (props) => {
     const [bookingSlots, setBookingSlots] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
     const [showForgot, setShowForgot] = useState(false);
-
     const { getbookedSlots } = PatientApi();
+    const navigate = useNavigate()
     const data = props;
 
     useEffect(() => {
@@ -43,9 +44,14 @@ const ShowInClinicAppointSlots = (props) => {
     const handleClose = () => setShow(false);
 
     const handleShow = (item) => {
-        setSlotItem('')
-        setSlotItem(item)
-        setShow(true)
+        if (!loggedIn) {
+            setSlotItem('')
+            setSlotItem(item)
+            setShow(true)
+        } else {
+            navigate(`/patientprofile/${patientId}`)
+        }
+
     }
 
     const checkSlotAvailability = (slot) => {
@@ -109,12 +115,12 @@ const ShowInClinicAppointSlots = (props) => {
             <div style={{ flexWrap: 'wrap' }}>
                 <div className="row">
                     <div align='left'
-                        className="font_weight  col-sm-6"
+                        className="font_weight col-md-6"
                         style={{ color: "black" }}>
                         {slotDate}&nbsp;Fees - <FaRupeeSign /> {session.fees} /-
                     </div>
 
-                    <div align='right' style={{ color: "black" }} className="slots col-sm-6">
+                    <div align='left' style={{ color: "black" }} className="slots col-md-6">
                         <input
                             type="radio"
                             name='appointment'
@@ -143,8 +149,8 @@ const ShowInClinicAppointSlots = (props) => {
                     null
                 ) : (
                     <>
-                        <h6 align='left' className="font_weight mt-2">MORNING </h6>
-                        <section className=" radiobutton">
+                        <h6 align='left' className="font_weight ml-2 margin_top_30">MORNING </h6>
+                        <section>
                             {morningSlots.map((item, index) => (
                                 <div key={index}>
                                     {checkSlotAvailability(item)
@@ -177,8 +183,8 @@ const ShowInClinicAppointSlots = (props) => {
                     null
                 ) : (
                     <>
-                        <h6 align='left' className="font_weight  mt-2">  AFTERNOON </h6>
-                        <section className=" radiobutton">
+                        <h6 align='left' className="font_weight ml-2 margin_top_30">  AFTERNOON </h6>
+                        <section >
                             {afternoonSlots.map((item, index) => (
                                 <div key={index}>
                                     {checkSlotAvailability(item)
@@ -211,8 +217,8 @@ const ShowInClinicAppointSlots = (props) => {
                     null
                 ) : (
                     <>
-                        <h6 align='left' className="font_weight mt-2">EVENING </h6>
-                        <section className=" radiobutton">
+                        <h6 align='left' className="font_weight ml-2 margin_top_30">EVENING </h6>
+                        <section >
                             {eveningSlots.map((item, index) => (
                                 <div key={index}>
                                     {checkSlotAvailability(item)

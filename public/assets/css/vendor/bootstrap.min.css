@@ -507,6 +507,7 @@ pre code {
     flex: 0 0 50%;
     min-width: 50%;
   }
+
 }
 
 @media (min-width: 992px) {
@@ -857,6 +858,7 @@ pre code {
     text-align: left;
     margin-top: 10px;
   }
+
 }
 
 @media (max-width: 370px) {
@@ -870,13 +872,7 @@ pre code {
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .slots.col-sm-6 {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    text-align: left;
-    margin-top: 10px;
-  }
+ 
 }
 
 @media (min-width: 476px) {

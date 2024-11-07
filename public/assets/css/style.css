@@ -305,6 +305,9 @@ strong {
 		flex: 0 0 40%;
 		min-width: 40%;
 	}
+	.slots {
+		margin-top: 10px;
+	}
 }
 
 @media (max-width: 476px) {
@@ -4017,7 +4020,7 @@ section {
 }
 
 section > div {
-	flex: 1;
+	/* flex: 1; */
 	padding: 0.5rem;
 }
 
