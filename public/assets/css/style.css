@@ -52,7 +52,7 @@ ul,
 ul#cat_nav {
 	list-style: none;
 }
-.smallLogo{
+.smallLogo {
 	height: 25px;
 }
 
@@ -5941,6 +5941,9 @@ a.box_feat_about h3 {
 .appColor {
 	background-color: var(--appColor);
 	color: white;
+}
+.whiteColor {
+	color: #fff;
 }
 .alert-bgcolor {
 	background-color: #e1e8ed;

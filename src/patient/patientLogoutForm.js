@@ -15,7 +15,7 @@ function PatientLogoutForm(){
             <div className="bg_color_2">
                 <div className="container margin_60_35">
                     <div id="login-2">
-                        {patientData ==""?
+                        {patientData ===""?
                             <h1> Succefully Logout...</h1>
                             :
                             null

@@ -8,10 +8,12 @@ import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
+import { setDoctorClinic } from "../recoil/atom/setDoctorClinic";
 
 export default function Header() {
     const [doctorId, setDoctor] = useRecoilState(setDoctorId);
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn);
+    console.log('--------loggedIn', loggedIn)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
@@ -19,13 +21,13 @@ export default function Header() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        navigate("/patient");
+        setLoggedIn('')
         setDoctor("")
-        setLoggedIn(false)
         setPatientId('')
         setSlotItem('')
         setSessionsData('')
         setFetchPatientData('')
+        navigate("/patient");
     }
 
     return (
@@ -41,7 +43,7 @@ export default function Header() {
                     </div>
                     <div className="width70">
                         <nav id="menu" className="main-menu">
-                            {loggedIn ?
+                            {patientId ?
                                 (
                                     <li className="fontSize">
                                         <Link className="font_weight" onClick={handleLogout}>

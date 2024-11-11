@@ -6,13 +6,12 @@ import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { Button } from "react-bootstrap";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
-import { Center, Text } from "@chakra-ui/react";
 import { PatientMpin } from "../patient/patientMpin/PatientMpin";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
-    const [patientData, setPatientData] = useState([])
+    const [patientName, setPatientName] = useState([])
     const { fetchPatient } = PatientApi()
 
     useEffect(() => {
@@ -20,19 +19,22 @@ function HomePageTitle() {
     }, [])
 
     function getAllPatientData() {
-        fetchPatient({ patientId })
-            .then((response) => {
-                if (response[0]) {
-                    setPatientData(response[0])
-                }
-            })
+        if (loggedIn) {
+            fetchPatient({ patientId })
+                .then((response) => {
+                    const patientName = response[0].name
+                    if (patientName) {
+                        setPatientName(patientName)
+                    }
+                })
+        }
     }
     return (
         <div className=" padding_top_20 wraper">
             {loggedIn === true ?
                 <div className="row ">
                     <div className="col-xl-6 text_align ">
-                        <h4 className="colorNorm mt-3">Welcome to fly4smile,&nbsp;{patientData.name}</h4>
+                        <h4 className="colorNorm mt-3">Welcome to fly4smile,&nbsp;{patientName}</h4>
                     </div>
                     <div className="col-xl-6 align-items-right mt-3">
                         <NavLink to={`/booking/6698d3f5a895e509cc5ad938`}>

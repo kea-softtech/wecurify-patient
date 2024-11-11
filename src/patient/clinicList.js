@@ -41,7 +41,7 @@ function ClinicList() {
             <MainNav>
                 <div className="clearfix row">
                     <div className="width50">
-                        <Link to={goBack}>
+                        <Link onClick={goBack}>
                             <i className="arrow_back backArrow" title="back button"></i>
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Clinic List  </span>

@@ -53,7 +53,7 @@ export default function PatientProfile() {
               <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Edit Information</span>
             </div>
             <div className="getDependent col-md-5 row justifyContent">
-              <Link to={`/fetchpatientprofile/${patientId}`} className="appColor">
+              <Link to={`/fetchpatientprofile/${patientId}`} className="whiteColor">
                 Done
               </Link>
             </div>

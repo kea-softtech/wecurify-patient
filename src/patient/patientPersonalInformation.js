@@ -171,7 +171,7 @@ function PatientPersonalInformation(props) {
                                 value="female"
                                 name="gender"
                                 onChange={handleInputChange}
-                                checked={updateData.gender === 'female' ? true : false}
+                                checked={updateData.gender === 'female'}
                             />
                             <span>Female</span>
                             <input
@@ -179,7 +179,7 @@ function PatientPersonalInformation(props) {
                                 type="radio"
                                 value='male'
                                 name="gender"
-                                checked={updateData.gender === 'male' ? true : false}
+                                checked={updateData.gender === 'male'}
                                 onChange={handleInputChange}
                             />
                             <span>Male</span>
@@ -188,7 +188,7 @@ function PatientPersonalInformation(props) {
                                 type="radio"
                                 value='other'
                                 name="gender"
-                                checked={updateData.gender === 'other' ? true : false}
+                                checked={updateData.gender === 'other' }
                                 onChange={handleInputChange}
                             />
                             <span>Other</span>

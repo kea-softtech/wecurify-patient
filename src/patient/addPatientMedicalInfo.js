@@ -45,7 +45,7 @@ function AddPatientMedicalInfo(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <div align='left' className="patientData">Allergies</div>
+                    <div align='left' className="font_weight patientData">Allergies</div>
                     <MainInput
                         type="text"
                         name="allergies"

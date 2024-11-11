@@ -10,10 +10,12 @@ import { setSlotData } from "../recoil/atom/setSlotData";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import Loader from "./patientHistory/Loader";
+import { Autocomplete, TextField } from "@mui/material";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
+    const [saveGender, setSaveGender] = useState([])
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
@@ -21,6 +23,21 @@ function PatientRegistrationForm(props) {
     const { insertPatientData, fetchPatient } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+    const gender = [
+        {
+            "_id": 0,
+            "name": "Male"
+        },
+        {
+            "_id": 1,
+            "name": "Female"
+        },
+        {
+            "_id": 2,
+            "name": "Other"
+        }
+    ]
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -48,6 +65,12 @@ function PatientRegistrationForm(props) {
                 setUpdatePatientData(result[0])
             })
     }
+
+    const handleGender = ((e, selectedValue) => {
+        e.preventDefault()
+        setSaveGender(selectedValue.name)
+    })
+
 
     const { register, setValue, formState: { errors } } = useForm();
     const onSubmit = (e) => {
@@ -85,7 +108,9 @@ function PatientRegistrationForm(props) {
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className="row mt-3">
                             <div className="col-md-6">
-                                <div align='left'><label>Full name</label></div>
+                                <label className="font_weight left">
+                                    Full name
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="name"
@@ -96,7 +121,9 @@ function PatientRegistrationForm(props) {
                                 {errors.name && <span className="validation">Please enter your full name</span>}
                             </div>
                             <div className="col-md-4 col-sm-4">
-                                <div align='left'> <label>Mobile</label></div>
+                                <label className="font_weight left">
+                                    Mobile
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="mobile"
@@ -111,7 +138,9 @@ function PatientRegistrationForm(props) {
                         </div>
                         <div className="row">
                             <div className="col-md-3  ">
-                                <div align='left'><label>Age</label></div>
+                                <label className="font_weight left">
+                                    Age
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="age"
@@ -121,9 +150,25 @@ function PatientRegistrationForm(props) {
                                 </MainInput>
                                 {errors.age && <span className="validation">Please enter your Age</span>}
                             </div>
+                            {/* <div className="col-md-3 ">
+                                <label className="font_weight left" >Gender</label>
+                                <Autocomplete
+                                    disablePortal={true}
+                                    disableClearable
+                                    disableCloseOnSelect
+                                    id={saveGender._id}
+                                    value={saveGender.name}
+                                    onChange={handleGender}
+                                    getOptionLabel={(gender) => `${gender.name}`}
+                                    options={gender}
+                                    renderInput={(params) => <TextField {...params} label="Select" />}
+                                />
+                            </div> */}
 
                             <div className="col-md-3 ">
-                                <div align='left'><label>Gender</label></div>
+                                <label className="font_weight left">
+                                    Gender
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="gender"
@@ -135,7 +180,9 @@ function PatientRegistrationForm(props) {
                             </div>
 
                             <div className="col-md-4 col-sm-4">
-                                <div align='left'><label>Email</label></div>
+                                <label className="font_weight left">
+                                    Email
+                                </label>
                                 <MainInput
                                     type="email"
                                     name="email"
