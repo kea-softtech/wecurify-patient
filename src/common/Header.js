@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import appLogo from '../../src/img/fly4smile.png'
@@ -8,7 +8,6 @@ import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
-import { setDoctorClinic } from "../recoil/atom/setDoctorClinic";
 
 export default function Header() {
     const [doctorId, setDoctor] = useRecoilState(setDoctorId);
@@ -20,6 +19,12 @@ export default function Header() {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (loggedIn === false) {
+            navigate("/");
+        }
+    }, [])
+
     const handleLogout = () => {
         setLoggedIn('')
         setDoctor("")
@@ -27,7 +32,9 @@ export default function Header() {
         setSlotItem('')
         setSessionsData('')
         setFetchPatientData('')
-        navigate("/patient");
+        setTimeout(() => {
+            navigate('/');
+        }, 100);
     }
 
     return (

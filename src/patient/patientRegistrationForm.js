@@ -193,11 +193,9 @@ function PatientRegistrationForm(props) {
                                 {errors.email && <span className="validation">Please enter your email address</span>}
                             </div>
                         </div>
-
                         <div className="text-right add_top_30  mr-3">
                             <MainButtonInput>Verify & Save</MainButtonInput>
                         </div>
-
                     </form>
                 </>
             }

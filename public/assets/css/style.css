@@ -5955,6 +5955,10 @@ a.box_feat_about h3 {
 	width: 60px;
 }
 
+.whiteColor {
+	color: white;
+}
+
 .borderRadius {
 	border-radius: 5px;
 }

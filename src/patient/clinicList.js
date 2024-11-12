@@ -32,7 +32,6 @@ function ClinicList() {
         e.preventDefault();
         navigate(`/bookAppointment/${doctorId}/${clinicId._id}`)
     }
-
     const goBack = () => {
         navigate(-1)
     }

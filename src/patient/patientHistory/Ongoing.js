@@ -106,9 +106,10 @@ export default function Ongoing(props) {
                                             <GetDoctorData
                                                 clinicId={details.clinicId}
                                                 doctorId={details.doctorId} />
+
                                             <span className='cardSpan time'>
                                                 <i className='pe-7s-date m-1 color patientListIcon' />
-                                                <span>
+                                                <span >
                                                     {moment(details.selectedDate).format('YYYY-MM-DD').toString()}
                                                     ,{details.slotTime}
                                                 </span>
@@ -198,7 +199,7 @@ export default function Ongoing(props) {
                     <Button variant="default" className='appColor' onClick={() => cancelAppointment(id)}>
                         Yes
                     </Button>
-                    <Button variant="default" style={{ border: '1px solid #1a3c8b' }} onClick={handleCancelClose}>
+                    <Button variant="default" className='appColorBorder' onClick={handleCancelClose}>
                         No
                     </Button>
                 </Modal.Footer>

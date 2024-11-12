@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MainInput } from '../mainComponent/mainInput';
 import { MainButtonInput } from "../mainComponent/mainButtonInput";
@@ -37,15 +37,17 @@ function AddPatientMedicalInfo(props) {
             .then((response) => {
                 setCoilPatientMedical(coilPatientMedical.concat(response))
             })
-            props.addMedicalRecord()
-            toast.success("Saved Successfully!")
+        props.addMedicalRecord()
+        toast.success("Saved Successfully!")
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
                 <div className="col-md-6 ">
-                    <div align='left' className="font_weight patientData">Allergies</div>
+                    <label className=" patientData font_weight left">
+                        Allergies
+                    </label>
                     <MainInput
                         type="text"
                         name="allergies"
@@ -53,7 +55,9 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.allergies}
                         placeholder="Allergies">
                     </MainInput>
-                    <div align='left' className="font_weight patientData">Current Medications</div>
+                    <label className=" patientData font_weight left">
+                        Current Medications
+                    </label>
                     <MainInput
                         type="text"
                         name="cmedication"
@@ -61,7 +65,9 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.cmedication}
                         placeholder="Current Medications">
                     </MainInput>
-                    <div align='left' className="font_weight patientData">Past Medications</div>
+                    <label className=" patientData font_weight left">
+                        Past Medications
+                    </label>
                     <MainInput
                         type="text"
                         name="pmedication"
@@ -72,7 +78,9 @@ function AddPatientMedicalInfo(props) {
                 </div>
 
                 <div className="col-md-6 ">
-                    <div align='left' className="font_weight patientData">Chronic diseases</div>
+                    <label className=" patientData font_weight left">
+                        Chronic diseases
+                    </label>
                     <MainInput
                         type="text"
                         name="diseases"
@@ -80,7 +88,9 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.diseases}
                         placeholder="Chronic diseases">
                     </MainInput>
-                    <div align='left' className="font_weight patientData">Injuries</div>
+                    <label className=" patientData font_weight left">
+                        Injuries
+                    </label>
                     <MainInput
                         type="text"
                         name="injuries"
@@ -88,8 +98,9 @@ function AddPatientMedicalInfo(props) {
                         value={updateData.injuries}
                         placeholder="Injuries">
                     </MainInput>
-
-                    <div align='left' className="font_weight patientData">Surgeries</div>
+                    <label className=" patientData font_weight left">
+                        Surgeries
+                    </label>
                     <MainInput
                         type="text"
                         name="surgeries"
