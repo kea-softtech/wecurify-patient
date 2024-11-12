@@ -12,7 +12,6 @@ import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 export default function Header() {
     const [doctorId, setDoctor] = useRecoilState(setDoctorId);
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn);
-    console.log('--------loggedIn', loggedIn)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
@@ -20,9 +19,9 @@ export default function Header() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (loggedIn === false) {
-            navigate("/");
-        }
+        // if (loggedIn === false) {
+        //     navigate("/");
+        // }
     }, [])
 
     const handleLogout = () => {
