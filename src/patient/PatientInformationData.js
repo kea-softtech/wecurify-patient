@@ -29,7 +29,7 @@ function PatientInformationData(props) {
             <div className="box_general_4 col-md-8">
                 <div className="patientDataStyle">
                     <div>
-                        <label className=" font_weight mx-2 fontS  col-md-6" >
+                        <label className=" col-md-6 font_weight fontS " >
                             {fetchPatientData.name}
                         </label>
                     </div>

@@ -22,7 +22,7 @@ const ShowInClinicAppointSlots = (props) => {
     const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [loggedIn] = useRecoilState(setloggedIn)
-    const [patientId, setPatientId] = useRecoilState(setNewPatientId);
+    const [patientId] = useRecoilState(setNewPatientId);
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const [show, setShow] = useState(false);
     const [bookingSlots, setBookingSlots] = useState([]);
@@ -44,14 +44,13 @@ const ShowInClinicAppointSlots = (props) => {
     const handleClose = () => setShow(false);
 
     const handleShow = (item) => {
+        setSlotItem('')
+        setSlotItem(item)
         if (!loggedIn) {
-            setSlotItem('')
-            setSlotItem(item)
             setShow(true)
         } else {
             navigate(`/patientprofile/${patientId}`)
         }
-
     }
 
     const checkSlotAvailability = (slot) => {

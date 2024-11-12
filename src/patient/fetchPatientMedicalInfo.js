@@ -70,34 +70,48 @@ function FetchPatientMedicalInfo(props) {
                                 <div className="row">
                                     <div className="col-md-6 ">
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Current Medications</div>
+                                            <label className="font_weight ">
+                                                Current Medications
+                                            </label>
                                             <div>{item.cmedication}</div>
                                         </div>
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Allergies</div>
+                                            <label className="font_weight ">
+                                                Allergies
+                                            </label>
                                             <div>{item.allergies}</div>
                                         </div>
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Past Medications</div>
+                                            <label className="font_weight ">
+                                                Past Medications
+                                            </label>
                                             <div>{item.pmedication}</div>
                                         </div>
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Past Allergies</div>
+                                            <label className="font_weight ">
+                                                Past Allergies
+                                            </label>
                                             <div>{item.allergies}</div>
                                         </div>
                                     </div>
 
                                     <div className="col-md-6 ">
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Chronic Diseases</div>
+                                            <label className="font_weight ">
+                                                Chronic Diseases
+                                            </label>
                                             <div>{item.diseases}</div>
                                         </div>
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Injuries</div>
+                                            <label className="font_weight ">
+                                                Injuries
+                                            </label>
                                             <div>{item.injuries}</div>
                                         </div>
                                         <div className="fetchedudata">
-                                            <div className="font_weight">Surgeries</div>
+                                            <label className="font_weight ">
+                                                Surgeries
+                                            </label>
                                             <div>{item.surgeries}</div>
                                         </div>
                                     </div>
