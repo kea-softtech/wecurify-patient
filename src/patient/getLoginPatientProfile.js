@@ -16,10 +16,10 @@ export default function GetLoginPatientProfile() {
         navigate(`/adddependent/${patientId}`)
     }
 
-
     const goBack = () => {
         navigate(-1);
     }
+    
     return (
         <>
             <Wrapper>

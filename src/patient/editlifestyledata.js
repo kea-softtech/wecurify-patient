@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react"
-import { MainButtonInput } from "../mainComponent/mainButtonInput"
-import { MainInput } from "../mainComponent/mainInput"
+import { useEffect, useState } from "react";
+import { MainButtonInput } from "../mainComponent/mainButtonInput";
+import { MainInput } from "../mainComponent/mainInput";
 import { setPatientLifestyle } from "../recoil/atom/setPatientLifestyle";
 import { useRecoilState } from 'recoil';
-import PatientApi from '../services/PatientApi'
+import PatientApi from '../services/PatientApi';
+
 function EditLifeStyleData(props) {
     const { lifeStyleId } = props;
-    const [editPatientData, setEditPatientData] = useState([])
-    const [coilPatientMedical, setCoilPatientMedical] = useRecoilState(setPatientLifestyle)
-    const { updatePatientLifestyle, fetchUpdatePatientLifestyle } = PatientApi()
+    const [editPatientData, setEditPatientData] = useState([]);
+    const [coilPatientMedical, setCoilPatientMedical] = useRecoilState(setPatientLifestyle);
+    const { updatePatientLifestyle, fetchUpdatePatientLifestyle } = PatientApi();
 
     useEffect(() => {
         fetchPatientData();
@@ -39,7 +40,6 @@ function EditLifeStyleData(props) {
             alcoholConsumption: editPatientData.alcoholConsumption,
             foodPreferences: editPatientData.foodPreferences,
             occupation: editPatientData.occupation,
-            activityLevel: editPatientData.activityLevel
         }
         updatePatientLifestyle(lifeStyleId, updateMedical)
             .then((res) => {
@@ -100,16 +100,6 @@ function EditLifeStyleData(props) {
                         value={editPatientData.occupation}
                         onChange={handleInputChange}
                         placeholder="occupation">
-                    </MainInput>
-                </div>
-                <div className="col-lg-12">
-                    <label className="font_weight">Activity Level</label>
-                    <MainInput
-                        type="text"
-                        name="activityLevel"
-                        value={editPatientData.activityLevel}
-                        onChange={handleInputChange}
-                        placeholder="activityLevel">
                     </MainInput>
                 </div>
             </div>

@@ -34,7 +34,7 @@ function CalendarModalBox(props) {
     }
     return (
         <div>
-            <div className="d-flex container " >
+            <div className="d-flex" >
                 <div className="align-items-left ">
                     <img src={PatientProfile} alt="Patient Profile" />
                 </div>
@@ -70,14 +70,10 @@ function CalendarModalBox(props) {
 
                     {appointmentDetails.status === "Ongoing" ?
                         <span>
-                            <Link onClick={handleCancelShow}>
-                                <button className="btn appColor modalbtn ">Cancel Appointment</button>
-                            </Link>
+                            <button onClick={handleCancelShow} className="btn appColor modalbtn ">Cancel Appointment</button>
                         </span>
-                        : <div>
-                            <span className=" validation">
-                                {appointmentDetails.status}
-                            </span>
+                        : <div className=" validation">
+                            {appointmentDetails.status}
                         </div>}
                 </div>
             </div>

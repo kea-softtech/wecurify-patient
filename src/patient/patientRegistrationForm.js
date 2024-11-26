@@ -85,7 +85,9 @@ function PatientRegistrationForm(props) {
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className="row mt-3">
                             <div className="col-md-6">
-                                <div align='left'><label>Full name</label></div>
+                                <label className="font_weight left">
+                                    Full name
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="name"
@@ -96,7 +98,9 @@ function PatientRegistrationForm(props) {
                                 {errors.name && <span className="validation">Please enter your full name</span>}
                             </div>
                             <div className="col-md-4 col-sm-4">
-                                <div align='left'> <label>Mobile</label></div>
+                                <label className="font_weight left">
+                                    Mobile
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="mobile"
@@ -111,7 +115,9 @@ function PatientRegistrationForm(props) {
                         </div>
                         <div className="row">
                             <div className="col-md-3  ">
-                                <div align='left'><label>Age</label></div>
+                                <label className="font_weight left">
+                                    Age
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="age"
@@ -123,7 +129,9 @@ function PatientRegistrationForm(props) {
                             </div>
 
                             <div className="col-md-3 ">
-                                <div align='left'><label>Gender</label></div>
+                                <label className="font_weight left">
+                                    Gender
+                                </label>
                                 <MainInput
                                     type="text"
                                     name="gender"
@@ -135,7 +143,9 @@ function PatientRegistrationForm(props) {
                             </div>
 
                             <div className="col-md-4 col-sm-4">
-                                <div align='left'><label>Email</label></div>
+                                <label className="font_weight left">
+                                    Email
+                                </label>
                                 <MainInput
                                     type="email"
                                     name="email"
@@ -146,11 +156,9 @@ function PatientRegistrationForm(props) {
                                 {errors.email && <span className="validation">Please enter your email address</span>}
                             </div>
                         </div>
-
                         <div className="text-right add_top_30  mr-3">
                             <MainButtonInput>Verify & Save</MainButtonInput>
                         </div>
-
                     </form>
                 </>
             }
