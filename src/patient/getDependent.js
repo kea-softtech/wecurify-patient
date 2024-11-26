@@ -66,7 +66,8 @@ export default function GetDependent(props) {
             "patientmobile": fetchPatientData.mobile,
             "doctorname": doctorName,
             "status": "Ongoing",
-            "payment": "hold"
+            "payment": "hold",
+            "email":fetchPatientData.email,
         }
         paymentInfo(transactionData)
             .then((res) => {
