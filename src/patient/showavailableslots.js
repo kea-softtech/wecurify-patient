@@ -47,8 +47,12 @@ const ShowInClinicAppointSlots = (props) => {
         setSlotItem('')
         setSlotItem(item)
         if (!loggedIn) {
+            setSlotItem(' ')
+            setSlotItem(item)
             setShow(true)
         } else {
+            setSlotItem(' ')
+            setSlotItem(item)
             navigate(`/patientprofile/${patientId}`)
         }
     }
@@ -100,7 +104,7 @@ const ShowInClinicAppointSlots = (props) => {
 
     const handleAppointmentType = (e) => {
         const value = e.target.value;
-        setSelectedType(value || "In Clinic");
+        setSelectedType(value);
     };
 
     const handleForgotShow = () => {
@@ -277,7 +281,8 @@ const ShowInClinicAppointSlots = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <CreatePatientLoginMpin
-                        onSubmit={handleCreateClose} />
+                        onSubmit={handleCreateClose}
+                    />
                 </Modal.Body>
             </Modal>
         </>

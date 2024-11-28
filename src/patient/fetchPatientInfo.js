@@ -30,7 +30,8 @@ function FetchPatientInfo(props) {
 
     function getAllPatientData() {
         fetchPatient({ patientId })
-            .then(response => {
+            .then(response => {console.log(
+                "response", response)
                 setFetchPatientData(response[0])
             })
     }
@@ -46,8 +47,6 @@ function FetchPatientInfo(props) {
     }
 
     const handleShow = (item) => {
-        //setSlotItem('')
-        //setSlotItem(item)
         setShow(true)
     }
 
@@ -77,7 +76,8 @@ function FetchPatientInfo(props) {
             "patientmobile": fetchPatientData.mobile,
             "doctorname": doctorName,
             "status": "Ongoing",
-            "payment": "hold"
+            "payment": "hold",
+            "email":fetchPatientData.email,
         }
         paymentInfo(transactionData)
             .then((res) => {
