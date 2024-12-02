@@ -8,28 +8,44 @@ import { MainNav } from "../mainComponent/mainNav";
 import { Wrapper } from "../mainComponent/Wrapper";
 import Loader from "./patientHistory/Loader";
 import ClinicApi from "../services/ClinicApi";
+import { MainSelect } from "../mainComponent/mainSelect";
+import { useRecoilState } from "recoil";
+import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 function AppointmentBookingSection() {
     const { doctorId, clinicId } = useParams()
-    const [ clinicData, setClinicData] = useState(null)
-    const [ doctorName, setDoctorName] = useState([])
-    const [ isLoading, setIsLoading] = useState(true);
-    const { getDrInfo } = AuthApi()
+    const [clinicData, setClinicData] = useState(null);
+    const [doctorName, setDoctorName] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const { getDrInfo } = AuthApi();
+    const [selectedValue, setSelectedValue] = useState(null);
+    const [doctors, setDoctors] = useState(null);
+    const [DoctorId, setDoctorsId] = useRecoilState(setDoctorId);
     const { getClinic } = ClinicApi()
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         doctorData();
         clinic();
-    }, [])
+        setDoctorsId(doctorId)
+    }, [selectedValue])
 
     function doctorData() {
         getDrInfo({ doctorId })
             .then((res) => {
                 setDoctorName(res.result[0])
+                const doctorList = res.result[0]["doctorList"]
+                const filterDoctors = doctorList.filter((item) => {
+                    return item.clinics.some(clinic => clinic.id === clinicId);
+                });
+                setDoctors(filterDoctors)
             })
     }
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setSelectedValue(value);
+    };
     function clinic() {
         setIsLoading(true);
         getClinic({ clinicId })
@@ -54,8 +70,15 @@ function AppointmentBookingSection() {
                         </Link>
                         <span className='float-none ml-2' style={{ fontSize: 'inherit' }}>Book Appointment</span>
                     </div>
+
                     <div className="width50 row justifyContent">
-                        <div className="appColor normal-font" align='right'>Dr. {doctorName.name}</div>
+                        <MainSelect className='appColor btn_sub' value={selectedValue} onChange={handleChange}>
+                            <option value="">Select Assign Doctor</option>
+                            {doctors && doctors.map((item, index) => (
+                                <option key={item._id} value={item._id} className="form-control">{item.name}</option>
+                            ))}
+                        </MainSelect>
+                        {/* <div className="appColor normal-font" align='right'>Dr. {doctorName.name}</div> */}
                     </div>
                 </div>
             </MainNav>
@@ -71,7 +94,10 @@ function AppointmentBookingSection() {
                             <>
                                 <div>
                                     <MainAccordion icon={<FaClinicMedical />} title={clinicData.clinicName}>
-                                        <DoctorAppointmentType clinicData={clinicData} doctorId={doctorId} />
+                                        <DoctorAppointmentType
+                                            clinicData={clinicData}
+                                            doctorId={!selectedValue ? doctorId : selectedValue}
+                                        />
                                     </MainAccordion>
                                 </div>
 

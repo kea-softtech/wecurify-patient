@@ -18,12 +18,6 @@ export default function Header() {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // if (loggedIn === false) {
-        //     navigate("/");
-        // }
-    }, [])
-
     const handleLogout = () => {
         setLoggedIn('')
         setDoctor("")

@@ -37,7 +37,7 @@ function MainContainer() {
       <Route path="/forgetpatientmpin" element={<ForgotPatientMpin />} />
       <Route path="/createprofile/:patientId" element={<CreatePatientProfile />} />
       <Route path="/patientprofile/:patientId" element={<GetLoginPatientProfile />} />
-      <Route path="/confirm" element={<SlotConfirmation />} />
+      <Route path="/confirm/:doctorId" element={<SlotConfirmation />} />
       <Route path="/doctors" element={<DoctorList />} />
       <Route path="/booking/:doctorId" element={<ClinicList />} />
       <Route path="/bookAppointment/:doctorId/:clinicId" element={<AppointmentBookingSection />} />

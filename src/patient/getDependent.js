@@ -8,10 +8,12 @@ import { Button, Modal } from 'react-bootstrap';
 import { setPatientProfileData } from '../recoil/atom/setPatientProfileData';
 import { setAppointmentType } from '../recoil/atom/setAppointmentType';
 import AuthApi from '../services/AuthApi';
+import { setDoctorId } from '../recoil/atom/setDoctorId';
 
 export default function GetDependent(props) {
     const { patientId, doctorId } = props;
     const [fetchPatientData] = useRecoilState(setPatientProfileData)
+    const [DoctorId] = useRecoilState(setDoctorId)
     const [slotItem] = useRecoilState(setSlotData)
     const [bookSlot, setbookSlot] = useState([]);
     const [show, setShow] = useState(false);
@@ -68,11 +70,12 @@ export default function GetDependent(props) {
             "status": "Ongoing",
             "payment": "hold",
             "email":fetchPatientData.email,
+            "parent":DoctorId
         }
         paymentInfo(transactionData)
             .then((res) => {
                 if (slotItem._id) {
-                    navigate(`/confirm`)
+                    navigate(`/confirm/${sessionData.session.doctorId}`)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }

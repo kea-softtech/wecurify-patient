@@ -78,7 +78,7 @@ export default function DoctorList() {
     return (
         <Wrapper>
             <MainNav>
-                <div className=" clearfix row">
+                <div className="clearfix row">
                     <div className="width50">
                         <Link to={`/`}>
                             <i className="arrow_back backArrow" title="back button"></i>
