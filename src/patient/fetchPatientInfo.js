@@ -9,6 +9,7 @@ import { setDependentId } from "../recoil/atom/setDependentId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 import AuthApi from "../services/AuthApi";
+import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
@@ -16,6 +17,7 @@ function FetchPatientInfo(props) {
     const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
     const [dependentId] = useRecoilState(setDependentId)
+    const [DoctorId] = useRecoilState(setDoctorId)
     const [doctorName, setDoctorName] = useState([])
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
@@ -30,8 +32,7 @@ function FetchPatientInfo(props) {
 
     function getAllPatientData() {
         fetchPatient({ patientId })
-            .then(response => {console.log(
-                "response", response)
+            .then(response => {
                 setFetchPatientData(response[0])
             })
     }
@@ -79,11 +80,12 @@ function FetchPatientInfo(props) {
             "status": "Ongoing",
             "payment": "hold",
             "email":fetchPatientData.email,
+            "parent": DoctorId
         }
         paymentInfo(transactionData)
             .then((res) => {
                 if (slotId) {
-                    navigate(`/confirm`)
+                    navigate(`/confirm/${sessionData.session.doctorId}`)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }

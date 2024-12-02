@@ -10,7 +10,7 @@ import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
-    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
+    const {doctorId} = useParams()
     const [doctorData, setDoctorData] = useState([])
     const [patientData, setPatientData] = useState([])
     const { getDrInfo } = AuthApi()

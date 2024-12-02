@@ -1,6 +1,6 @@
 const MainSelect = (props) => {
     return (
-        <div className="form-group">
+        <div>
             <select
                 className="form-control"
                 name={props.name}

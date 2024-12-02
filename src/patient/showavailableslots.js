@@ -19,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 const ShowInClinicAppointSlots = (props) => {
     const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
-    const [doctorId, setDoctorsId] = useRecoilState(setDoctorId)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [loggedIn] = useRecoilState(setloggedIn)
     const [patientId] = useRecoilState(setNewPatientId);
@@ -38,7 +37,6 @@ const ShowInClinicAppointSlots = (props) => {
         }
         availableSlots()
         setSessionsData(data)
-        setDoctorsId(doctorsId)
     }, [props])
 
     const handleClose = () => setShow(false);
