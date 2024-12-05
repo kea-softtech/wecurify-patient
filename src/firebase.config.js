@@ -40,7 +40,7 @@ export const messaging = getMessaging(app)
 
 export const listenForMessages = (callback) => {
     onMessage(messaging, (payload) => {
-        console.log("Message received.------------------- ", payload);
+        // console.log("Message received.------------------- ", payload);
         // callback(payload.notification);
     });
 };
