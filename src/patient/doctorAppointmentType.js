@@ -15,10 +15,7 @@ const DoctorAppointmentType = (props) => {
     function fetchSessionSlots() {
         fetchSessionSlotsData({ doctorId, clinicId })
             .then((result) => {
-                const returnData = result.filter((item, index) => {
-                    return item.isDeleted === false
-                })
-                setClinicSession(returnData)
+                setClinicSession(result)
             })
     }
 
