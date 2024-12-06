@@ -63,7 +63,7 @@ function PatientLoginMpin(props) {
                             required
                         />
                         <div className="width50 mt-4" align="left">
-                            <Link onClick={onForgotAccount}>Forgot MPIN </Link>
+                            <Link onClick={onForgotAccount}>Set / Forgot MPIN </Link>
                         </div>
                         <div className="row" align='right'>
                             <div className="mr-2 mt-2">

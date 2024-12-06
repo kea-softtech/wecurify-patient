@@ -87,7 +87,7 @@ function PatientMpin(props) {
                                 <div className="validation mb-2">{isError}</div>
                                 
                                 <div className="width50 mt-5" align="left">
-                                    <Link to={`/forgetpatientmpin`}>Forgot MPIN </Link>
+                                    <Link to={`/forgetpatientmpin`}>Set / Forgot MPIN </Link>
                                 </div>
                                 <div className="row" align='right'>
                                     <div className="mr-2 mt-2" >

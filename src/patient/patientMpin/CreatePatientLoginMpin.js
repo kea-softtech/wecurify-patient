@@ -1,10 +1,11 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { useRecoilState } from "recoil";
 import PatientApi from "../../services/PatientApi";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
-import { LoginPatientOtp } from "../loginPatientOtp";
+// import { LoginPatientOtp } from "../loginPatientOtp";
+import CreatePatientMpin from "./CreatePatientMpin";
 
 export default function CreatePatientLoginMpin() {
     const [mobile, setMobile] = useState("");
@@ -56,12 +57,12 @@ export default function CreatePatientLoginMpin() {
                                 placeholder="Phone Number (+XX)"
                                 className="form-control"
                             />
-                            {message && (<div className="sendotp-message mb-2"> OTP is sent to the mobile number</div>)}
+                            {/* {message && (<div className="sendotp-message mb-2"> OTP is sent to the mobile number</div>)} */}
                             <div className=" validation">{isError}</div>
                         </div>
                         {showOTP === true && isError !== true ?
                             <>
-                                <LoginPatientOtp loginData={loginData} />
+                                <CreatePatientMpin loginData={loginData} />
                                 <Outlet />
                             </>
                             : <div className="mr-3 " align='left'>

@@ -8,6 +8,7 @@ import { Wrapper } from "../../mainComponent/Wrapper";
 import PatientApi from "../../services/PatientApi";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import { useRecoilState } from "recoil";
+import CreatePatientMpin from "./CreatePatientMpin";
 
 export default function CreatePatientLogin() {
     const [mobile, setMobile] = useState("");
@@ -68,12 +69,12 @@ export default function CreatePatientLogin() {
                                                     placeholder="Phone Number (+XX)"
                                                     className="form-control mb-2"
                                                 />
-                                                {message && (<span className="sendotp-message  mb-2"> OTP is sent to the mobile number</span>)}
+                                                {/* {message && (<span className="sendotp-message  mb-2"> OTP is sent to the mobile number</span>)} */}
                                                 <div className="mb-2 validation">{isError}</div>
                                             </div>
                                             {showOTP === true && isError !== true ?
                                                 <>
-                                                    <LoginPatientOtp loginData={loginData} />
+                                                    <CreatePatientMpin loginData={loginData}/>
                                                     <Outlet />
                                                 </>
                                                 : <div align='left'>

@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
 import { ShowPatientOtp } from "./ShowPatientOtp";
+import { ForgotMpin } from "./ForgotMpin";
 
 export default function ForgotPatientLoginMpin(props) {
     const { patientId } = props
@@ -50,15 +51,14 @@ export default function ForgotPatientLoginMpin(props) {
                     placeholder="Phone Number (+XX)"
                     className="form-control"
                 />
-                {message && (<span className="sendotp-message"> OTP is sent to the mobile number</span>)}
+                {/* {message && (<span className="sendotp-message"> OTP is sent to the mobile number</span>)} */}
                 <div className="validation">{isError} </div>
             </div>
             {showOTP === true && isError !== true ?
-                <ShowPatientOtp
+                <ForgotMpin
                     doctorId={doctorId}
-                    patientId={patientId}
-                    loginData={loginData}
                     mobile={mobile}
+                    loginData={loginData}
                 />
                 :
                 <div align='left' >

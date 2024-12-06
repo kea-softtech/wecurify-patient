@@ -7,6 +7,7 @@ import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
 import { ShowPatientOtp } from "./ShowPatientOtp";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
+import { ForgotMpin } from "./ForgotMpin";
 
 export default function ForgotPatientMpin() {
     const [mobile, setMobile] = useState("");
@@ -53,23 +54,21 @@ export default function ForgotPatientMpin() {
                                     <div className=" last">
                                         <label className='mb-2'>Mobile Number</label>
                                         <div className="mb-2">
-                                            <input 
+                                            <input
                                                 name="mobile"
                                                 value={mobile.mobile}
                                                 maxLength={10}
                                                 pattern="[+-]?\d+(?:[.,]\d+)?"
                                                 onChange={(e) => setMobile(e.target.value)}
                                                 placeholder="Phone Number (+XX)"
-                                                className="form-control" 
+                                                className="form-control"
                                             />
-                                            {message && (<span className="sendotp-message mb-2"> OTP is sent to the mobile number</span>)}
+                                            {/* {message && (<span className="sendotp-message mb-2"> OTP is sent to the mobile number</span>)} */}
                                             {<span className="validation mb-2">{isError}</span>}
                                         </div>
                                         {showOTP === true && isError !== true ?
-                                            <ShowPatientOtp
+                                            <ForgotMpin
                                                 doctorId={doctorId}
-                                                patientId={patientId}
-                                                loginData={loginData}
                                                 mobile={mobile}
                                             />
                                             :
