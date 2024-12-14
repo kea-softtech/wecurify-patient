@@ -10,10 +10,9 @@ import { setSlotData } from "../../recoil/atom/setSlotData";
 import { SecondaryButton } from "../../mainComponent/SecondaryButton";
 
 function PatientMpin(props) {
-    const { doctorId } = props
-    const [mobile, setMobile] = useState("");
+    const { mobile } = props
+    // const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState(false);
     const [password, setPassword] = useState("")
     const [slotItem] = useRecoilState(setSlotData)
     const { patientSignIn } = PatientApi()
@@ -55,27 +54,28 @@ function PatientMpin(props) {
     }
 
     return (
-        <div className="bg_color_2">
-            <div className="container margin_60_35">
-                <div id="login-2">
-                    <h1>Login to Fly4smiles</h1>
+        // <div className="bg_color_2">
+        //     <div className="container margin_60_35">
+                // <div id="login-2">
+                //     <h1>Login to Wecurify</h1>
                     <form>
                         <div className=" clearfix">
-                            <div className="last">
-                                <label className='mb-2'>Mobile Number</label>
+                            {/* <div className="last"> */}
+                                {/* <label className='mb-2'>Mobile Number</label>
                                 <MainInput
                                     type="text"
                                     name="mobile"
-                                    value={mobile.mobile}
+                                    value={mobile}
                                     maxLength={10}
                                     pattern="[+-]?\d+(?:[.,]\d+)?"
-                                    onChange={(e) => setMobile(e.target.value)}
+                                    // onChange={(e) => setMobile(e.target.value)}
                                     placeholder="Phone Number (+XX)">
-                                </MainInput>
+                                </MainInput> */}
 
                                 <label className='mb-2'>MPIN</label>
                                 <MainInput
                                     type="password"
+                                    className='form-group'
                                     name="password"
                                     maxLength={6}
                                     pattern="[+-]?\d+(?:[.,]\d+)?"
@@ -85,7 +85,7 @@ function PatientMpin(props) {
                                 </MainInput>
 
                                 <div className="validation mb-2">{isError}</div>
-                                
+
                                 <div className="width50 mt-5" align="left">
                                     <Link to={`/forgetpatientmpin`}>Set / Forgot MPIN </Link>
                                 </div>
@@ -98,11 +98,11 @@ function PatientMpin(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {/* </div> */}
                     </form>
-                </div>
-            </div>
-        </div >
+                // </div>
+        //     </div>
+        // </div >
     )
 }
 export { PatientMpin }

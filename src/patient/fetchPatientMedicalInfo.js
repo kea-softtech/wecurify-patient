@@ -6,12 +6,16 @@ import { useRecoilState } from "recoil";
 import { setPatientMedical } from "../recoil/atom/setPatientMedical";
 import PatientApi from "../services/PatientApi";
 import { AddPatientMedicalInfo } from "./addPatientMedicalInfo";
+import { Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 function FetchPatientMedicalInfo(props) {
     const { patientId } = props;
-    const [fetchPatientdata, setFetchPatientData] = useRecoilState(setPatientMedical)
-    const [activeModal, setActiveModal] = useState()
-    const [showMedicalInfo, setShowMedicalInfo] = useState(false)
+    const [fetchPatientdata, setFetchPatientData] = useRecoilState(setPatientMedical);
+    const [activeModal, setActiveModal] = useState(false);
+    const [showMedicalInfo, setShowMedicalInfo] = useState(false);
+    const [open, setOpen] = useState(false);
+    const isMobile = useMediaQuery('(max-width:  768px)')
     const { getPatientMedical } = PatientApi()
 
     useEffect(() => {
@@ -19,12 +23,14 @@ function FetchPatientMedicalInfo(props) {
     }, [])
 
     const handleClose = () => {
-        setActiveModal(null)
+        setActiveModal(false)
+        setOpen(false)
     }
 
     const handleShow = (e, index) => {
         e.preventDefault()
-        setActiveModal(index)
+        setActiveModal(true)
+        setOpen(true)
     };
 
     const MedicalData = () => {
@@ -59,14 +65,35 @@ function FetchPatientMedicalInfo(props) {
                                     onClick={e => handleShow(e, index)} className="editbutton">
                                     <i className="icon_pencil-edit mr-3 mt-3" title="Edit profile"></i>
                                 </Link>
-                                <Modal show={activeModal === index} onHide={handleClose} id={`item-${item._id}`} key={item._id}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Edit Patient Data</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <EditMedicalData patientId={patientId} medicalId={item._id} onSubmit={MedicalData} />
-                                    </Modal.Body>
-                                </Modal>
+                                {isMobile ? (
+                                    <Drawer anchor="bottom" open={open} onClose={handleClose}>
+                                        <div className='drawerTitle underline' >
+                                            <Typography variant="h6">Edit Medical Data</Typography>
+                                            <IconButton onClick={handleClose} aria-label="close">
+                                                <CloseIcon />
+                                            </IconButton>
+                                        </div>
+                                        <div className='p-4'>
+                                            <EditMedicalData
+                                                patientId={patientId}
+                                                medicalId={item._id}
+                                                onSubmit={MedicalData} />
+                                        </div>
+                                    </Drawer>
+                                ) : (
+                                    <Modal show={activeModal} onHide={handleClose} id={`item-${item._id}`} key={item._id}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Edit Medical Data</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <EditMedicalData
+                                                patientId={patientId}
+                                                medicalId={item._id}
+                                                onSubmit={MedicalData} />
+                                        </Modal.Body>
+                                    </Modal>
+                                )
+                                }
                                 <div className="row">
                                     <div className="col-md-6 ">
                                         <div className="fetchedudata">
@@ -120,7 +147,9 @@ function FetchPatientMedicalInfo(props) {
                         ))}
                     </>
                     :
-                    <AddPatientMedicalInfo patientId={patientId} addMedicalRecord={handleRecordAdded} />
+                    <AddPatientMedicalInfo
+                        patientId={patientId}
+                        addMedicalRecord={handleRecordAdded} />
             }
         </>
     )
