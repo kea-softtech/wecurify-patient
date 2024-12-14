@@ -7,6 +7,7 @@ const MainSelect = (props) => {
                 onChange={props.onChange}
                 value={props.value}
                 multiSelect={props}
+
             >
                 {props.children}
             </select>

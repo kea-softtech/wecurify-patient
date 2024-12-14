@@ -130,6 +130,12 @@ hr.double {
 .css-zpphrz-MuiTypography-root {
 	line-height: 2.5 !important;
 }
+.drawerTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px;
+}
 @-webkit-keyframes circle {
 	0% {
 		-webkit-transform: rotate(0);
@@ -4717,6 +4723,11 @@ ul.treatments.checkout li strong {
 		height: 350px;
 	}
 }
+@media (min-width: 768px) and (max-width: 991px) {
+	#login-2 {
+		width: 50%;
+	}
+}
 
 .error_message {
 	color: #f26c4f;
@@ -4818,6 +4829,9 @@ ul.treatments.checkout li strong {
 	.step {
 		padding-left: 0;
 	}
+	/* #login-2 {
+		width: 50%;
+	} */
 }
 
 .message {
@@ -5974,6 +5988,9 @@ a.box_feat_about h3 {
 
 .underline {
 	border-bottom: 1px solid var(--borderColor);
+}
+.select-width {
+	width: 50px;
 }
 
 .form-textarea {

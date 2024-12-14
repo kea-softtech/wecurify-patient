@@ -13,7 +13,7 @@ function EditLifeStyleData(props) {
 
     useEffect(() => {
         fetchPatientData();
-    }, [])
+    }, []);
 
     const handleInputChange = event => {
         const { name, value } = event.target;

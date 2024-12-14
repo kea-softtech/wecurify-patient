@@ -46,6 +46,7 @@ function AppointmentBookingSection() {
         const value = e.target.value;
         setSelectedValue(value);
     };
+    
     function clinic() {
         setIsLoading(true);
         getClinic({ clinicId })

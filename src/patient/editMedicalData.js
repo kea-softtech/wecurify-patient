@@ -13,8 +13,8 @@ function EditMedicalData(props) {
 
     useEffect(() => {
         fetchPatientData();
-    }, [])
-
+    }, []);
+    
     const handleInputChange = event => {
         const { name, value } = event.target;
         setEditPatientData({ ...editPatientData, [name]: value })
@@ -69,7 +69,7 @@ function EditMedicalData(props) {
                     <label className="font_weight">Allergies</label>
                     <MainInput
                         type="text"
-                        name="Allergies"
+                        name="allergies"
                         value={editPatientData.allergies}
                         onChange={handleInputChange}
                         placeholder="Allergies">

@@ -9,7 +9,7 @@ import CreatePatientMpin from "./patientMpin/CreatePatientMpin";
 
 function LoginPatientOtp(props) {
     const { patientId, loginData } = props;
-    const [patientData, setPatientData] = useRecoilState(setNewPatientId);
+    const [_, setPatientData] = useRecoilState(setNewPatientId);
     const [loginotp, setLoginOtp] = useState('');
     const [data, setData] = useState(false)
     const getOTP = loginData.otp
@@ -43,7 +43,7 @@ function LoginPatientOtp(props) {
                             </MainInput>
                             {errormessage && (<span className="validation">{errormessage}</span>)}
                         </div>
-                        <div className="width_20 ml-2">
+                        <div className="width_20 ">
                             <MainButtonInput onClick={handleSubmit}>Login</MainButtonInput>
                         </div>
                     </>
