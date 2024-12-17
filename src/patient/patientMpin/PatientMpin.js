@@ -101,9 +101,9 @@ function PatientMpin(props) {
                     <div className="mr-2 mt-2" >
                         <MainButtonInput onClick={handleMpin}>Login</MainButtonInput>
                     </div>
-                    <div className="mr-2 mt-2" >
+                    {/* <div className="mr-2 mt-2" >
                         <SecondaryButton onClick={createMPIN}>Create Account</SecondaryButton>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {/* </div> */}

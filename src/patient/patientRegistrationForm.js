@@ -10,12 +10,14 @@ import { setSlotData } from "../recoil/atom/setSlotData";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import Loader from "./patientHistory/Loader";
-import { Autocomplete, TextField } from "@mui/material";
+import { MainSelect } from "../mainComponent/mainSelect";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
-    const [saveGender, setSaveGender] = useState([])
+    console.log('=====updatePatientData==', updatePatientData)
+    const [saveGender, setSaveGender] = useState('')
+    console.log('=====', saveGender)
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
@@ -66,9 +68,9 @@ function PatientRegistrationForm(props) {
             })
     }
 
-    const handleGender = ((e, selectedValue) => {
+    const handleGender = ((e) => {
         e.preventDefault()
-        setSaveGender(selectedValue.name)
+        setSaveGender(e.target.value)
     })
 
 
@@ -78,7 +80,7 @@ function PatientRegistrationForm(props) {
         const newPatientData = {
             mobile: updatePatientData.mobile,
             name: updatePatientData.name,
-            gender: updatePatientData.gender,
+            gender: updatePatientData.saveGender,
             age: updatePatientData.age,
             email: updatePatientData.email,
         }
@@ -150,25 +152,17 @@ function PatientRegistrationForm(props) {
                                 </MainInput>
                                 {errors.age && <span className="validation">Please enter your Age</span>}
                             </div>
-                            {/* <div className="col-md-3 ">
-                                <label className="font_weight left" >Gender</label>
-                                <Autocomplete
-                                    disablePortal={true}
-                                    disableClearable
-                                    disableCloseOnSelect
-                                    id={saveGender._id}
-                                    value={saveGender.name}
-                                    onChange={handleGender}
-                                    getOptionLabel={(gender) => `${gender.name}`}
-                                    options={gender}
-                                    renderInput={(params) => <TextField {...params} label="Select" />}
-                                />
-                            </div> */}
 
                             <div className="col-md-3 ">
                                 <label className="font_weight left">
                                     Gender
                                 </label>
+                                {/* <MainSelect value={saveGender} onChange={handleGender}>
+                                    <option value="">Select</option>
+                                    {gender && gender.map((item, index) => (
+                                        <option key={index} value={item.name} className="form-control">{item.name}</option>
+                                    ))}
+                                </MainSelect> */}
                                 <MainInput
                                     type="text"
                                     name="gender"

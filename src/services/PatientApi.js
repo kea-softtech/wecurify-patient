@@ -42,11 +42,21 @@ export default function PatientApi() {
             return err;
         }
     };
+    const PatientForgetEmailMpin = async ({email}) => {
+        console.log('========email', email)
+        try {
+            const result = await axios.post(`${API}/patientforgetemailmpin`, {email})
+            return result
+        }
+        catch (err) {
+            return err;
+        }
+    };
 
     // fetch patientList after payment
     const getpaymentData = async ({ patientId }, data) => {
         try {
-            const result = await axios.post(`${API}/getBookings/${patientId}`,  data )
+            const result = await axios.post(`${API}/getBookings/${patientId}`, data)
             return result.data
         }
         catch (err) {
@@ -74,9 +84,9 @@ export default function PatientApi() {
         }
     };
 
-    const loginPatient = async ({ mobile}) => {
+    const loginPatient = async ({ mobile }) => {
         try {
-            const result = await axios.post(`${API}/patientLogin`, { mobile})
+            const result = await axios.post(`${API}/patientLogin`, { mobile })
             return result
         }
         catch (err) {
@@ -84,9 +94,9 @@ export default function PatientApi() {
         }
     };
 
-    const loginPatientEmail = async ({ email}) => {
+    const loginPatientEmail = async ({ email }) => {
         try {
-            const result = await axios.post(`${API}/patientLoginemail`, { email})
+            const result = await axios.post(`${API}/patientLoginemail`, { email })
             return result
         }
         catch (err) {
@@ -247,7 +257,7 @@ export default function PatientApi() {
             return err
         }
     };
-    
+
     return {
         fetchSessionSlotsData,
         paymentInfo,
@@ -273,7 +283,6 @@ export default function PatientApi() {
         updatePatientData,
         validLoginPatient,
         PatientForgetMpin,
+        PatientForgetEmailMpin
     }
-
-
 }

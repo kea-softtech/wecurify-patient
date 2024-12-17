@@ -123,19 +123,27 @@ function PatientMobile() {
                                 <div>
                                     {showMpin === true ?
                                         <>
-                                            <PatientMpin mobile={mobile} email={email} loginData={loginData} />
+                                            <PatientMpin
+                                                mobile={mobile}
+                                                email={email}
+                                                loginData={loginData} />
                                             <Outlet />
                                         </>
                                         :
                                         <>
                                             {showOtp === true ?
                                                 <>
-                                                    <LoginPatientOtp patientId={patientId} loginData={loginData} />
+                                                    <LoginPatientOtp
+                                                        patientId={patientId}
+                                                        loginData={loginData} />
                                                     <Outlet />
                                                 </>
                                                 :
                                                 <div align='left'>
-                                                    <MainButtonInput onClick={handleMobile}>Go</MainButtonInput>
+                                                    <MainButtonInput
+                                                        onClick={handleMobile}>
+                                                        Go
+                                                    </MainButtonInput>
                                                 </div>
 
                                             }

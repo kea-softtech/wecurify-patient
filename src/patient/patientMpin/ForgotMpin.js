@@ -9,10 +9,9 @@ import { Modal } from "react-bootstrap";
 import { PatientLoginMpin } from "./PatientLoginMpin";
 
 function ForgotMpin(props) {
-    const { doctorId, mobile } = props;
+    const { email, mobile } = props;
     const [isError, setIsError] = useState(false);
-    const [error, setError] = useState(false);
-    const { PatientForgetMpin } = PatientApi()
+    const { PatientForgetMpin,PatientForgetEmailMpin } = PatientApi()
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [show, setShow] = useState(false);
     const [data, setData] = useState(
@@ -37,24 +36,40 @@ function ForgotMpin(props) {
             setIsError("Please enter password");
         }
         else if (password === confirmPassword) {
-            const bodyData = {
-                mobile: mobile,
-                password: password,
+            if (mobile) {
+                const bodyData = {
+                    mobile: mobile,
+                    password: password,
+                }
+                PatientForgetMpin(bodyData)
+                    .then(response => {
+                        const patientId = response.data._id
+                        if (slotItem._id) {
+                            setShow(true)
+                        } else {
+                            navigate(`/patient`)
+                        }
+                    })
             }
-            PatientForgetMpin(bodyData)
-                .then(response => {
-                    const patientId = response.data._id
-                    if (slotItem._id) {
-                        setShow(true)
-                    } else {
-                        navigate(`/patient`)
-                    }
-                })
+            // else{
+            //     const bodyData = {
+            //         email: email,
+            //         password: password,
+            //     }
+            //     PatientForgetEmailMpin(bodyData)
+            //         .then(response => {
+            //             const patientId = response.data._id
+            //             if (slotItem._id) {
+            //                 setShow(true)
+            //             } else {
+            //                 navigate(`/patient`)
+            //             }
+            //         })
+                
+            // }
         }
-        else {
-            setIsError("Password must have 6 number")
-        }
-        
+
+
     };
     return (
         <div className="full-width">

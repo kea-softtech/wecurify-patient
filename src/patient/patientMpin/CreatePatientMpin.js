@@ -9,6 +9,7 @@ import Loader from "../patientHistory/Loader";
 
 export default function CreatePatientMpin(props) {
     const { loginData } = props;
+    console.log('=======loginData==',loginData)
     const [isError, setIsError] = useState(false);
     const [password, setPassword] = useState('');
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
