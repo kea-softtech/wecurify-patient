@@ -33,7 +33,7 @@ function MainContainer() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route path="/patient" element={<PatientMobile/>} />
+      {/* <Route path="/" element={<PatientMobile/>} /> */}
       <Route path="/createpatientmpin" element={<CreatePatientLogin />} />
       <Route path="/forgetpatientmpin" element={<ForgotPatientMpin />} />
       <Route path="/createprofile/:patientId" element={<CreatePatientProfile />} />

@@ -7,6 +7,7 @@ import { Button } from "react-bootstrap";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
 import { PatientMpin } from "../patient/patientMpin/PatientMpin";
+import { PatientMobile } from "../patient/patientMpin/PatientMobile";
 
 function HomePageTitle() {
     const [loggedIn] = useRecoilState(setloggedIn)
@@ -56,7 +57,7 @@ function HomePageTitle() {
                 : null
             }
             {loggedIn !== true ?
-                <PatientMpin redirection="dashboard" />
+                <PatientMobile redirection="dashboard" />
                 :
                 <div className="p-3">
                     <PatientCards />

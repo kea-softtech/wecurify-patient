@@ -17,20 +17,15 @@ export default function CreatePatientMpin(props) {
     const { patientSignUp } = PatientApi();
     const navigate = useNavigate()
 
-
     setTimeout(() => {
         setIsLoading(false)
     }, 2000)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (loginData.mobile.length < 10) {
-            setIsError('Mobile number must be 10 digits.')
-        }
-        else if (password === confirmPassword) {
+        if (password === confirmPassword) {
             const bodyData = {
                 _id: loginData._id,
-                mobile: loginData.mobile,
                 password: password,
             }
             patientSignUp(bodyData)

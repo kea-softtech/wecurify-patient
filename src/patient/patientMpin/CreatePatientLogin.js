@@ -11,7 +11,7 @@ import CreatePatientMpin from "./CreatePatientMpin";
 export default function CreatePatientLogin() {
     const [mobile, setMobile] = useState("");
     const [isError, setIsError] = useState(false);
-    const [_, setPatientId] = useRecoilState(setNewPatientId);
+    const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [showOTP, setShowOTP] = useState(false)
     const [loginData, setLoginData] = useState([])
     const [message, setMessage] = useState(false)
@@ -74,7 +74,7 @@ export default function CreatePatientLogin() {
                                             </div>
                                             {showOTP === true && isError !== true ?
                                                 <>
-                                                    <CreatePatientMpin loginData={loginData}/>
+                                                    <LoginPatientOtp patientId={patientId} loginData={loginData}/>
                                                     <Outlet />
                                                 </>
                                                 : <div align='left'>

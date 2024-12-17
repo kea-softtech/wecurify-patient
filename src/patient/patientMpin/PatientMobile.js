@@ -11,6 +11,7 @@ import { MainSelect } from "../../mainComponent/mainSelect";
 
 function PatientMobile() {
     const [mobile, setMobile] = useState("");
+    const [email, setEmailId] = useState("");
     const [isError, setIsError] = useState(false);
     const [showMpin, setShowMpin] = useState(false)
     const [showOtp, setShowOtp] = useState(false)
@@ -18,23 +19,37 @@ function PatientMobile() {
     const [message, setMessage] = useState(false)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [selectedValue, setSelectedValue] = useState('')
-    const { loginPatient } = PatientApi();
+    const { loginPatient, loginPatientEmail } = PatientApi();
 
     const handleSelectData = ((e) => {
         const selectedItem = e.target.value
-        console.log('=======', selectedItem)
         setSelectedValue(selectedItem)
     })
 
     const handleMobile = (e) => {
         e.preventDefault()
-        if (mobile.length < 10) {
-            setIsError('Mobile number must be 10 digits')
-        }
-        else {
-            loginPatient({ mobile })
+        if (mobile) {
+            if (mobile.length < 10) {
+                setIsError('Mobile number must be 10 digits')
+            }
+            else {
+                loginPatient({ mobile })
+                    .then(data => {
+                        if (data.data.password) {
+                            setPatientId(data.data._id)
+                            setShowMpin(true)
+                            setIsError(false)
+                        }
+                        else {
+                            setShowOtp(true)
+                            setMessage(true)
+                        }
+                        setLoginData(data.data)
+                    })
+            }
+        } else {
+            loginPatientEmail({ email })
                 .then(data => {
-                    console.log('====', data)
                     if (data.data.password) {
                         setPatientId(data.data._id)
                         setShowMpin(true)
@@ -53,7 +68,7 @@ function PatientMobile() {
         <div className="bg_color_2">
             <div className="container margin_60_35">
                 <div id="login-2">
-                    <h1>Login to Wecurify</h1>
+                    <h1>Login to Fly4smile</h1>
                     <form>
                         <div className=" clearfix">
                             <div className="last ">
@@ -73,12 +88,15 @@ function PatientMobile() {
                                             <>
                                                 <label className='mb-2'>EmailId</label>
                                                 <MainInput
-                                                    type="text"
+                                                    type="email"
                                                     name="email"
-                                                    value={mobile.mobile}
-                                                    // onChange={handleChange}
+                                                    value={mobile.email}
+                                                    onChange={(e) => setEmailId(e.target.value)}
                                                     placeholder="Email">
                                                 </MainInput>
+                                                {message && (<span className="sendotp-message  mb-2">
+                                                    OTP is sent to the EmailId
+                                                </span>)}
                                             </>
                                             :
                                             <>
@@ -92,21 +110,20 @@ function PatientMobile() {
                                                     onChange={(e) => setMobile(e.target.value)}
                                                     placeholder="Phone Number (+XX)">
                                                 </MainInput>
+                                                {message && (<span className="sendotp-message  mb-2">
+                                                    OTP is sent to the mobile number
+                                                </span>)}
                                             </>
                                         }
                                     </div>
 
                                 </div>
-                                {message && (<span className="sendotp-message  mb-2">
-                                    OTP is sent to the mobile number
-                                </span>)}
-
                                 <div className="validation mb-2">{isError}</div>
 
                                 <div>
                                     {showMpin === true ?
                                         <>
-                                            <PatientMpin mobile={mobile} loginData={loginData} />
+                                            <PatientMpin mobile={mobile} email={email} loginData={loginData} />
                                             <Outlet />
                                         </>
                                         :
