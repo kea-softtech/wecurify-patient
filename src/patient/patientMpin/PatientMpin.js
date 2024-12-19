@@ -86,8 +86,15 @@ function PatientMpin(props) {
                     className='form-group'
                     name="password"
                     maxLength={6}
-                    pattern="[+-]?\d+(?:[.,]\d+)?"
-                    onChange={(e) => setPassword(e.target.value)}
+                    pattern="^[7-9]\d{9}$"
+                    // onChange={(e) => {
+                    //     let value = e.target.value;
+                    //     value = value.replace(/\D/g, '');
+                    //     setPassword({ ...password, password: value });
+                    // }}
+                    onChange={
+                        (e) => setPassword(e.target.value)
+                    }
                     placeholder="Enter Mpin"
                     required>
                 </MainInput>

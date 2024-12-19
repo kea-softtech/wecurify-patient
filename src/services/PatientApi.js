@@ -42,10 +42,9 @@ export default function PatientApi() {
             return err;
         }
     };
-    const PatientForgetEmailMpin = async ({email}) => {
-        console.log('========email', email)
+    const PatientForgetEmailMpin = async ({ email }) => {
         try {
-            const result = await axios.post(`${API}/patientforgetemailmpin`, {email})
+            const result = await axios.post(`${API}/patientforgetemailmpin`, { email })
             return result
         }
         catch (err) {

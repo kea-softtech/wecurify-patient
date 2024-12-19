@@ -80,7 +80,7 @@ function FetchPatientInfo(props) {
             "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold",
-            "email":fetchPatientData.email,
+            "email": fetchPatientData.email,
             "parent": DoctorId
         }
         paymentInfo(transactionData)

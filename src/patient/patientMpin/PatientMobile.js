@@ -27,42 +27,91 @@ function PatientMobile() {
     })
 
     const handleMobile = (e) => {
-        e.preventDefault()
-        if (mobile) {
-            if (mobile.length < 10) {
-                setIsError('Mobile number must be 10 digits')
-            }
-            else {
-                loginPatient({ mobile })
-                    .then(data => {
+        e.preventDefault();
+        if (selectedValue === "OTHER") {
+            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                setIsError("Please enter a valid email address");
+                return;
+            } else {
+                loginPatientEmail({ email })
+                    .then((data) => {
                         if (data.data.password) {
-                            setPatientId(data.data._id)
-                            setShowMpin(true)
-                            setIsError(false)
+                            setPatientId(data.data._id);
+                            setShowMpin(true);
+                            setIsError("");
+                        } else {
+                            setShowOtp(true);
+                            setMessage(true);
                         }
-                        else {
-                            setShowOtp(true)
-                            setMessage(true)
-                        }
-                        setLoginData(data.data)
+                        setLoginData(data.data);
                     })
+                    .catch(() => setIsError("Failed to login with email"));
             }
         } else {
-            loginPatientEmail({ email })
-                .then(data => {
+            if (!mobile) {
+                setIsError("Mobile number is required");
+                return;
+            }
+            if (mobile.length < 10) {
+                setIsError("Mobile number must be 10 digits");
+                return;
+            }
+            loginPatient({ mobile })
+                .then((data) => {
                     if (data.data.password) {
-                        setPatientId(data.data._id)
-                        setShowMpin(true)
-                        setIsError(false)
+                        setPatientId(data.data._id);
+                        setShowMpin(true);
+                        setIsError("");
+                    } else {
+                        setShowOtp(true);
+                        setMessage(true);
                     }
-                    else {
-                        setShowOtp(true)
-                        setMessage(true)
-                    }
-                    setLoginData(data.data)
+                    setLoginData(data.data);
                 })
+                .catch(() => setIsError("Failed to login with mobile"));
         }
-    }
+    };
+
+    // const handleMobile = (e) => {
+    //     e.preventDefault()
+    //     if (mobile) {
+    //         if (!mobile){
+    //             setIsError('Mobile number is required')
+    //         }
+    //         else if (mobile.length < 10 ) {
+    //             setIsError('Mobile number must be 10 digits')
+    //         }
+    //         else {
+    //             loginPatient({ mobile })
+    //                 .then(data => {
+    //                     if (data.data.password) {
+    //                         setPatientId(data.data._id)
+    //                         setShowMpin(true)
+    //                         setIsError(false)
+    //                     }
+    //                     else {
+    //                         setShowOtp(true)
+    //                         setMessage(true)
+    //                     }
+    //                     setLoginData(data.data)
+    //                 })
+    //         }
+    //     } else {
+    //         loginPatientEmail({ email })
+    //             .then(data => {
+    //                 if (data.data.password) {
+    //                     setPatientId(data.data._id)
+    //                     setShowMpin(true)
+    //                     setIsError(false)
+    //                 }
+    //                 else {
+    //                     setShowOtp(true)
+    //                     setMessage(true)
+    //                 }
+    //                 setLoginData(data.data)
+    //             })
+    //     }
+    // }
 
     return (
         <div className="bg_color_2">
@@ -73,17 +122,17 @@ function PatientMobile() {
                         <div className=" clearfix">
                             <div className="last ">
                                 <div className=" full-width row">
-                                    <div className="width25 ">
+                                    <div className="width25 mr-2">
                                         <label className='mb-2'>Select</label>
                                         <MainSelect
                                             value={selectedValue}
                                             onChange={handleSelectData}
                                         >
-                                            <option value="IND">IND</option>
-                                            <option value="OTHER">OTHER</option>
+                                            <option value="IND">IN</option>
+                                            <option value="OTHER">Other</option>
                                         </MainSelect>
                                     </div>
-                                    <div className="width70 ml-2">
+                                    <div className="width70">
                                         {selectedValue === 'OTHER' ?
                                             <>
                                                 <label className='mb-2'>EmailId</label>
@@ -103,10 +152,16 @@ function PatientMobile() {
                                                 <label className='mb-2 '>Mobile Number</label>
                                                 <MainInput
                                                     type="text"
+                                                    // type="tel"
                                                     name="mobile"
                                                     value={mobile.mobile}
                                                     maxLength={10}
-                                                    pattern="[+-]?\d+(?:[.,]\d+)?"
+                                                    pattern="^[7-9]\d{9}$"
+                                                    // onChange={(e) => {
+                                                    //     let value = e.target.value;
+                                                    //     value = value.replace(/\D/g, '');
+                                                    //     setMobile({ ...mobile, mobile: value });
+                                                    // }}
                                                     onChange={(e) => setMobile(e.target.value)}
                                                     placeholder="Phone Number (+XX)">
                                                 </MainInput>

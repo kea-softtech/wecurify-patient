@@ -15,9 +15,7 @@ import { MainSelect } from "../mainComponent/mainSelect";
 function PatientRegistrationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
-    console.log('=====updatePatientData==', updatePatientData)
     const [saveGender, setSaveGender] = useState('')
-    console.log('=====', saveGender)
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
@@ -80,7 +78,7 @@ function PatientRegistrationForm(props) {
         const newPatientData = {
             mobile: updatePatientData.mobile,
             name: updatePatientData.name,
-            gender: updatePatientData.saveGender,
+            gender: saveGender ? saveGender : updatePatientData.gender,
             age: updatePatientData.age,
             email: updatePatientData.email,
         }
@@ -157,19 +155,18 @@ function PatientRegistrationForm(props) {
                                 <label className="font_weight left">
                                     Gender
                                 </label>
-                                {/* <MainSelect value={saveGender} onChange={handleGender}>
-                                    <option value="">Select</option>
+                                <MainSelect
+                                    value={saveGender ? saveGender : updatePatientData.gender}
+                                    onChange={handleGender}>
+                                    <option>Select</option>
                                     {gender && gender.map((item, index) => (
-                                        <option key={index} value={item.name} className="form-control">{item.name}</option>
+                                        <option key={index}
+                                            value={item.name}
+                                            className="form-control">
+                                            {item.name}
+                                        </option>
                                     ))}
-                                </MainSelect> */}
-                                <MainInput
-                                    type="text"
-                                    name="gender"
-                                    value={updatePatientData.gender}
-                                    onChange={handleInputChange}
-                                    placeholder="Male">
-                                </MainInput>
+                                </MainSelect>
                                 {errors.gender && <span className="validation">Please enter your gender</span>}
                             </div>
 
@@ -193,7 +190,7 @@ function PatientRegistrationForm(props) {
                     </form>
                 </>
             }
-        </div>
+        </div >
     )
 }
 export { PatientRegistrationForm }

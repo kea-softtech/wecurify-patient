@@ -92,6 +92,46 @@ function PatientPersonalInformation(props) {
                             name="email" >
                         </MainInput>
                     </div>
+
+                    <div className="col-sm-3">
+                        <label className=" patientData font_weight left">
+                            Weight
+                        </label>
+                        <MainInput
+                            type="text"
+                            name="weight"
+                            onChange={handleInputChange}
+                            value={updateData.weight}
+                            placeholder="kg">
+                        </MainInput>
+                    </div>
+                    <div className="col-sm-3">
+                        <label className=" patientData font_weight left">
+                            Height
+                        </label>
+                        <MainInput
+                            type="text"
+                            name="height"
+                            onChange={handleInputChange}
+                            value={updateData.height}
+                            placeholder="cm">
+                        </MainInput>
+                    </div>
+                    <div className="col-sm-3">
+                        <label className=" patientData font_weight left">
+                            Mobile No
+                        </label>
+                        <MainInput
+                            type="text"
+                            onChange={handleInputChange}
+                            name="mobile"
+                            maxLength={10}
+                            value={updateData.mobile}
+                            placeholder="9090909090">
+                        </MainInput>
+                    </div>
+
+
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
                             Marital status
@@ -117,30 +157,6 @@ function PatientPersonalInformation(props) {
                     </div>
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
-                            Height
-                        </label>
-                        <MainInput
-                            type="text"
-                            name="height"
-                            onChange={handleInputChange}
-                            value={updateData.height}
-                            placeholder="cm">
-                        </MainInput>
-                    </div>
-                    <div className="col-sm-3">
-                        <label className=" patientData font_weight left">
-                            Weight
-                        </label>
-                        <MainInput
-                            type="text"
-                            name="weight"
-                            onChange={handleInputChange}
-                            value={updateData.weight}
-                            placeholder="kg">
-                        </MainInput>
-                    </div>
-                    <div className="col-sm-3">
-                        <label className=" patientData font_weight left">
                             Blood Group
                         </label>
                         <MainInput
@@ -151,6 +167,7 @@ function PatientPersonalInformation(props) {
                             placeholder="Ex. O+ A B...">
                         </MainInput>
                     </div>
+
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
                             Emergency Contact
@@ -165,19 +182,7 @@ function PatientPersonalInformation(props) {
                             placeholder="Emergency Contact">
                         </MainInput>
                     </div>
-                    <div className="col-sm-3">
-                        <label className=" patientData font_weight left">
-                            Mobile No
-                        </label>
-                        <MainInput
-                            type="text"
-                            onChange={handleInputChange}
-                            name="mobile"
-                            maxLength={10}
-                            value={updateData.mobile}
-                            placeholder="9090909090">
-                        </MainInput>
-                    </div>
+
                     <div className="col-sm-4">
                         <div align='left' className="patientData font_weight ">
                             Gender
@@ -186,27 +191,27 @@ function PatientPersonalInformation(props) {
                             <input
                                 className="radio_button"
                                 type="radio"
-                                value="female"
+                                value="Female"
                                 name="gender"
                                 onChange={handleInputChange}
-                                checked={updateData.gender === 'female'}
+                                checked={updateData.gender === 'Female'}
                             />
                             <span>Female</span>
                             <input
                                 className="radio_button"
                                 type="radio"
-                                value='male'
+                                value='Male'
                                 name="gender"
-                                checked={updateData.gender === 'male'}
+                                checked={updateData.gender === 'Male'}
                                 onChange={handleInputChange}
                             />
                             <span>Male</span>
                             <input
                                 className="radio_button"
                                 type="radio"
-                                value='other'
+                                value='Other'
                                 name="gender"
-                                checked={updateData.gender === 'other'}
+                                checked={updateData.gender === 'Other'}
                                 onChange={handleInputChange}
                             />
                             <span>Other</span>
