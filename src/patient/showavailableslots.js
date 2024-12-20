@@ -7,17 +7,15 @@ import moment from "moment";
 import { setSlotData } from "../recoil/atom/setSlotData";
 import { setSessionData } from "../recoil/atom/setSessionData";
 import { setloggedIn } from "../recoil/atom/setloggedIn";
-import { setDoctorId } from "../recoil/atom/setDoctorId";
 import { Modal } from "react-bootstrap";
 import { PatientLoginMpin } from "./patientMpin/PatientLoginMpin";
 import { setAppointmentType } from "../recoil/atom/setAppointmentType";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import CreatePatientLoginMpin from "./patientMpin/CreatePatientLoginMpin";
-import ForgotPatientLoginMpin from "./patientMpin/ForgotPatientLoginMpin";
 import { useNavigate } from "react-router-dom";
 
 const ShowInClinicAppointSlots = (props) => {
-    const { sessionSlot, selectedDate, session, slotDate, doctorsId } = props;
+    const { sessionSlot, selectedDate, session, slotDate } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [sessionData, setSessionsData] = useRecoilState(setSessionData)
     const [loggedIn] = useRecoilState(setloggedIn)
@@ -262,7 +260,7 @@ const ShowInClinicAppointSlots = (props) => {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showForgot} onHide={handleForgotClose}>
+            {/* <Modal show={showForgot} onHide={handleForgotClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Reset MPIN</Modal.Title>
                 </Modal.Header>
@@ -271,7 +269,7 @@ const ShowInClinicAppointSlots = (props) => {
                         patientId={patientId}
                         onSubmit={handleForgotClose} />
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
 
             <Modal show={showCreate} onHide={handleCreateClose}>
                 <Modal.Header closeButton>

@@ -5,7 +5,6 @@ import { Wrapper } from "../../mainComponent/Wrapper";
 import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
-import { ForgotMpin } from "./ForgotMpin";
 import { MainInput } from "../../mainComponent/mainInput";
 import { MainSelect } from "../../mainComponent/mainSelect";
 import { LoginPatientOtp } from "../loginPatientOtp";
@@ -85,8 +84,8 @@ export default function ForgotPatientMpin() {
                                                     value={selectedValue}
                                                     onChange={handleSelectData}
                                                 >
-                                                    <option value="IND">IND</option>
-                                                    <option value="OTHER">OTHER</option>
+                                                    <option value="IND">IN</option>
+                                                    <option value="OTHER">Other</option>
                                                 </MainSelect>
                                             </div>
                                             <div className="width70 ml-2">

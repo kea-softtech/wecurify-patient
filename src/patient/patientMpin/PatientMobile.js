@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MainInput } from "../../mainComponent/mainInput";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
 import { useRecoilState } from "recoil";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 import PatientApi from "../../services/PatientApi";
 import { PatientMpin } from "./PatientMpin";
@@ -26,7 +26,7 @@ function PatientMobile() {
         setSelectedValue(selectedItem)
     })
 
-    const handleMobile = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
         if (selectedValue === "OTHER") {
             if (!email || !/\S+@\S+\.\S+/.test(email)) {
@@ -72,46 +72,6 @@ function PatientMobile() {
         }
     };
 
-    // const handleMobile = (e) => {
-    //     e.preventDefault()
-    //     if (mobile) {
-    //         if (!mobile){
-    //             setIsError('Mobile number is required')
-    //         }
-    //         else if (mobile.length < 10 ) {
-    //             setIsError('Mobile number must be 10 digits')
-    //         }
-    //         else {
-    //             loginPatient({ mobile })
-    //                 .then(data => {
-    //                     if (data.data.password) {
-    //                         setPatientId(data.data._id)
-    //                         setShowMpin(true)
-    //                         setIsError(false)
-    //                     }
-    //                     else {
-    //                         setShowOtp(true)
-    //                         setMessage(true)
-    //                     }
-    //                     setLoginData(data.data)
-    //                 })
-    //         }
-    //     } else {
-    //         loginPatientEmail({ email })
-    //             .then(data => {
-    //                 if (data.data.password) {
-    //                     setPatientId(data.data._id)
-    //                     setShowMpin(true)
-    //                     setIsError(false)
-    //                 }
-    //                 else {
-    //                     setShowOtp(true)
-    //                     setMessage(true)
-    //                 }
-    //                 setLoginData(data.data)
-    //             })
-    //     }
-    // }
 
     return (
         <div className="bg_color_2">
@@ -196,7 +156,7 @@ function PatientMobile() {
                                                 :
                                                 <div align='left'>
                                                     <MainButtonInput
-                                                        onClick={handleMobile}>
+                                                        onClick={handleLogin}>
                                                         Go
                                                     </MainButtonInput>
                                                 </div>
@@ -204,6 +164,9 @@ function PatientMobile() {
                                             }
                                         </>
                                     }
+                                    <div className="" align="right">
+                                        <Link to={`/forgetpatientmpin`}>Set / Forgot MPIN </Link>
+                                    </div>
 
                                 </div>
                                 {/* <div className="row" align='right'>

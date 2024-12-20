@@ -46,7 +46,7 @@ function AppointmentBookingSection() {
         const value = e.target.value;
         setSelectedValue(value);
     };
-    
+
     function clinic() {
         setIsLoading(true);
         getClinic({ clinicId })
@@ -74,9 +74,13 @@ function AppointmentBookingSection() {
 
                     <div className="width50 row justifyContent">
                         <MainSelect className='appColor btn_sub' value={selectedValue} onChange={handleChange}>
-                            <option value="">Select Assign Doctor</option>
+                            <option >Assign Doctor</option>
                             {doctors && doctors.map((item, index) => (
-                                <option key={item._id} value={item._id} className="form-control">{item.name}</option>
+                                <option key={item._id}
+                                    value={item._id}
+                                    className="form-control">
+                                    {item.name}
+                                </option>
                             ))}
                         </MainSelect>
                         {/* <div className="appColor normal-font" align='right'>Dr. {doctorName.name}</div> */}

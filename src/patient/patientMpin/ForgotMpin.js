@@ -11,7 +11,7 @@ import { PatientLoginMpin } from "./PatientLoginMpin";
 function ForgotMpin(props) {
     const { email, mobile } = props;
     const [isError, setIsError] = useState(false);
-    const { PatientForgetMpin,PatientForgetEmailMpin } = PatientApi()
+    const { PatientForgetMpin, PatientForgetEmailMpin } = PatientApi()
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
     const [show, setShow] = useState(false);
     const [data, setData] = useState(
@@ -51,22 +51,22 @@ function ForgotMpin(props) {
                         }
                     })
             }
-            // else{
-            //     const bodyData = {
-            //         email: email,
-            //         password: password,
-            //     }
-            //     PatientForgetEmailMpin(bodyData)
-            //         .then(response => {
-            //             const patientId = response.data._id
-            //             if (slotItem._id) {
-            //                 setShow(true)
-            //             } else {
-            //                 navigate(`/patient`)
-            //             }
-            //         })
-                
-            // }
+            else {
+                const bodyData = {
+                    email: email,
+                    password: password,
+                }
+                PatientForgetEmailMpin(bodyData)
+                    .then(response => {
+                        const patientId = response.data._id
+                        if (slotItem._id) {
+                            setShow(true)
+                        } else {
+                            navigate(`/patient`)
+                        }
+                    })
+
+            }
         }
 
 
