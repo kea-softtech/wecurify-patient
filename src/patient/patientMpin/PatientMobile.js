@@ -11,6 +11,7 @@ import { MainSelect } from "../../mainComponent/mainSelect";
 
 function PatientMobile() {
     const [mobile, setMobile] = useState("");
+    const [email, setEmail] = useState("");
     const [isError, setIsError] = useState(false);
     const [showMpin, setShowMpin] = useState(false)
     const [showOtp, setShowOtp] = useState(false)
@@ -18,7 +19,7 @@ function PatientMobile() {
     const [message, setMessage] = useState(false)
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [selectedValue, setSelectedValue] = useState('')
-    const { loginPatient } = PatientApi();
+    const { loginPatient, loginPatientEmail } = PatientApi();
 
     const handleSelectData = ((e) => {
         const selectedItem = e.target.value
@@ -26,28 +27,75 @@ function PatientMobile() {
         setSelectedValue(selectedItem)
     })
 
-    const handleMobile = (e) => {
-        e.preventDefault()
-        if (mobile.length < 10) {
-            setIsError('Mobile number must be 10 digits')
-        }
-        else {
+    // const handleMobile = (e) => {
+    //     e.preventDefault()
+    //     if (mobile.length < 10) {
+    //         setIsError('Mobile number must be 10 digits')
+    //     }
+    //     else {
+    //         loginPatient({ mobile })
+    //             .then(data => {
+    //                 console.log('====', data)
+    //                 if (data.data.password) {
+    //                     setPatientId(data.data._id)
+    //                     setShowMpin(true)
+    //                     setIsError(false)
+    //                 }
+    //                 else {
+    //                     setShowOtp(true)
+    //                     setMessage(true)
+    //                 }
+    //                 setLoginData(data.data)
+    //             })
+    //     }
+    // }
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (selectedValue === "OTHER") {
+            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                setIsError("Please enter a valid email address");
+                return;
+            } else {
+                loginPatientEmail({ email })
+                    .then((data) => {
+                        if (data.data.password) {
+                            setPatientId(data.data._id);
+                            setShowMpin(true);
+                            setIsError("");
+                        } else {
+                            setShowOtp(true);
+                            setMessage(true);
+                        }
+                        setLoginData(data.data);
+                    })
+                    .catch(() => setIsError("Failed to login with email"));
+            }
+        } else {
+            if (!mobile) {
+                setIsError("Mobile number is required");
+                return;
+            }
+            if (mobile.length < 10) {
+                setIsError("Mobile number must be 10 digits");
+                return;
+            }
             loginPatient({ mobile })
-                .then(data => {
-                    console.log('====', data)
+                .then((data) => {
                     if (data.data.password) {
-                        setPatientId(data.data._id)
-                        setShowMpin(true)
-                        setIsError(false)
+                        setPatientId(data.data._id);
+                        setShowMpin(true);
+                        setIsError("");
+                    } else {
+                        setShowOtp(true);
+                        setMessage(true);
                     }
-                    else {
-                        setShowOtp(true)
-                        setMessage(true)
-                    }
-                    setLoginData(data.data)
+                    setLoginData(data.data);
                 })
+                .catch(() => setIsError("Failed to login with mobile"));
         }
-    }
+    };
+
+
 
     return (
         <div className="bg_color_2">
@@ -64,8 +112,8 @@ function PatientMobile() {
                                             value={selectedValue}
                                             onChange={handleSelectData}
                                         >
-                                            <option value="IND">IND</option>
-                                            <option value="OTHER">OTHER</option>
+                                            <option value="IND">IN</option>
+                                            <option value="OTHER">Other</option>
                                         </MainSelect>
                                     </div>
                                     <div className="width70 ml-2">
@@ -75,8 +123,8 @@ function PatientMobile() {
                                                 <MainInput
                                                     type="text"
                                                     name="email"
-                                                    value={mobile.mobile}
-                                                    // onChange={handleChange}
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
                                                     placeholder="Email">
                                                 </MainInput>
                                             </>
@@ -106,19 +154,27 @@ function PatientMobile() {
                                 <div>
                                     {showMpin === true ?
                                         <>
-                                            <PatientMpin mobile={mobile} loginData={loginData} />
+                                            <PatientMpin
+                                                mobile={mobile}
+                                                email={email}
+                                                loginData={loginData} />
                                             <Outlet />
                                         </>
                                         :
                                         <>
                                             {showOtp === true ?
                                                 <>
-                                                    <LoginPatientOtp patientId={patientId} loginData={loginData} />
+                                                    <LoginPatientOtp
+                                                        patientId={patientId}
+                                                        loginData={loginData} />
                                                     <Outlet />
                                                 </>
                                                 :
                                                 <div align='left'>
-                                                    <MainButtonInput onClick={handleMobile}>Go</MainButtonInput>
+                                                    <MainButtonInput
+                                                        onClick={handleLogin}>
+                                                        Go
+                                                    </MainButtonInput>
                                                 </div>
 
                                             }

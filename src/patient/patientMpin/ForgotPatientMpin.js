@@ -7,24 +7,51 @@ import { setDoctorId } from "../../recoil/atom/setDoctorId";
 import PatientApi from "../../services/PatientApi";
 import { ShowPatientOtp } from "./ShowPatientOtp";
 import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
+import { MainSelect } from "../../mainComponent/mainSelect";
+import { LoginPatientOtp } from "../loginPatientOtp";
 
 export default function ForgotPatientMpin() {
     const [mobile, setMobile] = useState("");
+    const [email, setEmail] = useState("");
     const [isError, setIsError] = useState(false);
     const [loginData, setLoginData] = useState([])
-    const { validLoginPatient } = PatientApi();
+    const { validLoginPatient, PatientForgetEmailMpin } = PatientApi();
     const [showOTP, setShowOTP] = useState(false);
     const [doctorId, setdoctorId] = useRecoilState(setDoctorId);
     const [patientId, setPatientId] = useRecoilState(setNewPatientId);
     const [message, setMessage] = useState(false)
+    const [selectedValue, setSelectedValue] = useState('')
+
+    const handleSelectData = ((e) => {
+        const selectedItem = e.target.value
+        setSelectedValue(selectedItem)
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (mobile.length < 10) {
-            setIsError('Mobile number must be 10 digits.')
+        if (mobile) {
+            if (mobile.length < 10) {
+                setIsError('Mobile number must be 10 digits.')
+            }
+            else {
+                validLoginPatient({ mobile })
+                    .then(response => {
+                        if (response.data.isLoggedIn === true) {
+                            setPatientId(response.data._id)
+                            setIsError(false)
+                            setMessage(true)
+                            setShowOTP(true)
+                        }
+                        else {
+                            setIsError('Entered mobile number is not register')
+                        }
+                        let item = response.data
+                        setLoginData(item)
+                    })
+            }
         }
         else {
-            validLoginPatient({ mobile })
+            PatientForgetEmailMpin({ email })
                 .then(response => {
                     if (response.data.isLoggedIn === true) {
                         setPatientId(response.data._id)
@@ -41,6 +68,7 @@ export default function ForgotPatientMpin() {
         }
     };
 
+
     return (
         <Wrapper>
             <div className=" common_box">
@@ -51,31 +79,64 @@ export default function ForgotPatientMpin() {
                             <form >
                                 <div className="clearfix">
                                     <div className=" last">
-                                        <label className='mb-2'>Mobile Number</label>
-                                        <div className="mb-2">
-                                            <input 
-                                                name="mobile"
-                                                value={mobile.mobile}
-                                                maxLength={10}
-                                                pattern="[+-]?\d+(?:[.,]\d+)?"
-                                                onChange={(e) => setMobile(e.target.value)}
-                                                placeholder="Phone Number (+XX)"
-                                                className="form-control" 
-                                            />
-                                            {message && (<span className="sendotp-message mb-2"> OTP is sent to the mobile number</span>)}
-                                            {<span className="validation mb-2">{isError}</span>}
+                                        <div className=" full-width row">
+                                            <div className="width25 ">
+                                                <label className='mb-2'>Select</label>
+                                                <MainSelect
+                                                    value={selectedValue}
+                                                    onChange={handleSelectData}
+                                                >
+                                                    <option value="IND">IN</option>
+                                                    <option value="OTHER">Other</option>
+                                                </MainSelect>
+                                            </div>
+                                            <div className="width70 ml-2">
+                                                {selectedValue === 'OTHER' ?
+                                                    <>
+                                                        <label className='mb-2'>EmailId</label>
+                                                        <MainInput
+                                                            type="email"
+                                                            name="email"
+                                                            value={email.email}
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            placeholder="Email">
+                                                        </MainInput>
+                                                        {message && (<span className="sendotp-message  mb-2">
+                                                            OTP is sent to the EmailId
+                                                        </span>)}
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <label className='mb-2 '>Mobile Number</label>
+                                                        <MainInput
+                                                            type="text"
+                                                            name="mobile"
+                                                            value={mobile.mobile}
+                                                            maxLength={10}
+                                                            pattern="[+-]?\d+(?:[.,]\d+)?"
+                                                            onChange={(e) => setMobile(e.target.value)}
+                                                            placeholder="Phone Number (+XX)">
+                                                        </MainInput>
+                                                        {message && (<span className="sendotp-message  mb-2">
+                                                            OTP is sent to the mobile number
+                                                        </span>)}
+                                                    </>
+                                                }
+                                            </div>
                                         </div>
-                                        {showOTP === true && isError !== true ?
-                                            <ShowPatientOtp
-                                                doctorId={doctorId}
+                                        {<span className="validation mb-2">{isError}</span>}
+
+                                        {showOTP === true ?
+                                            <LoginPatientOtp
                                                 patientId={patientId}
-                                                loginData={loginData}
-                                                mobile={mobile}
-                                            />
+                                                loginData={loginData} />
                                             :
                                             <>
                                                 <div align='left' >
-                                                    <MainButtonInput onClick={handleSubmit}>Go</MainButtonInput>
+                                                    <MainButtonInput
+                                                        onClick={handleSubmit}>
+                                                        Go
+                                                    </MainButtonInput>
                                                 </div>
                                             </>
                                         }
@@ -85,7 +146,7 @@ export default function ForgotPatientMpin() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </Wrapper>
+            </div >
+        </Wrapper >
     )
 }

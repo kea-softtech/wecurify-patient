@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { MainButtonInput } from "../mainComponent/mainButtonInput";
 import { MainInput } from "../mainComponent/mainInput";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
