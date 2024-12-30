@@ -74,7 +74,7 @@ function AppointmentBookingSection() {
 
                     <div className="width50 row justifyContent">
                         <MainSelect className='appColor btn_sub' value={selectedValue} onChange={handleChange}>
-                            <option value="">Select Assign Doctor</option>
+                            <option value="">Assign Doctor</option>
                             {doctors && doctors.map((item, index) => (
                                 <option key={item._id} value={item._id} className="form-control">{item.name}</option>
                             ))}
