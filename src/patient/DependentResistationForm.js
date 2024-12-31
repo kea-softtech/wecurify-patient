@@ -4,6 +4,7 @@ import { MainInput } from "../mainComponent/mainInput";
 import { MainButtonInput } from "../mainComponent/mainButtonInput";
 import PatientApi from "../services/PatientApi";
 import { useNavigate } from "react-router-dom";
+import { MainSelect } from "../mainComponent/mainSelect";
 
 function DependentRegistationForm(props) {
     const { patientId } = props;
@@ -11,6 +12,26 @@ function DependentRegistationForm(props) {
     const [dependentData, setDependentData] = useState([])
     const { fetchPatient, AddDependents } = PatientApi()
     const navigate = useNavigate();
+    const [saveGender, setSaveGender] = useState('')
+    const gender = [
+        {
+            "_id": 0,
+            "name": "Male"
+        },
+        {
+            "_id": 1,
+            "name": "Female"
+        },
+        {
+            "_id": 2,
+            "name": "Other"
+        }
+    ]
+
+    const handleGender = ((e) => {
+        e.preventDefault()
+        setSaveGender(e.target.value)
+    })
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -40,13 +61,14 @@ function DependentRegistationForm(props) {
         const dependentAdd = {
             name: dependentData.name,
             // mobile: updatePatientData.mobile,
-            gender: dependentData.gender,
+            gender: saveGender ? saveGender : dependentData.gender,
             age: dependentData.age,
             email: dependentData.email,
             patientId: patientId,
         }
         AddDependents(patientId, dependentAdd)
             .then((response) => {
+                console.log('======>>response', response)
                 // setFetchPatientData(response)
                 // setDependentsId(response._id)
                 navigate(`/patientprofile/${patientId}`)
@@ -110,13 +132,18 @@ function DependentRegistationForm(props) {
                                 <label className="font_weight left">
                                     Gender
                                 </label>
-                                <MainInput
-                                    type="text"
-                                    name="gender"
-                                    value={dependentData.gender}
-                                    onChange={handleInputChange}
-                                    placeholder="Male">
-                                </MainInput>
+                                <MainSelect
+                                    value={saveGender ? saveGender : dependentData.gender}
+                                    onChange={handleGender}>
+                                    <option>Select</option>
+                                    {gender && gender.map((item, index) => (
+                                        <option key={index}
+                                            value={item.name}
+                                            className="form-control">
+                                            {item.name}
+                                        </option>
+                                    ))}
+                                </MainSelect>
                                 {errors.gender && <span className="validation">Please enter your gender</span>}
                             </div>
 
@@ -134,7 +161,7 @@ function DependentRegistationForm(props) {
                                 {errors.email && <span className="validation">Please enter your email address</span>}
                             </div>
                         </div>
-                        <div className="text-right add_top_30 m-2">
+                        <div className="text-right add_top_30 mr-3">
                             <MainButtonInput>Verify & Save</MainButtonInput>
                         </div>
                     </form>

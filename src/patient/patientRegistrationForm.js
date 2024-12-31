@@ -17,12 +17,12 @@ function PatientRegistrationForm(props) {
     const [updatePatientData, setUpdatePatientData] = useState({})
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
-    const [saveGender, setSaveGender] = useState('')
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [saveGender, setSaveGender] = useState('')
     const gender = [
         {
             "_id": 0,
@@ -38,15 +38,16 @@ function PatientRegistrationForm(props) {
         }
     ]
 
+    const handleGender = ((e) => {
+        e.preventDefault()
+        setSaveGender(e.target.value)
+    })
+
     const handleInputChange = event => {
         const { name, value } = event.target;
         setUpdatePatientData({ ...updatePatientData, [name]: value });
         setValue(name, value)
     };
-    const handleGender = ((e) => {
-        e.preventDefault()
-        setSaveGender(e.target.value)
-    })
 
     useEffect(() => {
         getPatientDetails()
@@ -165,7 +166,6 @@ function PatientRegistrationForm(props) {
                                 </MainSelect>
                                 {errors.gender && <span className="validation">Please enter your gender</span>}
                             </div>
-
 
                             <div className="col-md-4 col-sm-4">
                                 <label className="font_weight left">

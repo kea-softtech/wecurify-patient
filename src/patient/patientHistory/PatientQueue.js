@@ -61,7 +61,7 @@ export default function PatientQueue() {
                 <div className="full-width">
                     <div className="common_box">
                         {/* <HStack> */}
-                            <Wrap justify='center'>
+                            <Wrap className="mt-2" justify='center'>
                                 {selectedSlots.map((item, index) => (
                                     < QueueItem
                                         key={index}

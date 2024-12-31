@@ -57,7 +57,7 @@ function PatientPersonalInformation(props) {
             <div className="col-12" >
                 <div className="row">
                     <div className="col-sm-3">
-                        <label className=" patientData font_weight left">
+                        <label className="patientData font_weight left">
                             Full Name
                         </label>
                         <MainInput
@@ -117,16 +117,19 @@ function PatientPersonalInformation(props) {
                     </div>
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
-                            Height
+                            Emergency Contact
                         </label>
                         <MainInput
                             type="text"
-                            name="height"
+                            name="emcontact"
                             onChange={handleInputChange}
-                            value={updateData.height}
-                            placeholder="cm">
+                            value={updateData.emcontact}
+                            maxLength={10}
+                            className="form-control"
+                            placeholder="Emergency Contact">
                         </MainInput>
                     </div>
+                   
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
                             Weight
@@ -153,16 +156,14 @@ function PatientPersonalInformation(props) {
                     </div>
                     <div className="col-sm-3">
                         <label className=" patientData font_weight left">
-                            Emergency Contact
+                            Height
                         </label>
                         <MainInput
                             type="text"
-                            name="emcontact"
+                            name="height"
                             onChange={handleInputChange}
-                            value={updateData.emcontact}
-                            maxLength={10}
-                            className="form-control"
-                            placeholder="Emergency Contact">
+                            value={updateData.height}
+                            placeholder="cm">
                         </MainInput>
                     </div>
                     <div className="col-sm-3">

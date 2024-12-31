@@ -69,8 +69,8 @@ export default function GetDependent(props) {
             "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold",
-            "email":fetchPatientData.email,
-            "parent":DoctorId
+            "email": fetchPatientData.email,
+            "parent": DoctorId
         }
         paymentInfo(transactionData)
             .then((res) => {
@@ -128,7 +128,7 @@ export default function GetDependent(props) {
                     <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(bookSlot)}>
                         Yes
                     </Button>
-                    <Button variant="default" className='appColorBorder'  onClick={handleClose}>
+                    <Button variant="default" className='appColorBorder' onClick={handleClose}>
                         No
                     </Button>
                 </Modal.Footer>

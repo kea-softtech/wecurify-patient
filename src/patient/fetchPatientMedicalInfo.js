@@ -37,7 +37,6 @@ function FetchPatientMedicalInfo(props) {
         handleClose(true);
     };
 
-
     function handleRecordAdded() {
         setShowMedicalInfo(false)
     }
