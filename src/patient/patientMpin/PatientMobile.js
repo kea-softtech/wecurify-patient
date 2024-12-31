@@ -23,7 +23,6 @@ function PatientMobile() {
 
     const handleSelectData = ((e) => {
         const selectedItem = e.target.value
-        console.log('=======', selectedItem)
         setSelectedValue(selectedItem)
     })
 
@@ -35,7 +34,6 @@ function PatientMobile() {
     //     else {
     //         loginPatient({ mobile })
     //             .then(data => {
-    //                 console.log('====', data)
     //                 if (data.data.password) {
     //                     setPatientId(data.data._id)
     //                     setShowMpin(true)

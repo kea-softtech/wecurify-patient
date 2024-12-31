@@ -68,7 +68,6 @@ function DependentRegistationForm(props) {
         }
         AddDependents(patientId, dependentAdd)
             .then((response) => {
-                console.log('======>>response', response)
                 // setFetchPatientData(response)
                 // setDependentsId(response._id)
                 navigate(`/patientprofile/${patientId}`)

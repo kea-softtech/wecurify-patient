@@ -21,6 +21,7 @@ function PatientRegistrationForm(props) {
     const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
+    const [mobile, setMobile] = useState('');
     const navigate = useNavigate();
     const [saveGender, setSaveGender] = useState('')
     const gender = [
@@ -48,6 +49,9 @@ function PatientRegistrationForm(props) {
         setUpdatePatientData({ ...updatePatientData, [name]: value });
         setValue(name, value)
     };
+    const handleMobile = (e) => {
+        setMobile(e.target.value)
+    }
 
     useEffect(() => {
         getPatientDetails()
