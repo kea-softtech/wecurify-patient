@@ -10,23 +10,43 @@ import { setSlotData } from "../recoil/atom/setSlotData";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import Loader from "./patientHistory/Loader";
+import { MainSelect } from "../mainComponent/mainSelect";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
     const [slotItem] = useRecoilState(setSlotData)
+    const [saveGender, setSaveGender] = useState('')
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const gender = [
+        {
+            "_id": 0,
+            "name": "Male"
+        },
+        {
+            "_id": 1,
+            "name": "Female"
+        },
+        {
+            "_id": 2,
+            "name": "Other"
+        }
+    ]
 
     const handleInputChange = event => {
         const { name, value } = event.target;
         setUpdatePatientData({ ...updatePatientData, [name]: value });
         setValue(name, value)
     };
+    const handleGender = ((e) => {
+        e.preventDefault()
+        setSaveGender(e.target.value)
+    })
 
     useEffect(() => {
         getPatientDetails()
@@ -55,7 +75,7 @@ function PatientRegistrationForm(props) {
         const newPatientData = {
             mobile: updatePatientData.mobile,
             name: updatePatientData.name,
-            gender: updatePatientData.gender,
+            gender: saveGender ? saveGender : updatePatientData.gender,
             age: updatePatientData.age,
             email: updatePatientData.email,
         }
@@ -127,20 +147,25 @@ function PatientRegistrationForm(props) {
                                 </MainInput>
                                 {errors.age && <span className="validation">Please enter your Age</span>}
                             </div>
-
                             <div className="col-md-3 ">
                                 <label className="font_weight left">
                                     Gender
                                 </label>
-                                <MainInput
-                                    type="text"
-                                    name="gender"
-                                    value={updatePatientData.gender}
-                                    onChange={handleInputChange}
-                                    placeholder="Male">
-                                </MainInput>
+                                <MainSelect
+                                    value={saveGender ? saveGender : updatePatientData.gender}
+                                    onChange={handleGender}>
+                                    <option>Select</option>
+                                    {gender && gender.map((item, index) => (
+                                        <option key={index}
+                                            value={item.name}
+                                            className="form-control">
+                                            {item.name}
+                                        </option>
+                                    ))}
+                                </MainSelect>
                                 {errors.gender && <span className="validation">Please enter your gender</span>}
                             </div>
+
 
                             <div className="col-md-4 col-sm-4">
                                 <label className="font_weight left">
@@ -162,7 +187,7 @@ function PatientRegistrationForm(props) {
                     </form>
                 </>
             }
-        </div>
+        </div >
     )
 }
 export { PatientRegistrationForm }
