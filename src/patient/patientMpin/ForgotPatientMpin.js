@@ -38,6 +38,7 @@ export default function ForgotPatientMpin() {
                     .then(response => {
                         if (response.data.isLoggedIn === true) {
                             setPatientId(response.data._id)
+                            alert(response.data.otp)
                             setIsError(false)
                             setMessage(true)
                             setShowOTP(true)

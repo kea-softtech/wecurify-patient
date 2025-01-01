@@ -31,8 +31,6 @@ function PatientLoginMpin(props) {
     const [selectedValue, setSelectedValue] = useState('')
     const { loginPatient, loginPatientEmail } = PatientApi();
 
-    const navigate = useNavigate();
-
     const handleSelectData = ((e) => {
         const selectedItem = e.target.value
         setSelectedValue(selectedItem)
@@ -76,6 +74,7 @@ function PatientLoginMpin(props) {
                         setShowMpin(true);
                         setIsError("");
                     } else {
+                        alert(data.data.otp)
                         setShowOtp(true);
                         setMessage(true);
                     }
@@ -173,9 +172,9 @@ function PatientLoginMpin(props) {
                             }
 
                         </div>
-                        <div align='right'>
+                        {/* <div align='right'>
                             <Link onClick={handleForgotShow} >Set / Forgot MPIN</Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </form>
