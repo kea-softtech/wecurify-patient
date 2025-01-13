@@ -20,7 +20,7 @@ export default function GetDependent(props) {
     const [doctorName, setDoctorName] = useState([])
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
-    const { addDoctorInformation } = AuthApi()
+    const { getDrInfo } = AuthApi()
     const navigate = useNavigate()
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
 
@@ -36,7 +36,7 @@ export default function GetDependent(props) {
         setShow(false)
     }
     function getDoctorData() {
-        addDoctorInformation({ doctorId })
+        getDrInfo({ doctorId })
             .then((response) => {
                 let fullName = response.name.split(' '),
                     firstName = fullName[0],

@@ -11,6 +11,9 @@ import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import Loader from "./patientHistory/Loader";
 import { MainSelect } from "../mainComponent/mainSelect";
+import { requestNotificationPermission } from "../firebase.config";
+import { API } from "../config";
+import AuthApi from "../services/AuthApi";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
@@ -24,6 +27,8 @@ function PatientRegistrationForm(props) {
     const [mobile, setMobile] = useState('');
     const navigate = useNavigate();
     const [saveGender, setSaveGender] = useState('')
+    const { savePatientToken } = AuthApi()
+
     const gender = [
         {
             "_id": 0,
@@ -38,6 +43,8 @@ function PatientRegistrationForm(props) {
             "name": "Other"
         }
     ]
+
+
 
     const handleGender = ((e) => {
         e.preventDefault()
@@ -74,6 +81,23 @@ function PatientRegistrationForm(props) {
             })
     }
 
+    const patientToken = async (patientId) => {
+        try {
+            const currentToken = await requestNotificationPermission();
+            if (currentToken) {
+                savePatientToken(patientId, { patientToken: currentToken })
+                    .then(() => {
+                        console.log('Patient token saved for patientId:', patientId);
+                    })
+                    .catch(err => {
+                        console.error('Error saving patient token:', err);
+                    });
+            }
+        } catch (error) {
+            console.error('Error generating patient token:', error);
+        }
+    };
+
     const { register, setValue, formState: { errors } } = useForm();
     const onSubmit = (e) => {
         e.preventDefault();
@@ -86,6 +110,7 @@ function PatientRegistrationForm(props) {
         }
         insertPatientData(patientId, newPatientData)
             .then((response) => {
+                patientToken(patientId)
                 setCoilFetchPatientData(response)
                 setLoggedIn(response.isLoggedIn)
             })

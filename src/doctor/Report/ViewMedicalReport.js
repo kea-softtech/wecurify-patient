@@ -19,8 +19,8 @@ export default function ViewMedicalReport() {
     const { reportId } = useParams();
     const { getMedicineReport } = ReportApi();
     const { fetchPatient } = PatientApi();
-    const { getDrInfo } = AuthApi()
-    const { getClinic } = ClinicApi()
+    const { getDrInfo } = AuthApi();
+    const { getClinic } = ClinicApi();
     const [viewData, setViewData] = useState([]);
     const [patientData, setPatientData] = useRecoilState(setNewPatientId);
     const [patientDetails, setPatientDetails] = useState([]);

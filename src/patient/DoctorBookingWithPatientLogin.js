@@ -1,4 +1,4 @@
-import { Link ,useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import React from "react";
 import { DoctorBookingConfirmation} from "../patient/doctorbookingconfirmation";
 import { PatientLoginForm } from "../patient/patientLoginForm";
@@ -19,7 +19,7 @@ export default function DoctorBookingWithPatientLogin(){
                         <div className="col-xl-8 col-lg-8">
                             <div className="box_general_3 cart">
                             {patientId?
-                            <FetchPatientInfo patientId={patientId}/>
+                            <FetchPatientInfo doctorId={doctorId} patientId={patientId}/>
                             :
                             <PatientLoginForm redirection="payment" />
                             }

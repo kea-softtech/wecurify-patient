@@ -14,21 +14,23 @@ import { setDoctorId } from "../recoil/atom/setDoctorId";
 function FetchPatientInfo(props) {
     const { patientId, doctorId } = props;
     const [slotItem, setSlotItem] = useRecoilState(setSlotData)
-    const [show, setShow] = useState(false);
     const [sessionData] = useRecoilState(setSessionData)
+    const [show, setShow] = useState(false);
     const [dependentId] = useRecoilState(setDependentId)
     const [DoctorId] = useRecoilState(setDoctorId)
     const [doctorName, setDoctorName] = useState([])
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const { fetchPatient, paymentInfo } = PatientApi()
-    const { addDoctorInformation } = AuthApi()
+    const { notifyDoctor, getDrInfo } = AuthApi()
+    const [token, setToken] = useState(null);
+
     const navigate = useNavigate()
 
     useEffect(() => {
-        getAllPatientData()
-        getDoctorData()
-    }, [])
+        getDoctorData();
+        getAllPatientData();
+    }, []);
 
     function getAllPatientData() {
         fetchPatient({ patientId })
@@ -36,16 +38,34 @@ function FetchPatientInfo(props) {
                 setFetchPatientData(response[0])
             })
     }
-
     function getDoctorData() {
-        addDoctorInformation({ doctorId })
+        getDrInfo({ doctorId })
             .then((response) => {
-                let fullName = response.name.split(' '),
-                    firstName = fullName[0],
+                let doctordata = response.result[0]
+                let fullName = doctordata.name.split(' '),
+                    // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
                 setDoctorName("Dr. " + lastName)
+                setToken(doctordata.doctorToken)
             })
     }
+    const handleBookAppointment = async (doctorId) => {
+        if (token) {
+            const notificationData = {
+                doctorId,
+                token: token,
+                patientId,
+                date: sessionData.slotDate,
+                appointmentTime: slotItem.time,
+                patientName: fetchPatientData.name,
+                // email: fetchPatientData.email,
+                // phone: fetchPatientData.mobile,
+                // doctorName: doctorName,
+            };
+            notifyDoctor(doctorId, notificationData)
+            // console.log('Notification sent to doctor!');
+        }
+    };
 
     const handleShow = (item) => {
         setShow(true)
@@ -79,13 +99,14 @@ function FetchPatientInfo(props) {
             "doctorname": doctorName,
             "status": "Ongoing",
             "payment": "hold",
-            "email":fetchPatientData.email,
+            "email": fetchPatientData.email,
             "parent": DoctorId
         }
         paymentInfo(transactionData)
             .then((res) => {
                 if (slotId) {
                     navigate(`/confirm/${sessionData.session.doctorId}`)
+                    handleBookAppointment(doctorId)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }
@@ -136,7 +157,7 @@ function FetchPatientInfo(props) {
                         <Button variant="default" className='appColor' onClick={() => handleSelectedSlot(slotItem)}>
                             Yes
                         </Button>
-                        <Button variant="default" className='appColorBorder'  onClick={handleClose}>
+                        <Button variant="default" className='appColorBorder' onClick={handleClose}>
                             No
                         </Button>
                     </Modal.Footer>

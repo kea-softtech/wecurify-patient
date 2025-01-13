@@ -82,7 +82,7 @@ export default function AuthApi() {
     };
     const notifyDoctor = async (doctorId, notificationData) => {
         try {
-            const result = await axios.post(`${API}/notifydoctor/${doctorId}`, notificationData);
+            const result = await axios.post(`${API}/notifydoctor/${doctorId}`,notificationData);
             return result.data
         }
         catch (err) {
@@ -98,6 +98,17 @@ export default function AuthApi() {
             return err
         }
     };
+    const savePatientToken = async (patientId, {patientToken:currentToken}) => {
+        try {
+            const result = await axios.post(`${API}/savepatienttoken/${patientId}`, {patientToken:currentToken})
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    };
+
+
     return {
         addDoctorInformation,
         submitDoctorInformation,
@@ -109,5 +120,6 @@ export default function AuthApi() {
         notifyDoctor,
         saveNotification,
         getNotification,
+        savePatientToken,
     }
 }
