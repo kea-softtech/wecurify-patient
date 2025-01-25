@@ -24,7 +24,6 @@ function FetchPatientInfo(props) {
     const { fetchPatient, paymentInfo } = PatientApi()
     const { notifyDoctor, getDrInfo } = AuthApi()
     const [token, setToken] = useState(null);
-    console.log('==========token', token)
 
     const navigate = useNavigate()
 
@@ -42,8 +41,7 @@ function FetchPatientInfo(props) {
     function getDoctorData() {
         getDrInfo({ doctorId })
             .then((response) => {
-                let doctordata = response.result[0]
-                console.log('--------------------', doctordata.doctorTokens)
+                let doctordata = response['result'][0]
                 let fullName = doctordata.name.split(' '),
                     // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
@@ -65,11 +63,7 @@ function FetchPatientInfo(props) {
                 // phone: fetchPatientData.mobile,
             };
             try {
-                // Trigger the backend API to notify the doctor
                 await notifyDoctor(doctorId, notificationData)
-                    .then((res) => {
-                        console.log('=====res', res)
-                    })
             } catch (error) {
                 console.error('Error sending notification to doctor:', error);
             }

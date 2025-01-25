@@ -60,7 +60,6 @@ function DependentRegistationForm(props) {
         e.preventDefault();
         const dependentAdd = {
             name: dependentData.name,
-            // mobile: updatePatientData.mobile,
             gender: saveGender ? saveGender : dependentData.gender,
             age: dependentData.age,
             email: dependentData.email,
@@ -68,8 +67,6 @@ function DependentRegistationForm(props) {
         }
         AddDependents(patientId, dependentAdd)
             .then((response) => {
-                // setFetchPatientData(response)
-                // setDependentsId(response._id)
                 navigate(`/patientprofile/${patientId}`)
             })
     }
@@ -106,7 +103,6 @@ function DependentRegistationForm(props) {
                                     value={updatePatientData.mobile}
                                     maxLength={10}
                                     pattern="[+-]?\d+(?:[.,]\d+)?"
-                                    // onChange={handleInputChange}
                                     placeholder="Mobile Number (+XX)">
                                 </MainInput>
                                 {errors.mobile && <span className="validation">Please enter your Mobile Number</span>}

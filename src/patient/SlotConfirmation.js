@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
-import { setDoctorId } from "../recoil/atom/setDoctorId";
 
 export default function SlotConfirmation() {
     const [patientId, setPatientId] = useRecoilState(setNewPatientId)
