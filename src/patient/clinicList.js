@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { MainNav } from "../mainComponent/mainNav";
 import { Wrapper } from "../mainComponent/Wrapper";
 import Loader from "./patientHistory/Loader";
+import clinicLogo from '../img/clinicLogo.png'
 
 function ClinicList() {
     const { doctorId } = useParams()
@@ -65,15 +66,13 @@ function ClinicList() {
                                             {clinicData && clinicData.map((clinicItem, id) => (
                                                 <div key={clinicItem._id}>
                                                     <div className='row underline mb-3'>
-                                                        {clinicItem.clinicLogo ?
-                                                            <figure className="clinicList col-sm-3" >
-                                                                <img
-                                                                    className='clinicLogo borderRadius'
-                                                                    src={clinicItem.clinicLogo}
-                                                                    alt="Clinic Logo"
-                                                                />
-                                                            </figure>
-                                                            : null}
+                                                        <figure className="clinicList col-sm-3" >
+                                                            <img
+                                                                className='clinicLogo borderRadius'
+                                                                src={clinicItem.clinicLogo || clinicLogo}
+                                                                alt="Clinic Logo"
+                                                            />
+                                                        </figure>
                                                         <div className="clinicList col-sm-6" align='left' >
                                                             <div className="mb-4">
                                                                 <div className='font_weight fontS'>{clinicItem.clinicName}

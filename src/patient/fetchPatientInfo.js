@@ -24,6 +24,7 @@ function FetchPatientInfo(props) {
     const { fetchPatient, paymentInfo } = PatientApi()
     const { notifyDoctor, getDrInfo } = AuthApi()
     const [token, setToken] = useState(null);
+    console.log('==========token', token)
 
     const navigate = useNavigate()
 
@@ -42,11 +43,12 @@ function FetchPatientInfo(props) {
         getDrInfo({ doctorId })
             .then((response) => {
                 let doctordata = response.result[0]
+                console.log('--------------------', doctordata.doctorTokens)
                 let fullName = doctordata.name.split(' '),
                     // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
                 setDoctorName("Dr. " + lastName)
-                setToken(doctordata.doctorToken)
+                setToken(doctordata.doctorTokens)
             })
     }
     const handleBookAppointment = async (doctorId) => {
@@ -58,12 +60,19 @@ function FetchPatientInfo(props) {
                 date: sessionData.slotDate,
                 appointmentTime: slotItem.time,
                 patientName: fetchPatientData.name,
+                doctorName: doctorName
                 // email: fetchPatientData.email,
                 // phone: fetchPatientData.mobile,
-                // doctorName: doctorName,
             };
-            notifyDoctor(doctorId, notificationData)
-            // console.log('Notification sent to doctor!');
+            try {
+                // Trigger the backend API to notify the doctor
+                await notifyDoctor(doctorId, notificationData)
+                    .then((res) => {
+                        console.log('=====res', res)
+                    })
+            } catch (error) {
+                console.error('Error sending notification to doctor:', error);
+            }
         }
     };
 

@@ -38,10 +38,12 @@ export default function GetDependent(props) {
     function getDoctorData() {
         getDrInfo({ doctorId })
             .then((response) => {
-                let fullName = response.name.split(' '),
-                    firstName = fullName[0],
+                let doctordata = response.result[0]
+                let fullName = doctordata.name.split(' '),
+                    // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
                 setDoctorName("Dr. " + lastName)
+                // setToken(doctordata.doctorToken)
             })
     }
 

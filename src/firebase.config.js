@@ -44,3 +44,5 @@ export const listenForMessages = (callback) => {
         // callback(payload.notification);
     });
 };
+
+export default firebaseConfig;
