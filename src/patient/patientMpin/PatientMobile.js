@@ -63,6 +63,7 @@ function PatientMobile() {
                         setShowMpin(true);
                         setIsError("");
                     } else {
+                        alert(data.data.otp)
                         setShowOtp(true);
                         setMessage(true);
                     }
@@ -133,7 +134,6 @@ function PatientMobile() {
                                     </div>
 
                                 </div>
-                                <div className="validation mb-2">{isError}</div>
 
                                 <div>
                                     {showMpin === true ?
@@ -154,13 +154,15 @@ function PatientMobile() {
                                                     <Outlet />
                                                 </>
                                                 :
-                                                <div align='left'>
-                                                    <MainButtonInput
-                                                        onClick={handleLogin}>
-                                                        Go
-                                                    </MainButtonInput>
-                                                </div>
-
+                                                <>
+                                                    <div className="validation mb-2">{isError}</div>
+                                                    <div align='left'>
+                                                        <MainButtonInput
+                                                            onClick={handleLogin}>
+                                                            Go
+                                                        </MainButtonInput>
+                                                    </div>
+                                                </>
                                             }
                                         </>
                                     }

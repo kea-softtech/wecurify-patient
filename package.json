@@ -24,7 +24,7 @@
     "date-fns": "^2.22.1",
     "dayjs": "^1.11.10",
     "express": "^4.17.1",
-    "firebase": "^10.0.0",
+    "firebase": "^9.0.0",
     "formik": "^2.4.5",
     "input-group": "^0.1.5",
     "js-file-download": "^0.4.12",

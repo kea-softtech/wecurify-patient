@@ -11,16 +11,21 @@ import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import { setPatientProfileData } from "../recoil/atom/setPatientProfileData";
 import Loader from "./patientHistory/Loader";
 import { MainSelect } from "../mainComponent/mainSelect";
+import { requestNotificationPermission } from "../firebase.config";
+import AuthApi from "../services/AuthApi";
+import { validateForm } from "../doctor/Dashboard-card/validateForm";
 
 function PatientRegistrationForm(props) {
     const { patientId } = props;
     const [updatePatientData, setUpdatePatientData] = useState({})
     const [saveGender, setSaveGender] = useState('')
     const [loggedIn, setLoggedIn] = useRecoilState(setloggedIn)
+    const [errors, setErrors] = useState({})
     const [slotItem] = useRecoilState(setSlotData)
     const [patientData, setPatientData] = useRecoilState(setNewPatientId)
     const [coilFetchPatientData, setCoilFetchPatientData] = useRecoilState(setPatientProfileData)
     const { insertPatientData, fetchPatient } = PatientApi()
+    const { savePatientToken } = AuthApi()
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -66,15 +71,40 @@ function PatientRegistrationForm(props) {
             })
     }
 
+    const patientToken = async (patientId) => {
+        try {
+            const currentToken = await requestNotificationPermission();
+            if (currentToken) {
+                savePatientToken(patientId, { patientToken: currentToken })
+                    .then(() => {
+                        console.log('Patient token saved for patientId:', patientId);
+                    })
+                    .catch(err => {
+                        console.error('Error saving patient token:', err);
+                    });
+            }
+        } catch (error) {
+            console.error('Error generating patient token:', error);
+        }
+    };
+
     const handleGender = ((e) => {
         e.preventDefault()
         setSaveGender(e.target.value)
     })
 
-
-    const { register, setValue, formState: { errors } } = useForm();
+    const { register, setValue } = useForm();
     const onSubmit = (e) => {
         e.preventDefault();
+        const validation = validateForm({
+            updatePatientData,
+            saveGender
+        });
+
+        if (!validation.formIsValid) {
+            setErrors(validation.errors);
+            return;
+        }
         const newPatientData = {
             mobile: updatePatientData.mobile,
             name: updatePatientData.name,
@@ -84,6 +114,7 @@ function PatientRegistrationForm(props) {
         }
         insertPatientData(patientId, newPatientData)
             .then((response) => {
+                patientToken(patientId)
                 setCoilFetchPatientData(response)
                 setLoggedIn(response.isLoggedIn)
             })
@@ -109,7 +140,7 @@ function PatientRegistrationForm(props) {
                         <div className="row mt-3">
                             <div className="col-md-6">
                                 <label className="font_weight left">
-                                    Full name
+                                    Full name *
                                 </label>
                                 <MainInput
                                     type="text"
@@ -118,7 +149,7 @@ function PatientRegistrationForm(props) {
                                     onChange={handleInputChange}
                                     placeholder="Jhon">
                                 </MainInput>
-                                {errors.name && <span className="validation">Please enter your full name</span>}
+                                {errors.name && <span className="validation">{errors.name}</span>}
                             </div>
                             <div className="col-md-4 col-sm-4">
                                 <label className="font_weight left">
@@ -133,13 +164,13 @@ function PatientRegistrationForm(props) {
                                     onChange={handleInputChange}
                                     placeholder="Mobile Number (+XX)">
                                 </MainInput>
-                                {errors.mobile && <span className="validation">Please enter your Mobile Number</span>}
+                                {errors.mobile && <span className="validation">{errors.mobile }</span>}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-3  ">
                                 <label className="font_weight left">
-                                    Age
+                                    Age *
                                 </label>
                                 <MainInput
                                     type="text"
@@ -148,12 +179,12 @@ function PatientRegistrationForm(props) {
                                     onChange={handleInputChange}
                                     placeholder="25">
                                 </MainInput>
-                                {errors.age && <span className="validation">Please enter your Age</span>}
+                                {errors.age && <span className="validation">{errors.age}</span>}
                             </div>
 
                             <div className="col-md-3 ">
                                 <label className="font_weight left">
-                                    Gender
+                                    Gender *
                                 </label>
                                 <MainSelect
                                     value={saveGender ? saveGender : updatePatientData.gender}
@@ -167,7 +198,7 @@ function PatientRegistrationForm(props) {
                                         </option>
                                     ))}
                                 </MainSelect>
-                                {errors.gender && <span className="validation">Please enter your gender</span>}
+                                {errors.gender && <span className="validation mt-3">{errors.gender}</span>}
                             </div>
 
                             <div className="col-md-4 col-sm-4">
@@ -181,7 +212,7 @@ function PatientRegistrationForm(props) {
                                     onChange={handleInputChange}
                                     placeholder="jhon@doe.com">
                                 </MainInput>
-                                {errors.email && <span className="validation">Please enter your email address</span>}
+                                {/* {errors.email && <span className="validation">Please enter your email address</span>} */}
                             </div>
                         </div>
                         <div className="text-right add_top_30  mr-3">

@@ -62,15 +62,7 @@ export default function AuthApi() {
         const result = await axios.post(`${API}/otp`, { getOTP, _id });
         return result;
     };
-    // const saveNotification = async (bodyData) => {
-    //     try {
-    //         const result = await axios.post(`${API}/savenotification`, bodyData)
-    //         return result;
-    //     }
-    //     catch (err) {
-    //         return err
-    //     }
-    // };
+
     const getNotification = async (doctorId) => {
         try {
             const result = await axios.get(`${API}/getnotification/${doctorId}`)
@@ -98,6 +90,15 @@ export default function AuthApi() {
             return err
         }
     };
+    const savePatientToken = async (patientId, { patientToken: currentToken }) => {
+        try {
+            const result = await axios.post(`${API}/savepatienttoken/${patientId}`, { patientToken: currentToken })
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    };
     return {
         addDoctorInformation,
         submitDoctorInformation,
@@ -109,5 +110,6 @@ export default function AuthApi() {
         notifyDoctor,
         saveNotification,
         getNotification,
+        savePatientToken
     }
 }

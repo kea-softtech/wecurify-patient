@@ -4,13 +4,10 @@ import User from "./user";
 import ViewMedicalReport from './doctor/Report/ViewMedicalReport';
 import Logout from "./doctor/Profile/LogoutForm";
 import DoctorList from "./doctor/Dashboard-card/doctorList";
-import LoginPatient from "./patient/LoginPatient";
 import GetLoginPatientProfile from "./patient/getLoginPatientProfile";
 import CreatePatientProfile from "./patient/createPatientProfile";
 import DoctorBookingWithPatientLogin from "./patient/DoctorBookingWithPatientLogin";
 import SlotConfirmation from "./patient/SlotConfirmation";
-import { setloggedIn } from "./recoil/atom/setloggedIn";
-import { useRecoilState } from "recoil";
 import Clinic from "./Clinic/Clinic";
 import Home from "./homepage/Home";
 import PatientProfile from "./patient/PatientProfile";
@@ -25,11 +22,8 @@ import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
 import FetchPatientProfile from "./patient/FetchPatientProfile";
 import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
 import { ClinicList } from "./patient/clinicList";
-import { PatientMobile } from "./patient/patientMpin/PatientMobile";
 
 function MainContainer() {
-  const [loggedIn] = useRecoilState(setloggedIn);
-
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />

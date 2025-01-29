@@ -5,11 +5,19 @@ import Footer from './common/Footer';
 import MainContainer from './MainContainer';
 import { BrowserRouter as Router } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
+import { handleForegroundMessages, requestNotificationPermission } from './firebase.config';
 
 function App() {
   const [subDomain, setSubDomain] = useState(null)
 
   useEffect(()=>{
+    const getNotificationToken = async () => {
+      const token = await requestNotificationPermission()
+      console.log('FCM Token:', token); 
+    };
+    getNotificationToken();
+    handleForegroundMessages()
+    
     const host = window.location.host
     const arr = host.split(".").slice(0, host.includes("localhost") ? -1 : -2);
     if(arr.length > 0) setSubDomain(arr[0])

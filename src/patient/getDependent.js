@@ -20,8 +20,9 @@ export default function GetDependent(props) {
     const [doctorName, setDoctorName] = useState([])
     const [sessionData] = useRecoilState(setSessionData)
     const { paymentInfo } = PatientApi()
-    const { addDoctorInformation } = AuthApi()
-    const navigate = useNavigate()
+    const { notifyDoctor,getDrInfo } = AuthApi()
+    const navigate = useNavigate();
+    const [token, setToken] = useState(null);
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
 
     useEffect(() => {
@@ -36,15 +37,37 @@ export default function GetDependent(props) {
         setShow(false)
     }
     function getDoctorData() {
-        addDoctorInformation({ doctorId })
+        getDrInfo({ doctorId })
             .then((response) => {
-                let fullName = response.name.split(' '),
-                    firstName = fullName[0],
+                let doctordata = response['result'][0]
+                let fullName = doctordata.name.split(' '),
+                    // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
                 setDoctorName("Dr. " + lastName)
+                setToken(doctordata.doctorTokens)
             })
     }
 
+    const handleBookAppointment = async (doctorId) => {
+        if (token) {
+            const notificationData = {
+                doctorId,
+                token: token,
+                patientId,
+                date: sessionData.slotDate,
+                appointmentTime: slotItem.time,
+                patientName: fetchPatientData.name,
+                doctorName: doctorName
+                // email: fetchPatientData.email,
+                // phone: fetchPatientData.mobile,
+            };
+            try {
+                await notifyDoctor(doctorId, notificationData)
+            } catch (error) {
+                console.error('Error sending notification to doctor:', error);
+            }
+        }
+    };
     const handleSelectedSlot = (item) => {
         const startDate = (sessionData.selectedDate + " " + slotItem.time)
         const slotId = slotItem._id
@@ -76,6 +99,7 @@ export default function GetDependent(props) {
             .then((res) => {
                 if (slotItem._id) {
                     navigate(`/confirm/${sessionData.session.doctorId}`)
+                    handleBookAppointment(doctorId)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }

@@ -6,7 +6,6 @@ import { setNewPatientId } from "../../recoil/atom/setNewPatientId";
 import { Wrapper } from "../../mainComponent/Wrapper";
 import PatientApi from "../../services/PatientApi";
 import { useRecoilState } from "recoil";
-import CreatePatientMpin from "./CreatePatientMpin";
 
 export default function CreatePatientLogin() {
     const [mobile, setMobile] = useState("");

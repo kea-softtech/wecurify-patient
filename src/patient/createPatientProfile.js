@@ -5,7 +5,8 @@ import { MainNav } from "../mainComponent/mainNav";
 
 export default function CreatePatientProfile() {
     const { patientId } = useParams();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
     const goBack = () => {
         navigate(-1);
     }

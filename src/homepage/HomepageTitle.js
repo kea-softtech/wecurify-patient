@@ -6,7 +6,6 @@ import { setloggedIn } from "../recoil/atom/setloggedIn";
 import { Button } from "react-bootstrap";
 import { setNewPatientId } from "../recoil/atom/setNewPatientId";
 import PatientApi from "../services/PatientApi";
-import { PatientMpin } from "../patient/patientMpin/PatientMpin";
 import { PatientMobile } from "../patient/patientMpin/PatientMobile";
 
 function HomePageTitle() {

@@ -22,8 +22,9 @@ function FetchPatientInfo(props) {
     const [fetchPatientData, setFetchPatientData] = useRecoilState(setPatientProfileData)
     const [selectedType, setSelectedType] = useRecoilState(setAppointmentType);
     const { fetchPatient, paymentInfo } = PatientApi()
-    const { addDoctorInformation } = AuthApi()
+    const { getDrInfo, notifyDoctor } = AuthApi()
     const navigate = useNavigate()
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         getAllPatientData()
@@ -38,14 +39,37 @@ function FetchPatientInfo(props) {
     }
 
     function getDoctorData() {
-        addDoctorInformation({ doctorId })
+        getDrInfo({ doctorId })
             .then((response) => {
-                let fullName = response.name.split(' '),
-                    firstName = fullName[0],
+                let doctordata = response['result'][0]
+                let fullName = doctordata.name.split(' '),
+                    // firstName = fullName[0],
                     lastName = fullName[fullName.length - 1];
                 setDoctorName("Dr. " + lastName)
+                setToken(doctordata.doctorTokens)
             })
     }
+
+    const handleBookAppointment = async (doctorId) => {
+        if (token) {
+            const notificationData = {
+                doctorId,
+                token: token,
+                patientId,
+                date: sessionData.slotDate,
+                appointmentTime: slotItem.time,
+                patientName: fetchPatientData.name,
+                doctorName: doctorName
+                // email: fetchPatientData.email,
+                // phone: fetchPatientData.mobile,
+            };
+            try {
+                await notifyDoctor(doctorId, notificationData)
+            } catch (error) {
+                console.error('Error sending notification to doctor:', error);
+            }
+        }
+    };
 
     const handleShow = (item) => {
         //setSlotItem('')
@@ -56,6 +80,7 @@ function FetchPatientInfo(props) {
     const handleClose = () => {
         setShow(false)
     }
+
     const handleSelectedSlot = (item) => {
         const startDate = (sessionData.selectedDate + " " + item.time)
         const slotId = item._id
@@ -87,6 +112,7 @@ function FetchPatientInfo(props) {
             .then((res) => {
                 if (slotId) {
                     navigate(`/confirm/${sessionData.session.doctorId}`)
+                    handleBookAppointment(doctorId)
                 } else {
                     navigate(`/booking/${doctorId}`)
                 }

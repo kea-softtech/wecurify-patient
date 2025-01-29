@@ -256,6 +256,7 @@ export default function PatientApi() {
             return err
         }
     };
+    
 
     return {
         fetchSessionSlotsData,

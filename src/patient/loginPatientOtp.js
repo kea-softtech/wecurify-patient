@@ -19,7 +19,7 @@ function LoginPatientOtp(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         patientLoginOtp({ otp: loginotp, _id: patientId })
-            .then((response) => {
+            .then(() => {
                 setPatientData(patientId)
                 if (getOTP !== loginotp) {
                     setErrormessage("Please Enter Valid OTP");

@@ -149,7 +149,8 @@ function FetchPatientMedicalInfo(props) {
                     :
                     <AddPatientMedicalInfo
                         patientId={patientId}
-                        addMedicalRecord={handleRecordAdded} />
+                        addMedicalRecord={handleRecordAdded}
+                        getPatientData={getPatientData} />
             }
         </>
     )
