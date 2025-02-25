@@ -63,7 +63,7 @@ function PatientMobile() {
                         setShowMpin(true);
                         setIsError("");
                     } else {
-                        alert(data.data.otp)
+                        // alert(data.data.otp)
                         setShowOtp(true);
                         setMessage(true);
                     }
