@@ -24,7 +24,7 @@ export default function AddNewDoctor() {
         else {
             login({ mobile: mobile })
                 .then(response => {
-                    alert(response.data.otp)
+                    // alert(response.data.otp)
                     let item = response.data
                     setLoginData(item)
                     setShowOTP(true)
