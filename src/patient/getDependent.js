@@ -39,7 +39,6 @@ export default function GetDependent(props) {
     function getDoctorData() {
         getDrInfo({ doctorId })
             .then((response) => {
-                console.log('=====>>>>>>>response.',response)
                 let doctordata = response.result[0]
                 let fullName = doctordata.name.split(' '),
                     // firstName = fullName[0],

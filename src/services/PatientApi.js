@@ -130,6 +130,15 @@ export default function PatientApi() {
             return err
         }
     }
+    const deleteDependent = async (dependentId) => {
+        try {
+            const result = await axios.delete(`${API}/deletedependent/${dependentId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
     const getPatientLifestyle = async (patientId) => {
         try {
             const result = await axios.get(`${API}/fetchPatientLifestyleInfo/${patientId}`);
@@ -241,6 +250,7 @@ export default function PatientApi() {
             return err;
         }
     };
+   
     return {
         fetchSessionSlotsData,
         paymentInfo,
@@ -248,7 +258,6 @@ export default function PatientApi() {
         getpaymentData,
         getAllPatient,
         fetchPatient,
-        // patientDetailsData,
         loginPatient,
         patientSignUp,
         patientSignIn,
@@ -262,6 +271,7 @@ export default function PatientApi() {
         fetchUpdatePatientLifestyle,
         AddDependents,
         getPatientData,
+        deleteDependent,
         updatePatientData,
         validLoginPatient,
         PatientForgetMpin,

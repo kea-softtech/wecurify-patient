@@ -26,6 +26,7 @@ import FetchPatientProfile from "./patient/FetchPatientProfile";
 import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
 import { ClinicList } from "./patient/clinicList";
 import { PatientMobile } from "./patient/patientMpin/PatientMobile";
+import AddDependentData from "./patient/AddDependentData";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -56,6 +57,7 @@ function MainContainer() {
 
       <Route path="/patientappointment/:patientId" element={<PatientHistory />} />
       <Route path="/patientinfo/:patientId" element={<PatientProfile />} />
+      <Route path="/adddependentdata/:patientId" element={<AddDependentData />} />
       <Route path="/fetchpatientprofile/:patientId" element={<FetchPatientProfile />} />
 
       <Route path="/clinic" element={<Clinic />} />

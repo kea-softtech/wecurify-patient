@@ -8,6 +8,8 @@ import { Wrapper } from "../mainComponent/Wrapper";
 import { FetchPatientLifestyleData } from "./fetchPatientLifestyleData";
 import { FetchPatientMedicalInfo } from "./fetchPatientMedicalInfo";
 import PatientApi from "../services/PatientApi";
+import AddDependent from "./AddDependent";
+import DependentList from "./DependentList";
 
 export default function PatientProfile() {
   const { patientId } = useParams();
@@ -62,14 +64,15 @@ export default function PatientProfile() {
 
         <div className="wraper row">
           <div className="full-width">
-            <div className="common_box">
+            <div className="">
               <div className="white-box">
                 <MainTabs
                   value={value}
                   onChange={handleChange}
                   label="Personal"
                   label1="Medical "
-                  label2="Lifestyle">
+                  label2="Lifestyle"
+                  label3="Dependent ">
                 </MainTabs>
 
                 <TabPanel value={value} index={0}>
@@ -88,6 +91,12 @@ export default function PatientProfile() {
 
                 <TabPanel value={value} index={2}>
                   <FetchPatientLifestyleData
+                    patientId={patientId}
+                  />
+                </TabPanel>
+
+                <TabPanel value={value} index={3}>
+                  <DependentList
                     patientId={patientId}
                   />
                 </TabPanel>

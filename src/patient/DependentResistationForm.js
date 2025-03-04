@@ -67,7 +67,7 @@ function DependentRegistationForm(props) {
         }
         AddDependents(patientId, dependentAdd)
             .then((response) => {
-                navigate(`/patientprofile/${patientId}`)
+                navigate(-1)
             })
     }
 

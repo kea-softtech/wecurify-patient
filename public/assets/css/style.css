@@ -790,7 +790,12 @@ header.header_sticky.sticky {
 		position: static;
 	}
 }
-
+.justify-end {
+	justify-content: end;
+}
+.top_border {
+	border-top: 1px solid var(--borderColor);
+}
 header.header_map {
 	width: 100%;
 	position: fixed;
@@ -4266,6 +4271,10 @@ input[type="radio"]:checked + label {
 	display: inline-block;
 	/* margin-top: 5px; */
 	float: left;
+}
+
+.linehieght{
+	line-height: 25px;
 }
 
 @media (max-width: 767px) {
