@@ -9,6 +9,7 @@ import Ongoing from "./patientHistory/Ongoing";
 import Completed from "./patientHistory/Completed";
 import Cancelled from "./patientHistory/Cancelled";
 import Incomplete from "./patientHistory/Incomplete";
+import Inprogress from "./patientHistory/Inprogress";
 
 export default function PatientHistory() {
     const { patientId } = useParams();
@@ -39,7 +40,8 @@ export default function PatientHistory() {
                             label="Ongoing"
                             label1="Completed"
                             label2="Cancelled"
-                            label3="Incomplete">
+                            label3="Incomplete"
+                            label4="InProgress">
                         </MainTabs>
 
                         <TabPanel value={value} index={0}>
@@ -56,6 +58,10 @@ export default function PatientHistory() {
 
                         <TabPanel value={value} index={3}>
                             <Incomplete patientId={patientId} />
+                        </TabPanel>
+
+                        <TabPanel value={value} index={4}>
+                            <Inprogress patientId={patientId} />
                         </TabPanel>
                     </div>
                 </div>

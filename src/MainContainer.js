@@ -22,6 +22,7 @@ import ForgotPatientMpin from "./patient/patientMpin/ForgotPatientMpin";
 import FetchPatientProfile from "./patient/FetchPatientProfile";
 import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
 import { ClinicList } from "./patient/clinicList";
+import TreatmentConsentReport from "./patient/patientHistory/consent";
 
 function MainContainer() {
   return (
@@ -41,12 +42,13 @@ function MainContainer() {
       <Route path="/calender/:patientId" element={<Calender />} />
       <Route path="/patientqueue/:clinicId" element={<PatientQueue />} />
       <Route path="/adddependent/:patientId" element={<AddDependent />} />
-      <Route path="report/:reportId" element={<ViewMedicalReport />} />
+      <Route path="/report/:reportId" element={<ViewMedicalReport />} />
+      <Route path="/consent/:appointmentId" element={<TreatmentConsentReport />} />
 
       {/* <Route path="appointment/:doctorId" >
         <Route index element={<PatientAppointment />} />
       </Route> */}
-      <Route path="consultation/:reportId" element={<PatientMedicalReport />} />
+      <Route path="/consultation/:reportId" element={<PatientMedicalReport />} />
 
       <Route path="/patientappointment/:patientId" element={<PatientHistory />} />
       <Route path="/patientinfo/:patientId" element={<PatientProfile />} />

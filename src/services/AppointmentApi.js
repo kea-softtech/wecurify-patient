@@ -67,6 +67,26 @@ export default function AppointmentApi() {
         }
     }
 
+    const fetchTreatmentbyAppointmentId = async (appointmentId) => {
+        try {
+            const result = await axios.get(`${API}/gettreatments/${appointmentId}`);
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    }
+
+    const updateConsentStatus = async (treatmentId, bodyData) => {
+        try {
+            const result = await axios.post(`${API}/consentStatus/${treatmentId}`, bodyData);
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    }
+
     return {
         cancelPatientAppointment,
         downloadPrescription,
@@ -74,6 +94,8 @@ export default function AppointmentApi() {
         createPDF,
         getappointment,
         updateIncompleteStatus,
-        fetchAppointmentData
+        fetchAppointmentData,
+        fetchTreatmentbyAppointmentId,
+        updateConsentStatus
     }
 }
