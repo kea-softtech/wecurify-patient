@@ -5,6 +5,7 @@ import { MainNav } from '../../mainComponent/mainNav';
 import { Wrapper } from '../../mainComponent/Wrapper';
 import { MainTabs } from '../../mainComponent/mainTabs';
 import DentalTreatmentPriscription from './consent/dentalTreamentprescription';
+import GetMedicinePriscription from '../../doctor/Report/partial/GetMedicinePrescription';
 
 function TabPanel(props) {
     const { children, value, index } = props;
@@ -20,7 +21,8 @@ function TabPanel(props) {
 }
 
 export default function TreatmentConsentReport() {
-    const {appointmentId} = useParams()
+    const {appointmentId, reportId} = useParams()
+    console.log("====================", appointmentId, reportId)
     const navigate = useNavigate()
     //for tab
     const [value, setValue] = useState(0);
@@ -54,8 +56,7 @@ export default function TreatmentConsentReport() {
                             variant='scrollable'
                             onChange={handleChange}
                             label="Treatment"
-                            // label1="Medicines"
-                            // label2="Follow up"
+                            label1="Medicines"
                         >
                         </MainTabs>
                         <div className="tablecontent">
@@ -66,20 +67,12 @@ export default function TreatmentConsentReport() {
                                 />
                             </TabPanel>
 
-                            {/* <TabPanel value={value} index={1}>
-                                <MedicinePrescription
+                            <TabPanel value={value} index={1}>
+                                <GetMedicinePriscription
                                     reportId={reportId}
-                                    doctorId={doctorId}
                                     onChange={() => changeTab(2)} 
                                 />
                             </TabPanel>
-
-                            <TabPanel value={value} index={2}>
-                                <NewFollowup
-                                    doctorId={doctorId}
-                                    reportId={reportId}
-                                />
-                            </TabPanel> */}
                         </div>
                     </div>
                 </div>

@@ -11,12 +11,12 @@ import { Button } from "react-bootstrap";
 
 export default function Inprogress(props) {
     const { patientId } = props;
-    const [ patientHistoryData, setPatientHistoryData] = useState(null)
-    const [ currentPage, setCurrentPage] = useState(1)
-    const [ totalPages, setTotalPages] = useState(0);
+    const [patientHistoryData, setPatientHistoryData] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0);
     const { getpaymentData } = PatientApi()
-    const [ isLoading, setIsLoading] = useState(true);
-    const [ isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
     const paginationRef = useRef(currentPage)
     const pageSize = 6;
 
@@ -58,7 +58,7 @@ export default function Inprogress(props) {
                 </div>
                 :
                 <>
-                    {patientHistoryData && patientHistoryData.length > 0 ?
+                    {patientHistoryData ?
                         <div className='row'>
                             {patientHistoryData.map((details, i) => {
                                 return (
@@ -90,11 +90,22 @@ export default function Inprogress(props) {
                                                     </div>
                                                 </div>
                                             }
+                                            {details["childrenbooking"].map((item, index) => {
+                                                return (
+                                                    <>
+                                                        <span key={index} className='slotTime cardSpan'>
+                                                            <span className="time pl-1 pr-1">Next followup:</span>
+                                                            {moment(item.selectedDate).format('YYYY-MM-DD').toString()},
+                                                            {item.slotTime}
+                                                        </span>
+                                                    </>
+                                                )
+                                            })}
                                             <div className='cardSpan appointmentBtn historyBtn'>
                                                 <Link to={`/report/${details.medicalReportId}`}>
                                                     <Button className="appColor helperBtn"> View Report</Button>
                                                 </Link>
-                                                <Link to={`/consent/${details._id}`}>
+                                                <Link to={`/consent/${details._id}/${details.medicalReportId}`}>
                                                     <Button className="appColor helperBtn"> consent</Button>
                                                 </Link>
                                             </div>

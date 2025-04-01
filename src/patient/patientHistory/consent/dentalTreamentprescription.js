@@ -36,21 +36,22 @@ export default function DentalTreatmentPriscription(props) {
     };
 
     const handleConsent = (consent) => {
-        if (consent) {
-            updateConsentStatus(selectedTreatmentId, { status: true })
-                .then(() => {
-                    setConsentStatus((prev) => ({
-                        ...prev,
-                        [selectedTreatmentId]: true,
-                    }));
-                    setShow(false);
-                })
-                .catch(() => {
-                    alert('Error updating consent status.');
-                });
-        } else {
-            setShow(false);
-        }
+        const updatedConsentStatus = !consentStatus[selectedTreatmentId];
+        
+        // Toggle the consent status
+        setConsentStatus((prev) => ({
+            ...prev,
+            [selectedTreatmentId]: updatedConsentStatus
+        }));
+        
+        // Update the consent status in the backend
+        updateConsentStatus(selectedTreatmentId, { status: updatedConsentStatus })
+            .then(() => {
+                setShow(false);
+            })
+            .catch(() => {
+                alert('Error updating consent status.');
+            });
     };
 
     return (
@@ -80,17 +81,11 @@ export default function DentalTreatmentPriscription(props) {
                                         <TableCell align="center">{moment(item.planDate).format('YYYY-MM-DD')}</TableCell>
                                         <TableCell align="center">{item.status}</TableCell>
                                         <TableCell align="center">
-                                            {consentStatus[item._id] ?
-                                                <input
-                                                    type="checkbox"
-                                                    checked={consentStatus[item._id] || false}
-                                                /> :
-                                                <input
-                                                    type="checkbox"
-                                                    checked={consentStatus[item._id] || false}
-                                                    onChange={() => handleCheckboxChange(item._id)}
-                                                />
-                                            }
+                                            <input
+                                                type="checkbox"
+                                                checked={consentStatus[item._id] || false}
+                                                onChange={() => handleCheckboxChange(item._id)}
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 ))}
