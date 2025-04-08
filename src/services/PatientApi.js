@@ -255,7 +255,16 @@ export default function PatientApi() {
         catch (err) {
             return err
         }
-    };
+    }
+    const deleteDependent = async (dependentId) => {
+        try {
+            const result = await axios.delete(`${API}/deletedependent/${dependentId}`)
+            return result.data
+        }
+        catch (err) {
+            return err
+        }
+    }
     
 
     return {
@@ -279,6 +288,7 @@ export default function PatientApi() {
         updatePatientLifestyle,
         fetchUpdatePatientLifestyle,
         AddDependents,
+        deleteDependent,
         getPatientData,
         updatePatientData,
         validLoginPatient,
