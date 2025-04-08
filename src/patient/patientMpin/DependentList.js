@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Modal } from "react-bootstrap";
 import PatientApi from "../../services/PatientApi";
 import { MainButtonInput } from "../../mainComponent/mainButtonInput";
-import { Theme_Color } from "../../config";
 
 export default function DependentList(props) {
     const { patientId } = props
@@ -99,7 +98,7 @@ export default function DependentList(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div  className="alert alert-bgcolor modalColor" >
-                        You want to delete this assistant.
+                        You want to delete this dependent.
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
