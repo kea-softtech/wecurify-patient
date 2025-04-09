@@ -27,6 +27,7 @@ import CreatePatientLogin from "./patient/patientMpin/CreatePatientLogin";
 import { ClinicList } from "./patient/clinicList";
 import { PatientMobile } from "./patient/patientMpin/PatientMobile";
 import AddDependentData from "./patient/AddDependentData";
+import TreatmentConsentReport from "./patient/consent/consent";
 
 function MainContainer() {
   const [loggedIn] = useRecoilState(setloggedIn);
@@ -34,7 +35,7 @@ function MainContainer() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route path="/patient" element={<PatientMobile/>} />
+      <Route path="/patient" element={<PatientMobile />} />
       <Route path="/createpatientmpin" element={<CreatePatientLogin />} />
       <Route path="/forgetpatientmpin" element={<ForgotPatientMpin />} />
       <Route path="/createprofile/:patientId" element={<CreatePatientProfile />} />
@@ -49,7 +50,7 @@ function MainContainer() {
       <Route path="/patientqueue/:clinicId" element={<PatientQueue />} />
       <Route path="/adddependent/:patientId" element={<AddDependent />} />
       <Route path="report/:reportId" element={<ViewMedicalReport />} />
-
+      <Route path="/consent/:appointmentId/:reportId" element={<TreatmentConsentReport />} />
       {/* <Route path="appointment/:doctorId" >
         <Route index element={<PatientAppointment />} />
       </Route> */}

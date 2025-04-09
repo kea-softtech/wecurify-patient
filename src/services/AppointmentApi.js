@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API } from '../config'
 export default function AppointmentApi() {
-    
+
     const cancelPatientAppointment = async (id) => {
         try {
             const result = await axios.delete(`${API}/cancelappointment/${id}`)
@@ -38,7 +38,7 @@ export default function AppointmentApi() {
             return err
         }
     }
-    const createPDF = async ( reportId ) => {
+    const createPDF = async (reportId) => {
         try {
             const result = await axios.post(`${API}/createPrescriptionPdf/${reportId}`)
             return result.data
@@ -57,7 +57,7 @@ export default function AppointmentApi() {
             return err
         }
     };
-    const fetchAppointmentData = async ( appointmentId ) => {
+    const fetchAppointmentData = async (appointmentId) => {
         try {
             const result = await axios.get(`${API}/getappointmentdata/${appointmentId}`)
             return result.data
@@ -67,6 +67,28 @@ export default function AppointmentApi() {
         }
     }
 
+
+    const fetchTreatmentbyAppointmentId = async (appointmentId) => {
+        try {
+            const result = await axios.get(`${API}/gettreatments/${appointmentId}`);
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    }
+
+    const updateConsentStatus = async (treatmentId, bodyData) => {
+        try {
+            const result = await axios.post(`${API}/consentStatus/${treatmentId}`, bodyData);
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    }
+
+
     return {
         cancelPatientAppointment,
         downloadPrescription,
@@ -74,6 +96,8 @@ export default function AppointmentApi() {
         createPDF,
         getappointment,
         updateIncompleteStatus,
-        fetchAppointmentData
+        fetchAppointmentData,
+        fetchTreatmentbyAppointmentId,
+        updateConsentStatus
     }
 }
