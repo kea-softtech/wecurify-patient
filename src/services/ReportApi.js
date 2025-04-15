@@ -158,6 +158,16 @@ export default function ReportApi() {
         }
     };
 
+
+    const fetchTreatmentbyAppointmentId = async (appointmentId) => {
+        try {
+            const result = await axios.get(`${API}/gettreatments/${appointmentId}`);
+            return result.data;
+        }
+        catch (err) {
+            return err
+        }
+    }
     return {
         getLabData,
         symptomsData,
@@ -175,6 +185,7 @@ export default function ReportApi() {
         getMedicinePrescriptionData,
         getLabTestPrescriptionData,
         getMedicineReport,
-        getDentalServicesPrescription
+        getDentalServicesPrescription,
+        fetchTreatmentbyAppointmentId
     }
 }

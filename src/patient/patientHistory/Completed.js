@@ -107,7 +107,7 @@ export default function Completed(props) {
                                                 </div>
                                             }
                                             <div className='cardSpan appointmentBtn historyBtn'>
-                                                <Link to={`/report/${details.medicalReportId}`}>
+                                                <Link to={`/report/${details.medicalReportId}/${details._id}`}>
                                                     <Button className="appColor helperBtn" > View Report</Button>
                                                 </Link>
                                                 <Button className="appColor helperBtn" onClick={() => downloadPdf(details)}> Download</Button>

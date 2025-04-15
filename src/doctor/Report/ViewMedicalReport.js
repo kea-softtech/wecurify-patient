@@ -14,10 +14,11 @@ import Loader from '../../patient/patientHistory/Loader';
 import wecurifyLogo from '../../img/small_wecurify.png'
 import AuthApi from '../../services/AuthApi';
 import ClinicApi from '../../services/ClinicApi';
+import GetAllTreatments from './partial/getAllTreatment';
 
 export default function ViewMedicalReport() {
-    const { reportId } = useParams();
-    const { getMedicineReport } = ReportApi();
+    const { reportId ,appointmentId} = useParams();
+    const { getMedicineReport, fetchTreatmentbyAppointmentId } = ReportApi();
     const { fetchPatient } = PatientApi();
     const { getDrInfo } = AuthApi();
     const { getClinic } = ClinicApi();
@@ -27,16 +28,15 @@ export default function ViewMedicalReport() {
     const [isLoading, setIsLoading] = useState(true);
     const [doctorDetails, setDoctorDetails] = useState([]);
     const [clinicDetails, setClinicDetails] = useState([]);
+    const [getServices, setGetServices] = useState([]);
 
     useEffect(() => {
         getMedicineReportData()
+        getServicesData()
     }, [])
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 2000);
-
     const getMedicineReportData = () => {
+        setIsLoading(true);
         getMedicineReport({ reportId })
             .then((res) => {
                 if (res[0]) {
@@ -61,6 +61,18 @@ export default function ViewMedicalReport() {
                     return <span className="validation mb-2">Server error</span>
                 }
 
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
+    const getServicesData = () => {
+        fetchTreatmentbyAppointmentId(appointmentId)
+            .then((result) => {
+                if (result) {
+                    setGetServices(result)
+                }
             })
     }
 
@@ -133,6 +145,8 @@ export default function ViewMedicalReport() {
                                     </div>
 
                                     <GetMedicinePriscription reportId={reportId} />
+
+                                    <GetAllTreatments getServices={getServices} />
 
                                     <GetLabPrescription reportId={reportId} />
 

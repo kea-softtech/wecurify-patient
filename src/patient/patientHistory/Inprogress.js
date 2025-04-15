@@ -50,6 +50,8 @@ export default function Inprogress(props) {
         paginationRef.current = data.selected + 1
         getPatientDetails(data.selected + 1)
     }
+
+    
     return (
         <>
             {isLoading ?
@@ -102,7 +104,7 @@ export default function Inprogress(props) {
                                                 )
                                             })}
                                             <div className='cardSpan appointmentBtn historyBtn'>
-                                                <Link to={`/report/${details.medicalReportId}`}>
+                                                <Link to={`/report/${details.medicalReportId}/${details._id}`}>
                                                     <Button className="appColor helperBtn"> View Report</Button>
                                                 </Link>
                                                 <Link to={`/consent/${details._id}/${details.medicalReportId}`}>

@@ -49,7 +49,7 @@ function MainContainer() {
       <Route path="/calender/:patientId" element={<Calender />} />
       <Route path="/patientqueue/:clinicId" element={<PatientQueue />} />
       <Route path="/adddependent/:patientId" element={<AddDependent />} />
-      <Route path="report/:reportId" element={<ViewMedicalReport />} />
+      <Route path="report/:reportId/:appointmentId" element={<ViewMedicalReport />} />
       <Route path="/consent/:appointmentId/:reportId" element={<TreatmentConsentReport />} />
       {/* <Route path="appointment/:doctorId" >
         <Route index element={<PatientAppointment />} />
