@@ -8,7 +8,6 @@ import { Wrapper } from "../mainComponent/Wrapper";
 import { FetchPatientLifestyleData } from "./fetchPatientLifestyleData";
 import { FetchPatientMedicalInfo } from "./fetchPatientMedicalInfo";
 import PatientApi from "../services/PatientApi";
-import AddDependent from "./AddDependent";
 import DependentList from "./DependentList";
 
 export default function PatientProfile() {
